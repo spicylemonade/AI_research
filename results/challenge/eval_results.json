@@ -1,0 +1,696 @@
+{
+  "phys_mdt": {
+    "overall": {
+      "exact_match": 0.04,
+      "symbolic_equivalence": 0.06,
+      "numerical_r2": 0.06,
+      "tree_edit_distance": 0.9542857142857143,
+      "complexity_penalty": 0.7433333333333334,
+      "composite": 0.062404761904761914
+    },
+    "by_category": {
+      "coupled_systems": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.825,
+        "composite": 0.00875
+      },
+      "damped_driven": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.775,
+        "composite": 0.01125
+      },
+      "kepler_problem": {
+        "exact_match": 0.2,
+        "symbolic_equivalence": 0.3,
+        "numerical_r2": 0.3,
+        "tree_edit_distance": 0.8,
+        "complexity_penalty": 0.4,
+        "composite": 0.275
+      },
+      "lagrangian_hamiltonian": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.9,
+        "composite": 0.005000000000000001
+      },
+      "nbody": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 0.9714285714285715,
+        "complexity_penalty": 0.8166666666666667,
+        "composite": 0.012023809523809525
+      }
+    },
+    "by_family": {
+      "dynamics": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.6893939393939393,
+        "composite": 0.015530303030303031
+      },
+      "energy": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.9722222222222222,
+        "composite": 0.0013888888888888892
+      },
+      "gravitation": {
+        "exact_match": 0.125,
+        "symbolic_equivalence": 0.1875,
+        "numerical_r2": 0.1875,
+        "tree_edit_distance": 0.8571428571428572,
+        "complexity_penalty": 0.5729166666666666,
+        "composite": 0.17626488095238096
+      },
+      "oscillations": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.7954545454545454,
+        "composite": 0.010227272727272727
+      }
+    },
+    "avg_inference_time_s": 0.1261
+  },
+  "ar_baseline": {
+    "overall": {
+      "exact_match": 0.06,
+      "symbolic_equivalence": 0.08,
+      "numerical_r2": 0.08,
+      "tree_edit_distance": 0.94,
+      "complexity_penalty": 0.7533333333333333,
+      "composite": 0.08033333333333333
+    },
+    "by_category": {
+      "coupled_systems": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.9666666666666666,
+        "composite": 0.001666666666666667
+      },
+      "damped_driven": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.8,
+        "composite": 0.01
+      },
+      "kepler_problem": {
+        "exact_match": 0.2,
+        "symbolic_equivalence": 0.3,
+        "numerical_r2": 0.3,
+        "tree_edit_distance": 0.8,
+        "complexity_penalty": 0.3833333333333333,
+        "composite": 0.2758333333333333
+      },
+      "lagrangian_hamiltonian": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.9333333333333332,
+        "composite": 0.003333333333333334
+      },
+      "nbody": {
+        "exact_match": 0.1,
+        "symbolic_equivalence": 0.1,
+        "numerical_r2": 0.1,
+        "tree_edit_distance": 0.9,
+        "complexity_penalty": 0.6833333333333333,
+        "composite": 0.11083333333333334
+      }
+    },
+    "by_family": {
+      "dynamics": {
+        "exact_match": 0.09090909090909091,
+        "symbolic_equivalence": 0.09090909090909091,
+        "numerical_r2": 0.09090909090909091,
+        "tree_edit_distance": 0.9090909090909091,
+        "complexity_penalty": 0.9090909090909091,
+        "composite": 0.09090909090909091
+      },
+      "energy": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.875,
+        "composite": 0.006250000000000001
+      },
+      "gravitation": {
+        "exact_match": 0.125,
+        "symbolic_equivalence": 0.1875,
+        "numerical_r2": 0.1875,
+        "tree_edit_distance": 0.875,
+        "complexity_penalty": 0.5104166666666666,
+        "composite": 0.17760416666666667
+      },
+      "oscillations": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.8181818181818182,
+        "composite": 0.009090909090909092
+      }
+    },
+    "avg_inference_time_s": 0.2277
+  },
+  "n_equations": 50,
+  "n_with_observations": 43,
+  "categories": [
+    "coupled_systems",
+    "damped_driven",
+    "kepler_problem",
+    "lagrangian_hamiltonian",
+    "nbody"
+  ],
+  "per_equation": [
+    {
+      "name": "coupled_spring_mass_force_on_body1",
+      "category": "coupled_systems",
+      "family": "dynamics",
+      "ground_truth": "10.0*(x2 - x1) - 5.0*x1",
+      "mdt_prediction": "C0*(C0 + 2*t)",
+      "ar_prediction": "C0/h",
+      "mdt_time_s": 0.1786,
+      "ar_time_s": 0.0334
+    },
+    {
+      "name": "coupled_spring_mass_force_on_body2",
+      "category": "coupled_systems",
+      "family": "dynamics",
+      "ground_truth": "-10.0*(x2 - x1) + 8.0*x2",
+      "mdt_prediction": "2*C0**2*t",
+      "ar_prediction": "C0/r",
+      "mdt_time_s": 0.1158,
+      "ar_time_s": 0.0224
+    },
+    {
+      "name": "coupled_spring_mass_accel_body1",
+      "category": "coupled_systems",
+      "family": "dynamics",
+      "ground_truth": "(12.0*(x2 - x1) - 6.0*x1) / 2.0",
+      "mdt_prediction": "C0*(C0*t**3 + 2*t)",
+      "ar_prediction": "C0/h",
+      "mdt_time_s": 0.1166,
+      "ar_time_s": 0.0219
+    },
+    {
+      "name": "coupled_spring_mass_accel_body2",
+      "category": "coupled_systems",
+      "family": "dynamics",
+      "ground_truth": "(-12.0*(x2 - x1)) / 3.0",
+      "mdt_prediction": "t*(C0 + t**4)",
+      "ar_prediction": "C0/r",
+      "mdt_time_s": 0.1225,
+      "ar_time_s": 0.0237
+    },
+    {
+      "name": "coupled_spring_3body_middle",
+      "category": "coupled_systems",
+      "family": "dynamics",
+      "ground_truth": "8.0*(x1 - x2) + 6.0*(x3 - x2)",
+      "mdt_prediction": "C0*(C0 + t**3 + t)",
+      "ar_prediction": "C0/h",
+      "mdt_time_s": 0.1168,
+      "ar_time_s": 0.0225
+    },
+    {
+      "name": "coupled_normal_mode_symmetric",
+      "category": "coupled_systems",
+      "family": "dynamics",
+      "ground_truth": "1.0*cos(sqrt(4.0/1.0)*t) + 0.5*cos(sqrt((4.0 + 2*2.0)/1.0)*t)",
+      "mdt_prediction": "t**2*(t**2 + t)",
+      "ar_prediction": "C0*cos(C0*t + C0)",
+      "mdt_time_s": 0.1183,
+      "ar_time_s": 0.0367
+    },
+    {
+      "name": "coupled_spring_energy",
+      "category": "coupled_systems",
+      "family": "energy",
+      "ground_truth": "0.5*2.0*v1**2 + 0.5*3.0*v2**2 + 0.5*10.0*x1**2 + 0.5*8.0*(x2 - x1)**2",
+      "mdt_prediction": "36",
+      "ar_prediction": "1/h",
+      "mdt_time_s": 0.1168,
+      "ar_time_s": 0.6381
+    },
+    {
+      "name": "coupled_pendulum_small_angle_1",
+      "category": "coupled_systems",
+      "family": "dynamics",
+      "ground_truth": "-(9.81/1.0)*theta1 - (5.0/(1.0*1.0))*(theta1 - theta2)",
+      "mdt_prediction": "t*(C0**3*t + C0)",
+      "ar_prediction": "C0*x",
+      "mdt_time_s": 0.1263,
+      "ar_time_s": 0.0158
+    },
+    {
+      "name": "coupled_pendulum_small_angle_2",
+      "category": "coupled_systems",
+      "family": "dynamics",
+      "ground_truth": "-(9.81/1.0)*theta2 + (5.0/(1.5*1.0))*(theta1 - theta2)",
+      "mdt_prediction": "C0*(C0**2 + 2*t)",
+      "ar_prediction": "C0*t",
+      "mdt_time_s": 0.1241,
+      "ar_time_s": 0.0162
+    },
+    {
+      "name": "coupled_oscillator_beat_pattern",
+      "category": "coupled_systems",
+      "family": "oscillations",
+      "ground_truth": "2.0*cos(0.5*(5.0 - 4.5)*t)*cos(0.5*(5.0 + 4.5)*t)",
+      "mdt_prediction": "C0**2*t",
+      "ar_prediction": "C0*x",
+      "mdt_time_s": 0.1457,
+      "ar_time_s": 0.0158
+    },
+    {
+      "name": "kepler_effective_potential",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "-6.674*1000000.0*1.0/r + 50.0**2/(2*1.0*r**2)",
+      "mdt_prediction": "* * / 1 r r * / / / / r r r / / / / 1 1 1 r 1 * * * / / / r * * * * * 1 r r r r / / / / / / r r 1 * * / / 1 1 * * * / / / / r / / / / / / / / / / / / / / / / r r r * * / / / / / / / / / / / 1 1 1 * * * * / / r * * * * * * * * r r r / / / / / / 1 * * * *",
+      "ar_prediction": "r**(-3)",
+      "mdt_time_s": 0.1578,
+      "ar_time_s": 0.6195
+    },
+    {
+      "name": "kepler_vis_viva",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "sqrt(6.674*1000000.0*(2/r - 1/30.0))",
+      "mdt_prediction": "t*(t + 18)",
+      "ar_prediction": "h",
+      "mdt_time_s": 0.1399,
+      "ar_time_s": 0.6942
+    },
+    {
+      "name": "kepler_orbit_radius",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "20.0*(1 - 0.6**2)/(1 + 0.6*cos(th0.6t20.0))",
+      "mdt_prediction": "C0**4",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1174,
+      "ar_time_s": 0.0083
+    },
+    {
+      "name": "kepler_radial_velocity",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "sqrt(6.674*1000000.0/(25.0*(1 - 0.5**2)))*0.5*sin(th0.5t25.0)",
+      "mdt_prediction": "C0**4",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1209,
+      "ar_time_s": 0.0092
+    },
+    {
+      "name": "kepler_angular_momentum_conservation",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "2.0*r**2*o2.0ega",
+      "mdt_prediction": "C0**4",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1225,
+      "ar_time_s": 0.0092
+    },
+    {
+      "name": "kepler_total_energy",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "-6.674*1000000.0*1.0/(2*30.0)",
+      "mdt_prediction": "* * / 1 r r * / / / / r r r / / / / 1 1 1 r 1 * * * / / / r * * * * * 1 r r r r / / / / / / r r 1 * * / / 1 1 * * * / / / / r / / / / / / / / / / / / / / / / r r r * * / / / / / / / / / / / 1 1 1 * * * * / / r * * * * * * * * r r r / / / / / / 1 * * * *",
+      "ar_prediction": "r**(-3)",
+      "mdt_time_s": 0.1409,
+      "ar_time_s": 0.6536
+    },
+    {
+      "name": "kepler_perihelion_velocity",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "sqrt(6.674*1000000.0*(1 + 0.3)/(20.0*(1 - 0.3)))",
+      "mdt_prediction": "36",
+      "ar_prediction": "h",
+      "mdt_time_s": 0.1164,
+      "ar_time_s": 0.6131
+    },
+    {
+      "name": "kepler_tidal_force",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "2*6.674*1000000.0*1.0*0.5/r**3",
+      "mdt_prediction": "t*(C0**2*t**2 + t)",
+      "ar_prediction": "1/h",
+      "mdt_time_s": 0.1248,
+      "ar_time_s": 0.6338
+    },
+    {
+      "name": "kepler_precession_rate",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "6*3.14159*6.674*1000000.0/(50.0*(1 - 0.2**2)*300000000.0**2)",
+      "mdt_prediction": "C0**4",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1242,
+      "ar_time_s": 0.0093
+    },
+    {
+      "name": "kepler_specific_orbital_energy",
+      "category": "kepler_problem",
+      "family": "gravitation",
+      "ground_truth": "0.5*v**2 - 6.674*1000000.0/r",
+      "mdt_prediction": "* * / 1 r r * / / / / r r r / / / / 1 1 1 r 1 * * * / / / r * * * * * 1 r r r r / / / / / / r r 1 * * / / 1 1 * * * / / / / r / / / / / / / / / / / / / / / / r r r * * / / / / / / / / / / / 1 1 1 * * * * / / r * * * * * * * * r r r / / / / / / 1 * * * *",
+      "ar_prediction": "r**(-3)",
+      "mdt_time_s": 0.1178,
+      "ar_time_s": 0.6234
+    },
+    {
+      "name": "lagrangian_free_particle_2d",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "0.5*2.0*(v_x**2 + v_y**2)",
+      "mdt_prediction": "18*t",
+      "ar_prediction": "h",
+      "mdt_time_s": 0.1186,
+      "ar_time_s": 0.6351
+    },
+    {
+      "name": "lagrangian_gravity_2d",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "0.5*1.5*(v_x**2 + v_y**2) - 1.5*9.81*y",
+      "mdt_prediction": "C0**2*t",
+      "ar_prediction": "C0/h",
+      "mdt_time_s": 0.1183,
+      "ar_time_s": 0.0267
+    },
+    {
+      "name": "lagrangian_simple_pendulum",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "0.5*1.0*1.0**2*o1.0e9.81a**2 + 1.0*9.81*1.0*cos(theta)",
+      "mdt_prediction": "C0**4",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1913,
+      "ar_time_s": 0.0081
+    },
+    {
+      "name": "lagrangian_spring_pendulum",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "0.5*1.0*(v_r**2 + r**2*o1.0e9.81a**2) - 1.0*9.81*r*cos(theta) - 0.5*20.0*(r - 1.0)**2",
+      "mdt_prediction": "C0**4",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.145,
+      "ar_time_s": 0.0087
+    },
+    {
+      "name": "hamiltonian_harmonic_oscillator",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "p**2/(2*2.0) + 0.5*8.0*q**2",
+      "mdt_prediction": "2*C0 + 8",
+      "ar_prediction": "1/h",
+      "mdt_time_s": 0.1123,
+      "ar_time_s": 0.6118
+    },
+    {
+      "name": "hamiltonian_central_force",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "p_r**2/(2*1.0) + p_theta**2/(2*1.0*r**2) - 6.674*1000000.0*1.0/r",
+      "mdt_prediction": "* * / 1 r r * / / / / r r r / / / / 1 1 1 r 1 * * * / / / r * * * * * 1 r r r r / / / / / / r r 1 * * / / 1 1 * * * / / / / r / / / / / / / / / / / / / / / / r r r * * / / / / / / / / / / / 1 1 1 * * * * / / r * * * * * * * * r r r / / / / / / 1 * * * *",
+      "ar_prediction": "r**(-3)",
+      "mdt_time_s": 0.1178,
+      "ar_time_s": 0.6109
+    },
+    {
+      "name": "lagrangian_double_pendulum_ke",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "0.5*(1.0 + 1.0)*1.0**2*omega1**2 + 0.5*1.0*1.0**2*omega2**2 + 1.0*1.0*1.0*omega1*omega2*cos(theta1 - theta2)",
+      "mdt_prediction": "4*C0",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1091,
+      "ar_time_s": 0.0249
+    },
+    {
+      "name": "lagrangian_double_pendulum_pe",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "-(1.0 + 1.0)*9.81*1.0*cos(theta1) - 1.0*9.81*1.0*cos(theta2)",
+      "mdt_prediction": "2*C0**4",
+      "ar_prediction": "C0*x",
+      "mdt_time_s": 0.1347,
+      "ar_time_s": 0.0152
+    },
+    {
+      "name": "hamiltonian_charged_particle",
+      "category": "lagrangian_hamiltonian",
+      "family": "energy",
+      "ground_truth": "(p_x**2 + p_y**2 + p_z**2)/(2*1.0) + 1.6*V",
+      "mdt_prediction": "20",
+      "ar_prediction": "C0*h",
+      "mdt_time_s": 0.1272,
+      "ar_time_s": 0.0471
+    },
+    {
+      "name": "euler_lagrange_generalized_force",
+      "category": "lagrangian_hamiltonian",
+      "family": "dynamics",
+      "ground_truth": "1.0*1.0**2*alpha + 1.0*9.81*1.0*sin(theta)",
+      "mdt_prediction": "t*(2*t**3 + t)",
+      "ar_prediction": "1",
+      "mdt_time_s": 0.1168,
+      "ar_time_s": 0.0274
+    },
+    {
+      "name": "damped_driven_oscillator_displacement",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "3.0*exp(-0.2*t)*cos(4.0*t + 0.5)",
+      "mdt_prediction": "C0**2*t",
+      "ar_prediction": "C0*x",
+      "mdt_time_s": 0.1194,
+      "ar_time_s": 0.0397
+    },
+    {
+      "name": "driven_oscillator_steady_state",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "5.0*sin(4.8*t)/(1.0*sqrt((5.0**2 - 4.8**2)**2 + (2*0.3*4.8)**2))",
+      "mdt_prediction": "C0**2*t",
+      "ar_prediction": "C0*x",
+      "mdt_time_s": 0.113,
+      "ar_time_s": 0.0153
+    },
+    {
+      "name": "driven_oscillator_amplitude_response",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "5.0/(1.0*sqrt((5.0**2 - o1.0ega**2)**2 + (2*0.3*o1.0ega)**2))",
+      "mdt_prediction": "C0**4",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1147,
+      "ar_time_s": 0.0079
+    },
+    {
+      "name": "driven_oscillator_phase_lag",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "atan(2*0.3*omega/(5.0**2 - omega**2))",
+      "mdt_prediction": "C0**4",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1149,
+      "ar_time_s": 0.0077
+    },
+    {
+      "name": "damped_oscillator_energy_decay",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "10.0*exp(-2*0.15*t)",
+      "mdt_prediction": "C0**2*t",
+      "ar_prediction": "C0*h",
+      "mdt_time_s": 0.1466,
+      "ar_time_s": 0.0528
+    },
+    {
+      "name": "damped_oscillator_quality_factor_response",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "5.0/(2*1.0*5.0*0.2)",
+      "mdt_prediction": "2*C0**2*t",
+      "ar_prediction": "C0*t",
+      "mdt_time_s": 0.1204,
+      "ar_time_s": 0.0146
+    },
+    {
+      "name": "critically_damped_oscillator",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "(2.0 + 1.5*t)*exp(-0.5*t)",
+      "mdt_prediction": "C0**2*t",
+      "ar_prediction": "C0*cos(2*C0*x)",
+      "mdt_time_s": 0.1173,
+      "ar_time_s": 0.0419
+    },
+    {
+      "name": "overdamped_oscillator",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "2.0*exp(-0.5*t) + -1.0*exp(-2.0*t)",
+      "mdt_prediction": "C0**2*t",
+      "ar_prediction": "C0*x",
+      "mdt_time_s": 0.1147,
+      "ar_time_s": 0.0149
+    },
+    {
+      "name": "damped_driven_transient_plus_steady",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "2.0*exp(-0.2*t)*cos(4.9*t + 0.0) + 1.5*cos(3.0*t + 0.8)",
+      "mdt_prediction": "C0**2*t",
+      "ar_prediction": "C0*sqrt(h)",
+      "mdt_time_s": 0.1139,
+      "ar_time_s": 0.6185
+    },
+    {
+      "name": "parametric_resonance_mathieu",
+      "category": "damped_driven",
+      "family": "oscillations",
+      "ground_truth": "1.0*exp(0.1*t)*cos(3.0*t) + 0.5*exp(-0.1*t)*cos(3.0*t)",
+      "mdt_prediction": "t**6",
+      "ar_prediction": "C0*cos(C0*t + C0)",
+      "mdt_time_s": 0.1165,
+      "ar_time_s": 0.0337
+    },
+    {
+      "name": "nbody_force_on_body1_from_2_and_3",
+      "category": "nbody",
+      "family": "gravitation",
+      "ground_truth": "6.674*100.0*80.0/r12**2 + 6.674*100.0*60.0/r13**2",
+      "mdt_prediction": "t*(2*t + 8)",
+      "ar_prediction": "h**2",
+      "mdt_time_s": 0.15,
+      "ar_time_s": 0.6702
+    },
+    {
+      "name": "nbody_gravitational_potential_3body",
+      "category": "nbody",
+      "family": "gravitation",
+      "ground_truth": "-6.674*100.0*80.0/r12 - 6.674*100.0*60.0/r13 - 6.674*80.0*60.0/r23",
+      "mdt_prediction": "* * / 1 r r * / / / / r r r / / / / 1 1 1 r 1 * * * / / / r * * * * * 1 r r r r / / / / / / r r 1 * * / / 1 1 * * * / / / / r / / / / / / / / / / / / / / / / r r r * * / / / / / / / / / / / 1 1 1 * * * * / / r * * * * * * * * r r r / / / / / / 1 * * * *",
+      "ar_prediction": "r**(-3)",
+      "mdt_time_s": 0.145,
+      "ar_time_s": 0.5759
+    },
+    {
+      "name": "nbody_center_of_mass_x",
+      "category": "nbody",
+      "family": "dynamics",
+      "ground_truth": "(3.0*x1 + 5.0*x2 + 2.0*x3)/(3.0 + 5.0 + 2.0)",
+      "mdt_prediction": "t*(2*C0 + t**3)",
+      "ar_prediction": "* / / 1 1 r",
+      "mdt_time_s": 0.1394,
+      "ar_time_s": 0.0249
+    },
+    {
+      "name": "nbody_total_kinetic_energy",
+      "category": "nbody",
+      "family": "energy",
+      "ground_truth": "0.5*3.0*v1**2 + 0.5*5.0*v2**2 + 0.5*2.0*v3**2",
+      "mdt_prediction": "36",
+      "ar_prediction": "h",
+      "mdt_time_s": 0.115,
+      "ar_time_s": 0.6048
+    },
+    {
+      "name": "nbody_virial_theorem",
+      "category": "nbody",
+      "family": "energy",
+      "ground_truth": "-0.5*(6.674*100.0*80.0/r12 + 6.674*100.0*60.0/r13 + 6.674*80.0*60.0/r23)",
+      "mdt_prediction": "* * / 1 r r * / / / / r r r / / / / / 1 1 r 1 * * * / / / r * * * * * 1 r r r r / / / / / / / r 1 * * / / 1 1 * * * / / / / r 1 / / / / / / / / / / / / / / / r r r * * / / / / / / / / / / / 1 1 1 * * * * / / r * * * * * * * * r r r / / / / / / 1 * * * *",
+      "ar_prediction": "r**(-3)",
+      "mdt_time_s": 0.1167,
+      "ar_time_s": 0.6182
+    },
+    {
+      "name": "nbody_tidal_tensor_component",
+      "category": "nbody",
+      "family": "gravitation",
+      "ground_truth": "6.674*1000000.0*(3*x**2/r**5 - 1/r**3)",
+      "mdt_prediction": "2*C0*r",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.118,
+      "ar_time_s": 0.026
+    },
+    {
+      "name": "nbody_escape_velocity_binary",
+      "category": "nbody",
+      "family": "gravitation",
+      "ground_truth": "sqrt(2*6.674*(100000.0/r1 + 80000.0/r2))",
+      "mdt_prediction": "12*t",
+      "ar_prediction": "h**2",
+      "mdt_time_s": 0.1172,
+      "ar_time_s": 0.6047
+    },
+    {
+      "name": "nbody_reduced_3body_potential",
+      "category": "nbody",
+      "family": "gravitation",
+      "ground_truth": "-6.674*100000.0/r1 - 6.674*50000.0/r2 - 0.5*0.1**2*(x**2 + y**2)",
+      "mdt_prediction": "* * / 1 r r * / / / / r r r / / / / 1 1 1 r 1 * * * / / / r * * * * * 1 r r r r / / / / / / r r 1 * * / / 1 1 * * * / / / / r / / / / / / / / / / / / / / / / r r r * * / / / / / / / / / / / 1 1 1 * * * * / / r * * * * * * * * r r r / / / / / / 1 * * * *",
+      "ar_prediction": "r**(-3)",
+      "mdt_time_s": 0.1188,
+      "ar_time_s": 0.6288
+    },
+    {
+      "name": "nbody_acceleration_x_component",
+      "category": "nbody",
+      "family": "gravitation",
+      "ground_truth": "-6.674*80.0*(x1 - x2)/((x1 - x2)**2 + (y1 - y2)**2)**(1.5) - 6.674*60.0*(x1 - x3)/((x1 - x3)**2 + (y1 - y3)**2)**(1.5)",
+      "mdt_prediction": "4*C0*t**3",
+      "ar_prediction": "C0",
+      "mdt_time_s": 0.1207,
+      "ar_time_s": 0.0257
+    },
+    {
+      "name": "nbody_total_angular_momentum",
+      "category": "nbody",
+      "family": "dynamics",
+      "ground_truth": "3.0*(x1*vy1 - y1*vx1) + 5.0*(x2*vy2 - y2*vx2) + 2.0*(x3*vy3 - y3*vx3)",
+      "mdt_prediction": "t*(C0*t**3 + 2*t)",
+      "ar_prediction": "C0/h",
+      "mdt_time_s": 0.1189,
+      "ar_time_s": 0.0229
+    }
+  ],
+  "config": {
+    "n_obs": 20,
+    "mdt_steps": 20,
+    "max_len": 128,
+    "seed": 42,
+    "device": "cpu",
+    "mdt_model_path": "/home/codex/work/repo/results/phys_mdt/model.pt",
+    "ar_model_path": "/home/codex/work/repo/results/baseline_ar/model.pt"
+  }
+}

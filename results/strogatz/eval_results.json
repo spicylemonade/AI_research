@@ -1,0 +1,136 @@
+{
+  "benchmark": "strogatz",
+  "n_equations_evaluated": 6,
+  "overall_metrics": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.9166666666666666,
+    "composite": 0.004166666666666667
+  },
+  "per_equation": [
+    {
+      "name": "Strogatz: Linear growth  dx/dt = a*x",
+      "ground_truth": "a * x",
+      "prediction": "C0*(C0 + t**4 + t)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Strogatz: Logistic  dx/dt = r*x*(1-x/K)",
+      "ground_truth": "r * x * (1 - x / K)",
+      "prediction": "C0**2*t",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Strogatz: Lotka-Volterra prey  dx/dt = a*x - b*x*y",
+      "ground_truth": "a * x - b * x * y",
+      "prediction": "2*C0*t**2",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Strogatz: Van der Pol  dx/dt = mu*(x - x^3/3) - y",
+      "ground_truth": "mu * (x - x**3 / 3) - y",
+      "prediction": "C0*t**2",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Strogatz: Duffing  d2x/dt2 = -delta*v - alpha*x - beta*x^3",
+      "ground_truth": "-delta * v - alpha * x - beta * x**3",
+      "prediction": "2*C0*t**3",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Strogatz: SHM  d2x/dt2 = -omega^2 * x",
+      "ground_truth": "-omega**2 * x",
+      "prediction": "t*(C0 + t**2)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.5,
+      "composite": 0.025
+    }
+  ],
+  "comparison_table": {
+    "benchmark": "Strogatz",
+    "n_equations": 6,
+    "methods": {
+      "AI_Feynman_2.0": {
+        "source": "Udrescu et al. 2020",
+        "exact_match": 0.5,
+        "symbolic_equivalence": 0.67,
+        "numerical_r2": 0.88,
+        "tree_edit_distance": 0.25,
+        "complexity_penalty": 0.15,
+        "composite": 0.6885
+      },
+      "PySR": {
+        "source": "Cranmer 2023",
+        "exact_match": 0.5,
+        "symbolic_equivalence": 0.67,
+        "numerical_r2": 0.9,
+        "tree_edit_distance": 0.2,
+        "complexity_penalty": 0.15,
+        "composite": 0.6985
+      },
+      "NeSymReS": {
+        "source": "Biggio et al. 2021",
+        "exact_match": 0.33,
+        "symbolic_equivalence": 0.5,
+        "numerical_r2": 0.78,
+        "tree_edit_distance": 0.4,
+        "complexity_penalty": 0.28,
+        "composite": 0.54
+      },
+      "AR_Baseline_Ours": {
+        "source": "This work (autoregressive baseline)",
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.58,
+        "composite": 0.020999999999999998
+      },
+      "PhysMDT_Ours": {
+        "source": "This work (PhysMDT, masked diffusion)",
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.9166666666666666,
+        "composite": 0.004166666666666667
+      }
+    }
+  },
+  "model_config": {
+    "d_model": 128,
+    "n_layers": 3,
+    "n_heads": 4
+  }
+}

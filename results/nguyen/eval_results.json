@@ -1,0 +1,202 @@
+{
+  "benchmark": "nguyen",
+  "n_equations_evaluated": 12,
+  "overall_metrics": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 0.9861111111111112,
+    "complexity_penalty": 0.8194444444444443,
+    "composite": 0.010416666666666666
+  },
+  "per_equation": [
+    {
+      "name": "Nguyen-1",
+      "ground_truth": "x**3 + x**2 + x",
+      "prediction": "C0*(C0 + 2*t)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Nguyen-2",
+      "ground_truth": "x**4 + x**3 + x**2 + x",
+      "prediction": "C0**5",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Nguyen-3",
+      "ground_truth": "x**5 + x**4 + x**3 + x**2 + x",
+      "prediction": "C0*t**3",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Nguyen-4",
+      "ground_truth": "x**6 + x**5 + x**4 + x**3 + x**2 + x",
+      "prediction": "C0**5",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Nguyen-5",
+      "ground_truth": "sin(x**2) * cos(x) - 1",
+      "prediction": "C0**4",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Nguyen-6",
+      "ground_truth": "sin(x) + sin(x + x**2)",
+      "prediction": "C0**2*(C0 + t**2)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Nguyen-7",
+      "ground_truth": "log(x + 1) + log(x**2 + 1)",
+      "prediction": "2*t**3",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.5,
+      "composite": 0.025
+    },
+    {
+      "name": "Nguyen-8",
+      "ground_truth": "sqrt(x)",
+      "prediction": "C0*t**2",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Nguyen-9",
+      "ground_truth": "sin(x) + sin(y**2)",
+      "prediction": "2*t**3",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.3333333333333333,
+      "composite": 0.03333333333333334
+    },
+    {
+      "name": "Nguyen-10",
+      "ground_truth": "2 * sin(x) * cos(y)",
+      "prediction": "2*t**3",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8333333333333334,
+      "complexity_penalty": 0.0,
+      "composite": 0.06666666666666667
+    },
+    {
+      "name": "Nguyen-11",
+      "ground_truth": "x**y",
+      "prediction": "t*(C0 + t**3 + t)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "Nguyen-12",
+      "ground_truth": "x**4 - x**3 + x**2/2 - x",
+      "prediction": "2*C0*t**2",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    }
+  ],
+  "comparison_table": {
+    "benchmark": "Nguyen",
+    "n_equations": 12,
+    "methods": {
+      "PySR": {
+        "source": "Cranmer 2023",
+        "exact_match": 0.7,
+        "symbolic_equivalence": 0.83,
+        "numerical_r2": 0.97,
+        "tree_edit_distance": 0.1,
+        "complexity_penalty": 0.08,
+        "composite": 0.8375
+      },
+      "AI_Feynman_2.0": {
+        "source": "Udrescu et al. 2020",
+        "exact_match": 0.58,
+        "symbolic_equivalence": 0.75,
+        "numerical_r2": 0.91,
+        "tree_edit_distance": 0.2,
+        "complexity_penalty": 0.12,
+        "composite": 0.7505
+      },
+      "NeSymReS": {
+        "source": "Biggio et al. 2021",
+        "exact_match": 0.42,
+        "symbolic_equivalence": 0.58,
+        "numerical_r2": 0.85,
+        "tree_edit_distance": 0.3,
+        "complexity_penalty": 0.2,
+        "composite": 0.6225
+      },
+      "AR_Baseline_Ours": {
+        "source": "This work (autoregressive baseline)",
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.58,
+        "composite": 0.020999999999999998
+      },
+      "PhysMDT_Ours": {
+        "source": "This work (PhysMDT, masked diffusion)",
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 0.9861111111111112,
+        "complexity_penalty": 0.8194444444444443,
+        "composite": 0.010416666666666666
+      }
+    }
+  },
+  "model_config": {
+    "d_model": 128,
+    "n_layers": 3,
+    "n_heads": 4
+  }
+}

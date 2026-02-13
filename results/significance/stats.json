@@ -1,0 +1,224 @@
+{
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "config": {
+    "n_samples": 200,
+    "n_epochs": 3,
+    "timeout_per_run_s": 30,
+    "n_eval": 30,
+    "d_model": 64,
+    "n_layers": 2,
+    "n_heads": 2,
+    "batch_size": 32,
+    "lr": 0.0005
+  },
+  "per_run": {
+    "ar_baseline": [
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 1.0,
+        "composite": 0.0
+      },
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.75,
+        "composite": 0.0125
+      },
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.75,
+        "composite": 0.0125
+      },
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.7,
+        "composite": 0.015
+      },
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 1.0,
+        "composite": 0.0
+      }
+    ],
+    "phys_mdt": [
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.75,
+        "composite": 0.0125
+      },
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.75,
+        "composite": 0.0125
+      },
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.75,
+        "composite": 0.0125
+      },
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.75,
+        "composite": 0.0125
+      },
+      {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.75,
+        "composite": 0.0125
+      }
+    ]
+  },
+  "summary": {
+    "ar_baseline": {
+      "exact_match": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "symbolic_equivalence": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "numerical_r2": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "tree_edit_distance": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "complexity_penalty": {
+        "mean": 0.84,
+        "std": 0.147479
+      },
+      "composite": {
+        "mean": 0.008,
+        "std": 0.007374
+      }
+    },
+    "phys_mdt": {
+      "exact_match": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "symbolic_equivalence": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "numerical_r2": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "tree_edit_distance": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "complexity_penalty": {
+        "mean": 0.75,
+        "std": 0.0
+      },
+      "composite": {
+        "mean": 0.0125,
+        "std": 0.0
+      }
+    }
+  },
+  "tests": {
+    "exact_match": {
+      "paired_ttest": {
+        "statistic": null,
+        "p_value": null
+      },
+      "wilcoxon_signed_rank": {
+        "statistic": null,
+        "p_value": null
+      }
+    },
+    "symbolic_equivalence": {
+      "paired_ttest": {
+        "statistic": null,
+        "p_value": null
+      },
+      "wilcoxon_signed_rank": {
+        "statistic": null,
+        "p_value": null
+      }
+    },
+    "numerical_r2": {
+      "paired_ttest": {
+        "statistic": null,
+        "p_value": null
+      },
+      "wilcoxon_signed_rank": {
+        "statistic": null,
+        "p_value": null
+      }
+    },
+    "tree_edit_distance": {
+      "paired_ttest": {
+        "statistic": null,
+        "p_value": null
+      },
+      "wilcoxon_signed_rank": {
+        "statistic": null,
+        "p_value": null
+      }
+    },
+    "complexity_penalty": {
+      "paired_ttest": {
+        "statistic": -1.364576,
+        "p_value": 0.24411
+      },
+      "wilcoxon_signed_rank": {
+        "statistic": 1.0,
+        "p_value": 0.276303
+      }
+    },
+    "composite": {
+      "paired_ttest": {
+        "statistic": 1.364576,
+        "p_value": 0.24411
+      },
+      "wilcoxon_signed_rank": {
+        "statistic": 1.0,
+        "p_value": 0.276303
+      }
+    }
+  },
+  "scipy_available": true,
+  "total_runtime_s": 47.1
+}

@@ -1,0 +1,452 @@
+[
+  {
+    "name": "coupled_spring_mass_force_on_body1",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "k1*(x2 - x1) - k2*x1",
+    "variables": {"x1": [-5, 5], "x2": [-5, 5]},
+    "coefficients": {"k1": 10.0, "k2": 5.0}
+  },
+  {
+    "name": "coupled_spring_mass_force_on_body2",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "-k1*(x2 - x1) + k3*x2",
+    "variables": {"x1": [-5, 5], "x2": [-5, 5]},
+    "coefficients": {"k1": 10.0, "k3": 8.0}
+  },
+  {
+    "name": "coupled_spring_mass_accel_body1",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "(k1*(x2 - x1) - k2*x1) / m1",
+    "variables": {"x1": [-5, 5], "x2": [-5, 5]},
+    "coefficients": {"k1": 12.0, "k2": 6.0, "m1": 2.0}
+  },
+  {
+    "name": "coupled_spring_mass_accel_body2",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "(-k1*(x2 - x1)) / m2",
+    "variables": {"x1": [-5, 5], "x2": [-5, 5]},
+    "coefficients": {"k1": 12.0, "m2": 3.0}
+  },
+  {
+    "name": "coupled_spring_3body_middle",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "k1*(x1 - x2) + k2*(x3 - x2)",
+    "variables": {"x1": [-5, 5], "x2": [-5, 5], "x3": [-5, 5]},
+    "coefficients": {"k1": 8.0, "k2": 6.0}
+  },
+  {
+    "name": "coupled_normal_mode_symmetric",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "A*cos(sqrt(k1/m1)*t) + B*cos(sqrt((k1 + 2*k2)/m1)*t)",
+    "variables": {"t": [0, 10]},
+    "coefficients": {"A": 1.0, "B": 0.5, "k1": 4.0, "k2": 2.0, "m1": 1.0}
+  },
+  {
+    "name": "coupled_spring_energy",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "0.5*m1*v1**2 + 0.5*m2*v2**2 + 0.5*k1*x1**2 + 0.5*k2*(x2 - x1)**2",
+    "variables": {"v1": [-5, 5], "v2": [-5, 5], "x1": [-3, 3], "x2": [-3, 3]},
+    "coefficients": {"m1": 2.0, "m2": 3.0, "k1": 10.0, "k2": 8.0}
+  },
+  {
+    "name": "coupled_pendulum_small_angle_1",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "-(g/L)*theta1 - (k/(m1*L))*(theta1 - theta2)",
+    "variables": {"theta1": [-0.5, 0.5], "theta2": [-0.5, 0.5]},
+    "coefficients": {"g": 9.81, "L": 1.0, "k": 5.0, "m1": 1.0}
+  },
+  {
+    "name": "coupled_pendulum_small_angle_2",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "-(g/L)*theta2 + (k/(m2*L))*(theta1 - theta2)",
+    "variables": {"theta1": [-0.5, 0.5], "theta2": [-0.5, 0.5]},
+    "coefficients": {"g": 9.81, "L": 1.0, "k": 5.0, "m2": 1.5}
+  },
+  {
+    "name": "coupled_oscillator_beat_pattern",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "coupled_systems",
+    "infix": "A*cos(0.5*(omega1 - omega2)*t)*cos(0.5*(omega1 + omega2)*t)",
+    "variables": {"t": [0, 20]},
+    "coefficients": {"A": 2.0, "omega1": 5.0, "omega2": 4.5}
+  },
+  {
+    "name": "kepler_effective_potential",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "-G*M*m/r + L**2/(2*m*r**2)",
+    "variables": {"r": [1, 100]},
+    "coefficients": {"G": 6.674, "M": 1e6, "m": 1.0, "L": 50.0}
+  },
+  {
+    "name": "kepler_vis_viva",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "sqrt(G*M*(2/r - 1/a))",
+    "variables": {"r": [5, 50]},
+    "coefficients": {"G": 6.674, "M": 1e6, "a": 30.0}
+  },
+  {
+    "name": "kepler_orbit_radius",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "a*(1 - e**2)/(1 + e*cos(theta))",
+    "variables": {"theta": [0, 6.28]},
+    "coefficients": {"a": 20.0, "e": 0.6}
+  },
+  {
+    "name": "kepler_radial_velocity",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "sqrt(G*M/(a*(1 - e**2)))*e*sin(theta)",
+    "variables": {"theta": [0, 6.28]},
+    "coefficients": {"G": 6.674, "M": 1e6, "a": 25.0, "e": 0.5}
+  },
+  {
+    "name": "kepler_angular_momentum_conservation",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "m*r**2*omega",
+    "variables": {"r": [5, 50], "omega": [0.01, 1.0]},
+    "coefficients": {"m": 2.0}
+  },
+  {
+    "name": "kepler_total_energy",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "-G*M*m/(2*a)",
+    "variables": {},
+    "coefficients": {"G": 6.674, "M": 1e6, "m": 1.0, "a": 30.0}
+  },
+  {
+    "name": "kepler_perihelion_velocity",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "sqrt(G*M*(1 + e)/(a*(1 - e)))",
+    "variables": {},
+    "coefficients": {"G": 6.674, "M": 1e6, "a": 20.0, "e": 0.3}
+  },
+  {
+    "name": "kepler_tidal_force",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "2*G*M*m*d/r**3",
+    "variables": {"r": [10, 100]},
+    "coefficients": {"G": 6.674, "M": 1e6, "m": 1.0, "d": 0.5}
+  },
+  {
+    "name": "kepler_precession_rate",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "6*pi*G*M/(a*(1 - e**2)*c**2)",
+    "variables": {},
+    "coefficients": {"G": 6.674, "M": 1e6, "a": 50.0, "e": 0.2, "c": 3e8, "pi": 3.14159}
+  },
+  {
+    "name": "kepler_specific_orbital_energy",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "kepler_problem",
+    "infix": "0.5*v**2 - G*M/r",
+    "variables": {"v": [1, 100], "r": [5, 50]},
+    "coefficients": {"G": 6.674, "M": 1e6}
+  },
+  {
+    "name": "lagrangian_free_particle_2d",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "0.5*m*(v_x**2 + v_y**2)",
+    "variables": {"v_x": [-10, 10], "v_y": [-10, 10]},
+    "coefficients": {"m": 2.0}
+  },
+  {
+    "name": "lagrangian_gravity_2d",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "0.5*m*(v_x**2 + v_y**2) - m*g*y",
+    "variables": {"v_x": [-10, 10], "v_y": [-10, 10], "y": [0, 20]},
+    "coefficients": {"m": 1.5, "g": 9.81}
+  },
+  {
+    "name": "lagrangian_simple_pendulum",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "0.5*m*L**2*omega**2 + m*g*L*cos(theta)",
+    "variables": {"omega": [-5, 5], "theta": [-3.14, 3.14]},
+    "coefficients": {"m": 1.0, "L": 1.0, "g": 9.81}
+  },
+  {
+    "name": "lagrangian_spring_pendulum",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "0.5*m*(v_r**2 + r**2*omega**2) - m*g*r*cos(theta) - 0.5*k*(r - L)**2",
+    "variables": {"v_r": [-5, 5], "r": [0.5, 3], "omega": [-3, 3], "theta": [-1.5, 1.5]},
+    "coefficients": {"m": 1.0, "g": 9.81, "k": 20.0, "L": 1.0}
+  },
+  {
+    "name": "hamiltonian_harmonic_oscillator",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "p**2/(2*m) + 0.5*k*q**2",
+    "variables": {"p": [-10, 10], "q": [-5, 5]},
+    "coefficients": {"m": 2.0, "k": 8.0}
+  },
+  {
+    "name": "hamiltonian_central_force",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "p_r**2/(2*m) + p_theta**2/(2*m*r**2) - G*M*m/r",
+    "variables": {"p_r": [-10, 10], "p_theta": [1, 50], "r": [5, 50]},
+    "coefficients": {"m": 1.0, "G": 6.674, "M": 1e6}
+  },
+  {
+    "name": "lagrangian_double_pendulum_ke",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "0.5*(m1 + m2)*L1**2*omega1**2 + 0.5*m2*L2**2*omega2**2 + m2*L1*L2*omega1*omega2*cos(theta1 - theta2)",
+    "variables": {"omega1": [-5, 5], "omega2": [-5, 5], "theta1": [-3.14, 3.14], "theta2": [-3.14, 3.14]},
+    "coefficients": {"m1": 1.0, "m2": 1.0, "L1": 1.0, "L2": 1.0}
+  },
+  {
+    "name": "lagrangian_double_pendulum_pe",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "-(m1 + m2)*g*L1*cos(theta1) - m2*g*L2*cos(theta2)",
+    "variables": {"theta1": [-3.14, 3.14], "theta2": [-3.14, 3.14]},
+    "coefficients": {"m1": 1.0, "m2": 1.0, "g": 9.81, "L1": 1.0, "L2": 1.0}
+  },
+  {
+    "name": "hamiltonian_charged_particle",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "(p_x**2 + p_y**2 + p_z**2)/(2*m) + q_charge*V",
+    "variables": {"p_x": [-10, 10], "p_y": [-10, 10], "p_z": [-10, 10], "V": [-100, 100]},
+    "coefficients": {"m": 1.0, "q_charge": 1.6}
+  },
+  {
+    "name": "euler_lagrange_generalized_force",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "lagrangian_hamiltonian",
+    "infix": "m*L**2*alpha + m*g*L*sin(theta)",
+    "variables": {"alpha": [-5, 5], "theta": [-3.14, 3.14]},
+    "coefficients": {"m": 1.0, "L": 1.0, "g": 9.81}
+  },
+  {
+    "name": "damped_driven_oscillator_displacement",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "A*exp(-gamma*t)*cos(omega_d*t + phi)",
+    "variables": {"t": [0, 20]},
+    "coefficients": {"A": 3.0, "gamma": 0.2, "omega_d": 4.0, "phi": 0.5}
+  },
+  {
+    "name": "driven_oscillator_steady_state",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "F0*sin(omega*t)/(m*sqrt((omega0**2 - omega**2)**2 + (2*gamma*omega)**2))",
+    "variables": {"t": [0, 20]},
+    "coefficients": {"F0": 5.0, "m": 1.0, "omega0": 5.0, "omega": 4.8, "gamma": 0.3}
+  },
+  {
+    "name": "driven_oscillator_amplitude_response",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "F0/(m*sqrt((omega0**2 - omega**2)**2 + (2*gamma*omega)**2))",
+    "variables": {"omega": [0.1, 10]},
+    "coefficients": {"F0": 5.0, "m": 1.0, "omega0": 5.0, "gamma": 0.3}
+  },
+  {
+    "name": "driven_oscillator_phase_lag",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "atan(2*gamma*omega/(omega0**2 - omega**2))",
+    "variables": {"omega": [0.1, 4.5]},
+    "coefficients": {"gamma": 0.3, "omega0": 5.0}
+  },
+  {
+    "name": "damped_oscillator_energy_decay",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "E0*exp(-2*gamma*t)",
+    "variables": {"t": [0, 20]},
+    "coefficients": {"E0": 10.0, "gamma": 0.15}
+  },
+  {
+    "name": "damped_oscillator_quality_factor_response",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "F0/(2*m*omega0*gamma)",
+    "variables": {},
+    "coefficients": {"F0": 5.0, "m": 1.0, "omega0": 5.0, "gamma": 0.2}
+  },
+  {
+    "name": "critically_damped_oscillator",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "(A + B*t)*exp(-gamma*t)",
+    "variables": {"t": [0, 20]},
+    "coefficients": {"A": 2.0, "B": 1.5, "gamma": 0.5}
+  },
+  {
+    "name": "overdamped_oscillator",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "A*exp(-alpha1*t) + B*exp(-alpha2*t)",
+    "variables": {"t": [0, 20]},
+    "coefficients": {"A": 2.0, "B": -1.0, "alpha1": 0.5, "alpha2": 2.0}
+  },
+  {
+    "name": "damped_driven_transient_plus_steady",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "C*exp(-gamma*t)*cos(omega_d*t + phi) + D*cos(omega*t + psi)",
+    "variables": {"t": [0, 30]},
+    "coefficients": {"C": 2.0, "D": 1.5, "gamma": 0.2, "omega_d": 4.9, "phi": 0.0, "omega": 3.0, "psi": 0.8}
+  },
+  {
+    "name": "parametric_resonance_mathieu",
+    "family": "oscillations",
+    "difficulty": "complex",
+    "category": "damped_driven",
+    "infix": "A*exp(mu*t)*cos(omega*t) + B*exp(-mu*t)*cos(omega*t)",
+    "variables": {"t": [0, 10]},
+    "coefficients": {"A": 1.0, "B": 0.5, "mu": 0.1, "omega": 3.0}
+  },
+  {
+    "name": "nbody_force_on_body1_from_2_and_3",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "G*m1*m2/r12**2 + G*m1*m3/r13**2",
+    "variables": {"r12": [1, 50], "r13": [1, 50]},
+    "coefficients": {"G": 6.674, "m1": 100.0, "m2": 80.0, "m3": 60.0}
+  },
+  {
+    "name": "nbody_gravitational_potential_3body",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "-G*m1*m2/r12 - G*m1*m3/r13 - G*m2*m3/r23",
+    "variables": {"r12": [1, 50], "r13": [1, 50], "r23": [1, 50]},
+    "coefficients": {"G": 6.674, "m1": 100.0, "m2": 80.0, "m3": 60.0}
+  },
+  {
+    "name": "nbody_center_of_mass_x",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "(m1*x1 + m2*x2 + m3*x3)/(m1 + m2 + m3)",
+    "variables": {"x1": [-10, 10], "x2": [-10, 10], "x3": [-10, 10]},
+    "coefficients": {"m1": 3.0, "m2": 5.0, "m3": 2.0}
+  },
+  {
+    "name": "nbody_total_kinetic_energy",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "0.5*m1*v1**2 + 0.5*m2*v2**2 + 0.5*m3*v3**2",
+    "variables": {"v1": [0, 20], "v2": [0, 20], "v3": [0, 20]},
+    "coefficients": {"m1": 3.0, "m2": 5.0, "m3": 2.0}
+  },
+  {
+    "name": "nbody_virial_theorem",
+    "family": "energy",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "-0.5*(G*m1*m2/r12 + G*m1*m3/r13 + G*m2*m3/r23)",
+    "variables": {"r12": [1, 50], "r13": [1, 50], "r23": [1, 50]},
+    "coefficients": {"G": 6.674, "m1": 100.0, "m2": 80.0, "m3": 60.0}
+  },
+  {
+    "name": "nbody_tidal_tensor_component",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "G*M*(3*x**2/r**5 - 1/r**3)",
+    "variables": {"x": [-10, 10], "r": [1, 50]},
+    "coefficients": {"G": 6.674, "M": 1e6}
+  },
+  {
+    "name": "nbody_escape_velocity_binary",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "sqrt(2*G*(m1/r1 + m2/r2))",
+    "variables": {"r1": [1, 50], "r2": [1, 50]},
+    "coefficients": {"G": 6.674, "m1": 1e5, "m2": 8e4}
+  },
+  {
+    "name": "nbody_reduced_3body_potential",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "-G*m1/r1 - G*m2/r2 - 0.5*omega**2*(x**2 + y**2)",
+    "variables": {"r1": [1, 50], "r2": [1, 50], "x": [-20, 20], "y": [-20, 20]},
+    "coefficients": {"G": 6.674, "m1": 1e5, "m2": 5e4, "omega": 0.1}
+  },
+  {
+    "name": "nbody_acceleration_x_component",
+    "family": "gravitation",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "-G*m2*(x1 - x2)/((x1 - x2)**2 + (y1 - y2)**2)**(1.5) - G*m3*(x1 - x3)/((x1 - x3)**2 + (y1 - y3)**2)**(1.5)",
+    "variables": {"x1": [-10, 10], "x2": [-10, 10], "x3": [-10, 10], "y1": [-10, 10], "y2": [-10, 10], "y3": [-10, 10]},
+    "coefficients": {"G": 6.674, "m2": 80.0, "m3": 60.0}
+  },
+  {
+    "name": "nbody_total_angular_momentum",
+    "family": "dynamics",
+    "difficulty": "complex",
+    "category": "nbody",
+    "infix": "m1*(x1*vy1 - y1*vx1) + m2*(x2*vy2 - y2*vx2) + m3*(x3*vy3 - y3*vx3)",
+    "variables": {"x1": [-10, 10], "y1": [-10, 10], "vx1": [-5, 5], "vy1": [-5, 5], "x2": [-10, 10], "y2": [-10, 10], "vx2": [-5, 5], "vy2": [-5, 5], "x3": [-10, 10], "y3": [-10, 10], "vx3": [-5, 5], "vy3": [-5, 5]},
+    "coefficients": {"m1": 3.0, "m2": 5.0, "m3": 2.0}
+  }
+]

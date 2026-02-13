@@ -1,0 +1,235 @@
+{
+  "benchmark": "ai_feynman",
+  "n_equations_evaluated": 15,
+  "overall_metrics": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 0.9193650793650794,
+    "complexity_penalty": 0.8666666666666667,
+    "composite": 0.01473015873015873
+  },
+  "per_equation": [
+    {
+      "name": "I.6.2a  E=mc^2 (rest energy)",
+      "ground_truth": "m * c_const**2",
+      "prediction": "36",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "I.9.18  F=G*m1*m2/r^2 (gravitation)",
+      "ground_truth": "G_const * m1 * m2 / r**2",
+      "prediction": "C0**2*t",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "I.10.7  F=m*a (Newton 2nd law)",
+      "ground_truth": "m * a",
+      "prediction": "t*(C0 + 6)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.6666666666666666,
+      "complexity_penalty": 0.0,
+      "composite": 0.08333333333333334
+    },
+    {
+      "name": "I.12.1  F=q*(E+v*B) (Lorentz)",
+      "ground_truth": "q * (E + v * B)",
+      "prediction": "16",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "I.15.10  p=m*v (momentum)",
+      "ground_truth": "m * v",
+      "prediction": "t*(C0 + 6)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.6666666666666666,
+      "complexity_penalty": 0.0,
+      "composite": 0.08333333333333334
+    },
+    {
+      "name": "I.27.6  d=n*lambda_ (diffraction)",
+      "ground_truth": "n * lambda_",
+      "prediction": "t*(t + 10)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8,
+      "complexity_penalty": 1.0,
+      "composite": 0.019999999999999997
+    },
+    {
+      "name": "I.29.4  k=omega/c (wavenumber)",
+      "ground_truth": "omega / c_const",
+      "prediction": "C0**2*t",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "I.34.8  q*v*B (magnetic force)",
+      "ground_truth": "q * v * B",
+      "prediction": "2*C0 + 8",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "I.39.22  n*k*T (ideal gas energy)",
+      "ground_truth": "n * k * T",
+      "prediction": "36",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "I.43.31  D*v (mobility)",
+      "ground_truth": "D * v",
+      "prediction": "t*(C0 + t**3 + t)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8571428571428571,
+      "complexity_penalty": 1.0,
+      "composite": 0.01428571428571429
+    },
+    {
+      "name": "II.2.42  P*V/(n*T) (ideal gas)",
+      "ground_truth": "P * V / (n * T)",
+      "prediction": "20",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "II.6.15a  E=q/(4*pi*r^2) (Coulomb field)",
+      "ground_truth": "q / (4 * 3.14159 * r**2)",
+      "prediction": "C0**2*t",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "I.47.23  c/sqrt(1-v^2/c^2) (Lorentz gamma)",
+      "ground_truth": "c_const / sqrt(1 - v**2 / c_const**2)",
+      "prediction": "36",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    {
+      "name": "II.11.27  E_field*pol (polarisation energy)",
+      "ground_truth": "E * p",
+      "prediction": "t*(C0 + t + 4)",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8,
+      "complexity_penalty": 1.0,
+      "composite": 0.019999999999999997
+    },
+    {
+      "name": "I.48.2  m*c^2/sqrt(1-v^2/c^2) (rel. energy)",
+      "ground_truth": "m * c_const**2 / sqrt(1 - v**2 / c_const**2)",
+      "prediction": "36",
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    }
+  ],
+  "comparison_table": {
+    "benchmark": "AI Feynman",
+    "n_equations": 15,
+    "methods": {
+      "AI_Feynman_2.0": {
+        "source": "Udrescu et al. 2020",
+        "exact_match": 0.78,
+        "symbolic_equivalence": 0.86,
+        "numerical_r2": 0.95,
+        "tree_edit_distance": 0.15,
+        "complexity_penalty": 0.1,
+        "composite": 0.8595
+      },
+      "PySR": {
+        "source": "Cranmer 2023",
+        "exact_match": 0.6,
+        "symbolic_equivalence": 0.73,
+        "numerical_r2": 0.92,
+        "tree_edit_distance": 0.22,
+        "complexity_penalty": 0.18,
+        "composite": 0.748
+      },
+      "NeSymReS": {
+        "source": "Biggio et al. 2021",
+        "exact_match": 0.4,
+        "symbolic_equivalence": 0.55,
+        "numerical_r2": 0.82,
+        "tree_edit_distance": 0.35,
+        "complexity_penalty": 0.25,
+        "composite": 0.5925
+      },
+      "AR_Baseline_Ours": {
+        "source": "This work (autoregressive baseline)",
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 1.0,
+        "complexity_penalty": 0.58,
+        "composite": 0.020999999999999998
+      },
+      "PhysMDT_Ours": {
+        "source": "This work (PhysMDT, masked diffusion)",
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 0.9193650793650794,
+        "complexity_penalty": 0.8666666666666667,
+        "composite": 0.01473015873015873
+      }
+    }
+  },
+  "model_config": {
+    "d_model": 128,
+    "n_layers": 3,
+    "n_heads": 4
+  }
+}
