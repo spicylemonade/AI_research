@@ -84,6 +84,9 @@ OPERATOR_ARITY = {
 MAX_SEQ_LEN = 128  # Maximum sequence length for equations
 
 
+_PREFIX_CACHE: Dict[str, List[str]] = {}
+
+
 def infix_to_prefix(expr_str: str) -> List[str]:
     """Convert an infix equation string to prefix notation token list.
 
@@ -93,16 +96,20 @@ def infix_to_prefix(expr_str: str) -> List[str]:
     Returns:
         List of tokens in prefix notation, e.g., ['+', '*', 'm', 'a', ...]
     """
+    if expr_str in _PREFIX_CACHE:
+        return _PREFIX_CACHE[expr_str]
     try:
         # Parse with sympy (keep ** for Python power operator; ^ is XOR)
         local_dict = _build_local_dict()
         expr = parse_expr(expr_str,
                           local_dict=local_dict,
                           transformations=standard_transformations + (implicit_multiplication_application,))
-        return _sympy_to_prefix(expr)
+        result = _sympy_to_prefix(expr)
     except Exception:
         # Fallback: try direct tokenization
-        return _direct_tokenize(expr_str)
+        result = _direct_tokenize(expr_str)
+    _PREFIX_CACHE[expr_str] = result
+    return result
 
 
 def prefix_to_infix(tokens: List[str]) -> str:

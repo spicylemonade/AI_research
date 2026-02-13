@@ -1,0 +1,32 @@
+{
+  "1": {
+    "composite": 0.020000000000000007,
+    "exact_match": 0.0,
+    "symbolic_equiv": 0.0,
+    "wall_time_seconds": 5.0
+  },
+  "5": {
+    "composite": 0.020000000000000007,
+    "exact_match": 0.0,
+    "symbolic_equiv": 0.0,
+    "wall_time_seconds": 6.2
+  },
+  "10": {
+    "composite": 0.020000000000000007,
+    "exact_match": 0.0,
+    "symbolic_equiv": 0.0,
+    "wall_time_seconds": 7.6
+  },
+  "20": {
+    "composite": 0.020000000000000007,
+    "exact_match": 0.0,
+    "symbolic_equiv": 0.0,
+    "wall_time_seconds": 10.5
+  },
+  "50": {
+    "composite": 0.03823892472522691,
+    "exact_match": 0.0,
+    "symbolic_equiv": 0.0,
+    "wall_time_seconds": 20.4
+  }
+}

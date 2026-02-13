@@ -272,6 +272,27 @@ def instantiate_equation(template_tuple, rng=None) -> Dict[str, Any]:
     }
 
 
+# Cache for compiled expressions: infix -> (compiled_code, math_ns)
+_COMPILED_CACHE: Dict[str, Any] = {}
+
+
+def _compile_expr(infix: str):
+    """Compile an expression string once for fast repeated evaluation."""
+    if infix in _COMPILED_CACHE:
+        return _COMPILED_CACHE[infix]
+    eval_expr = infix
+    eval_expr = eval_expr.replace('sin(', 'math.sin(')
+    eval_expr = eval_expr.replace('cos(', 'math.cos(')
+    eval_expr = eval_expr.replace('tan(', 'math.tan(')
+    eval_expr = eval_expr.replace('exp(', 'math.exp(')
+    eval_expr = eval_expr.replace('log(', 'math.log(')
+    eval_expr = eval_expr.replace('sqrt(', 'math.sqrt(')
+    eval_expr = eval_expr.replace('abs(', 'abs(')
+    code = compile(eval_expr, '<equation>', 'eval')
+    _COMPILED_CACHE[infix] = code
+    return code
+
+
 def generate_numerical_data(equation_dict: Dict, n_points: int = 20,
                             rng=None) -> Optional[Dict[str, List]]:
     """Generate numerical (x, y) pairs for a given equation.
@@ -287,7 +308,14 @@ def generate_numerical_data(equation_dict: Dict, n_points: int = 20,
         return None
 
     infix = equation_dict["infix"]
-    coeffs = equation_dict["coefficients"]
+
+    # Compile expression once
+    try:
+        code = _compile_expr(infix)
+    except Exception:
+        return None
+
+    math_ns = {"__builtins__": {}, "math": math}
 
     x_data = []
     y_data = []
@@ -297,19 +325,8 @@ def generate_numerical_data(equation_dict: Dict, n_points: int = 20,
         for var, (lo, hi) in variables.items():
             point[var] = rng.uniform(lo, hi)
 
-        # Evaluate equation
         try:
-            local_vars = {**point}
-            # Replace math functions for eval
-            eval_expr = infix
-            eval_expr = eval_expr.replace('sin(', 'math.sin(')
-            eval_expr = eval_expr.replace('cos(', 'math.cos(')
-            eval_expr = eval_expr.replace('tan(', 'math.tan(')
-            eval_expr = eval_expr.replace('exp(', 'math.exp(')
-            eval_expr = eval_expr.replace('log(', 'math.log(')
-            eval_expr = eval_expr.replace('sqrt(', 'math.sqrt(')
-            eval_expr = eval_expr.replace('abs(', 'abs(')
-            y_val = eval(eval_expr, {"__builtins__": {}, "math": math}, local_vars)
+            y_val = eval(code, math_ns, point)
             if math.isfinite(y_val):
                 x_data.append(point)
                 y_data.append(round(float(y_val), 6))

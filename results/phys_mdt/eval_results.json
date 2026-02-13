@@ -1,0 +1,133 @@
+{
+  "single_pass": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.03268811261352022,
+    "tree_edit_distance": 0.9672092352092352,
+    "complexity_penalty": 0.3325,
+    "composite": 0.04482610463245653
+  },
+  "refined": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.58,
+    "composite": 0.021
+  },
+  "per_family": {
+    "gravitation": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.7142857142857143,
+      "composite": 0.014285714285714287
+    },
+    "kinematics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.7,
+      "composite": 0.015000000000000003
+    },
+    "dynamics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.125,
+      "composite": 0.043750000000000004
+    },
+    "fluid": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.4444444444444444,
+      "composite": 0.027777777777777776
+    },
+    "energy": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    "rotational": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.75,
+      "composite": 0.0125
+    },
+    "oscillations": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.25,
+      "composite": 0.037500000000000006
+    }
+  },
+  "per_difficulty": {
+    "medium": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.55,
+      "composite": 0.0225
+    },
+    "complex": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.5555555555555556,
+      "composite": 0.022222222222222223
+    },
+    "simple": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.6190476190476191,
+      "composite": 0.01904761904761905
+    }
+  },
+  "training_history": {
+    "train_loss": [
+      2.8639131784439087,
+      2.1876480762775126,
+      1.943312901716966,
+      1.6878838539123535,
+      1.5598880969561064,
+      1.377918275503012,
+      1.3457875022521386,
+      1.0865780390225923,
+      1.143366786149832,
+      1.1728766239606416
+    ],
+    "val_loss": [
+      2.1656174659729004,
+      1.8644588589668274,
+      1.6484187245368958,
+      1.411138117313385,
+      1.3373573422431946,
+      1.2470738887786865,
+      1.2245106101036072,
+      1.248826801776886,
+      1.1968657970428467,
+      1.1705275177955627
+    ]
+  },
+  "model_config": {
+    "d_model": 128,
+    "n_layers": 3,
+    "n_heads": 4
+  }
+}

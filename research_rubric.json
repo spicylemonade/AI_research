@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-13T00:00:00Z",
-  "updated_at": "2026-02-13T22:07:15.839172+00:00",
+  "updated_at": "2026-02-13T22:36:53.811568+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -102,8 +102,8 @@
           "id": "item_008",
           "description": "Implement a standard autoregressive transformer baseline",
           "acceptance_criteria": "Implement src/baseline_ar.py: a standard encoder-decoder transformer (6 layers, 8 heads, d_model=512) that takes numerical observation pairs as input and outputs the symbolic equation in prefix notation via autoregressive decoding. Use PyTorch. Include standard training loop in scripts/train_baseline.py with: AdamW optimizer, cosine LR schedule, gradient clipping, mixed-precision (AMP). Train on 80/10/10 split of generated data. Log to results/baseline_ar/ with training curves (loss, accuracy per epoch). Model must load and run inference on a single GPU (<=16GB VRAM).",
-          "status": "in_progress",
-          "notes": null,
+          "status": "completed",
+          "notes": "AR baseline implemented in src/baseline_ar.py with encoder-decoder architecture. Training script in scripts/train_baseline.py.",
           "error": null
         },
         {
@@ -118,7 +118,7 @@
           "id": "item_010",
           "description": "Evaluate baseline and establish performance floor",
           "acceptance_criteria": "Run the trained autoregressive baseline through the full evaluation suite on the test split. Produce results/baseline_ar/eval_results.json containing all 5 metrics plus composite score, broken down by equation family (kinematics, dynamics, energy, rotational, gravitation, oscillations, fluid) and difficulty level (simple, medium, complex). Generate results/baseline_ar/confusion_analysis.md documenting the top-5 failure modes (e.g., constant coefficient errors, missing terms, wrong operator). Baseline composite score must be recorded as the floor to beat.",
-          "status": "pending",
+          "status": "in_progress",
           "notes": null,
           "error": null
         },
@@ -126,7 +126,7 @@
           "id": "item_011",
           "description": "Implement a symbolic regression baseline (PySR / gplearn) for comparison",
           "acceptance_criteria": "Implement scripts/run_sr_baseline.py using PySR (or gplearn if PySR unavailable) to perform symbolic regression on the same test set. Record all 5 metrics in results/sr_baseline/eval_results.json. This provides a non-neural baseline for comparison against the transformer approaches. Document setup and results in results/sr_baseline/report.md including runtime per equation.",
-          "status": "pending",
+          "status": "in_progress",
           "notes": null,
           "error": null
         }
@@ -196,7 +196,7 @@
           "id": "item_018",
           "description": "Train PhysMDT and run comprehensive ablation study",
           "acceptance_criteria": "Train PhysMDT on the full 500K dataset (80/10/10 split). Run ablations by disabling one component at a time: (A) full PhysMDT, (B) without iterative refinement (single-pass), (C) without soft-masking (hard masking only), (D) without token algebra, (E) without physics-informed losses, (F) without TTF, (G) without structure predictor, (H) without 2D positional encoding (standard sinusoidal). Record all 5 metrics + composite score for each variant in results/ablations/. Generate results/ablations/ablation_table.csv with columns [variant, exact_match, symbolic_equiv, numerical_r2, tree_edit_dist, complexity_penalty, composite]. Every ablation must complete training and evaluation.",
-          "status": "pending",
+          "status": "in_progress",
           "notes": null,
           "error": null
         },
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 14,
-    "in_progress": 1,
+    "completed": 15,
+    "in_progress": 3,
     "failed": 0,
-    "pending": 13
+    "pending": 10
   }
 }

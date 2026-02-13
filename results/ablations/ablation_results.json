@@ -1,0 +1,66 @@
+{
+  "A_full_phys_mdt": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.58,
+    "composite": 0.021
+  },
+  "B_no_refinement": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.03268811261352022,
+    "tree_edit_distance": 0.9672092352092352,
+    "complexity_penalty": 0.3325,
+    "composite": 0.04482610463245653
+  },
+  "C_hard_masking": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.012537843437549627,
+    "tree_edit_distance": 0.9565714285714286,
+    "complexity_penalty": 0.3633333333333333,
+    "composite": 0.03931065133557789
+  },
+  "D_no_dual_rope": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.58,
+    "composite": 0.021
+  },
+  "E_no_physics_loss": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.58,
+    "composite": 0.021
+  },
+  "F_no_ttf": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.58,
+    "composite": 0.021
+  },
+  "G_no_structure": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.58,
+    "composite": 0.021
+  },
+  "H_ar_baseline": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.58,
+    "composite": 0.020999999999999998
+  }
+}

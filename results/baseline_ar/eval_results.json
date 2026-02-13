@@ -1,0 +1,141 @@
+{
+  "overall": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 1.0,
+    "complexity_penalty": 0.58,
+    "composite": 0.020999999999999998
+  },
+  "per_family": {
+    "gravitation": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.6923076923076923,
+      "composite": 0.015384615384615385
+    },
+    "kinematics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.75,
+      "composite": 0.0125
+    },
+    "dynamics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.25,
+      "composite": 0.03750000000000001
+    },
+    "fluid": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.4166666666666667,
+      "composite": 0.029166666666666664
+    },
+    "energy": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 1.0,
+      "composite": 0.0
+    },
+    "rotational": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.6666666666666666,
+      "composite": 0.01666666666666667
+    },
+    "oscillations": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.42857142857142855,
+      "composite": 0.02857142857142857
+    }
+  },
+  "per_difficulty": {
+    "medium": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.5833333333333334,
+      "composite": 0.020833333333333332
+    },
+    "complex": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.47619047619047616,
+      "composite": 0.02619047619047619
+    },
+    "simple": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.627906976744186,
+      "composite": 0.0186046511627907
+    }
+  },
+  "training_history": {
+    "train_loss": [
+      4.172537711950449,
+      2.1714951625237098,
+      1.7547987699508667,
+      1.4710650810828576,
+      1.2629982049648578,
+      1.1368050437707167,
+      0.9988671862162076,
+      0.8940788782559909
+    ],
+    "train_acc": [
+      0.19469246031746032,
+      0.36433531746031744,
+      0.4494047619047619,
+      0.5099206349206349,
+      0.5855654761904762,
+      0.6237599206349206,
+      0.6510416666666666,
+      0.6862599206349206
+    ],
+    "val_loss": [
+      2.1801837682724,
+      1.5830899477005005,
+      1.4414438009262085,
+      1.169041097164154,
+      1.0195119976997375,
+      1.0099557936191559,
+      0.7956125736236572,
+      0.6241259276866913
+    ],
+    "val_acc": [
+      0.32978723404255317,
+      0.44680851063829785,
+      0.5148936170212766,
+      0.6191489361702127,
+      0.597872340425532,
+      0.6446808510638298,
+      0.723404255319149,
+      0.7595744680851064
+    ]
+  },
+  "model_config": {
+    "d_model": 128,
+    "n_layers": 3,
+    "n_heads": 4
+  }
+}

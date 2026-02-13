@@ -1,0 +1,8 @@
+{
+  "exact_match": 0.15,
+  "symbolic_equivalence": 0.22,
+  "numerical_r2": 0.45,
+  "tree_edit_distance": 0.55,
+  "complexity_penalty": 0.35,
+  "composite": 0.301
+}
