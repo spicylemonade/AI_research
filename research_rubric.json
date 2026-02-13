@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-13T00:00:00Z",
-  "updated_at": "2026-02-13T21:39:56.372260+00:00",
+  "updated_at": "2026-02-13T21:41:45.342215+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -63,8 +63,8 @@
           "id": "item_004",
           "description": "Survey state-of-the-art benchmarks for physics equation discovery",
           "acceptance_criteria": "Search the web for and document (in docs/benchmarks.md) at least 5 existing benchmarks: AI Feynman dataset, SRBench, Strogatz dataset, Nguyen benchmark, ODE-Bench, and any recent 2024-2026 datasets. For each, record: number of equations, complexity distribution, input/output format, and best published accuracy. Cite all in sources.bib. This defines the evaluation landscape the project must beat or match.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Benchmark survey complete in docs/benchmarks.md covering 6 benchmarks: AI Feynman (120 eqs), SRBench (252 problems), Strogatz (7 ODE systems), Nguyen (12 eqs), ODEBench (63 ODE systems), and recent 2024-2026 developments. All cited in sources.bib.",
           "error": null
         },
         {
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 3,
+    "completed": 4,
     "in_progress": 0,
     "failed": 0,
-    "pending": 25
+    "pending": 24
   }
 }
