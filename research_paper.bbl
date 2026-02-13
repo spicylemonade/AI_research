@@ -1,0 +1,156 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Azerbayev et~al.(2024)Azerbayev, Schoelkopf, Paster, Santos, McAleer,
+  Jiang, Deng, Biderman, and Welleck]{azerbayev2024llemma}
+Zhangir Azerbayev, Hailey Schoelkopf, Keiran Paster, Marco~Dos Santos, Stephen
+  McAleer, Albert~Q Jiang, Jia Deng, Stella Biderman, and Sean Welleck.
+\newblock Llemma: An open language model for mathematics.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2310.10631}.
+
+\bibitem[Biggio et~al.(2021)Biggio, Bendinelli, Neitz, Lucchi, and
+  Parascandolo]{biggio2021neural}
+Luca Biggio, Tommaso Bendinelli, Alexander Neitz, Aurelien Lucchi, and
+  Giambattista Parascandolo.
+\newblock Neural symbolic regression that scales.
+\newblock In \emph{International Conference on Machine Learning}, 2021.
+\newblock URL \url{https://arxiv.org/abs/2106.06427}.
+\newblock NeSymReS.
+
+\bibitem[Cranmer(2023)]{cranmer2023interpretable}
+Miles Cranmer.
+\newblock Interpretable machine learning for science with {PySR} and
+  {SymbolicRegression.jl}.
+\newblock \emph{arXiv preprint arXiv:2305.01582}, 2023.
+
+\bibitem[d'Ascoli et~al.(2024)d'Ascoli, Becker, Schwaller, Mathis, and
+  Kilbertus]{dascoli2023odeformer}
+St{\'e}phane d'Ascoli, S{\"o}ren Becker, Philippe Schwaller, Alexander Mathis,
+  and Niki Kilbertus.
+\newblock {ODEFormer}: Symbolic regression of dynamical systems with
+  transformers.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2310.05573}.
+
+\bibitem[Kamienny et~al.(2022)Kamienny, d'Ascoli, Lample, and
+  Charton]{kamienny2022end}
+Pierre-Alexandre Kamienny, St{\'e}phane d'Ascoli, Guillaume Lample, and
+  Fran{\c{c}}ois Charton.
+\newblock End-to-end symbolic regression with transformers.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2022.
+
+\bibitem[Koza(1994)]{koza1994genetic}
+John~R Koza.
+\newblock Genetic programming as a means for programming computers by natural
+  selection.
+\newblock \emph{Statistics and Computing}, 4\penalty0 (2):\penalty0 87--112,
+  1994.
+\newblock Foundation work for genetic programming / gplearn.
+
+\bibitem[La~Cava(2016)]{lacava2016strogatz}
+William La~Cava.
+\newblock {ODE-Strogatz}: A benchmark set of 2-state nonlinear ordinary
+  differential equations.
+\newblock \url{https://github.com/lacava/ode-strogatz}, 2016.
+
+\bibitem[La~Cava et~al.(2021)La~Cava, Orzechowski, Burlacu, de~Franca,
+  Virgolin, Jin, Kommenda, and Moore]{lacava2021srbench}
+William La~Cava, Patryk Orzechowski, Bogdan Burlacu, Fabr{\'\i}cio de~Franca,
+  Marco Virgolin, Ying Jin, Michael Kommenda, and Jason Moore.
+\newblock Contemporary symbolic regression methods and their relative
+  performance.
+\newblock \emph{arXiv preprint arXiv:2107.14351}, 2021.
+\newblock SRBench.
+
+\bibitem[{Lambda Labs ML Team}(2025)]{arc2025architects}
+{Lambda Labs ML Team}.
+\newblock {ARC 2025} solution by the {ARChitects}: Masked diffusion models for
+  {ARC-AGI}.
+\newblock
+  \url{https://lambdalabsml.github.io/ARC2025_Solution_by_the_ARChitects/},
+  2025.
+\newblock 1st place solution for the ARC-AGI-2 competition.
+
+\bibitem[Lample and Charton(2020)]{lample2020deep}
+Guillaume Lample and Fran{\c{c}}ois Charton.
+\newblock Deep learning for symbolic mathematics.
+\newblock In \emph{International Conference on Learning Representations}, 2020.
+\newblock URL \url{https://arxiv.org/abs/1912.01412}.
+
+\bibitem[Lewkowycz et~al.(2022)Lewkowycz, Andreassen, Dohan, Dyer, Michalewski,
+  Ramasesh, Slone, Anil, Schlag, Gutman-Solo, et~al.]{lewkowycz2022solving}
+Aitor Lewkowycz, Anders Andreassen, David Dohan, Ethan Dyer, Henryk
+  Michalewski, Vinay Ramasesh, Ambrose Slone, Cem Anil, Imanol Schlag, Theo
+  Gutman-Solo, et~al.
+\newblock Solving quantitative reasoning problems with language models.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  35:\penalty0 3843--3857, 2022.
+\newblock Minerva.
+
+\bibitem[Nguyen et~al.(2011)Nguyen, Nguyen, O'Neill, McKay, and
+  Galv{\'a}n-L{\'o}pez]{nguyen2011benchmark}
+Quang~Uy Nguyen, Xuan~Hoai Nguyen, Michael O'Neill, Robert~I McKay, and Edgar
+  Galv{\'a}n-L{\'o}pez.
+\newblock Semantically-based crossover in genetic programming: Application to
+  real-valued symbolic regression.
+\newblock \emph{Genetic Programming and Evolvable Machines}, 12\penalty0
+  (2):\penalty0 91--119, 2011.
+
+\bibitem[Nie et~al.(2025)Nie, Zhu, You, Zhang, Ou, Hu, Lu, Zhou, Lin, Wen, and
+  Li]{nie2025llada}
+Shen Nie, Fengqi Zhu, Chao You, Xiaojian Zhang, Jianfeng Ou, Jun Hu, Yanqin Lu,
+  Zhiheng Zhou, Jie Lin, Ji-Rong Wen, and Chongxuan Li.
+\newblock Large language diffusion models.
+\newblock \emph{arXiv preprint arXiv:2502.09992}, 2025.
+\newblock LLaDA: Large Language Diffusion with mAsking.
+
+\bibitem[Raissi et~al.(2019)Raissi, Perdikaris, and
+  Karniadakis]{raissi2019physics}
+Maziar Raissi, Paris Perdikaris, and George~E Karniadakis.
+\newblock Physics-informed neural networks: A deep learning framework for
+  solving forward and inverse problems involving nonlinear partial differential
+  equations.
+\newblock \emph{Journal of Computational Physics}, 378:\penalty0 686--707,
+  2019.
+
+\bibitem[Sahoo et~al.(2024)Sahoo, Arriola, Schiff, Gokaslan, Marroquin, Chiu,
+  Rush, and Kuleshov]{sahoo2024simple}
+Subham~Sekhar Sahoo, Marianne Arriola, Yair Schiff, Aaron Gokaslan, Edgar
+  Marroquin, Justin~T Chiu, Alexander Rush, and Volodymyr Kuleshov.
+\newblock Simple and effective masked diffusion language models.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2406.07524}.
+\newblock MDLM.
+
+\bibitem[Su et~al.(2024)Su, Ahmed, Lu, Pan, Bo, and Liu]{su2024roformer}
+Jianlin Su, Murtadha Ahmed, Yu~Lu, Shengfeng Pan, Wen Bo, and Yunfeng Liu.
+\newblock {RoFormer}: Enhanced transformer with rotary position embedding.
+\newblock \emph{Neurocomputing}, 568:\penalty0 127063, 2024.
+\newblock RoPE.
+
+\bibitem[Sun and Magliacane(2023)]{sun2023tpsr}
+Wei Sun and Sara Magliacane.
+\newblock {TPSR}: Transformer-based planning for symbolic regression.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2023.
+\newblock URL \url{https://github.com/deep-symbolic-mathematics/TPSR}.
+
+\bibitem[Udrescu and Tegmark(2020)]{udrescu2020ai}
+Silviu-Marian Udrescu and Max Tegmark.
+\newblock {AI Feynman}: A physics-inspired method for symbolic regression.
+\newblock \emph{Science Advances}, 6\penalty0 (16):\penalty0 eaay2631, 2020.
+
+\bibitem[Udrescu et~al.(2020)Udrescu, Tan, Feng, Neto, Wu, and
+  Tegmark]{udrescu2020ai2}
+Silviu-Marian Udrescu, Andrew Tan, Jiaqi Feng, Orisvaldo Neto, Tailin Wu, and
+  Max Tegmark.
+\newblock {AI Feynman 2.0}: Pareto-optimal symbolic regression exploiting graph
+  modularity.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  33:\penalty0 4860--4871, 2020.
+
+\end{thebibliography}
