@@ -1,0 +1,24 @@
+{
+  "n_samples": 10000,
+  "n_templates": 61,
+  "family_distribution": {
+    "kinematics": 1478,
+    "dynamics": 1646,
+    "energy": 1475,
+    "rotational": 1309,
+    "gravitation": 1313,
+    "oscillations": 1472,
+    "fluid": 1307
+  },
+  "difficulty_distribution": {
+    "simple": 4099,
+    "medium": 3609,
+    "complex": 2292
+  },
+  "split_sizes": {
+    "train": 8000,
+    "val": 1000,
+    "test": 1000
+  },
+  "seed": 42
+}
