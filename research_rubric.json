@@ -1,0 +1,276 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-13T23:15:00Z",
+  "updated_at": "2026-02-13T23:14:33.201475+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-13T23:08:00Z",
+      "completed_at": "2026-02-13T23:14:33.201446+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Deep analysis of ARChitects ARC2025 codebase and architecture",
+          "acceptance_criteria": "Written document (in results/) covering: (1) LLaDA masked diffusion architecture and training procedure, (2) 2D Golden Gate RoPE positional encoding design, (3) recursive soft-masking inference with token algebra in embedding space, (4) test-time training with per-task LoRA adaptation, (5) speculative decoding and prefix caching optimizations, (6) most-visited-candidate selection strategy. Must include code-level references to the ARChitects GitHub repository.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Literature review: transformer-based symbolic regression and physics equation discovery",
+          "acceptance_criteria": "Web search conducted for at least 15 relevant papers. Must cover: SymbolicGPT (Valipour et al.), AI Feynman (Udrescu & Tegmark), TPSR (NeurIPS 2023), E2E transformer SR (Kamienny et al. 2022), PySR (Cranmer 2023), Sym-Q (2025), PhyE2E (2025), KAN-SR (2025), and IdeSearchFitter. Results documented in results/literature_review.md with key findings, architectures, and benchmark results.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Literature review: transformers learning physics world models and Newtonian mechanics",
+          "acceptance_criteria": "Web search conducted covering: 'From Kepler to Newton' (Liu et al. 2026, arXiv:2602.06923) on inductive biases for world models, AI-Newton (Fang et al. 2025) concept-driven discovery, Archetype AI Newton model, physics-informed neural networks (PINNs), and the prediction-vs-understanding gap in learned physics. Documented in results/literature_review.md. Must identify the three critical inductive biases: spatial smoothness, stability under noise, and temporal locality.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Literature review: masked diffusion language models and test-time training",
+          "acceptance_criteria": "Web search conducted covering: LLaDA (Nie et al., arXiv:2502.09992, NeurIPS 2025 oral), d1 reasoning with diffusion, LLaDA-MoE, test-time training for ARC (Aky\u00fcrek et al. 2024, 53% ARC accuracy), T5-ARC, TTT theoretical guarantees (ICML 2025), and progressive self-correction (ProSeCo) for masked diffusion. Documented in results/literature_review.md.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Create and populate sources.bib with BibTeX entries for all consulted literature",
+          "acceptance_criteria": "sources.bib exists in repo root with valid BibTeX entries for at least 15 relevant papers including: Valipour et al. (SymbolicGPT), Udrescu & Tegmark (AI Feynman), Shojaee et al. (TPSR), Nie et al. (LLaDA), Liu et al. (Kepler to Newton), Aky\u00fcrek et al. (TTT for ARC), Kamienny et al. (E2E SR), Cranmer (PySR), Fang et al. (AI-Newton), Vaswani et al. (Attention Is All You Need), the ARChitects ARC2025 report, the SRSD benchmark paper, Landajuela et al. (uDSR), and at least 2 additional relevant papers found during the review. Each entry must have author, title, year, venue/journal fields.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_006",
+          "description": "Define the research problem, hypothesis, and novel contribution statement",
+          "acceptance_criteria": "Written document (results/problem_statement.md) containing: (1) Problem: Can a transformer autonomously derive symbolic Newtonian physics equations from raw observational data without domain-specific priors? (2) Hypothesis: A masked diffusion transformer with recursive self-refinement (inspired by ARChitects' soft-masking), physics-aware 2D positional encoding, temporal locality attention bias, and test-time training can discover symbolic force laws (F=ma, gravitational law, Hooke's law, etc.) from trajectory data. (3) Novel contributions clearly stated relative to prior work cited in sources.bib. (4) Specific target equations listed with complexity tiers (simple: F=ma, medium: F=GMm/r\u00b2, complex: coupled oscillator systems, Lagrangian mechanics).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_007",
+          "description": "Design and generate the physics equation training dataset",
+          "acceptance_criteria": "Python script (src/data/generate_physics_data.py) that: (1) Simulates N-body gravitational systems, spring-mass systems, pendulums, projectile motion, and collisions using numerical ODE solvers (scipy.integrate or torchdiffeq). (2) Records trajectory data as sequences of (t, x, v, a) tuples with configurable noise levels (0%, 1%, 5%, 10%). (3) Generates ground-truth symbolic equations in prefix notation (tokenizable). (4) Produces at least 100K training examples across 5 difficulty tiers. (5) Includes train/val/test splits (80/10/10). (6) Outputs saved in results/data/ directory. (7) Includes data augmentation: coordinate rotations, time reversal, scaling transformations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Define tokenization scheme for physics equations and observational data",
+          "acceptance_criteria": "Implemented tokenizer (src/tokenizer/physics_tokenizer.py) that: (1) Tokenizes symbolic math expressions in prefix notation (operators: +, -, *, /, ^, sin, cos, sqrt, log; variables: x, v, a, t, m, r, theta; constants: G, k, pi, numeric literals). (2) Tokenizes continuous observational data via discretization into bins or scientific notation tokens. (3) Supports special tokens: <mask>, <pad>, <eos>, <sep>, <grid_delim>. (4) Vocabulary size documented. (5) Roundtrip encoding/decoding verified on at least 20 physics equations from the Feynman benchmark.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Implement autoregressive transformer baseline for symbolic equation prediction",
+          "acceptance_criteria": "Working baseline model (src/models/ar_baseline.py) that: (1) Uses a standard decoder-only transformer (4-8 layers, 256-512 hidden dim) with 1D sinusoidal or RoPE positional encoding. (2) Takes tokenized observation sequences as input, outputs predicted symbolic equation tokens autoregressively. (3) Trained on the generated dataset for at least 50 epochs. (4) Training loss curve saved to figures/. (5) Achieves >0% exact-match accuracy on the test set (proving the pipeline works end-to-end). (6) Inference script produces predicted equations from test observations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Define comprehensive evaluation metrics and benchmarking suite",
+          "acceptance_criteria": "Evaluation module (src/evaluation/metrics.py) implementing: (1) Exact symbolic match accuracy (after canonicalization via sympy). (2) Normalized tree edit distance (NED) between predicted and ground-truth expression trees. (3) Numerical R\u00b2 score: evaluate predicted equation on held-out data points vs ground truth. (4) Complexity-adjusted score: accuracy weighted by equation complexity (number of operators/depth). (5) Generalization score: accuracy on equation forms NOT seen during training. (6) Per-tier breakdown (simple/medium/complex). (7) Comparison framework that logs results against prior work baselines from sources.bib (SymbolicGPT, AI Feynman recovery rates). All metrics documented with formulas in results/metrics_definition.md.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_011",
+          "description": "Implement masked diffusion transformer (PhysDiff) with LLaDA-style training",
+          "acceptance_criteria": "Novel model (src/models/physdiff.py) implementing: (1) Masked diffusion training: randomly mask output equation tokens at ratio t ~ U[0,1], train to predict all masked tokens simultaneously via cross-entropy loss. (2) Forward process: each token independently masked with probability t. (3) Reverse process: iterative parallel unmasking from fully masked state. (4) Architecture: transformer encoder-decoder with at least 6 layers, supporting both observation encoding and equation generation. (5) Model is trainable and loss decreases over first 1000 steps (verified with training curve in figures/physdiff_loss.png). (6) Cite LLaDA (Nie et al.) in implementation comments and sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_012",
+          "description": "Implement recursive soft-masking self-refinement loop (inspired by ARChitects)",
+          "acceptance_criteria": "Inference module (src/models/recursive_refine.py) implementing the ARChitects' key innovation: (1) Soft-masking: add <mask> embedding to all output positions to signal 'needs improvement'. (2) Recursive loop: feed model output back as input for N refinement iterations (configurable, default N=50). (3) Token algebra in continuous embedding space: blend token embeddings rather than discretizing between steps (e.g., output_emb = normalize(model(input_emb)); input_emb[mask_dim] += 1). (4) Convergence detection: track per-position entropy across iterations, stop early when entropy drops below threshold. (5) Most-visited-candidate selection: track which discrete outputs appear most frequently across iterations, select top-K. (6) Demonstrated improvement: recursive refinement must improve equation accuracy by at least 5 percentage points over single-pass decoding on the validation set.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement physics-aware positional encoding with temporal locality bias",
+          "acceptance_criteria": "Custom positional encoding module (src/models/physics_pos_encoding.py) implementing: (1) 2D positional encoding for observation grids inspired by ARChitects' Golden Gate RoPE, adapted for (time, variable_index) dimensions. (2) Temporal locality attention mask: restrict attention to a configurable window of recent timesteps (inspired by 'From Kepler to Newton' finding that temporal locality forces discovery of Newtonian force laws instead of curve-fitting). (3) Multi-scale temporal attention: combine local (last 5 steps) and global (full sequence) attention heads to capture both instantaneous forces and conservation laws. (4) Ablation-ready: can be toggled on/off for controlled experiments. (5) Validated: model with temporal locality bias achieves higher accuracy on force-law equations (F=ma, F=-kx) than model without it.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement test-time training (TTT) with per-instance LoRA adaptation",
+          "acceptance_criteria": "TTT module (src/training/test_time_training.py) implementing: (1) Per-instance LoRA adaptation (rank 16-32) at inference time, inspired by Aky\u00fcrek et al. and the ARChitects' per-task TTT. (2) For each test instance: freeze base model, train LoRA adapter for K steps (K=64-128) on augmented versions of the test input (time-reversed trajectories, coordinate rotations, noise perturbation). (3) Self-consistency filtering: generate predictions under multiple augmentations, keep only predictions that are consistent across transformations. (4) TTT must improve accuracy by at least 3 percentage points over non-TTT inference on the test set. (5) Wall-clock time per instance logged and reported.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement symbolic regression head for extracting interpretable equations from latent space",
+          "acceptance_criteria": "Symbolic extraction module (src/models/symbolic_head.py) implementing: (1) A lightweight symbolic regression head that operates on the transformer's internal representations to extract F=ma-style equations. (2) Probing approach: fit sparse linear models to intermediate layer activations to detect if force, energy, or momentum representations emerge. (3) Beam search decoding with complexity penalty to prefer simpler equations (Occam's razor). (4) Dimensional analysis constraint: predicted equations must be dimensionally consistent (enforce via masking invalid operator-operand combinations). (5) Output: both the raw token sequence and a sympy-parsed, simplified symbolic expression. (6) Compare extraction quality against direct end-to-end prediction.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_016",
+          "description": "Ablation study: contribution of each novel component",
+          "acceptance_criteria": "Systematic ablation experiment (results/ablation_study.md and results/ablation_results.json) comparing at least 6 model configurations: (1) AR baseline (item_009), (2) Masked diffusion only (item_011), (3) + recursive refinement (item_012), (4) + physics positional encoding (item_013), (5) + TTT (item_014), (6) Full model (all components). Each configuration evaluated on all metrics from item_010 across all difficulty tiers. Results presented in a table with statistical significance (3+ random seeds). Ablation must show each component provides additive improvement. Figures saved to figures/ablation_*.png.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_017",
+          "description": "Experiment: recovery of specific Newtonian physics equations",
+          "acceptance_criteria": "Detailed experiment (results/equation_recovery.md) testing the full model on recovering specific equations: (1) Newton's second law: F=ma (from acceleration-force data). (2) Universal gravitation: F=GMm/r\u00b2 (from orbital trajectory data). (3) Hooke's law: F=-kx (from spring oscillation data). (4) Projectile motion: y=v\u2080t - \u00bdgt\u00b2 (from parabolic trajectories). (5) Simple pendulum period: T=2\u03c0\u221a(L/g). (6) Kinetic energy: KE=\u00bdmv\u00b2. (7) At least 3 additional equations from the Feynman benchmark. Report: exact recovery rate, best NED score, R\u00b2 of predicted equation, number of refinement iterations to convergence. Must achieve exact symbolic recovery on at least 5 of the tested equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Experiment: generalization to unseen equation forms",
+          "acceptance_criteria": "Generalization experiment (results/generalization.md) testing: (1) Hold out entire equation families during training (e.g., train without any gravitational equations, test on F=GMm/r\u00b2). (2) Test on equations with more variables than seen in training. (3) Test on coupled differential equation systems (e.g., two-body problem). (4) Report generalization accuracy vs in-distribution accuracy. (5) Analyze failure modes: what kinds of equations does the model fail to derive, and why? (6) Compare generalization performance against SymbolicGPT and AI Feynman baselines from sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Experiment: robustness to noise and data scarcity",
+          "acceptance_criteria": "Robustness experiment (results/robustness.md) testing: (1) Equation recovery accuracy at noise levels 0%, 1%, 5%, 10%, 20% Gaussian noise on observations. (2) Accuracy vs number of observation data points (10, 50, 100, 500, 1000 points per equation instance). (3) Accuracy vs number of training examples (1K, 10K, 50K, 100K). (4) Plot accuracy-vs-noise and accuracy-vs-data curves saved to figures/robustness_*.png. (5) Identify the noise threshold where accuracy drops below 50%. (6) Recursive refinement should show particular benefit under noisy conditions (demonstrate with ablation).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Experiment: visualization of recursive refinement dynamics",
+          "acceptance_criteria": "Visualization study (figures/refinement_dynamics/) containing: (1) Per-iteration token probability heatmaps showing how the predicted equation evolves across 50+ refinement steps for at least 3 example equations. (2) Entropy-over-iterations plot showing convergence behavior. (3) Embedding space visualization (t-SNE/UMAP) of intermediate representations colored by equation family. (4) Attention pattern visualization showing temporal locality vs global attention heads. (5) 'Derivation trace': a step-by-step visualization showing how the model progressively refines e.g., 'F = ? * ? / ?' into 'F = G * M * m / r\u00b2'. (6) All figures publication-quality (vector format SVG or high-res PNG, labeled axes, legends).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Benchmark comparison against state-of-the-art symbolic regression methods",
+          "acceptance_criteria": "Comparative benchmark (results/benchmark_comparison.md) evaluating: (1) Our full model vs at least 3 baselines from the literature: SymbolicGPT, PySR, and TPSR (or reproduced approximations). (2) Evaluation on the SRSD benchmark (at least the 30 'easy' equations). (3) Evaluation on Feynman equations subset (at least 20 equations). (4) Metrics: exact match rate, NED, R\u00b2, and wall-clock inference time. (5) Results table formatted for potential paper submission. (6) Our model must outperform pure AR transformer baselines (SymbolicGPT) on at least one metric. (7) Explicitly cite and reference performance numbers from prior work in sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_022",
+          "description": "Analysis: what representations does the model learn internally?",
+          "acceptance_criteria": "Interpretability analysis (results/representation_analysis.md) containing: (1) Linear probing of intermediate layers for physical quantities (mass, distance, force magnitude, energy). (2) Identification of 'physics neurons' or attention heads specialized for specific operations (multiplication, division, squaring). (3) Analysis of whether the model learns conservation laws (energy, momentum) as implicit constraints. (4) Comparison of internal representations between the AR baseline and the masked diffusion model. (5) Discussion connecting findings to the 'prediction vs understanding' debate from 'From Kepler to Newton' (cite sources.bib).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Write complete research report with all results and analysis",
+          "acceptance_criteria": "Comprehensive research report (results/research_report.md) structured as: (1) Abstract (250 words). (2) Introduction with motivation and contributions. (3) Related work section citing at least 10 papers from sources.bib. (4) Method section describing PhysDiff architecture, recursive refinement, physics positional encoding, TTT, and symbolic head. (5) Experimental setup (dataset, metrics, baselines, compute). (6) Results with all tables and figure references from Phase 4. (7) Analysis and discussion (Phase 5 interpretability findings). (8) Limitations and future work. (9) Conclusion. Report must be at least 3000 words and suitable for arxiv preprint submission.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Create publication-quality summary figures",
+          "acceptance_criteria": "At minimum 4 publication-quality figures in figures/: (1) Architecture diagram of PhysDiff showing masked diffusion + recursive refinement + physics PE + symbolic head (figures/architecture.png or .svg). (2) Main results bar chart comparing all model variants and baselines (figures/main_results.png). (3) Recursive refinement visualization for a flagship equation (e.g., F=GMm/r\u00b2) showing progressive derivation (figures/refinement_showcase.png). (4) Noise robustness curves (figures/robustness.png). All figures must have labeled axes, legends, consistent color scheme, and be at least 300 DPI.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Final reproducibility package and code documentation",
+          "acceptance_criteria": "Repository organized with: (1) Updated README.md with project overview, installation instructions, and quickstart. (2) requirements.txt or pyproject.toml with all dependencies pinned. (3) src/ directory with all model, data, training, and evaluation code. (4) scripts/ directory with shell scripts to reproduce key experiments. (5) All random seeds documented and set for reproducibility. (6) results/ contains all experimental outputs. (7) sources.bib is complete and up-to-date with all referenced work. (8) Code passes basic linting (flake8 or ruff with no errors on core modules).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 25,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 25
+  }
+}
