@@ -1,0 +1,300 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-13T00:00:00Z",
+  "updated_at": "2026-02-13T21:30:58.484429+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-13T00:00:00Z",
+      "completed_at": "2026-02-13T21:30:58.484398+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Analyze repository structure and define project scaffold",
+          "acceptance_criteria": "Produce a written document (docs/repo_analysis.md) listing all existing files, directories, and their purposes. Define and create the directory scaffold: src/ (model code), data/ (datasets and generators), configs/ (hyperparameters), scripts/ (training/eval entrypoints), tests/ (unit tests), notebooks/ (analysis). All directories created and documented.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Conduct literature review on transformers for symbolic mathematics and physics derivation",
+          "acceptance_criteria": "Search the web for and read at least 10 papers covering: (a) transformers for symbolic regression (e.g., Lample & Charton 2020 'Deep Learning for Symbolic Mathematics'), (b) AI Feynman and symbolic physics discovery, (c) equation learners like NeSymReS, (d) physics-informed neural networks (PINNs), (e) LLMs for mathematical reasoning (Minerva, Llemma), (f) masked diffusion models (MDLM, LLaDA). Create sources.bib with valid BibTeX entries for all consulted sources. Minimum 10 entries required.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Analyze the ARC 2025 ARChitects solution and extract transferable techniques",
+          "acceptance_criteria": "Produce docs/arc_analysis.md covering: (1) masked diffusion architecture and why it outperformed autoregressive approaches, (2) recursive soft-masking refinement loop and its analogy to iterative equation refinement, (3) 2D positional encoding innovations and how they map to equation tree structures, (4) test-time finetuning protocol, (5) token algebra in continuous embedding space and its applicability to symbolic manipulation. Each section must include concrete proposals for adaptation to physics equation derivation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Survey state-of-the-art benchmarks for physics equation discovery",
+          "acceptance_criteria": "Search the web for and document (in docs/benchmarks.md) at least 5 existing benchmarks: AI Feynman dataset, SRBench, Strogatz dataset, Nguyen benchmark, ODE-Bench, and any recent 2024-2026 datasets. For each, record: number of equations, complexity distribution, input/output format, and best published accuracy. Cite all in sources.bib. This defines the evaluation landscape the project must beat or match.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Formalize the research problem statement and hypotheses",
+          "acceptance_criteria": "Write docs/problem_statement.md containing: (1) precise problem definition \u2014 given observational data pairs (x, y) and/or partial symbolic hints, derive the governing Newtonian physics equation in symbolic form, (2) three testable hypotheses (H1: a masked-diffusion transformer can derive equations competitive with symbolic regression baselines; H2: iterative refinement via soft-masking improves derivation accuracy over single-pass decoding; H3: test-time finetuning on in-context examples enables zero-shot generalization to unseen equation families), (3) scope definition covering Newtonian mechanics equations from F=ma through Lagrangian/Hamiltonian formulations, orbital mechanics, and coupled oscillators.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_006",
+          "description": "Design the symbolic equation tokenization and representation scheme",
+          "acceptance_criteria": "Write docs/tokenization_design.md specifying: (1) prefix-notation encoding of equations as token sequences (operators, variables, constants, parentheses), (2) vocabulary of at minimum 150 tokens covering arithmetic operators (+, -, *, /, ^), trigonometric/transcendental functions (sin, cos, exp, log, sqrt), physics-specific symbols (m, g, F, E, L, H, omega, theta, r, v, a, t), numeric constants (integers 0-9, pi, e, G, c), and structural tokens (BOS, EOS, PAD, MASK, SEP), (3) bidirectional conversion functions (equation string <-> token sequence) with round-trip fidelity tests, (4) maximum sequence length analysis showing 95th percentile of target equation corpus fits within chosen context window.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_007",
+          "description": "Build the physics equation dataset generator",
+          "acceptance_criteria": "Implement data/generator.py that procedurally generates training data with: (1) at least 50 distinct Newtonian physics equation templates spanning kinematics (projectile motion, uniform acceleration), dynamics (Newton's laws, friction, springs), energy (kinetic, potential, conservation), rotational mechanics (torque, angular momentum, moment of inertia), gravitation (Kepler's laws, orbital velocity, gravitational potential), oscillations (SHM, damped, driven), and fluid statics (pressure, buoyancy), (2) random coefficient sampling for each template, (3) symbolic equation output in prefix notation, (4) optional numerical data pairs (x_i, y_i) sampled from each equation, (5) configurable difficulty levels (simple single-variable to complex multi-variable coupled systems). Generator must produce at least 500,000 training examples. Include unit tests in tests/test_generator.py with >90% coverage.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement a standard autoregressive transformer baseline",
+          "acceptance_criteria": "Implement src/baseline_ar.py: a standard encoder-decoder transformer (6 layers, 8 heads, d_model=512) that takes numerical observation pairs as input and outputs the symbolic equation in prefix notation via autoregressive decoding. Use PyTorch. Include standard training loop in scripts/train_baseline.py with: AdamW optimizer, cosine LR schedule, gradient clipping, mixed-precision (AMP). Train on 80/10/10 split of generated data. Log to results/baseline_ar/ with training curves (loss, accuracy per epoch). Model must load and run inference on a single GPU (<=16GB VRAM).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Define evaluation metrics suite",
+          "acceptance_criteria": "Implement src/metrics.py containing: (1) exact_match \u2014 fraction of predictions that are symbolically identical to ground truth after canonicalization (sympy.simplify), (2) symbolic_equivalence \u2014 fraction where sympy.equals() returns True even if form differs, (3) numerical_r2 \u2014 R\u00b2 score between predicted equation evaluated on held-out x values vs ground truth y values, (4) tree_edit_distance \u2014 normalized edit distance between predicted and ground truth expression trees, (5) complexity_penalty \u2014 ratio of predicted expression tree depth to ground truth (penalizes over-complex solutions). All metrics must have unit tests. Produce a composite score: S = 0.3*exact_match + 0.3*symbolic_equivalence + 0.25*numerical_r2 + 0.1*(1 - tree_edit_distance) + 0.05*(1 - complexity_penalty).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Evaluate baseline and establish performance floor",
+          "acceptance_criteria": "Run the trained autoregressive baseline through the full evaluation suite on the test split. Produce results/baseline_ar/eval_results.json containing all 5 metrics plus composite score, broken down by equation family (kinematics, dynamics, energy, rotational, gravitation, oscillations, fluid) and difficulty level (simple, medium, complex). Generate results/baseline_ar/confusion_analysis.md documenting the top-5 failure modes (e.g., constant coefficient errors, missing terms, wrong operator). Baseline composite score must be recorded as the floor to beat.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_011",
+          "description": "Implement a symbolic regression baseline (PySR / gplearn) for comparison",
+          "acceptance_criteria": "Implement scripts/run_sr_baseline.py using PySR (or gplearn if PySR unavailable) to perform symbolic regression on the same test set. Record all 5 metrics in results/sr_baseline/eval_results.json. This provides a non-neural baseline for comparison against the transformer approaches. Document setup and results in results/sr_baseline/report.md including runtime per equation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_012",
+          "description": "Implement the masked diffusion transformer for physics equation derivation (PhysMDT)",
+          "acceptance_criteria": "Implement src/phys_mdt.py: a masked diffusion transformer inspired by the ARC 2025 LLaDA architecture, adapted for symbolic equation generation. Architecture must include: (1) 8-layer transformer with 8 attention heads, d_model=512, (2) masked diffusion training objective \u2014 randomly mask output equation tokens and train to predict them conditioned on input observations, (3) custom positional encoding that encodes both sequence position and expression-tree depth (inspired by ARC's 2D RoPE), (4) input encoder that processes numerical (x, y) observation pairs through a learned embedding, (5) LoRA support (rank-32 and rank-512 configurations) for parameter-efficient finetuning. Model file must include docstrings referencing the ARC 2025 architecture and Lample & Charton (2020) as cited in sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement the iterative soft-mask refinement loop (recursive self-improvement)",
+          "acceptance_criteria": "Implement src/refinement.py: the recursive soft-masking inference procedure from ARC 2025 adapted for equations. Must include: (1) initial forward pass producing logit distribution over equation tokens, (2) soft-mask injection \u2014 add mask embedding to all positions to signal refinement, (3) iterative refinement loop (configurable N steps, default 50), (4) cold-restart mechanism (two rounds of N/2 steps), (5) convergence detection via token-level confidence thresholding (early stopping when >95% of positions have confidence >0.9), (6) candidate tracking \u2014 count visit frequency of distinct equation candidates across iterations and select top-2 most visited. Include ablation flags to disable individual components. Unit tests must verify that refinement monotonically improves or maintains score on a toy equation set.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement token algebra for symbolic manipulation in embedding space",
+          "acceptance_criteria": "Implement src/token_algebra.py: continuous embedding space operations inspired by ARC 2025's discovery that tokens are points in continuous space. Must support: (1) linear interpolation between symbol embeddings (e.g., blend 'sin' and 'cos' embeddings to explore trigonometric space), (2) symbolic analogy via vector arithmetic (e.g., velocity_embedding - position_embedding + force_embedding \u2248 acceleration_embedding), (3) nearest-neighbor projection back to discrete token vocabulary after algebraic operations, (4) integration into the refinement loop as an alternative to pure logit-based sampling. Demonstrate with unit tests that trained embeddings capture physically meaningful relationships (e.g., cosine similarity between 'F' and 'ma' embeddings > 0.7 after training).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement test-time finetuning (TTF) for in-context equation adaptation",
+          "acceptance_criteria": "Implement src/ttf.py: test-time finetuning protocol adapted from ARC 2025. For each test equation: (1) take the provided numerical observation pairs as a few-shot task, (2) apply LoRA rank-32 finetuning for 64-128 steps with per-step data augmentation (noise injection on observations, variable renaming, coefficient scaling), (3) run the refinement loop post-TTF, (4) restore base weights after evaluation. Script must support batch processing of test equations. Measure and report TTF overhead (seconds per equation). Demonstrate that TTF improves composite score by at least 5 percentage points over no-TTF on a held-out validation set.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Implement physics-informed loss terms and constraints",
+          "acceptance_criteria": "Extend the training objective in src/physics_loss.py with: (1) dimensional consistency loss \u2014 penalize equations where left-hand and right-hand sides have incompatible physical dimensions (implement a simple dimensional analysis checker for M, L, T units), (2) conservation law regularizer \u2014 for systems where energy/momentum conservation applies, add a loss term penalizing predictions that violate conservation on sampled trajectories, (3) symmetry-awareness loss \u2014 penalize predictions that break known symmetries (e.g., time-reversal symmetry for conservative systems). Each loss term must be toggleable via config. Document expected impact in docstrings with references to physics-informed neural network literature (cite Raissi et al. 2019 from sources.bib).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_017",
+          "description": "Implement the dual-model architecture for equation structure prediction",
+          "acceptance_criteria": "Inspired by ARC 2025's dedicated shape-prediction model, implement src/structure_predictor.py: a smaller transformer (4 layers) that predicts the structural skeleton of the target equation (operator tree without leaf values) before the main PhysMDT fills in variables and constants. Pipeline: (1) structure model predicts equation template (e.g., '+ * ? ? * ? ? ?'), (2) PhysMDT fills in the template conditioned on observations and predicted structure. Evaluate structure prediction accuracy separately (must achieve >70% exact skeleton match on test set). Document the hypothesis that decomposing structure from content aids complex equation derivation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_018",
+          "description": "Train PhysMDT and run comprehensive ablation study",
+          "acceptance_criteria": "Train PhysMDT on the full 500K dataset (80/10/10 split). Run ablations by disabling one component at a time: (A) full PhysMDT, (B) without iterative refinement (single-pass), (C) without soft-masking (hard masking only), (D) without token algebra, (E) without physics-informed losses, (F) without TTF, (G) without structure predictor, (H) without 2D positional encoding (standard sinusoidal). Record all 5 metrics + composite score for each variant in results/ablations/. Generate results/ablations/ablation_table.csv with columns [variant, exact_match, symbolic_equiv, numerical_r2, tree_edit_dist, complexity_penalty, composite]. Every ablation must complete training and evaluation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Evaluate on standard physics benchmarks and compare against prior work",
+          "acceptance_criteria": "Evaluate PhysMDT (best configuration from ablation) on: (1) AI Feynman benchmark \u2014 report symbolic equivalence rate and compare against published AI Feynman 2.0 results and any subsequent improvements found in literature review, (2) Nguyen benchmark \u2014 report exact match and compare against PySR and neural baselines from literature, (3) Strogatz dataset \u2014 report symbolic equivalence. For each benchmark, produce results/{benchmark_name}/eval_results.json and a comparison table showing PhysMDT vs. at least 3 prior methods cited in sources.bib. PhysMDT must outperform the autoregressive baseline (item_010) by at least 15 composite points.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Evaluate on complex multi-variable Newtonian systems (the 'wow' results)",
+          "acceptance_criteria": "Create a challenge test set (data/challenge_set.json) of 50 complex Newtonian equations not seen during training, including: (1) coupled spring-mass systems (2+ bodies), (2) Kepler's problem with perturbations, (3) Lagrangian/Hamiltonian formulations with generalized coordinates, (4) damped driven oscillators with resonance, (5) N-body gravitational approximations. Evaluate PhysMDT and all baselines. Produce results/challenge/eval_results.json. PhysMDT must achieve >40% symbolic equivalence on this challenge set (vs expected <10% for baselines). Generate compelling visualizations in figures/challenge_*.png showing predicted vs. true equation evaluation on test trajectories.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Measure the effect of iterative refinement depth on derivation quality",
+          "acceptance_criteria": "Run inference with refinement steps in {1, 5, 10, 25, 50, 100, 200} on the full test set. For each depth, record composite score, per-family scores, and wall-clock time. Produce results/refinement_depth/depth_vs_score.csv and figures/refinement_curve.png showing the score-vs-compute tradeoff. Identify the 'knee' of the curve where additional refinement yields diminishing returns. Compare this curve against the ARC 2025 finding that 102 steps was optimal for their domain.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_022",
+          "description": "Analyze embedding space for physics knowledge emergence",
+          "acceptance_criteria": "Produce a detailed analysis in results/embeddings/ showing: (1) t-SNE / UMAP visualization of learned token embeddings colored by physical category (figures/embedding_tsne.png), verifying that physically related tokens cluster (e.g., force-related: F, m, a cluster together; energy-related: E, K, U, W cluster), (2) cosine similarity heatmap between key physics symbol pairs (figures/embedding_similarity.png), (3) vector analogy tests \u2014 does embedding('F') - embedding('m') + embedding('v') approximate embedding('p') (momentum)? Report top-10 analogies with their cosine similarity scores, (4) comparison of embedding structure before and after training. At least 5 physically meaningful analogies must achieve cosine similarity > 0.6.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Run statistical significance tests and error analysis",
+          "acceptance_criteria": "For all key comparisons (PhysMDT vs AR baseline, PhysMDT vs SR baseline, PhysMDT vs each ablation variant): (1) run 5 independent training runs with different seeds for PhysMDT and the AR baseline, (2) report mean \u00b1 standard deviation for all metrics, (3) perform paired t-tests or Wilcoxon signed-rank tests, (4) report p-values in results/significance/stats.json \u2014 key comparisons must have p < 0.05. Produce results/significance/error_analysis.md documenting: failure categories, correlation between equation complexity and success rate, and qualitative examples of the 10 most interesting correct derivations and 10 most instructive failures.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_024",
+          "description": "Write the comprehensive research report",
+          "acceptance_criteria": "Produce docs/research_report.md (minimum 3000 words) containing: (1) Abstract summarizing the approach and key findings, (2) Introduction motivating the problem with citations from sources.bib, (3) Related Work section comparing against at least 8 cited prior approaches, (4) Method section detailing PhysMDT architecture, training procedure, refinement loop, token algebra, physics-informed losses, and TTF \u2014 with architecture diagrams in figures/, (5) Experiments section presenting all results from Phase 4 with properly formatted tables and figure references, (6) Discussion interpreting results \u2014 what do the embedding analyses tell us about physics knowledge emergence in transformers? How does iterative refinement compare to chain-of-thought reasoning? (7) Conclusion and Future Work. All claims must be supported by experimental evidence from results/.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Create publication-quality figures and result visualizations",
+          "acceptance_criteria": "Produce at minimum 8 figures in figures/ directory: (1) architecture_diagram.png \u2014 PhysMDT architecture overview, (2) refinement_process.png \u2014 illustration of iterative soft-mask refinement on an example equation, (3) ablation_bar_chart.png \u2014 composite scores for all ablation variants, (4) benchmark_comparison.png \u2014 bar chart comparing PhysMDT vs baselines on each benchmark, (5) challenge_trajectories.png \u2014 predicted vs true equation trajectories for 4 selected challenge problems, (6) refinement_curve.png \u2014 score vs refinement depth, (7) embedding_tsne.png \u2014 embedding space visualization, (8) embedding_similarity.png \u2014 cosine similarity heatmap. All figures must have proper axis labels, legends, titles, and use a consistent color scheme. Figures must be generated programmatically (scripts/generate_figures.py) from data in results/.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_026",
+          "description": "Finalize sources.bib and ensure all citations are complete",
+          "acceptance_criteria": "sources.bib must contain at least 15 valid BibTeX entries covering: (1) Lample & Charton 2020 \u2014 Deep Learning for Symbolic Mathematics, (2) Udrescu & Tegmark 2020 \u2014 AI Feynman, (3) ARC 2025 ARChitects solution, (4) Raissi et al. 2019 \u2014 PINNs, (5) LLaDA masked diffusion model paper, (6) At least 2 papers on symbolic regression (PySR, gplearn, or similar), (7) At least 2 papers on LLMs for mathematics (Minerva, Llemma, or similar), (8) At least 2 papers on transformer architectures (attention is all you need, RoPE), (9) At least 2 papers on physics-informed ML. Every citation must be referenced in the research report. Run a script to verify all bib entries parse correctly (scripts/verify_bib.py).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_027",
+          "description": "Create reproducibility package and README",
+          "acceptance_criteria": "Update README.md with: (1) project title and one-paragraph summary, (2) installation instructions (requirements.txt with pinned versions), (3) data generation commands, (4) training commands for baseline and PhysMDT, (5) evaluation commands, (6) expected results summary table. Create a Makefile or scripts/reproduce.sh that runs the full pipeline end-to-end. Verify that a fresh clone + install + run produces results within 2% of reported numbers (document this check in docs/reproducibility_check.md).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_028",
+          "description": "Summarize key findings and novel contributions",
+          "acceptance_criteria": "Produce docs/key_findings.md listing: (1) the top-3 novel contributions of this work (expected: masked diffusion for symbolic physics, iterative refinement for equation derivation, physics-informed token algebra), (2) quantitative headline results (composite score improvement over baselines, challenge set performance), (3) the single most compelling qualitative result (a complex equation the model derived that demonstrates genuine physics reasoning \u2014 e.g., deriving the Lagrangian of a double pendulum from trajectory data), (4) limitations and failure modes, (5) three concrete directions for future work. This document serves as the executive summary for stakeholders.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 28,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 28
+  }
+}
