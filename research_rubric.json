@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-13T00:00:00Z",
-  "updated_at": "2026-02-13T21:38:24.884892+00:00",
+  "updated_at": "2026-02-13T21:39:56.372260+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -55,8 +55,8 @@
           "id": "item_003",
           "description": "Analyze the ARC 2025 ARChitects solution and extract transferable techniques",
           "acceptance_criteria": "Produce docs/arc_analysis.md covering: (1) masked diffusion architecture and why it outperformed autoregressive approaches, (2) recursive soft-masking refinement loop and its analogy to iterative equation refinement, (3) 2D positional encoding innovations and how they map to equation tree structures, (4) test-time finetuning protocol, (5) token algebra in continuous embedding space and its applicability to symbolic manipulation. Each section must include concrete proposals for adaptation to physics equation derivation.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "ARC 2025 analysis complete in docs/arc_analysis.md. Covers all 5 required sections with concrete adaptation proposals for physics equation derivation.",
           "error": null
         },
         {
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 2,
+    "completed": 3,
     "in_progress": 0,
     "failed": 0,
-    "pending": 26
+    "pending": 25
   }
 }
