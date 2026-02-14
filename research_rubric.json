@@ -86,8 +86,8 @@
           "id": "item_006",
           "description": "Implement the symbolic equation tokenizer: build a tokenizer that converts mathematical expressions to/from token sequences in reverse Polish notation (RPN), supporting operators (+, -, *, /, ^, sqrt, sin, cos, tan, log, exp), numeric constants (integers, floats, pi, e), and variable symbols (x1..x9). Include augmentation via symbolic equivalences (commutativity, associativity)",
           "acceptance_criteria": "A Python module src/data/tokenizer.py that: (1) encodes any valid expression string into an integer token sequence and decodes back losslessly for at least 50 test expressions, (2) vocabulary size \u2264200 tokens, (3) handles all 120 FSReD equations without error, (4) includes at least 4 augmentation transforms (commutative swap, constant folding, identity elimination, associative regrouping), (5) unit tests in tests/test_tokenizer.py with \u226595% line coverage passing",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "32/32 tests pass. 200-token vocabulary. 120 FSReD equations handled. 4 augmentation transforms implemented.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 5,
+    "completed": 6,
     "in_progress": 0,
     "failed": 0,
-    "pending": 20
+    "pending": 19
   }
 }
