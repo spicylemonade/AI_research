@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T18:05:00Z",
-  "updated_at": "2026-02-14T18:06:41.161928+00:00",
-  "current_agent": "orchestrator",
+  "updated_at": "2026-02-14T18:06:42.934267+00:00",
+  "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
       "status": "completed",
@@ -11,8 +11,8 @@
       "error": null
     },
     "researcher": {
-      "status": "pending",
-      "started_at": null,
+      "status": "in_progress",
+      "started_at": "2026-02-14T18:06:42.934251+00:00",
       "completed_at": null,
       "error": null
     },
@@ -39,31 +39,31 @@
           "id": "item_001",
           "description": "Define the research problem: Can a masked-diffusion transformer autonomously derive complex Newtonian physics equations from numerical observation data, and can recursive self-refinement (inspired by ARC2025 LLaDA soft-masking) improve symbolic recovery over autoregressive baselines?",
           "acceptance_criteria": "A written problem statement document (problem_statement.md) in the repo root clearly defining: (1) input format (numerical data tables with physical quantities), (2) output format (symbolic equations in Polish/prefix notation), (3) complexity tiers of target equations (simple linear, polynomial, transcendental, multi-variable coupled Newtonian), (4) the key hypothesis that recursive masked-diffusion refinement outperforms single-pass autoregressive decoding for physics equation discovery, and (5) scope constraints (single A100 GPU, Newtonian mechanics focus).",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "problem_statement.md created with all 5 required sections: input format (numerical tables), output format (prefix notation with ≤128 token vocab), 4 complexity tiers (32 equations total), key hypothesis (recursive masked-diffusion > autoregressive), and scope constraints (single A100, Newtonian mechanics).",
           "error": null
         },
         {
           "id": "item_002",
           "description": "Conduct a comprehensive literature review via web search covering: (a) transformer-based symbolic regression (E2ESR, NeSymReS, SymbolicGPT, TPSR, SNIP, MDLformer), (b) masked diffusion language models (LLaDA, MDLM, DDSR, LoMDM), (c) physics-informed equation discovery (AI Feynman 1.0/2.0, PySR, PhyE2E, SI-SR), (d) test-time training for reasoning (ARC2025 TTT, Akyurek et al.), and (e) the ARC2025 ARChitects solution architecture (recursive soft-masking, 2D positional encoding, stateful candidate selection).",
           "acceptance_criteria": "A literature_review.md document in the repo root summarizing at least 15 papers/resources across all five sub-areas, with a comparison table of methods (architecture type, training data, benchmark performance, key innovation). Each entry must include the paper title, authors, year, venue, and a 3-5 sentence summary of relevance to our project.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "literature_review.md created with 18 papers across all 5 sub-areas, comparison table, and key insights section.",
           "error": null
         },
         {
           "id": "item_003",
           "description": "Create and maintain sources.bib with BibTeX entries for all consulted sources throughout the project.",
           "acceptance_criteria": "sources.bib exists in the repo root with at least 15 valid BibTeX entries covering: Udrescu & Tegmark (AI Feynman), Kamienny et al. (E2ESR), Biggio et al. (NeSymReS), Valipour et al. (SymbolicGPT), Shojaee et al. (TPSR), Nie et al. (LLaDA), Sahoo et al. (MDLM), the ARC2025 ARChitects solution, Ying et al. (PhyE2E), Gozeten et al. (TTT for transformers), Matsubara et al. (SRSD benchmark), at least 2 masked-diffusion papers (DDSR, LoMDM), and at least 2 additional physics-SR papers. Each entry must have correct fields (author, title, year, journal/booktitle).",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "sources.bib created with 21 BibTeX entries covering all required papers: AI Feynman 1.0/2.0, E2ESR, NeSymReS, SymbolicGPT, TPSR, SNIP, MDLformer, LLaDA, MDLM, DDSR, LoMDM, PhyE2E, TTT, PySR, SRSD, ARC2025, DGSR, Attention, Set Transformer, LoRA.",
           "error": null
         },
         {
           "id": "item_004",
           "description": "Analyze the Feynman Symbolic Regression Database (FSRD) and SRSD benchmark datasets to identify the specific Newtonian mechanics equations that will serve as our evaluation targets, stratified by complexity.",
           "acceptance_criteria": "A dataset_analysis.md document listing: (1) at least 30 Newtonian-relevant equations from the Feynman/SRSD datasets categorized into 4 tiers \u2014 Tier 1: single-variable kinematics (e.g., s = v*t, F = m*a), Tier 2: multi-variable dynamics (e.g., gravitational force, spring-mass systems, projectile motion), Tier 3: energy/momentum conservation laws (e.g., kinetic energy, elastic collisions, orbital mechanics), Tier 4: coupled multi-body and transcendental equations (e.g., Kepler's laws, damped oscillator, Lagrangian-derived equations). Each equation must list its variables, complexity (number of operators/nesting depth), and source reference.",
-          "status": "pending",
+          "status": "in_progress",
           "notes": null,
           "error": null
         },
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 0,
-    "in_progress": 0,
+    "completed": 3,
+    "in_progress": 1,
     "failed": 0,
-    "pending": 25
+    "pending": 21
   }
 }
