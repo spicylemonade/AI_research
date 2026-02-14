@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T00:00:00Z",
-  "updated_at": "2026-02-14T08:11:04.465792+00:00",
+  "updated_at": "2026-02-14T08:14:37.483888+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -173,8 +173,8 @@
           "id": "item_016",
           "description": "Implement physics-informed loss functions: dimensional consistency, conservation regularization, and symmetry enforcement",
           "acceptance_criteria": "Module src/physics_loss.py implementing 3 toggleable loss components: (1) dimensional consistency loss penalizing equations with incompatible M,L,T units, (2) conservation regularizer enforcing energy/momentum conservation on sampled trajectories, (3) symmetry loss penalizing violations of known symmetries (time-reversal, spatial). Each loss must be independently toggleable. Must cite Raissi et al. 2019 (PINNs) in sources.bib. Passes >=6 unit tests validating each loss on known-correct and known-incorrect equations.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Physics-informed losses: dimensional consistency (MLT), conservation regularizer, symmetry enforcement. 22/22 tests pass (exceeds 6 required).",
           "error": null
         },
         {
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 15,
+    "completed": 16,
     "in_progress": 0,
     "failed": 0,
-    "pending": 13
+    "pending": 12
   }
 }
