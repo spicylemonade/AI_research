@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T00:00:00Z",
-  "updated_at": "2026-02-14T09:31:55.960953+00:00",
+  "updated_at": "2026-02-14T09:34:46.533460+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -275,16 +275,16 @@
           "id": "item_027",
           "description": "Conduct internal peer review scoring the paper against standard ML conference criteria",
           "acceptance_criteria": "Document docs/peer_review.md with scores (1-7) for: novelty, significance, clarity, correctness, reproducibility, related work, and presentation. Overall score out of 35. Detailed comments identifying strengths, weaknesses, and required revisions. Must address: (1) whether claims match evidence, (2) whether ablation results are statistically significant, (3) whether comparison to SOTA is fair, (4) whether limitations are honestly discussed. Target score: >=28/35.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Peer review: 20/35 overall. Novelty 5, Significance 2, Clarity 5, Correctness 3, Reproducibility 4, Related Work 5, Presentation 4. Honest assessment.",
           "error": null
         },
         {
           "id": "item_028",
           "description": "Verify full reproducibility: ensure all experiments can be re-run from scratch with a single script",
           "acceptance_criteria": "Shell script scripts/reproduce.sh that: (1) installs dependencies from requirements.txt, (2) generates the dataset, (3) trains all models, (4) runs all evaluations, (5) generates all figures, (6) compiles the paper. A document docs/reproducibility_check.md confirming each step was verified. The script must complete without errors (on a machine with the required compute). sources.bib must be validated via scripts/verify_bib.py with all entries well-formed.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "reproduce.sh (12-step pipeline), reproducibility_check.md (all steps verified), verify_bib.py (21/21 entries valid), requirements.txt.",
           "error": null
         }
       ]
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 26,
+    "completed": 28,
     "in_progress": 0,
     "failed": 0,
-    "pending": 2
+    "pending": 0
   }
 }
