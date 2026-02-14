@@ -1,0 +1,199 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{lacava2021srbench}
+\citation{valipour2021symbolicgpt}
+\citation{kamienny2022e2e}
+\citation{biggio2021nesymres}
+\citation{shojaee2023tpsr}
+\citation{dascoli2024odeformer}
+\citation{udrescu2020aifeynman,udrescu2020aifeynman2}
+\citation{shojaee2025llmsr,llmsrbench2025}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{1}{1}{Introduction}{section.1}{}}
+\citation{architects2025arc}
+\citation{nie2025llada}
+\citation{nie2025llada,sahoo2024mdlm}
+\citation{architects2025arc}
+\citation{su2021rope,architects2025arc}
+\citation{hu2022lora}
+\citation{valipour2021symbolicgpt}
+\citation{kamienny2022e2e}
+\citation{matsubara2023srsd}
+\citation{biggio2021nesymres}
+\citation{shojaee2023tpsr}
+\citation{dascoli2024odeformer}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Transformer-based symbolic regression.}{2}{section*.1}\protected@file@percent }
+\citation{udrescu2020aifeynman,udrescu2020aifeynman2}
+\citation{ying2025phye2e}
+\citation{tian2024symq}
+\citation{shojaee2025llmsr}
+\citation{nie2025llada}
+\citation{sahoo2024mdlm}
+\citation{zheng2023mdtv2}
+\citation{zheng2024maskdit}
+\citation{architects2025arc}
+\citation{udrescu2020aifeynman}
+\citation{matsubara2023srsd}
+\citation{lacava2021srbench}
+\citation{llmsrbench2025}
+\@writefile{toc}{\contentsline {paragraph}{Physics-informed equation discovery.}{3}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Masked diffusion models.}{3}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ARC-AGI and soft-masking recursion.}{3}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Benchmarks.}{3}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Background \& Preliminaries}{3}{section.3}\protected@file@percent }
+\newlabel{sec:background}{{3}{3}{Background \& Preliminaries}{section.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Symbolic regression.}{3}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reverse Polish notation (RPN).}{3}{section*.7}\protected@file@percent }
+\citation{nie2025llada}
+\citation{kamienny2022e2e}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Key notation used throughout this paper.\relax }}{4}{table.caption.10}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:notation}{{1}{4}{Key notation used throughout this paper.\relax }{table.caption.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{Masked diffusion objective.}{4}{section*.8}\protected@file@percent }
+\newlabel{eq:loss}{{1}{4}{Masked diffusion objective}{equation.3.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Notation.}{4}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Method}{4}{section.4}\protected@file@percent }
+\newlabel{sec:method}{{4}{4}{Method}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Set Encoder}{4}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:set_encoder}{{4.1}{4}{Set Encoder}{subsection.4.1}{}}
+\citation{architects2025arc,su2021rope}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the \textsc  {PhysMDT}{} architecture. Solid arrows denote the forward pass; dashed arrows denote optional inference-time components (soft-masking recursion loop and test-time finetuning). The data encoding $\mathbf  {z}$ conditions the masked diffusion transformer, which iteratively refines predictions through $T$ soft-masking recursion steps. Tree-aware 2D RoPE injects expression tree structure into attention.\relax }}{5}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{5}{Overview of the \physmdt {} architecture. Solid arrows denote the forward pass; dashed arrows denote optional inference-time components (soft-masking recursion loop and test-time finetuning). The data encoding $\bz $ conditions the masked diffusion transformer, which iteratively refines predictions through $T$ soft-masking recursion steps. Tree-aware 2D RoPE injects expression tree structure into attention.\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Masked Diffusion Transformer}{5}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:mdt}{{4.2}{5}{Masked Diffusion Transformer}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Tree-Aware 2D Positional Encoding}{5}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:tree_pe}{{4.3}{5}{Tree-Aware 2D Positional Encoding}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Position assignment.}{5}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Multi-directional RoPE.}{5}{section*.13}\protected@file@percent }
+\newlabel{eq:dir1}{{4}{5}{Multi-directional RoPE}{equation.4.4}{}}
+\newlabel{eq:dir2}{{5}{5}{Multi-directional RoPE}{equation.4.5}{}}
+\newlabel{eq:dir3}{{6}{5}{Multi-directional RoPE}{equation.4.6}{}}
+\newlabel{eq:dir4}{{7}{5}{Multi-directional RoPE}{equation.4.7}{}}
+\citation{architects2025arc}
+\citation{architects2025arc}
+\citation{hu2022lora}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Soft-Masking Recursion}{6}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:soft_masking}{{4.4}{6}{Soft-Masking Recursion}{subsection.4.4}{}}
+\newlabel{eq:sm1}{{10}{6}{Soft-Masking Recursion}{equation.4.10}{}}
+\newlabel{eq:sm2}{{11}{6}{Soft-Masking Recursion}{equation.4.11}{}}
+\newlabel{eq:sm3}{{12}{6}{Soft-Masking Recursion}{equation.4.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Test-Time Finetuning}{6}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:ttf}{{4.5}{6}{Test-Time Finetuning}{subsection.4.5}{}}
+\citation{matsubara2023srsd}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Soft-Masking Recursion Inference\relax }}{7}{algorithm.1}\protected@file@percent }
+\newlabel{alg:soft_masking}{{1}{7}{Soft-Masking Recursion Inference\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Physics-Informed Training Augmentations}{7}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:physics_aug}{{4.6}{7}{Physics-Informed Training Augmentations}{subsection.4.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Setup}{7}{section.5}\protected@file@percent }
+\newlabel{sec:experiments}{{5}{7}{Experimental Setup}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Datasets}{7}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{FSReD (Feynman Symbolic Regression Database).}{7}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Procedural Newtonian equations.}{7}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Newtonian physics showcase.}{7}{section*.16}\protected@file@percent }
+\citation{valipour2021symbolicgpt}
+\citation{valipour2021symbolicgpt}
+\citation{udrescu2020aifeynman2}
+\citation{ying2025phye2e}
+\citation{dascoli2024odeformer}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Model configurations and hyperparameters. All models use the AdamW optimizer with cosine learning rate schedule and warmup.\relax }}{8}{table.caption.17}\protected@file@percent }
+\newlabel{tab:hyperparams}{{2}{8}{Model configurations and hyperparameters. All models use the AdamW optimizer with cosine learning rate schedule and warmup.\relax }{table.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Baselines}{8}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Evaluation Metrics}{8}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Model Configurations}{8}{subsection.5.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Solution rate (\%) on the FSReD benchmark by difficulty level. Bold indicates best results. \textsc  {PhysMDT}{} with soft-masking recursion (SM) and test-time finetuning (TTF) significantly outperforms all baselines. Statistical significance: $^\dagger $ denotes $p < 0.05$ and $^\ddagger $ denotes $p < 0.01$ vs.\ AR-Baseline (Wilcoxon signed-rank test).\relax }}{9}{table.caption.18}\protected@file@percent }
+\newlabel{tab:main_results}{{3}{9}{Solution rate (\%) on the FSReD benchmark by difficulty level. Bold indicates best results. \physmdt {} with soft-masking recursion (SM) and test-time finetuning (TTF) significantly outperforms all baselines. Statistical significance: $^\dagger $ denotes $p < 0.05$ and $^\ddagger $ denotes $p < 0.01$ vs.\ AR-Baseline (Wilcoxon signed-rank test).\relax }{table.caption.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Hardware}{9}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{9}{section.6}\protected@file@percent }
+\newlabel{sec:results}{{6}{9}{Results}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Main Results on FSReD}{9}{subsection.6.1}\protected@file@percent }
+\newlabel{sec:main_results}{{6.1}{9}{Main Results on FSReD}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Ablation Study}{9}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:ablation}{{6.2}{9}{Ablation Study}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Refinement step sweep.}{9}{section*.22}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Solution rate comparison across methods on FSReD. \textsc  {PhysMDT}{}-Scaled + SM + TTF achieves the highest solution rate across all difficulty levels, with the largest gains on hard equations where iterative refinement is most beneficial. Error bars indicate 95\% bootstrap confidence intervals.\relax }}{10}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:main_results}{{2}{10}{Solution rate comparison across methods on FSReD. \physmdt {}-Scaled + SM + TTF achieves the highest solution rate across all difficulty levels, with the largest gains on hard equations where iterative refinement is most beneficial. Error bars indicate 95\% bootstrap confidence intervals.\relax }{figure.caption.19}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Ablation study. Each row removes one component from the full \textsc  {PhysMDT}{}-Base + SM + TTF configuration (60\% overall SR). $\Delta $SR indicates the solution rate change from removing that component. All four components contribute positively; soft-masking and tree-aware PE each exceed the $\geq 5\%$ significance threshold.\relax }}{10}{table.caption.20}\protected@file@percent }
+\newlabel{tab:ablation}{{4}{10}{Ablation study. Each row removes one component from the full \physmdt {}-Base + SM + TTF configuration (60\% overall SR). $\Delta $SR indicates the solution rate change from removing that component. All four components contribute positively; soft-masking and tree-aware PE each exceed the $\geq 5\%$ significance threshold.\relax }{table.caption.20}{}}
+\@writefile{toc}{\contentsline {paragraph}{LoRA rank sweep.}{10}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Newtonian Physics Showcase}{10}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:showcase}{{6.3}{10}{Newtonian Physics Showcase}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Key observations.}{10}{section*.25}\protected@file@percent }
+\newlabel{fig:ablation}{{3a}{11}{Individual contribution of each component to overall solution rate. Soft-masking recursion is the single most impactful component ($+10\%$), followed by tree-aware PE ($+8\%$).\relax }{figure.caption.21}{}}
+\newlabel{sub@fig:ablation}{{a}{11}{Individual contribution of each component to overall solution rate. Soft-masking recursion is the single most impactful component ($+10\%$), followed by tree-aware PE ($+8\%$).\relax }{figure.caption.21}{}}
+\newlabel{fig:refinement}{{3b}{11}{Refinement trajectory for three example equations showing how predictions evolve over soft-masking steps. The model builds the structural skeleton first and progressively refines operators and constants.\relax }{figure.caption.21}{}}
+\newlabel{sub@fig:refinement}{{b}{11}{Refinement trajectory for three example equations showing how predictions evolve over soft-masking steps. The model builds the structural skeleton first and progressively refines operators and constants.\relax }{figure.caption.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Ablation analysis (left) and soft-masking refinement progression (right).\relax }}{11}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:ablation_combined}{{3}{11}{Ablation analysis (left) and soft-masking refinement progression (right).\relax }{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Robustness Evaluation}{11}{subsection.6.4}\protected@file@percent }
+\newlabel{sec:robustness}{{6.4}{11}{Robustness Evaluation}{subsection.6.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Noise robustness.}{11}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Data efficiency.}{11}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Out-of-distribution generalization.}{11}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Computational Efficiency}{11}{subsection.6.5}\protected@file@percent }
+\newlabel{sec:efficiency}{{6.5}{11}{Computational Efficiency}{subsection.6.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Newtonian physics equation derivation showcase. \textsc  {PhysMDT}{}-Scaled + SM + TTF is evaluated on 18 equations spanning six physics categories. SR: solution rate (1.0 = exact symbolic match). Seven equations involve nested functions ($\dagger $). All 18 achieve $R^2 > 0.998$.\relax }}{12}{table.caption.24}\protected@file@percent }
+\newlabel{tab:newtonian}{{5}{12}{Newtonian physics equation derivation showcase. \physmdt {}-Scaled + SM + TTF is evaluated on 18 equations spanning six physics categories. SR: solution rate (1.0 = exact symbolic match). Seven equations involve nested functions ($\dagger $). All 18 achieve $R^2 > 0.998$.\relax }{table.caption.24}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Computational efficiency comparison. All inference times are measured on a single A100 GPU, averaged over 120 FSReD equations. TTF accounts for 86\% of \textsc  {PhysMDT}{} inference time; soft-masking adds modest overhead. All configurations satisfy the 5-minute-per-equation budget.\relax }}{12}{table.caption.31}\protected@file@percent }
+\newlabel{tab:efficiency}{{6}{12}{Computational efficiency comparison. All inference times are measured on a single A100 GPU, averaged over 120 FSReD equations. TTF accounts for 86\% of \physmdt {} inference time; soft-masking adds modest overhead. All configurations satisfy the 5-minute-per-equation budget.\relax }{table.caption.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{12}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{7}{12}{Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Why Masked Diffusion Works for Symbolic Regression}{12}{subsection.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Newtonian physics showcase summary. Solution rate (left axis, bars) and mean $R^2$ (right axis, line) by physics category. Conservation law and gravitation equations are recovered perfectly. Variational equations are hardest due to deeply nested structures with multiple transcendental functions.\relax }}{13}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:newtonian}{{4}{13}{Newtonian physics showcase summary. Solution rate (left axis, bars) and mean $R^2$ (right axis, line) by physics category. Conservation law and gravitation equations are recovered perfectly. Variational equations are hardest due to deeply nested structures with multiple transcendental functions.\relax }{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Interpretability Insights}{13}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Limitations}{13}{subsection.7.3}\protected@file@percent }
+\citation{nie2025llada}
+\newlabel{fig:noise}{{5a}{14}{Solution rate vs.\ Gaussian noise level. \physmdt {} degrades gracefully (8.3pp drop at 5\% noise) compared to the AR-Baseline (14.0pp drop). Soft-masking recursion provides implicit denoising through iterative refinement.\relax }{figure.caption.28}{}}
+\newlabel{sub@fig:noise}{{a}{14}{Solution rate vs.\ Gaussian noise level. \physmdt {} degrades gracefully (8.3pp drop at 5\% noise) compared to the AR-Baseline (14.0pp drop). Soft-masking recursion provides implicit denoising through iterative refinement.\relax }{figure.caption.28}{}}
+\newlabel{fig:data_efficiency}{{5b}{14}{Solution rate vs.\ number of data points per equation. \physmdt {} with TTF maintains reasonable performance even with only 100 data points (29.2\% SR), while AR-Baseline drops to 13.3\%. TTF provides robust adaptation in low-data regimes.\relax }{figure.caption.28}{}}
+\newlabel{sub@fig:data_efficiency}{{b}{14}{Solution rate vs.\ number of data points per equation. \physmdt {} with TTF maintains reasonable performance even with only 100 data points (29.2\% SR), while AR-Baseline drops to 13.3\%. TTF provides robust adaptation in low-data regimes.\relax }{figure.caption.28}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Robustness evaluation: noise resilience (left) and data efficiency (right).\relax }}{14}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:robustness_combined}{{5}{14}{Robustness evaluation: noise resilience (left) and data efficiency (right).\relax }{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Comparison with Prior Art}{14}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{14}{section.8}\protected@file@percent }
+\newlabel{sec:conclusion}{{8}{14}{Conclusion}{section.8}{}}
+\bibstyle{plainnat}
+\bibdata{sources}
+\bibcite{biggio2021nesymres}{{1}{2021}{{Biggio et~al.}}{{Biggio, Bendinelli, Neitz, Lucchi, and Parascandolo}}}
+\bibcite{dascoli2024odeformer}{{2}{2024}{{d'Ascoli et~al.}}{{d'Ascoli, Becker, Mathis, Schwaller, and Kilbertus}}}
+\bibcite{hu2022lora}{{3}{2022}{{Hu et~al.}}{{Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and Chen}}}
+\bibcite{kamienny2022e2e}{{4}{2022}{{Kamienny et~al.}}{{Kamienny, d'Ascoli, Lample, and Charton}}}
+\bibcite{lacava2021srbench}{{5}{2021}{{La~Cava et~al.}}{{La~Cava, Orzechowski, Burlacu, de~Fran{\c {c}}a, Virgolin, Jin, Kommenda, and Moore}}}
+\newlabel{fig:training_curves}{{6a}{15}{Training loss curves for \physmdt {} and AR-Baseline. The masked diffusion objective converges smoothly, reaching sub-1.0 cross-entropy loss on validation data within 100 epochs.\relax }{figure.caption.32}{}}
+\newlabel{sub@fig:training_curves}{{a}{15}{Training loss curves for \physmdt {} and AR-Baseline. The masked diffusion objective converges smoothly, reaching sub-1.0 cross-entropy loss on validation data within 100 epochs.\relax }{figure.caption.32}{}}
+\newlabel{fig:pareto}{{6b}{15}{Pareto frontier of accuracy vs.\ inference compute. \physmdt {} with 25 refinement steps achieves 80\% of the maximum benefit at 50\% of the compute, providing an attractive operating point for resource-constrained settings.\relax }{figure.caption.32}{}}
+\newlabel{sub@fig:pareto}{{b}{15}{Pareto frontier of accuracy vs.\ inference compute. \physmdt {} with 25 refinement steps achieves 80\% of the maximum benefit at 50\% of the compute, providing an attractive operating point for resource-constrained settings.\relax }{figure.caption.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Training dynamics (left) and computational Pareto frontier (right).\relax }}{15}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:compute_combined}{{6}{15}{Training dynamics (left) and computational Pareto frontier (right).\relax }{figure.caption.32}{}}
+\@writefile{toc}{\contentsline {paragraph}{Future work.}{15}{section*.33}\protected@file@percent }
+\bibcite{matsubara2023srsd}{{6}{2023}{{Matsubara et~al.}}{{Matsubara, Chiba, Igarashi, and Ushiku}}}
+\bibcite{nie2025llada}{{7}{2025}{{Nie et~al.}}{{Nie, Zhu, et~al.}}}
+\bibcite{sahoo2024mdlm}{{8}{2024}{{Sahoo et~al.}}{{Sahoo, Arriola, Gokaslan, Marroquin, Rush, Schiff, Chiu, and Kuleshov}}}
+\bibcite{shojaee2023tpsr}{{9}{2023}{{Shojaee et~al.}}{{Shojaee, Meidani, Farimani, and Reddy}}}
+\bibcite{shojaee2025llmsr}{{10}{2025{a}}{{Shojaee et~al.}}{{Shojaee, Meidani, Gupta, Farimani, and Reddy}}}
+\bibcite{llmsrbench2025}{{11}{2025{b}}{{Shojaee et~al.}}{{}}}
+\bibcite{su2021rope}{{12}{2021}{{Su et~al.}}{{Su, Lu, Pan, Murtadha, Wen, and Liu}}}
+\bibcite{architects2025arc}{{13}{2025}{{The ARChitects Team, Lambda Labs}}{{}}}
+\bibcite{tian2024symq}{{14}{2025}{{Tian et~al.}}{{Tian, Zhou, Dong, Kammer, and Fink}}}
+\bibcite{udrescu2020aifeynman}{{15}{2020}{{Udrescu and Tegmark}}{{}}}
+\bibcite{udrescu2020aifeynman2}{{16}{2020}{{Udrescu et~al.}}{{Udrescu, Tan, Feng, Neto, Wu, and Tegmark}}}
+\bibcite{valipour2021symbolicgpt}{{17}{2021}{{Valipour et~al.}}{{Valipour, You, Panju, and Ghodsi}}}
+\bibcite{ying2025phye2e}{{18}{2025}{{Ying et~al.}}{{}}}
+\bibcite{zheng2024maskdit}{{19}{2024}{{Zheng et~al.}}{{}}}
+\bibcite{zheng2023mdtv2}{{20}{2023}{{Zheng et~al.}}{{}}}
+\gdef \@abspage@last{17}
