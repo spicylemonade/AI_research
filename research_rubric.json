@@ -11,9 +11,9 @@
       "error": null
     },
     "researcher": {
-      "status": "in_progress",
+      "status": "completed",
       "started_at": "2026-02-14T06:18:31.790058+00:00",
-      "completed_at": null,
+      "completed_at": "2026-02-14T08:45:00.000000+00:00",
       "error": null
     },
     "writer": {
