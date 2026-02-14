@@ -63,8 +63,8 @@
           "id": "item_004",
           "description": "Formalize the research problem statement and hypotheses: define the task of deriving Newtonian physics equations (F=ma, gravitational law, projectile motion, harmonic oscillators, conservation laws, Kepler's laws, coupled oscillations, rigid body dynamics) from numerical data using a masked diffusion transformer with iterative self-refinement. State novel contributions relative to prior art",
           "acceptance_criteria": "A document (docs/problem_statement.md) containing: (1) formal mathematical definition of the symbolic regression task as sequence-to-sequence masked prediction, (2) enumeration of at least 15 target Newtonian equations spanning mechanics, gravitation, oscillations, and conservation laws with complexity annotations, (3) at least 3 falsifiable hypotheses (e.g., 'soft-masking recursion improves symbolic accuracy by \u226510% over single-pass autoregressive decoding on FSReD'), (4) explicit novelty claims with references to gaps in prior work cited in sources.bib",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "docs/problem_statement.md written with: (1) formal mathematical definition of SR as masked sequence prediction, (2) 18 target Newtonian equations across mechanics/gravitation/oscillations/conservation laws with complexity annotations, (3) 4 falsifiable hypotheses (H1-H4), (4) 5 explicit novelty claims referencing gaps in prior work.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 3,
+    "completed": 4,
     "in_progress": 0,
     "failed": 0,
-    "pending": 22
+    "pending": 21
   }
 }
