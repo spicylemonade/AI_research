@@ -1,0 +1,202 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{udrescu2020aifeynman,cranmer2023pysr}
+\citation{biggio2021nesymres}
+\citation{kamienny2022e2e}
+\citation{dascoli2024odeformer}
+\citation{shojaee2023tpsr}
+\citation{sahoo2024mdlm,shi2024md4,nie2025llada}
+\citation{architects2025arc}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{1}{1}{Introduction}{section.1}{}}
+\citation{nie2025llada}
+\citation{hu2022lora}
+\citation{udrescu2020aifeynman}
+\citation{biggio2021nesymres}
+\citation{lee2019settransformer}
+\citation{kamienny2022e2e}
+\citation{dascoli2024odeformer}
+\citation{shojaee2023tpsr}
+\citation{vastl2022symformer}
+\citation{raissi2019pinn}
+\citation{udrescu2020aifeynman,udrescu2020aifeynman2}
+\citation{cranmer2023pysr}
+\citation{lacava2021srbench}
+\@writefile{toc}{\contentsline {paragraph}{Contributions.}{2}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Paper outline.}{2}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related_work}{{2}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Transformer-based symbolic regression.}{2}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Physics-informed machine learning.}{2}{section*.4}\protected@file@percent }
+\citation{sahoo2024mdlm}
+\citation{shi2024md4}
+\citation{nie2025llada}
+\citation{svete2025mdm}
+\citation{architects2025arc}
+\citation{sahoo2024mdlm,shi2024md4,nie2025llada}
+\citation{architects2025arc}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Summary of notation used in this paper.\relax }}{3}{table.caption.8}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:notation}{{1}{3}{Summary of notation used in this paper.\relax }{table.caption.8}{}}
+\@writefile{toc}{\contentsline {paragraph}{Masked diffusion language models.}{3}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Background \& Preliminaries}{3}{section.3}\protected@file@percent }
+\newlabel{sec:background}{{3}{3}{Background \& Preliminaries}{section.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Problem formulation.}{3}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Notation.}{3}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Masked discrete diffusion.}{3}{section*.9}\protected@file@percent }
+\newlabel{eq:forward}{{1}{3}{Masked discrete diffusion}{equation.3.1}{}}
+\citation{biggio2021nesymres}
+\citation{lee2019settransformer}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Architecture overview of PhysDiffuser+. Observations are encoded by a Set Transformer into a latent vector $\mathbf  {z}$. The PhysDiffuser core iteratively refines equation token sequences through masked discrete diffusion with $T$ refinement steps. Physics-informed priors constrain the generation, test-time adaptation (LoRA) specializes predictions per equation, and most-visited-candidate selection aggregates $K$ trajectory outputs. BFGS constant fitting recovers numerical coefficients. Dashed arrows indicate training-time supervision signals.\relax }}{4}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{4}{Architecture overview of PhysDiffuser+. Observations are encoded by a Set Transformer into a latent vector $\mathbf {z}$. The PhysDiffuser core iteratively refines equation token sequences through masked discrete diffusion with $T$ refinement steps. Physics-informed priors constrain the generation, test-time adaptation (LoRA) specializes predictions per equation, and most-visited-candidate selection aggregates $K$ trajectory outputs. BFGS constant fitting recovers numerical coefficients. Dashed arrows indicate training-time supervision signals.\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {paragraph}{Token algebra soft-masking.}{4}{section*.10}\protected@file@percent }
+\newlabel{eq:soft_mask}{{2}{4}{Token algebra soft-masking}{equation.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Method}{4}{section.4}\protected@file@percent }
+\newlabel{sec:method}{{4}{4}{Method}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Set Transformer Encoder}{4}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:encoder}{{4.1}{4}{Set Transformer Encoder}{subsection.4.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{IEEE-754 multi-hot encoding.}{4}{section*.12}\protected@file@percent }
+\citation{architects2025arc}
+\@writefile{toc}{\contentsline {paragraph}{Architecture.}{5}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}PhysDiffuser: Masked Diffusion Core}{5}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:diffuser}{{4.2}{5}{PhysDiffuser: Masked Diffusion Core}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Training.}{5}{section*.14}\protected@file@percent }
+\newlabel{eq:loss_diffusion}{{3}{5}{Training}{equation.4.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Architecture.}{5}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Inference: Cosine schedule refinement.}{5}{section*.16}\protected@file@percent }
+\newlabel{eq:cosine_schedule}{{4}{5}{Inference: Cosine schedule refinement}{equation.4.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Most-visited-candidate selection.}{5}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Physics-Informed Structural Priors}{5}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:priors}{{4.3}{5}{Physics-Informed Structural Priors}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{1. Dimensional analysis loss.}{5}{section*.18}\protected@file@percent }
+\citation{architects2025arc}
+\citation{hu2022lora}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces PhysDiffuser+ Inference Pipeline\relax }}{6}{algorithm.1}\protected@file@percent }
+\newlabel{alg:inference}{{1}{6}{PhysDiffuser+ Inference Pipeline\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{2. Operator arity constraints.}{6}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{3. Symmetry-aware data augmentation.}{6}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{4. Compositionality prior.}{6}{section*.21}\protected@file@percent }
+\newlabel{eq:compositionality}{{5}{6}{4. Compositionality prior}{equation.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Test-Time Adaptation}{6}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:tta}{{4.4}{6}{Test-Time Adaptation}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Procedure.}{6}{section*.22}\protected@file@percent }
+\citation{udrescu2020aifeynman}
+\citation{biggio2021nesymres}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Feynman benchmark difficulty tiers. Equations are partitioned by variable count and operator complexity.\relax }}{7}{table.caption.24}\protected@file@percent }
+\newlabel{tab:tiers}{{2}{7}{Feynman benchmark difficulty tiers. Equations are partitioned by variable count and operator complexity.\relax }{table.caption.24}{}}
+\@writefile{toc}{\contentsline {paragraph}{Efficiency.}{7}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Chain-of-Derivation Supervision}{7}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:chains}{{4.5}{7}{Chain-of-Derivation Supervision}{subsection.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Training Objective}{7}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:training}{{4.6}{7}{Training Objective}{subsection.4.6}{}}
+\newlabel{eq:total_loss}{{6}{7}{Training Objective}{equation.4.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Setup}{7}{section.5}\protected@file@percent }
+\newlabel{sec:experiments}{{5}{7}{Experimental Setup}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Benchmark}{7}{subsection.5.1}\protected@file@percent }
+\citation{biggio2021nesymres}
+\citation{dascoli2024odeformer}
+\citation{shojaee2023tpsr}
+\citation{cranmer2023pysr}
+\citation{udrescu2020aifeynman}
+\citation{udrescu2020aifeynman}
+\citation{dascoli2024odeformer}
+\citation{shojaee2023tpsr}
+\citation{cranmer2023pysr}
+\citation{biggio2021nesymres}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Data Generation}{8}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Evaluation Metrics}{8}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Baselines}{8}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Implementation Details}{8}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{8}{section.6}\protected@file@percent }
+\newlabel{sec:results}{{6}{8}{Results}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Main Results: Feynman Benchmark}{8}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Comparison with State of the Art}{8}{subsection.6.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Hyperparameters for PhysDiffuser+ and its components.\relax }}{9}{table.caption.25}\protected@file@percent }
+\newlabel{tab:hyperparams}{{3}{9}{Hyperparameters for PhysDiffuser+ and its components.\relax }{table.caption.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Ablation Study}{9}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:ablation}{{6.3}{9}{Ablation Study}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Noise Robustness}{9}{subsection.6.4}\protected@file@percent }
+\newlabel{sec:noise}{{6.4}{9}{Noise Robustness}{subsection.6.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces PhysDiffuser+ performance on the Feynman benchmark by difficulty tier. Best results per column in \textbf  {bold}. 95\% bootstrap confidence intervals shown for overall metrics.\relax }}{10}{table.caption.26}\protected@file@percent }
+\newlabel{tab:main_results}{{4}{10}{PhysDiffuser+ performance on the Feynman benchmark by difficulty tier. Best results per column in \textbf {bold}. 95\% bootstrap confidence intervals shown for overall metrics.\relax }{table.caption.26}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Comparison with published state-of-the-art methods on Feynman equations. All prior results are from fully-trained models on GPU hardware. PhysDiffuser+ uses only $\sim $5 minutes of CPU training.\relax }}{10}{table.caption.27}\protected@file@percent }
+\newlabel{tab:sota}{{5}{10}{Comparison with published state-of-the-art methods on Feynman equations. All prior results are from fully-trained models on GPU hardware. PhysDiffuser+ uses only $\sim $5 minutes of CPU training.\relax }{table.caption.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Out-of-Distribution Generalization}{10}{subsection.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}CPU Performance Profile}{10}{subsection.6.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Showcase: Impressive Derivations}{10}{subsection.6.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rutherford scattering cross section.}{10}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Relativistic total energy.}{10}{section*.37}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Multi-panel results showcase for PhysDiffuser+. \textbf  {(A)} Exact match rates across five difficulty tiers, showing 92\% on simple equations and 20\% on the hardest tiers. \textbf  {(B)} Comparison with published SOTA methods, contextualizing our CPU-only results. \textbf  {(C)} Noise robustness curves with and without TTA, demonstrating graceful degradation. \textbf  {(D)} Ablation study showing the contribution of each component, with masked diffusion providing the largest single improvement.\relax }}{11}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:showcase}{{2}{11}{Multi-panel results showcase for PhysDiffuser+. \textbf {(A)} Exact match rates across five difficulty tiers, showing 92\% on simple equations and 20\% on the hardest tiers. \textbf {(B)} Comparison with published SOTA methods, contextualizing our CPU-only results. \textbf {(C)} Noise robustness curves with and without TTA, demonstrating graceful degradation. \textbf {(D)} Ablation study showing the contribution of each component, with masked diffusion providing the largest single improvement.\relax }{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {paragraph}{Fermi energy.}{11}{section*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Iterative refinement trajectory.}{11}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.8}Interpretability: Attention Analysis}{11}{subsection.6.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Self-attention entropy increases with complexity.}{11}{section*.41}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Ablation study results. Each row removes one component from the full PhysDiffuser+ model. $\Delta $ indicates the change in exact match rate relative to the full model. Bootstrap 95\% CIs from $n=1000$ resamples.\relax }}{12}{table.caption.29}\protected@file@percent }
+\newlabel{tab:ablation}{{6}{12}{Ablation study results. Each row removes one component from the full PhysDiffuser+ model. $\Delta $ indicates the change in exact match rate relative to the full model. Bootstrap 95\% CIs from $n=1000$ resamples.\relax }{table.caption.29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Ablation study: exact match rates by difficulty tier for each model variant. The full PhysDiffuser+ model (leftmost bar in each group) consistently outperforms all ablated variants. The diffusion mechanism is particularly critical for moderate, complex, and multi-step equations where iterative refinement provides the greatest advantage over single-pass autoregressive decoding.\relax }}{12}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:ablation}{{3}{12}{Ablation study: exact match rates by difficulty tier for each model variant. The full PhysDiffuser+ model (leftmost bar in each group) consistently outperforms all ablated variants. The diffusion mechanism is particularly critical for moderate, complex, and multi-step equations where iterative refinement provides the greatest advantage over single-pass autoregressive decoding.\relax }{figure.caption.30}{}}
+\@writefile{toc}{\contentsline {paragraph}{Encoder ISAB specialization.}{12}{section*.42}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{12}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{7}{12}{Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{Masked diffusion as a paradigm for symbolic reasoning.}{12}{section*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Physics priors amplify the benefit.}{12}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TTA: adapting to individual equations.}{12}{section*.46}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Noise robustness results. Exact match rate (\%) at different Gaussian noise levels $\sigma $, with and without test-time adaptation (TTA).\relax }}{13}{table.caption.31}\protected@file@percent }
+\newlabel{tab:noise}{{7}{13}{Noise robustness results. Exact match rate (\%) at different Gaussian noise levels $\sigma $, with and without test-time adaptation (TTA).\relax }{table.caption.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Noise robustness curves showing exact match rate as a function of observation noise level $\sigma $. The blue curve (with TTA) consistently outperforms the orange curve (without TTA), with the gap widening at higher noise levels. The iterative refinement of masked diffusion provides inherent noise robustness compared to single-pass autoregressive decoding, as the model can revise uncertain predictions across refinement steps.\relax }}{13}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:noise}{{4}{13}{Noise robustness curves showing exact match rate as a function of observation noise level $\sigma $. The blue curve (with TTA) consistently outperforms the orange curve (without TTA), with the gap widening at higher noise levels. The iterative refinement of masked diffusion provides inherent noise robustness compared to single-pass autoregressive decoding, as the model can revise uncertain predictions across refinement steps.\relax }{figure.caption.32}{}}
+\@writefile{toc}{\contentsline {paragraph}{OOD generalization reveals learned physics.}{13}{section*.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations.}{13}{section*.48}\protected@file@percent }
+\citation{udrescu2020aifeynman}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Selected out-of-distribution generalization results. Full results for all 20 equations available in the supplementary material.\relax }}{14}{table.caption.33}\protected@file@percent }
+\newlabel{tab:ood}{{8}{14}{Selected out-of-distribution generalization results. Full results for all 20 equations available in the supplementary material.\relax }{table.caption.33}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces CPU inference latency breakdown for PhysDiffuser+ (minimal configuration: $T{=}10$, $K{=}2$, TTA steps${=}4$). Total model size: 9.6M parameters.\relax }}{14}{table.caption.34}\protected@file@percent }
+\newlabel{tab:latency}{{9}{14}{CPU inference latency breakdown for PhysDiffuser+ (minimal configuration: $T{=}10$, $K{=}2$, TTA steps${=}4$). Total model size: 9.6M parameters.\relax }{table.caption.34}{}}
+\@writefile{toc}{\contentsline {paragraph}{Comparison with AI Feynman.}{14}{section*.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{14}{section.8}\protected@file@percent }
+\newlabel{sec:conclusion}{{8}{14}{Conclusion}{section.8}{}}
+\bibstyle{plainnat}
+\bibdata{sources}
+\bibcite{biggio2021nesymres}{{1}{2021}{{Biggio et~al.}}{{Biggio, Bendinelli, Neitz, Lucchi, and Parascandolo}}}
+\bibcite{cranmer2023pysr}{{2}{2023}{{Cranmer}}{{}}}
+\bibcite{dascoli2024odeformer}{{3}{2024}{{d'Ascoli et~al.}}{{d'Ascoli, Becker, Mathis, Schwaller, and Kilbertus}}}
+\bibcite{architects2025arc}{{4}{2025}{{Franzen et~al.}}{{Franzen, Disselhoff, and Hartmann}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Inference latency breakdown by pipeline stage. AR beam search dominates the inference time (54\%), followed by diffusion refinement (23\%) and TTA (22\%). Encoding and constant fitting are negligible ($<$2\% combined). The total 334ms per equation enables real-time interactive use.\relax }}{15}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:latency}{{5}{15}{Inference latency breakdown by pipeline stage. AR beam search dominates the inference time (54\%), followed by diffusion refinement (23\%) and TTA (22\%). Encoding and constant fitting are negligible ($<$2\% combined). The total 334ms per equation enables real-time interactive use.\relax }{figure.caption.35}{}}
+\@writefile{toc}{\contentsline {paragraph}{Future work.}{15}{section*.50}\protected@file@percent }
+\bibcite{hu2022lora}{{5}{2022}{{Hu et~al.}}{{Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and Chen}}}
+\bibcite{kamienny2022e2e}{{6}{2022}{{Kamienny et~al.}}{{Kamienny, d'Ascoli, Lample, and Charton}}}
+\bibcite{lacava2021srbench}{{7}{2021}{{La~Cava et~al.}}{{La~Cava, Orzechowski, Burlacu, de~Fran{\c {c}}a, Virgolin, Jin, Kommenda, and Moore}}}
+\bibcite{lee2019settransformer}{{8}{2019}{{Lee et~al.}}{{Lee, Lee, Kim, Kosiorek, Choi, and Teh}}}
+\bibcite{nie2025llada}{{9}{2025}{{Nie et~al.}}{{Nie, Zhu, You, Zhang, Ou, Hu, Zhou, Lin, Wen, and Li}}}
+\bibcite{raissi2019pinn}{{10}{2019}{{Raissi et~al.}}{{Raissi, Perdikaris, and Karniadakis}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Diffusion refinement trajectory for the kinematic displacement equation $s = v_0 t + \frac  {1}{2}at^2$. The visualization shows how token predictions evolve across 20 refinement steps, starting from a fully masked sequence. Variables and constants emerge first, followed by operators that define the equation's structure. This progressive resolution mirrors how a physicist might build an equation by first identifying relevant quantities before determining their relationships.\relax }}{16}{figure.caption.40}\protected@file@percent }
+\newlabel{fig:trajectory}{{6}{16}{Diffusion refinement trajectory for the kinematic displacement equation $s = v_0 t + \frac {1}{2}at^2$. The visualization shows how token predictions evolve across 20 refinement steps, starting from a fully masked sequence. Variables and constants emerge first, followed by operators that define the equation's structure. This progressive resolution mirrors how a physicist might build an equation by first identifying relevant quantities before determining their relationships.\relax }{figure.caption.40}{}}
+\bibcite{sahoo2024mdlm}{{11}{2024}{{Sahoo et~al.}}{{Sahoo, Arriola, Schiff, Gokaslan, Marroquin, Chiu, Rush, and Kuleshov}}}
+\bibcite{shi2024md4}{{12}{2024}{{Shi et~al.}}{{Shi, Han, Wang, Doucet, and Titsias}}}
+\bibcite{shojaee2023tpsr}{{13}{2023}{{Shojaee et~al.}}{{Shojaee, Meidani, Farimani, and Reddy}}}
+\bibcite{svete2025mdm}{{14}{2025}{{Svete and Sabharwal}}{{}}}
+\bibcite{udrescu2020aifeynman}{{15}{2020}{{Udrescu and Tegmark}}{{}}}
+\bibcite{udrescu2020aifeynman2}{{16}{2020}{{Udrescu et~al.}}{{Udrescu, Tan, Feng, Neto, Wu, and Tegmark}}}
+\bibcite{vastl2022symformer}{{17}{2024}{{Vastl et~al.}}{{Vastl, Kulh{\'a}nek, Kubal{\'i}k, Derner, and Babu{\v {s}}ka}}}
+\newlabel{fig:entropy}{{7a}{17}{Self-attention entropy by difficulty tier.\relax }{figure.caption.43}{}}
+\newlabel{sub@fig:entropy}{{a}{17}{Self-attention entropy by difficulty tier.\relax }{figure.caption.43}{}}
+\newlabel{fig:token_attn}{{7b}{17}{Mean attention by token type.\relax }{figure.caption.43}{}}
+\newlabel{sub@fig:token_attn}{{b}{17}{Mean attention by token type.\relax }{figure.caption.43}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Interpretability analysis of PhysDiffuser attention patterns. \textbf  {(a)} Self-attention entropy increases monotonically with equation complexity, indicating broader attention patterns for more difficult equations. \textbf  {(b)} Mean attention weight by token type, showing differential attention to operators, variables, and constants.\relax }}{17}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:interpretability}{{7}{17}{Interpretability analysis of PhysDiffuser attention patterns. \textbf {(a)} Self-attention entropy increases monotonically with equation complexity, indicating broader attention patterns for more difficult equations. \textbf {(b)} Mean attention weight by token type, showing differential attention to operators, variables, and constants.\relax }{figure.caption.43}{}}
+\gdef \@abspage@last{17}
