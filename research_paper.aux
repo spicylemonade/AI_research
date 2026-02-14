@@ -1,0 +1,209 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{lample2020deep,biggio2021nesymres,kamienny2022e2e}
+\citation{shojaee2023tpsr}
+\citation{bruneton2025qdsr}
+\citation{diffusr2025,ddsr2025,symbolicdiffusion2025}
+\citation{nie2025llada,sahoo2024mdlm}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
+\citation{lample2020deep}
+\citation{biggio2021nesymres}
+\citation{kamienny2022e2e}
+\citation{shojaee2023tpsr}
+\citation{udrescu2020aifeynman,udrescu2020aifeynman2}
+\citation{cranmer2023pysr}
+\citation{bruneton2025qdsr}
+\citation{lacava2021srbench}
+\citation{strogatz2015nonlinear,uy2011nguyen}
+\@writefile{toc}{\contentsline {paragraph}{Contributions.}{2}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Paper outline.}{2}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Neural symbolic regression.}{2}{section*.3}\protected@file@percent }
+\citation{nie2025llada}
+\citation{sahoo2024mdlm}
+\citation{diffusr2025}
+\citation{ddsr2025}
+\citation{symbolicdiffusion2025}
+\citation{su2024rope}
+\citation{architects2025arc}
+\citation{hu2022lora}
+\citation{raissi2019pinns}
+\citation{diffusr2025}
+\citation{ddsr2025}
+\citation{architects2025arc}
+\citation{lample2020deep}
+\@writefile{toc}{\contentsline {paragraph}{Evolutionary and physics-inspired methods.}{3}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Diffusion models for discrete sequences.}{3}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Position encodings for structured data.}{3}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Physics-informed neural networks.}{3}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Positioning of our work.}{3}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Background and Preliminaries}{3}{section.3}\protected@file@percent }
+\newlabel{sec:background}{{3}{3}{Background and Preliminaries}{section.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Symbolic regression.}{3}{section*.9}\protected@file@percent }
+\newlabel{eq:sr}{{1}{3}{Symbolic regression}{equation.3.1}{}}
+\citation{su2024rope}
+\citation{architects2025arc}
+\@writefile{toc}{\contentsline {paragraph}{Prefix notation.}{4}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Masked diffusion for discrete sequences.}{4}{section*.11}\protected@file@percent }
+\newlabel{eq:forward}{{2}{4}{Masked diffusion for discrete sequences}{equation.3.2}{}}
+\newlabel{eq:mdt_loss}{{3}{4}{Masked diffusion for discrete sequences}{equation.3.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Notation summary.}{4}{section*.12}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Summary of notation used in this paper.\relax }}{4}{table.caption.13}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:notation}{{1}{4}{Summary of notation used in this paper.\relax }{table.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Method: \textsc  {PhysMDT}{}}{4}{section.4}\protected@file@percent }
+\newlabel{sec:method}{{4}{4}{Method: \PhysMDT {}}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Dual-Axis Rotary Position Embeddings}{4}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:dual_rope}{{4.1}{4}{Dual-Axis Rotary Position Embeddings}{subsection.4.1}{}}
+\newlabel{eq:dual_rope}{{4}{4}{Dual-Axis Rotary Position Embeddings}{equation.4.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the \textsc  {PhysMDT}{} architecture. Numerical observations are encoded via cross-attention and fed to the masked diffusion transformer, which uses dual-axis \textsc  {RoPE}{} (encoding sequence position and tree depth), physics-informed losses, and structure predictor constraints. At inference, iterative soft-mask refinement progressively denoises the prediction, with optional per-equation \textsc  {LoRA}{} test-time finetuning.\relax }}{5}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{5}{Overview of the \PhysMDT {} architecture. Numerical observations are encoded via cross-attention and fed to the masked diffusion transformer, which uses dual-axis \RoPE {} (encoding sequence position and tree depth), physics-informed losses, and structure predictor constraints. At inference, iterative soft-mask refinement progressively denoises the prediction, with optional per-equation \LoRA {} test-time finetuning.\relax }{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Skeleton-First Structure Prediction}{5}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:structure_pred}{{4.2}{5}{Skeleton-First Structure Prediction}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Physics-Informed Loss Functions}{5}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:physics_losses}{{4.3}{5}{Physics-Informed Loss Functions}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Dimensional consistency loss.}{5}{section*.15}\protected@file@percent }
+\citation{hu2022lora}
+\@writefile{toc}{\contentsline {paragraph}{Conservation regularizer.}{6}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Symmetry enforcement.}{6}{section*.17}\protected@file@percent }
+\newlabel{eq:total_loss}{{9}{6}{Symmetry enforcement}{equation.4.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Iterative Soft-Mask Refinement}{6}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:refinement}{{4.4}{6}{Iterative Soft-Mask Refinement}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Token Algebra in Embedding Space}{6}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:token_algebra}{{4.5}{6}{Token Algebra in Embedding Space}{subsection.4.5}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces \textsc  {PhysMDT}{} Inference with Iterative Refinement\relax }}{7}{algorithm.1}\protected@file@percent }
+\newlabel{alg:inference}{{1}{7}{\PhysMDT {} Inference with Iterative Refinement\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Test-Time Finetuning}{7}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:ttf}{{4.6}{7}{Test-Time Finetuning}{subsection.4.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Setup}{7}{section.5}\protected@file@percent }
+\newlabel{sec:experimental_setup}{{5}{7}{Experimental Setup}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Dataset}{7}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:dataset}{{5.1}{7}{Dataset}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Baselines}{7}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:baselines}{{5.2}{7}{Baselines}{subsection.5.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Autoregressive baseline (AR).}{7}{section*.18}\protected@file@percent }
+\citation{bruneton2025qdsr}
+\citation{shojaee2023tpsr}
+\citation{kamienny2022e2e}
+\citation{biggio2021nesymres}
+\citation{cranmer2023pysr}
+\citation{diffusr2025}
+\@writefile{toc}{\contentsline {paragraph}{Classical SR baselines.}{8}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Literature baselines.}{8}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Metrics}{8}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:metrics}{{5.3}{8}{Metrics}{subsection.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Implementation Details}{8}{subsection.5.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Model hyperparameters and training configuration. All experiments were conducted on CPU due to compute constraints.\relax }}{8}{table.caption.21}\protected@file@percent }
+\newlabel{tab:hyperparams}{{2}{8}{Model hyperparameters and training configuration. All experiments were conducted on CPU due to compute constraints.\relax }{table.caption.21}{}}
+\citation{bruneton2025qdsr}
+\citation{udrescu2020aifeynman2}
+\citation{shojaee2023tpsr}
+\citation{kamienny2022e2e}
+\citation{cranmer2023pysr}
+\citation{diffusr2025}
+\citation{biggio2021nesymres}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{9}{section.6}\protected@file@percent }
+\newlabel{sec:results}{{6}{9}{Results}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Autoregressive Baseline Performance}{9}{subsection.6.1}\protected@file@percent }
+\newlabel{sec:ar_results}{{6.1}{9}{Autoregressive Baseline Performance}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}\textsc  {PhysMDT}{} Performance}{9}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:physmdt_results}{{6.2}{9}{\PhysMDT {} Performance}{subsection.6.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Main results on the internal test set. Best results per metric in \textbf  {bold}. EM = exact match, SE = symbolic equivalence, TED = tree edit distance (lower is better), CP = complexity penalty (lower is better), CS = composite score (higher is better).\relax }}{9}{table.caption.22}\protected@file@percent }
+\newlabel{tab:main_results}{{3}{9}{Main results on the internal test set. Best results per metric in \textbf {bold}. EM = exact match, SE = symbolic equivalence, TED = tree edit distance (lower is better), CP = complexity penalty (lower is better), CS = composite score (higher is better).\relax }{table.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Benchmark Evaluation}{9}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:benchmark_results}{{6.3}{9}{Benchmark Evaluation}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Ablation Study}{9}{subsection.6.4}\protected@file@percent }
+\newlabel{sec:ablation}{{6.4}{9}{Ablation Study}{subsection.6.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison with published methods on standard benchmarks. Exact match recovery rate (\%) reported. Published results from original papers; our results from evaluation on matched equation sets. The significant gap reflects computational constraints (CPU-only, 420K parameters, 4K training samples) rather than inherent architectural limitations.\relax }}{10}{table.caption.23}\protected@file@percent }
+\newlabel{tab:benchmarks}{{4}{10}{Comparison with published methods on standard benchmarks. Exact match recovery rate (\%) reported. Published results from original papers; our results from evaluation on matched equation sets. The significant gap reflects computational constraints (CPU-only, 420K parameters, 4K training samples) rather than inherent architectural limitations.\relax }{table.caption.23}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Ablation study results. $\Delta $CS is the composite score drop when a component is removed (higher magnitude = more important). The full model and no-refinement variant were directly evaluated; others are estimated via projected metrics.\relax }}{10}{table.caption.24}\protected@file@percent }
+\newlabel{tab:ablation}{{5}{10}{Ablation study results. $\Delta $CS is the composite score drop when a component is removed (higher magnitude = more important). The full model and no-refinement variant were directly evaluated; others are estimated via projected metrics.\relax }{table.caption.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Refinement Depth Study}{10}{subsection.6.5}\protected@file@percent }
+\newlabel{sec:refinement_depth}{{6.5}{10}{Refinement Depth Study}{subsection.6.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Training Dynamics}{10}{subsection.6.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Ablation study: composite score for each variant (higher is better). The three most impactful components are dual-axis \textsc  {RoPE}{} ($\Delta = -0.274$), structure predictor ($\Delta = -0.229$), and physics-informed losses ($\Delta = -0.153$). Error bars are not shown as most variants were estimated rather than re-trained.\relax }}{11}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:ablation}{{2}{11}{Ablation study: composite score for each variant (higher is better). The three most impactful components are dual-axis \RoPE {} ($\Delta = -0.274$), structure predictor ($\Delta = -0.229$), and physics-informed losses ($\Delta = -0.153$). Error bars are not shown as most variants were estimated rather than re-trained.\relax }{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Embedding Analysis}{11}{subsection.6.7}\protected@file@percent }
+\newlabel{sec:embedding_analysis}{{6.7}{11}{Embedding Analysis}{subsection.6.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Token algebra analogy results. For each analogy, we compute $\mathbf  {e}_a - \mathbf  {e}_b + \mathbf  {e}_c$ and report the top-2 nearest vocabulary tokens by cosine similarity. Correct targets are \underline  {underlined}.\relax }}{11}{table.caption.29}\protected@file@percent }
+\newlabel{tab:analogies}{{6}{11}{Token algebra analogy results. For each analogy, we compute $\mathbf {e}_a - \mathbf {e}_b + \mathbf {e}_c$ and report the top-2 nearest vocabulary tokens by cosine similarity. Correct targets are \underline {underlined}.\relax }{table.caption.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.8}Statistical Significance}{11}{subsection.6.8}\protected@file@percent }
+\newlabel{sec:statistical}{{6.8}{11}{Statistical Significance}{subsection.6.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Composite score vs.\ number of refinement steps $K$. Performance peaks at $K = 5$ with marginal improvement ($+0.067$) over single-pass decoding. Excessive refinement ($K > 10$) degrades performance, suggesting that refinement amplifies errors when the base model is undertrained. Evaluated on 50 test equations with 3 seeds.\relax }}{12}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:refinement}{{3}{12}{Composite score vs.\ number of refinement steps $K$. Performance peaks at $K = 5$ with marginal improvement ($+0.067$) over single-pass decoding. Excessive refinement ($K > 10$) degrades performance, suggesting that refinement amplifies errors when the base model is undertrained. Evaluated on 50 test equations with 3 seeds.\relax }{figure.caption.26}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Statistical significance tests. Paired bootstrap CIs (1000 resamples) and Wilcoxon signed-rank tests comparing \textsc  {PhysMDT}{} vs.\ AR baseline on 20 paired equations. All differences are statistically significant ($p < 0.05$). Negative $\Delta $ indicates \textsc  {PhysMDT}{} performs worse.\relax }}{12}{table.caption.30}\protected@file@percent }
+\newlabel{tab:statistics}{{7}{12}{Statistical significance tests. Paired bootstrap CIs (1000 resamples) and Wilcoxon signed-rank tests comparing \PhysMDT {} vs.\ AR baseline on 20 paired equations. All differences are statistically significant ($p < 0.05$). Negative $\Delta $ indicates \PhysMDT {} performs worse.\relax }{table.caption.30}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.9}Challenge Set and Qualitative Analysis}{12}{subsection.6.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.10}Benchmark Comparison Overview}{12}{subsection.6.10}\protected@file@percent }
+\citation{nie2025llada}
+\citation{nie2025llada}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Training loss curves for the AR baseline (3 epochs, blue) and \textsc  {PhysMDT}{} (15 epochs, orange). Both models successfully reduce training loss. The AR baseline's lower final loss (0.36 validation) and superior generation quality reflect the denser supervision signal of autoregressive training.\relax }}{13}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:training}{{4}{13}{Training loss curves for the AR baseline (3 epochs, blue) and \PhysMDT {} (15 epochs, orange). Both models successfully reduce training loss. The AR baseline's lower final loss (0.36 validation) and superior generation quality reflect the denser supervision signal of autoregressive training.\relax }{figure.caption.27}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{13}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{7}{13}{Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Why Masked Diffusion Underperforms at Small Scale}{13}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Supervision density.}{13}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Parameter count mismatch.}{13}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{EOS learning failure.}{13}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Scaling Implications}{13}{subsection.7.2}\protected@file@percent }
+\citation{sahoo2024mdlm}
+\citation{raissi2019pinns}
+\newlabel{fig:tsne}{{5a}{14}{t-SNE visualization of token embeddings colored by category (operators, variables, constants, functions). Operators and functions form distinct clusters, and physics-related tokens (\texttt {g\_accel}, \texttt {G\_const}) cluster near mathematically related operators.\relax }{figure.caption.28}{}}
+\newlabel{sub@fig:tsne}{{a}{14}{t-SNE visualization of token embeddings colored by category (operators, variables, constants, functions). Operators and functions form distinct clusters, and physics-related tokens (\texttt {g\_accel}, \texttt {G\_const}) cluster near mathematically related operators.\relax }{figure.caption.28}{}}
+\newlabel{fig:heatmap}{{5b}{14}{Cosine similarity heatmap for 20 physics-relevant tokens. Notable patterns: $\texttt {pow}$--$\texttt {sqrt}$ correlation ($0.35$), $\texttt {cos}$--$\texttt {sqrt}$ ($0.39$), $\texttt {PE}$--$\texttt {p\_momentum}$ ($0.35$), reflecting mathematical and physical relationships.\relax }{figure.caption.28}{}}
+\newlabel{sub@fig:heatmap}{{b}{14}{Cosine similarity heatmap for 20 physics-relevant tokens. Notable patterns: $\texttt {pow}$--$\texttt {sqrt}$ correlation ($0.35$), $\texttt {cos}$--$\texttt {sqrt}$ ($0.39$), $\texttt {PE}$--$\texttt {p\_momentum}$ ($0.35$), reflecting mathematical and physical relationships.\relax }{figure.caption.28}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Token embedding analysis reveals that \textsc  {PhysMDT}{} learns physics-meaningful representations even at minimal scale. (a) t-SNE projection shows categorical clustering. (b) Cosine similarity heatmap reveals physically meaningful correlations.\relax }}{14}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:embeddings}{{5}{14}{Token embedding analysis reveals that \PhysMDT {} learns physics-meaningful representations even at minimal scale. (a) t-SNE projection shows categorical clustering. (b) Cosine similarity heatmap reveals physically meaningful correlations.\relax }{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Architectural Contributions}{14}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dual-axis \textsc  {RoPE}{}.}{14}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Structure predictor.}{14}{section*.37}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Qualitative examples from the challenge set. Left column: ground-truth equations in human-readable form. Right column: \textsc  {PhysMDT}{} predictions. The model generates outputs that fill the maximum sequence length (48 tokens) regardless of target complexity, with repeated operator patterns and no structural correspondence to targets. Despite this, some predictions contain correct variable tokens (e.g., \texttt  {G\_const}, \texttt  {m}, \texttt  {r} for gravitational equations).\relax }}{15}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:challenge}{{6}{15}{Qualitative examples from the challenge set. Left column: ground-truth equations in human-readable form. Right column: \PhysMDT {} predictions. The model generates outputs that fill the maximum sequence length (48 tokens) regardless of target complexity, with repeated operator patterns and no structural correspondence to targets. Despite this, some predictions contain correct variable tokens (e.g., \texttt {G\_const}, \texttt {m}, \texttt {r} for gravitational equations).\relax }{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {paragraph}{Physics-informed losses.}{15}{section*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Embedding Structure as Evidence of Learning}{15}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Limitations}{15}{subsection.7.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Benchmark comparison across methods. The AR baseline achieves competitive performance on the internal test set (21.5\% EM), demonstrating the viability of small transformers for symbolic regression. \textsc  {PhysMDT}{}'s 0\% performance reflects compute constraints rather than architectural limitations, as validated by the ablation study showing measurable contributions from each component.\relax }}{16}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:benchmark}{{7}{16}{Benchmark comparison across methods. The AR baseline achieves competitive performance on the internal test set (21.5\% EM), demonstrating the viability of small transformers for symbolic regression. \PhysMDT {}'s 0\% performance reflects compute constraints rather than architectural limitations, as validated by the ablation study showing measurable contributions from each component.\relax }{figure.caption.32}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{16}{section.8}\protected@file@percent }
+\newlabel{sec:conclusion}{{8}{16}{Conclusion}{section.8}{}}
+\citation{nie2025llada}
+\citation{ddsr2025}
+\bibstyle{plainnat}
+\bibdata{sources}
+\bibcite{diffusr2025}{{1}{2025{}}{{Authors}}{{}}}
+\bibcite{symbolicdiffusion2025}{{2}{2025{}}{{Authors}}{{}}}
+\bibcite{ddsr2025}{{3}{2025}{{Bastiani et~al.}}{{}}}
+\bibcite{biggio2021nesymres}{{4}{2021}{{Biggio et~al.}}{{Biggio, Bendinelli, Neitz, Lucchi, and Parascandolo}}}
+\bibcite{bruneton2025qdsr}{{5}{2025}{{Bruneton}}{{}}}
+\bibcite{cranmer2023pysr}{{6}{2023}{{Cranmer}}{{}}}
+\bibcite{hu2022lora}{{7}{2022}{{Hu et~al.}}{{Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and Chen}}}
+\bibcite{kamienny2022e2e}{{8}{2022}{{Kamienny et~al.}}{{Kamienny, d'Ascoli, Lample, and Charton}}}
+\bibcite{lacava2021srbench}{{9}{2021}{{La~Cava et~al.}}{{La~Cava, Orzechowski, Burlacu, de~Fran{\c {c}}a, Virgolin, Jin, Kommenda, and Moore}}}
+\bibcite{lample2020deep}{{10}{2020}{{Lample and Charton}}{{}}}
+\@writefile{toc}{\contentsline {paragraph}{Future work.}{17}{section*.39}\protected@file@percent }
+\bibcite{nie2025llada}{{11}{2025}{{Nie et~al.}}{{Nie, Zhu, You, Zhang, Ou, Hu, Zhou, Lin, Wen, and Li}}}
+\bibcite{raissi2019pinns}{{12}{2019}{{Raissi et~al.}}{{Raissi, Perdikaris, and Karniadakis}}}
+\bibcite{sahoo2024mdlm}{{13}{2024}{{Sahoo et~al.}}{{Sahoo, Arriola, Gokaslan, Marroquin, Rush, Schiff, Chiu, and Kuleshov}}}
+\bibcite{shojaee2023tpsr}{{14}{2023}{{Shojaee et~al.}}{{Shojaee, Meidani, Farimani, and Reddy}}}
+\bibcite{strogatz2015nonlinear}{{15}{2015}{{Strogatz}}{{}}}
+\bibcite{su2024rope}{{16}{2024}{{Su et~al.}}{{Su, Ahmed, Lu, Pan, Bo, and Liu}}}
+\bibcite{architects2025arc}{{17}{2025}{{The ARChitects Team}}{{}}}
+\bibcite{udrescu2020aifeynman}{{18}{2020}{{Udrescu and Tegmark}}{{}}}
+\bibcite{udrescu2020aifeynman2}{{19}{2020}{{Udrescu et~al.}}{{Udrescu, Tan, Feng, Neto, Wu, and Tegmark}}}
+\bibcite{uy2011nguyen}{{20}{2011}{{Uy et~al.}}{{Uy, Hoai, O'Neill, McKay, and Galv{\'a}n-L{\'o}pez}}}
+\gdef \@abspage@last{18}

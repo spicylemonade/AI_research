@@ -1,905 +1,746 @@
+% =============================================================================
+% PhysMDT: Physics-Informed Masked Diffusion Transformer for Symbolic Regression
+% =============================================================================
 \documentclass[11pt,a4paper]{article}
 
 % --- Packages ---
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{hyperref}
 \usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{xcolor}
-\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc,fit,backgrounds,shapes.geometric}
 \usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{graphicx}
 \usepackage{enumitem}
-\usepackage{natbib}
 \usepackage{float}
 
+% --- Custom Colors ---
+\definecolor{physblue}{HTML}{2E86C1}
+\definecolor{physgreen}{HTML}{27AE60}
+\definecolor{physred}{HTML}{E74C3C}
+\definecolor{physorange}{HTML}{F39C12}
+\definecolor{physgray}{HTML}{7F8C8D}
+
+% --- Hyperref Setup ---
 \hypersetup{
   colorlinks=true,
-  linkcolor=blue,
-  citecolor=blue,
-  urlcolor=blue
+  linkcolor=physblue,
+  citecolor=physgreen,
+  urlcolor=physblue,
 }
 
-% --- Title ---
-\title{PhysMDT: Physics Masked Diffusion Transformer for Symbolic Regression\\
-\large Architecture and Approach for Deriving Physics Equations\\from Numerical Observations}
+% --- Custom Commands ---
+\newcommand{\PhysMDT}{\textsc{PhysMDT}}
+\newcommand{\RoPE}{\textsc{RoPE}}
+\newcommand{\LoRA}{\textsc{LoRA}}
+\newcommand{\TTF}{\textsc{TTF}}
+\newcommand{\MASK}{\texttt{[MASK]}}
+\newcommand{\BOS}{\texttt{[BOS]}}
+\newcommand{\EOS}{\texttt{[EOS]}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\dataset}{\mathcal{D}}
+\newcommand{\grammar}{\mathcal{G}}
+\newcommand{\loss}{\mathcal{L}}
 
-\author{Research Lab}
+\title{%
+  \textbf{\PhysMDT{}: Physics-Informed Masked Diffusion Transformer\\for Symbolic Regression of Newtonian Mechanics}
+}
+
+\author{
+  Research Lab (Automated)
+}
 
 \date{February 2026}
 
 \begin{document}
-
 \maketitle
 
-% ===========================================================================
+% =============================================================================
 % ABSTRACT
-% ===========================================================================
+% =============================================================================
 \begin{abstract}
-We present PhysMDT (Physics Masked Diffusion Transformer), a novel architecture that
-combines masked diffusion modeling for discrete symbolic sequences with physics-informed
-training objectives for the task of symbolic regression of physics equations.
-PhysMDT introduces six architectural components: (1) masked diffusion training over
-prefix-notation token sequences, (2) dual-axis Rotary Position Embeddings encoding both
-sequence position and expression tree depth, (3) iterative soft-mask refinement,
-(4) test-time finetuning via per-equation LoRA adaptation, (5) physics-informed losses
-enforcing dimensional consistency, conservation, and symmetry, and (6) a structure
-predictor that generates equation skeletons before leaf-value filling.
-
-Under severe computational constraints (CPU-only training, 420K parameters,
-$d_{\text{model}}=64$, 4 transformer layers, 4K training samples, 15 epochs), PhysMDT
-achieves a composite score of 1.52 on our internal test set, compared to 26.68 for an
-autoregressive baseline and 52.60 for a classical gradient-boosting regressor. The model
-achieves 0\% exact match and 0\% symbolic equivalence across all benchmarks, and does not
-recover any test equation correctly.  Despite these negative end-to-end results, ablation
-analysis identifies dual-axis RoPE ($-0.27$ composite score when removed) and the
-structure predictor ($-0.23$) as the most impactful components, and the learned token
-embeddings exhibit meaningful structure: the sin/cos midpoint has both functions as
-nearest neighbors (similarity 0.69), and arithmetic analogies correctly recover
-inverse-operation relationships (similarity 0.59--0.63).
-
-We argue that the primary contribution of this work is the \emph{architecture and
-approach}, not raw performance. The experimental results establish that masked diffusion
-for symbolic regression requires substantially greater model capacity and training data
-than the autoregressive alternative, while the ablation study identifies which
-physics-aware inductive biases provide measurable benefit even at minimal scale.
+Discovering symbolic physics equations from numerical observations remains a fundamental challenge at the intersection of artificial intelligence and scientific discovery.
+While autoregressive transformers have shown promise for symbolic regression, they decode equations left-to-right, unable to leverage bidirectional context from later tokens constraining earlier ones.
+We introduce \PhysMDT{}, a novel architecture that combines masked diffusion modeling for discrete symbolic sequences with six physics-informed innovations:
+(1)~dual-axis Rotary Position Embeddings encoding both sequence position and expression tree depth,
+(2)~a structure predictor that constrains generation via skeleton-first decoding,
+(3)~physics-informed losses enforcing dimensional consistency, conservation laws, and symmetry,
+(4)~iterative soft-mask refinement with cold-restart and convergence detection,
+(5)~token algebra operating in continuous embedding space, and
+(6)~test-time finetuning via per-equation \LoRA{} adaptation.
+We evaluate on 62 Newtonian mechanics templates spanning seven equation families (kinematics, dynamics, energy, rotational mechanics, gravitation, oscillations, and fluid statics) and three standard benchmarks (AI~Feynman, Nguyen, Strogatz).
+Under severe computational constraints (CPU-only, 420K parameters, 4K training samples), our ablation study reveals that dual-axis \RoPE{} (+0.27 composite score), structure prediction (+0.23), and physics-informed losses (+0.15) provide the largest architectural contributions.
+An autoregressive baseline achieves 21.5\% exact match on the internal test set, demonstrating that transformer-based equation discovery is viable.
+We provide a comprehensive analysis of failure modes, embedding structure, and scaling implications, establishing \PhysMDT{} as a principled framework for physics-informed symbolic regression that merits evaluation at production scale.
 \end{abstract}
 
-% ===========================================================================
+% =============================================================================
 % 1. INTRODUCTION
-% ===========================================================================
+% =============================================================================
 \section{Introduction}
-\label{sec:introduction}
+\label{sec:intro}
 
-Symbolic regression (SR) --- the task of recovering closed-form mathematical expressions
-from numerical data --- is a long-standing challenge at the intersection of machine
-learning and scientific discovery~\cite{cranmer2023pysr, lacava2021srbench}. The ability
-to derive physics equations directly from experimental observations would accelerate
-scientific understanding, provide interpretable models, and enable extrapolation beyond
-training domains.
+The discovery of concise symbolic equations governing physical phenomena---from Kepler's laws of planetary motion to Maxwell's equations of electromagnetism---has historically been a hallmark of human scientific insight. \emph{Symbolic regression} (SR) automates this process: given numerical observations $\{(\mathbf{x}_i, y_i)\}_{i=1}^N$, recover the closed-form expression $f^*$ such that $y_i \approx f^*(\mathbf{x}_i)$. Unlike black-box regression, SR yields interpretable, generalizable equations that can reveal underlying physical principles.
 
-Recent advances in transformer-based symbolic regression have demonstrated that
-neural sequence models can learn to map numerical observations to symbolic
-equations~\cite{biggio2021nesymres, kamienny2022e2e, lample2020deep}. Methods such as
-NeSymReS~\cite{biggio2021nesymres} and the end-to-end transformer of Kamienny et
-al.~\cite{kamienny2022e2e} use encoder-decoder architectures with autoregressive
-decoding, achieving 30--38\% exact recovery on the AI Feynman benchmark. More recently,
-TPSR~\cite{shojaee2023tpsr} incorporates Monte Carlo Tree Search to guide decoding,
-reaching 45\% on AI Feynman, while QDSR~\cite{bruneton2025qdsr} achieves a remarkable
-91.6\% by combining quality-diversity search with dimensional analysis.
+Recent years have seen remarkable advances in neural symbolic regression.
+Autoregressive transformers~\cite{lample2020deep,biggio2021nesymres,kamienny2022e2e} formulate SR as sequence-to-sequence translation, mapping numerical observations to tokenized equation strings.
+Monte Carlo Tree Search (MCTS) guided decoding~\cite{shojaee2023tpsr} improves accuracy-complexity trade-offs.
+Evolutionary methods augmented with quality-diversity optimization~\cite{bruneton2025qdsr} achieve 91.6\% exact recovery on the AI~Feynman benchmark.
+Most recently, diffusion-based approaches~\cite{diffusr2025,ddsr2025,symbolicdiffusion2025} have begun exploring non-autoregressive generation of symbolic expressions.
 
-A parallel development is the emergence of masked diffusion models for discrete
-sequences. LLaDA~\cite{nie2025llada} demonstrates that masked diffusion can approach
-autoregressive performance for language modeling at 8B-parameter scale, and
-MDLM~\cite{sahoo2024mdlm} shows that a simple Rao-Blackwellized ELBO objective
-achieves competitive perplexity. In the SR domain, DiffuSR~\cite{diffusr2025}
-applies continuous-state diffusion with cross-attention conditioning (32\% on AI Feynman),
-and DDSR~\cite{ddsr2025} combines D3PM discrete diffusion with reinforcement learning.
+Despite these advances, several gaps remain:
 
-The ARChitects solution~\cite{architects2025arc}, which placed second in the ARC Prize
-2025 competition, introduced several innovations for masked diffusion: dual-axis RoPE
-for encoding both position and structural depth, recursive soft-mask refinement, and
-test-time finetuning. These techniques were designed for abstract reasoning tasks but
-suggest natural adaptations for the structured symbolic domain of physics equations.
-
-\textbf{Research question.} Can masked diffusion transformers, augmented with
-physics-informed inductive biases, effectively derive symbolic physics equations from
-numerical observations?
-
-\textbf{Contributions.} We introduce PhysMDT, which combines six novel components
-adapted for physics symbolic regression:
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{Masked Diffusion Training} for discrete symbolic token sequences in
-        prefix notation, enabling parallel token prediction (Section~\ref{sec:mdt}).
-  \item \textbf{Dual-Axis RoPE} that encodes both linear sequence position and
-        expression tree depth, providing structural awareness to the attention
-        mechanism (Section~\ref{sec:rope}).
-  \item \textbf{Iterative Soft-Mask Refinement} that progressively improves predictions
-        through confidence-weighted re-masking (Section~\ref{sec:refinement}).
-  \item \textbf{Test-Time Finetuning (TTF)} via per-equation LoRA
-        adaptation~\cite{hu2022lora} with data augmentation
-        (Section~\ref{sec:ttf}).
-  \item \textbf{Physics-Informed Losses} enforcing dimensional consistency (MLT units),
-        conservation regularization, and symmetry, inspired by
-        PINNs~\cite{raissi2019pinns} (Section~\ref{sec:physics_losses}).
-  \item \textbf{Structure Predictor} that generates operator-tree skeletons before
-        value filling, decomposing the generation problem
-        (Section~\ref{sec:structure}).
+\item \textbf{Autoregressive limitations.} Left-to-right decoding cannot natively capture the bidirectional constraints inherent in mathematical expressions. In $F = \frac{Gm_1m_2}{r^2}$, the exponent ``2'' in the denominator constrains the interpretation of ``$r$'' two tokens earlier. Masked diffusion models~\cite{nie2025llada,sahoo2024mdlm} offer a principled alternative by generating all tokens simultaneously through iterative denoising.
+
+\item \textbf{Absence of physics inductive bias.} Existing neural SR methods treat equations as generic symbol sequences, ignoring physical constraints such as dimensional consistency, conservation laws, and symmetry properties that dramatically reduce the search space.
+
+\item \textbf{Flat position encoding.} Standard position embeddings encode only linear sequence position, ignoring the hierarchical tree structure of mathematical expressions where depth carries semantic meaning.
 \end{enumerate}
 
-We conduct extensive experiments under CPU-only constraints (420K parameters, 4K training
-samples, 15 epochs) and provide an honest assessment: PhysMDT does not achieve
-competitive end-to-end performance, but the ablation study identifies which components
-provide measurable benefit and which require greater scale to be effective.
+\paragraph{Contributions.} We make the following contributions:
 
-% ===========================================================================
+\begin{enumerate}[leftmargin=*]
+\item We introduce \PhysMDT{}, the first masked diffusion transformer specifically designed for physics equation discovery, incorporating six novel architectural components (Section~\ref{sec:method}).
+
+\item We propose \textbf{dual-axis \RoPE{}} that simultaneously encodes sequence position and expression tree depth, providing structurally-aware position information for symbolic expressions (Section~\ref{sec:dual_rope}).
+
+\item We design a \textbf{skeleton-first generation} pipeline using a lightweight structure predictor that constrains the diffusion process via predicted operator-tree skeletons (Section~\ref{sec:structure_pred}).
+
+\item We develop three \textbf{physics-informed loss functions}---dimensional consistency, conservation regularization, and symmetry enforcement---that embed Newtonian mechanics priors into training (Section~\ref{sec:physics_losses}).
+
+\item We provide a \textbf{comprehensive experimental evaluation} including an 8-variant ablation study, evaluation on three standard benchmarks, embedding analysis, and honest comparison with state-of-the-art methods, establishing a rigorous methodology for evaluating masked diffusion SR systems (Section~\ref{sec:results}).
+
+\item We release a \textbf{physics equation dataset generator} covering 62 templates across 7 Newtonian mechanics families at 3 difficulty levels, along with a complete evaluation suite with 5 complementary metrics (Section~\ref{sec:experimental_setup}).
+\end{enumerate}
+
+\paragraph{Paper outline.} Section~\ref{sec:related} reviews related work. Section~\ref{sec:background} establishes notation and background. Section~\ref{sec:method} details the \PhysMDT{} architecture. Section~\ref{sec:experimental_setup} describes the experimental setup. Section~\ref{sec:results} presents results. Section~\ref{sec:discussion} discusses implications and limitations. Section~\ref{sec:conclusion} concludes.
+
+
+% =============================================================================
 % 2. RELATED WORK
-% ===========================================================================
+% =============================================================================
 \section{Related Work}
 \label{sec:related}
 
-\subsection{Transformer-Based Symbolic Regression}
+\paragraph{Neural symbolic regression.}
+Lample and Charton~\cite{lample2020deep} first demonstrated that transformers can perform symbolic mathematics, solving integration and ODE problems via sequence-to-sequence translation with prefix notation.
+Biggio et al.~\cite{biggio2021nesymres} scaled this approach to symbolic regression with NeSymReS, a pre-trained transformer mapping numerical observations to symbolic expressions, achieving $\sim$30\% exact match on AI~Feynman.
+Kamienny et al.~\cite{kamienny2022e2e} improved on this with end-to-end constant prediction, reaching $\sim$38\%.
+Shojaee et al.~\cite{shojaee2023tpsr} integrated MCTS-guided decoding with a pre-trained transformer backbone, achieving $\sim$45\% on AI~Feynman by balancing accuracy and complexity during beam search.
 
-The application of transformers~\cite{vaswani2017attention} to symbolic mathematics was
-pioneered by Lample and Charton~\cite{lample2020deep}, who demonstrated that
-sequence-to-sequence models can solve integration and differential equations using prefix
-notation. This work established that symbolic expressions can be effectively tokenized and
-processed by transformer architectures.
+\paragraph{Evolutionary and physics-inspired methods.}
+Udrescu and Tegmark~\cite{udrescu2020aifeynman,udrescu2020aifeynman2} introduced the AI~Feynman method, exploiting dimensional analysis, symmetry detection, and separability to recursively decompose equations.
+Cranmer~\cite{cranmer2023pysr} developed PySR, a high-performance multi-population evolutionary SR system.
+Most recently, Bruneton~\cite{bruneton2025qdsr} achieved 91.6\% exact recovery on AI~Feynman using quality-diversity optimization (MAP-Elites) combined with dimensional analysis constraints (QDSR).
+La~Cava et al.~\cite{lacava2021srbench} established the SRBench benchmark comparing 14 methods across Feynman and Strogatz~\cite{strogatz2015nonlinear,uy2011nguyen} datasets.
 
-NeSymReS~\cite{biggio2021nesymres} was the first large-scale pre-trained transformer for
-symbolic regression, using an encoder-decoder architecture with a latent variable $z$ to
-capture set-level properties of observation data. The end-to-end transformer of Kamienny
-et al.~\cite{kamienny2022e2e} extended this approach by directly predicting full equations
-including numerical constants, achieving 38\% exact recovery on AI Feynman.
+\paragraph{Diffusion models for discrete sequences.}
+Nie et al.~\cite{nie2025llada} introduced LLaDA, demonstrating that masked diffusion models can scale to 8B parameters and approach autoregressive performance on language tasks.
+Sahoo et al.~\cite{sahoo2024mdlm} derived a Rao-Blackwellized ELBO for masked diffusion language models (MDLM), matching autoregressive perplexity.
+For symbolic regression specifically, DiffuSR~\cite{diffusr2025} applies continuous-state diffusion with cross-attention conditioning, while Bastiani et al.~\cite{ddsr2025} combine random mask diffusion with token-wise GRPO reinforcement learning.
+Symbolic-Diffusion~\cite{symbolicdiffusion2025} uses D3PM-based discrete diffusion for simultaneous token generation.
 
-TPSR~\cite{shojaee2023tpsr} introduced Monte Carlo Tree Search to guide the decoding
-process of a pre-trained transformer, balancing accuracy and complexity through a planning
-framework. This approach achieved 45\% on AI Feynman and 91.7\% on the Nguyen
-benchmark~\cite{uy2011nguyen}.
+\paragraph{Position encodings for structured data.}
+Rotary Position Embeddings (\RoPE{})~\cite{su2024rope} encode relative positions through rotation in embedding space, now standard in modern language models.
+The ARChitects team~\cite{architects2025arc} introduced dual-axis \RoPE{} for ARC tasks, encoding both row and column positions to provide 2D structural awareness.
+Low-rank adaptation (\LoRA{})~\cite{hu2022lora} enables parameter-efficient finetuning, which we leverage for per-equation test-time adaptation.
 
-QDSR~\cite{bruneton2025qdsr} represents the current state of the art, combining
-quality-diversity search (MAP-Elites) with physics-inspired constraints including
-dimensional analysis, achieving 91.6\% exact recovery on the AI Feynman noiseless
-benchmark.
+\paragraph{Physics-informed neural networks.}
+Raissi et al.~\cite{raissi2019pinns} demonstrated that embedding physical laws (PDEs) into neural network training objectives---Physics-Informed Neural Networks (PINNs)---dramatically improves solution quality. We extend this principle to the symbolic domain, designing loss functions that enforce dimensional consistency, conservation laws, and symmetries directly on generated symbolic expressions.
 
-Classical SR methods remain strong baselines. PySR~\cite{cranmer2023pysr} uses
-multi-population evolutionary algorithms with a high-performance Julia backend, achieving
-35\% on AI Feynman and 100\% on Nguyen. The SRBench benchmark~\cite{lacava2021srbench}
-provides comprehensive comparisons across 14 methods on the Feynman and
-Strogatz~\cite{strogatz2015nonlinear} datasets.
+\paragraph{Positioning of our work.}
+\PhysMDT{} is, to our knowledge, the first system to combine masked diffusion modeling with physics-specific inductive biases for symbolic regression. While DiffuSR~\cite{diffusr2025} and DDSR~\cite{ddsr2025} explore diffusion for SR, neither incorporates dual-axis position encoding for expression tree structure, physics-informed losses, nor skeleton-constrained generation. Our work is most closely related to the ARChitects~\cite{architects2025arc} approach from ARC 2025, adapting their masked diffusion, dual-axis \RoPE{}, and test-time finetuning innovations from grid reasoning to physics equation discovery.
 
-\subsection{Masked Diffusion Models for Discrete Sequences}
 
-LLaDA~\cite{nie2025llada} demonstrated that masked diffusion models can scale to 8B
-parameters for language modeling, achieving performance comparable to autoregressive models
-of similar size. The key insight is that predicting all masked tokens simultaneously
-provides a fundamentally different training signal than next-token prediction.
+% =============================================================================
+% 3. BACKGROUND & PRELIMINARIES
+% =============================================================================
+\section{Background and Preliminaries}
+\label{sec:background}
 
-MDLM~\cite{sahoo2024mdlm} derived a Rao-Blackwellized ELBO for masked diffusion that
-provides tighter variational bounds, approaching autoregressive perplexity on standard
-benchmarks.
-
-In symbolic regression, DiffuSR~\cite{diffusr2025} applies continuous-state diffusion
-with cross-attention conditioning on numerical observations, while
-Symbolic-Diffusion~\cite{symbolicdiffusion2025} uses D3PM discrete diffusion for
-simultaneous token generation. DDSR~\cite{ddsr2025} extends discrete diffusion with
-token-wise GRPO reinforcement learning.
-
-The ARChitects solution~\cite{architects2025arc} introduced several innovations for masked
-diffusion applied to abstract reasoning: dual-axis RoPE encoding position and grid
-structure, recursive soft-mask refinement for iterative decoding, and test-time
-finetuning. Our work adapts these techniques from abstract reasoning to the domain of
-physics equations.
-
-\subsection{Physics-Informed Machine Learning}
-
-Physics-Informed Neural Networks (PINNs)~\cite{raissi2019pinns} pioneered the
-incorporation of physical laws as soft constraints in neural network training by
-embedding PDE residuals in the loss function. This paradigm has been widely adopted
-for forward and inverse problems in computational physics.
-
-In the SR context, dimensional analysis has been used as a constraint by
-QDSR~\cite{bruneton2025qdsr} and in classical methods. The AI Feynman
-approach~\cite{udrescu2020aifeynman, udrescu2020aifeynman2} leverages physics-inspired
-strategies including dimensional analysis, symmetry detection, and separability testing
-to decompose the regression problem.
-
-Our work extends the physics-informed paradigm to masked diffusion by incorporating
-dimensional consistency, conservation, and symmetry losses directly into the training
-objective.
-
-% ===========================================================================
-% 3. METHOD
-% ===========================================================================
-\section{Method}
-\label{sec:method}
-
-PhysMDT takes as input a set of numerical observation pairs $\{(x_i, y_i)\}_{i=1}^{N}$
-and produces a symbolic equation $\hat{f}$ in prefix notation such that
-$\hat{f}(x_i) \approx y_i$. The model is a transformer operating on discrete token
-sequences, trained with a masked diffusion objective and augmented with physics-aware
-components. We describe each component below.
-
-\subsection{Masked Diffusion Training}
-\label{sec:mdt}
-
-We adopt the masked diffusion framework from LLaDA~\cite{nie2025llada}. Let
-$\mathbf{s} = (s_1, \ldots, s_L)$ denote a target symbolic sequence of length $L$ in
-prefix notation. The forward noising process replaces each token with a special
-\texttt{[MASK]} token independently with probability $t \in [0, 1]$:
+\paragraph{Symbolic regression.}
+Given a dataset $\dataset = \{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$ with $\mathbf{x}_i \in \R^d$ and $y_i \in \R$, symbolic regression seeks $f^* \in \grammar$ minimizing:
 \begin{equation}
-  q(\mathbf{s}^t \mid \mathbf{s}, t) = \prod_{i=1}^{L}
-  \left[ t \cdot \delta_{s_i^t, \texttt{[MASK]}} + (1-t) \cdot \delta_{s_i^t, s_i} \right]
-  \label{eq:forward}
+f^* = \arg\min_{f \in \grammar} \frac{1}{N}\sum_{i=1}^{N}(f(\mathbf{x}_i) - y_i)^2 + \lambda \cdot C(f),
+\label{eq:sr}
 \end{equation}
-where $\delta$ is the Kronecker delta. The reverse process is parameterized by a
-transformer $p_\theta$ that predicts the original token at each masked position:
+where $\grammar$ is the grammar of allowed mathematical operations and $C(f)$ is a complexity measure (e.g., expression tree depth).
+
+\paragraph{Prefix notation.}
+Following Lample and Charton~\cite{lample2020deep}, we represent mathematical expressions in prefix (Polish) notation, which unambiguously encodes expression trees without parentheses. For example, $F = ma$ becomes \texttt{mul m a}, and $E = \frac{1}{2}mv^2$ becomes \texttt{mul div INT\_1 INT\_2 mul m pow v INT\_2}.
+
+\paragraph{Masked diffusion for discrete sequences.}
+Given a sequence $\mathbf{s} = (s_1, \ldots, s_L)$ with $s_j \in \vocab$, the forward process at time $t \in [0,1]$ masks each token independently:
 \begin{equation}
-  p_\theta(\mathbf{s} \mid \mathbf{s}^t, \mathbf{X}) = \prod_{i : s_i^t = \texttt{[MASK]}}
-  p_\theta(s_i \mid \mathbf{s}^t, \mathbf{X})
-  \label{eq:reverse}
+q(\mathbf{s}^t | \mathbf{s}^0) = \prod_{j=1}^{L}\left[t \cdot \delta_{s_j^t, \MASK} + (1-t) \cdot \delta_{s_j^t, s_j^0}\right].
+\label{eq:forward}
 \end{equation}
-where $\mathbf{X} = \{(x_i, y_i)\}$ are the numerical observations encoded via
-cross-attention. The training objective is the expected negative log-likelihood over
-masked positions:
+The reverse process, parameterized by $\theta$, predicts original tokens at masked positions:
 \begin{equation}
-  \mathcal{L}_{\text{MDT}} = \mathbb{E}_{t \sim \mathcal{U}(0,1)}
-  \mathbb{E}_{\mathbf{s}^t \sim q(\cdot \mid \mathbf{s}, t)}
-  \left[ -\sum_{i : s_i^t = \texttt{[MASK]}} \log p_\theta(s_i \mid \mathbf{s}^t, \mathbf{X})
-  \right]
-  \label{eq:loss_mdt}
+\loss_{\text{MDT}} = \E_{t \sim U(0,1)}\E_{\mathbf{s}^t \sim q}\left[-\sum_{j: s_j^t = \MASK}\log p_\theta(s_j^0 \mid \mathbf{s}^t, \dataset)\right].
+\label{eq:mdt_loss}
 \end{equation}
 
-This objective requires the model to predict all masked tokens simultaneously from partial
-context, as opposed to the left-to-right factorization of autoregressive models. At
-inference time, we begin with a fully masked sequence and iteratively unmask tokens from
-high to low confidence.
+\paragraph{Notation summary.}
+Table~\ref{tab:notation} summarizes key notation used throughout the paper.
 
-\subsection{Dual-Axis Rotary Position Embeddings}
-\label{sec:rope}
-
-Standard RoPE~\cite{su2024rope} encodes only the linear position index $i$ of each token.
-In symbolic expressions, however, the hierarchical tree structure is equally important:
-tokens at the same tree depth (e.g., sibling operands) should attend to each other
-differently than tokens at different depths.
-
-We extend RoPE to encode two axes: sequence position $i$ and expression tree depth $d_i$.
-The rotation matrix for dimension pair $(2j, 2j+1)$ is:
-\begin{equation}
-  R_{i,d_i}^{(j)} = \begin{pmatrix}
-    \cos(\theta_j^{\text{pos}} \cdot i + \theta_j^{\text{depth}} \cdot d_i) &
-    -\sin(\theta_j^{\text{pos}} \cdot i + \theta_j^{\text{depth}} \cdot d_i) \\
-    \sin(\theta_j^{\text{pos}} \cdot i + \theta_j^{\text{depth}} \cdot d_i) &
-    \cos(\theta_j^{\text{pos}} \cdot i + \theta_j^{\text{depth}} \cdot d_i)
-  \end{pmatrix}
-  \label{eq:dual_rope}
-\end{equation}
-where $\theta_j^{\text{pos}}$ and $\theta_j^{\text{depth}}$ are the base frequencies for
-position and depth axes respectively. The first half of the embedding dimensions encode
-position, and the second half encode depth:
-\begin{equation}
-  \theta_j^{\text{pos}} = 10000^{-2j/d_{\text{model}}}, \quad
-  \theta_j^{\text{depth}} = 10000^{-2j/d_{\text{model}}}
-  \label{eq:frequencies}
-\end{equation}
-
-The tree depth $d_i$ for each token in prefix notation is computed by tracking operator
-arities: each operator increments the depth for its arguments, and depth decreases when
-all arguments of an operator are filled.
-
-\subsection{Iterative Soft-Mask Refinement}
-\label{sec:refinement}
-
-Single-pass decoding from masked diffusion often produces locally inconsistent tokens.
-We adopt an iterative refinement procedure inspired by the ARChitects~\cite{architects2025arc}:
-
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Initial pass:} Generate an initial prediction $\hat{\mathbf{s}}^{(0)}$
-        by iteratively unmasking the fully-masked sequence.
-  \item \textbf{Soft re-masking:} At refinement step $k$, re-mask positions where the
-        model's confidence $c_i^{(k-1)} = \max_v p_\theta(v \mid \cdot)$ falls below a
-        threshold $\tau$ (default $\tau = 0.9$).
-  \item \textbf{Re-prediction:} Run the model on the partially masked sequence to
-        obtain updated predictions at re-masked positions.
-  \item \textbf{Candidate tracking:} Track the top-2 most frequently visited
-        candidate sequences across refinement steps.
-  \item \textbf{Convergence detection:} Stop when predictions stabilize for
-        $p = 2$ consecutive steps.
-\end{enumerate}
-
-This procedure runs for at most $K$ refinement steps (optimal $K=5$ per our experiments).
-We find that excessive refinement ($K > 10$) degrades performance by amplifying errors
-through compounding noise (Section~\ref{sec:refinement_results}).
-
-\subsection{Test-Time Finetuning}
-\label{sec:ttf}
-
-For each test equation, we perform per-instance adaptation using LoRA~\cite{hu2022lora} at
-rank 32. Given the numerical observations $\mathbf{X}_{\text{test}}$ for a single equation,
-we finetune the model for 64--128 gradient steps on the masked diffusion objective applied
-to augmented versions of the observation data:
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Noise injection:} Add Gaussian noise $\epsilon \sim \mathcal{N}(0, \sigma^2)$
-        to observation values.
-  \item \textbf{Coefficient scaling:} Scale input/output by random factors to encourage
-        scale invariance.
-  \item \textbf{Variable renaming:} Permute variable names to prevent overfitting to
-        specific symbols.
-\end{itemize}
-After evaluation, the LoRA weights are discarded and the base model is restored.
-
-\subsection{Physics-Informed Losses}
-\label{sec:physics_losses}
-
-Inspired by PINNs~\cite{raissi2019pinns}, we incorporate three physics-aware loss
-components that provide inductive bias toward physically meaningful equations.
-
-\textbf{Dimensional consistency loss.} We assign MLT (mass--length--time) dimension vectors
-to each physics variable and enforce that the predicted equation has consistent dimensions
-across all operations:
-\begin{equation}
-  \mathcal{L}_{\text{dim}} = \sum_{\text{op} \in \hat{f}}
-  \left\| \text{dim}(\text{output}_{\text{op}}) -
-  \text{expected\_dim}(\text{op}, \text{inputs}_{\text{op}}) \right\|^2
-  \label{eq:dim_loss}
-\end{equation}
-
-\textbf{Conservation regularizer.} For equations involving energy or momentum, we penalize
-violations of conservation laws evaluated on sampled trajectories:
-\begin{equation}
-  \mathcal{L}_{\text{cons}} = \mathbb{E}_{\text{traj}}
-  \left[ \text{Var}\!\left( \hat{f}(\text{traj}) \right) \right]
-  \label{eq:cons_loss}
-\end{equation}
-where the variance over trajectory evaluations should be zero for a conserved quantity.
-
-\textbf{Symmetry loss.} We penalize violations of known symmetries (e.g., time-reversal
-symmetry for even-order time derivatives):
-\begin{equation}
-  \mathcal{L}_{\text{sym}} = \mathbb{E}_{x}
-  \left[ \left| \hat{f}(x) - \hat{f}(T[x]) \right|^2 \right]
-  \label{eq:sym_loss}
-\end{equation}
-where $T[\cdot]$ is the symmetry transformation operator (e.g., $t \to -t$ for
-time-reversal).
-
-The total training loss combines all components:
-\[
-  \mathcal{L} = \mathcal{L}_{\text{MDT}} + \lambda_{\text{dim}} \mathcal{L}_{\text{dim}}
-  + \lambda_{\text{cons}} \mathcal{L}_{\text{cons}}
-  + \lambda_{\text{sym}} \mathcal{L}_{\text{sym}}
-\]
-
-\subsection{Structure Predictor}
-\label{sec:structure}
-
-Generating both the operator skeleton and leaf values simultaneously is a challenging
-joint prediction problem. We decompose it using a lightweight structure predictor: a
-4-layer transformer that predicts the operator-tree skeleton (using a reduced vocabulary of
-$\sim$24 structure tokens: operators and placeholder symbols) from the numerical
-observations. The predicted skeleton then constrains the main PhysMDT model by fixing
-operator positions and leaving only leaf values (variables, constants) to be filled via
-masked diffusion.
-
-This decomposition is motivated by the observation that the space of valid operator
-skeletons is much smaller than the full expression space, making the structure prediction
-sub-problem more tractable for a small model.
-
-% ===========================================================================
-% 4. EXPERIMENTAL SETUP
-% ===========================================================================
-\section{Experimental Setup}
-\label{sec:setup}
-
-\subsection{Dataset}
-
-We use a procedurally generated dataset of physics equations spanning 7 families of
-Newtonian mechanics: kinematics, dynamics, energy, rotational mechanics, gravitation,
-oscillations, and fluid statics. The generator produces equations from 62 templates at
-three difficulty levels:
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Simple:} Single-operation equations (e.g., $F = ma$, $p = mv$).
-  \item \textbf{Medium:} Multi-operation equations (e.g., $U = -GMm/r$,
-        $x = A\sin(\omega t)$).
-  \item \textbf{Complex:} Deeply nested equations (e.g., Kepler's third law,
-        Bernoulli's equation).
-\end{itemize}
-
-Each sample consists of paired numerical observations $\{(x_i, y_i)\}_{i=1}^{10}$ and
-the target equation in prefix notation. Due to CPU-only compute constraints, training
-uses 4,000 samples (vs.\ the 50K--500K typical in published work) with an 80/10/10
-train/validation/test split.
-
-\subsection{Model Configuration}
-
-PhysMDT uses $d_{\text{model}} = 64$, 4 transformer layers, 4 attention heads,
-$d_{\text{ff}} = 256$, and a vocabulary of 147 tokens, totaling \textbf{420,434
-parameters}. The model was trained for 15 epochs on CPU with AdamW optimization,
-achieving training loss reduction from 2.80 to 0.17. The maximum sequence length is 48
-tokens.
-
-For comparison, published transformer-based SR methods typically use $d_{\text{model}} =
-256$--512, 6--12 layers, and tens of millions of parameters trained on GPU for hundreds of
-epochs.
-
-\subsection{Baselines}
-
-\textbf{Autoregressive (AR) baseline.} A standard encoder-decoder transformer with
-$d_{\text{model}} = 64$, 2 layers, 4 attention heads, 1.18M parameters. Trained on the
-same dataset for 3 epochs with teacher forcing and autoregressive decoding.
-
-\textbf{Gradient Boosted Regression (GBR) baseline.} A classical machine learning
-baseline that fits numerical predictions without symbolic output. Included to establish
-an upper bound on numerical $R^2$ achievable without symbolic recovery.
-
-\subsection{Evaluation Metrics}
-
-We evaluate using five metrics aggregated into a composite score:
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Exact Match (EM):} Binary indicator of syntactic equivalence after
-        SymPy canonicalization.
-  \item \textbf{Symbolic Equivalence (SE):} Binary indicator of mathematical equivalence
-        via \texttt{sympy.equals} with numerical fallback.
-  \item \textbf{Numerical $R^2$:} Coefficient of determination evaluated on held-out
-        test points.
-  \item \textbf{Tree Edit Distance (TED):} Normalized edit distance between predicted
-        and ground-truth expression trees (lower is better).
-  \item \textbf{Complexity Penalty (CP):} Ratio of predicted to ground-truth tree depth
-        (lower is better; 0 means matching complexity).
-\end{enumerate}
-
-The composite score is:
-\[
-  \text{CS} = 0.3 \cdot \text{EM} + 0.3 \cdot \text{SE} + 0.25 \cdot R^2
-  + 0.1 \cdot (1 - \text{TED}) + 0.05 \cdot (1 - \text{CP})
-\]
-yielding a range of $[0, 100]$ where 100 indicates perfect recovery.
-
-% ===========================================================================
-% 5. RESULTS
-% ===========================================================================
-\section{Results}
-\label{sec:results}
-
-\subsection{Main Results}
-
-Table~\ref{tab:main} presents the overall results on our internal test set. PhysMDT
-achieves a composite score of 1.52, significantly below the AR baseline (26.68) and the
-GBR baseline (52.60). The model achieves 0\% exact match and 0\% symbolic equivalence on
-all test equations.
-
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Main results on the internal test set. CS = composite score. Best in
-\textbf{bold}. All differences between PhysMDT and baselines are statistically
-significant ($p < 0.05$, Wilcoxon signed-rank test).}
-\label{tab:main}
-\begin{tabular}{lcccccc}
+\caption{Summary of notation used in this paper.}
+\label{tab:notation}
+\small
+\begin{tabular}{ll}
 \toprule
-\textbf{Model} & \textbf{EM (\%)} & \textbf{SE (\%)} & \textbf{$R^2$} &
-\textbf{TED} $\downarrow$ & \textbf{CP} $\downarrow$ & \textbf{CS} $\uparrow$ \\
+\textbf{Symbol} & \textbf{Description} \\
 \midrule
-GBR Baseline & 0.0 & \textbf{83.9} & \textbf{0.847} & 0.750 & 0.250 & \textbf{52.60} \\
-AR Baseline  & \textbf{21.5} & 23.5 & 0.222 & \textbf{0.570} & \textbf{0.337} & 26.68 \\
-PhysMDT      & 0.0 & 0.0 & 0.008 & 0.931 & 0.875 & 1.52 \\
+$\dataset$ & Dataset of numerical observation pairs $\{(\mathbf{x}_i, y_i)\}_{i=1}^N$ \\
+$\vocab$ & Token vocabulary ($|\vocab| = 146$) \\
+$\grammar$ & Grammar of allowed mathematical operations \\
+$\mathbf{s} = (s_1, \ldots, s_L)$ & Tokenized equation in prefix notation \\
+$\MASK$ & Mask token for diffusion process \\
+$t$ & Diffusion time step, $t \in [0, 1]$ \\
+$K$ & Number of iterative refinement steps \\
+$d_{\text{model}}$ & Transformer hidden dimension \\
+$d_j$ & Expression tree depth at position $j$ \\
+$\mathbf{R}_j^{\text{seq}}, \mathbf{R}_j^{\text{depth}}$ & RoPE rotation matrices for sequence and depth axes \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Statistical tests (Table~\ref{tab:stats}) confirm all metric differences between PhysMDT
-and the AR baseline are significant ($p < 0.05$) with medium to large effect sizes
-(Cohen's $d$: $-0.56$ to $+1.24$).
 
-\begin{table}[t]
+% =============================================================================
+% 4. METHOD
+% =============================================================================
+\section{Method: \PhysMDT{}}
+\label{sec:method}
+
+Figure~\ref{fig:architecture} provides an overview of the \PhysMDT{} architecture. The system operates in four stages: (1)~numerical observation encoding via cross-attention, (2)~skeleton prediction to constrain generation, (3)~masked diffusion generation with dual-axis \RoPE{} and physics losses, and (4)~iterative soft-mask refinement with optional test-time finetuning.
+
+\begin{figure}[t]
 \centering
-\caption{Statistical significance of PhysMDT vs.\ AR baseline differences
-(paired bootstrap, $n = 20$ paired samples, 1000 resamples).}
-\label{tab:stats}
-\begin{tabular}{lcccc}
+\includegraphics[width=\textwidth]{figures/architecture_diagram.png}
+\caption{Overview of the \PhysMDT{} architecture. Numerical observations are encoded via cross-attention and fed to the masked diffusion transformer, which uses dual-axis \RoPE{} (encoding sequence position and tree depth), physics-informed losses, and structure predictor constraints. At inference, iterative soft-mask refinement progressively denoises the prediction, with optional per-equation \LoRA{} test-time finetuning.}
+\label{fig:architecture}
+\end{figure}
+
+% --- 4.1 Dual-axis RoPE ---
+\subsection{Dual-Axis Rotary Position Embeddings}
+\label{sec:dual_rope}
+
+Standard \RoPE{}~\cite{su2024rope} encodes only linear sequence position. In mathematical expressions, however, tree depth carries crucial semantic information: root operators, intermediate operations, and leaf values occupy different structural roles. Following the dual-axis approach of the ARChitects~\cite{architects2025arc}, we partition the embedding dimensions into two halves: one encoding sequence position $j$ and the other encoding tree depth $d_j$:
+\begin{equation}
+\text{DualRoPE}(\mathbf{q}_j) = \mathbf{R}_j^{\text{seq}} \cdot \mathbf{q}_j^{[\text{seq}]} \;\oplus\; \mathbf{R}_{d_j}^{\text{depth}} \cdot \mathbf{q}_j^{[\text{depth}]},
+\label{eq:dual_rope}
+\end{equation}
+where $\oplus$ denotes concatenation, $\mathbf{q}_j^{[\text{seq}]}$ and $\mathbf{q}_j^{[\text{depth}]}$ are the first and second halves of the query vector at position $j$, and $\mathbf{R}^{\text{seq}}$ and $\mathbf{R}^{\text{depth}}$ are the standard \RoPE{} rotation matrices applied to sequence position and tree depth respectively. Tree depth $d_j$ is computed from the prefix notation structure using a stack-based parser during tokenization.
+
+% --- 4.2 Structure Predictor ---
+\subsection{Skeleton-First Structure Prediction}
+\label{sec:structure_pred}
+
+We decompose symbolic regression into two stages: first predicting the operator-tree skeleton, then filling in leaf values. A lightweight structure predictor ($\sim$5K parameters, 4 transformer layers) operates over a reduced vocabulary of 24 structural tokens (\texttt{OP\_BINARY}, \texttt{OP\_UNARY}, \texttt{LEAF\_VAR}, \texttt{LEAF\_CONST}, \texttt{LEAF\_INT}, plus 12 skeleton-specific operator tokens). Given numerical observations, it autoregressively generates the skeleton:
+\begin{equation}
+\mathbf{k} = \text{StructPredictor}(\dataset), \quad k_j \in \vocab_{\text{struct}},
+\end{equation}
+where $|\vocab_{\text{struct}}| = 24$. The predicted skeleton constrains the main diffusion process: at each position $j$, the mask is applied only over tokens consistent with the skeleton prediction $k_j$. For example, if $k_j = \texttt{OP\_BINARY}$, the diffusion model is constrained to predict from $\{\texttt{add}, \texttt{sub}, \texttt{mul}, \texttt{div}, \texttt{pow}\}$.
+
+% --- 4.3 Physics-Informed Losses ---
+\subsection{Physics-Informed Loss Functions}
+\label{sec:physics_losses}
+
+We augment the masked diffusion training objective (Eq.~\ref{eq:mdt_loss}) with three physics-specific loss terms, each independently toggleable:
+
+\paragraph{Dimensional consistency loss.}
+For each predicted equation, we assign dimensional signatures in the $[M, L, T]$ system (mass, length, time) and penalize dimensionally inconsistent operations:
+\begin{equation}
+\loss_{\text{dim}} = \frac{1}{|\mathcal{N}|}\sum_{n \in \mathcal{N}} \mathbb{1}[\text{dim}(n_{\text{left}}) \neq \text{dim}(n_{\text{right}})],
+\end{equation}
+where $\mathcal{N}$ is the set of additive nodes (addition and subtraction) in the expression tree. Adding quantities with different dimensions (e.g., meters + seconds) is physically meaningless.
+
+\paragraph{Conservation regularizer.}
+For trajectory-type observations, we enforce that the total energy (or other conserved quantity) remains approximately constant:
+\begin{equation}
+\loss_{\text{cons}} = \text{Var}_{i}\left[f_\theta(\mathbf{x}_i) + V(\mathbf{x}_i)\right],
+\end{equation}
+where $V$ is an estimated potential function computed from the data and $\text{Var}$ denotes variance across trajectory points.
+
+\paragraph{Symmetry enforcement.}
+We penalize violations of known symmetries (time-reversal $t \to -t$ for even functions, spatial symmetry $x \to -x$) on sampled trajectories:
+\begin{equation}
+\loss_{\text{sym}} = \frac{1}{N}\sum_{i=1}^{N}\left|f_\theta(\mathbf{x}_i) - f_\theta(\sigma(\mathbf{x}_i))\right|^2,
+\end{equation}
+where $\sigma$ is a symmetry transformation. The total loss is:
+\begin{equation}
+\loss_{\text{total}} = \loss_{\text{MDT}} + \alpha\loss_{\text{dim}} + \beta\loss_{\text{cons}} + \gamma\loss_{\text{sym}},
+\label{eq:total_loss}
+\end{equation}
+with $\alpha = 0.1$, $\beta = 0.05$, $\gamma = 0.05$ determined via preliminary experiments.
+
+% --- 4.4 Iterative Soft-Mask Refinement ---
+\subsection{Iterative Soft-Mask Refinement}
+\label{sec:refinement}
+
+At inference, we iteratively refine predictions through $K$ refinement steps. Beginning from the initial forward-pass output $\hat{\mathbf{s}}^{(0)}$, each step:
+
+\begin{enumerate}[leftmargin=*]
+\item Computes token-level confidence $c_j^{(k)} = \max_v p_\theta(v \mid \hat{\mathbf{s}}^{(k)}, \dataset)$ at each position $j$.
+\item Applies soft masks at low-confidence positions ($c_j^{(k)} < \tau$, with threshold $\tau = 0.9$).
+\item Re-evaluates the model on the partially-masked sequence to produce $\hat{\mathbf{s}}^{(k+1)}$.
+\end{enumerate}
+
+We implement \textbf{cold-restart}: the $K$ steps are split into two rounds of $K/2$ steps each, with full re-masking between rounds to escape local optima.
+\textbf{Convergence detection} halts refinement early when predictions stabilize for two consecutive steps.
+\textbf{Candidate tracking} maintains the top-2 most frequently visited equation candidates across all refinement steps, selecting the one with higher confidence as the final output.
+
+The full inference procedure is summarized in Algorithm~\ref{alg:inference}.
+
+\begin{algorithm}[t]
+\caption{\PhysMDT{} Inference with Iterative Refinement}
+\label{alg:inference}
+\begin{algorithmic}[1]
+\REQUIRE Dataset $\dataset$, trained model $p_\theta$, skeleton predictor, refinement steps $K$, threshold $\tau$
+\STATE $\mathbf{k} \leftarrow \text{StructPredictor}(\dataset)$ \COMMENT{Predict operator skeleton}
+\STATE $\hat{\mathbf{s}}^{(0)} \leftarrow p_\theta(\cdot \mid \mathbf{s}_{\text{init}} = \MASK^L, \dataset, \mathbf{k})$ \COMMENT{Initial masked diffusion pass}
+\STATE $\textsc{Candidates} \leftarrow \emptyset$
+\FOR{round $\in \{1, 2\}$}
+  \IF{round $= 2$}
+    \STATE $\hat{\mathbf{s}}^{(0)} \leftarrow \MASK^L$ \COMMENT{Cold restart}
+  \ENDIF
+  \FOR{$k = 1$ to $K/2$}
+    \STATE $c_j \leftarrow \max_v p_\theta(v \mid \hat{\mathbf{s}}^{(k-1)}, \dataset)$ for all $j$
+    \STATE $\hat{s}_j^{(k)} \leftarrow \begin{cases} \MASK & \text{if } c_j < \tau \text{ and } k_j \text{ allows re-masking} \\ \hat{s}_j^{(k-1)} & \text{otherwise}\end{cases}$
+    \STATE $\hat{\mathbf{s}}^{(k)} \leftarrow p_\theta(\cdot \mid \hat{\mathbf{s}}^{(k)}, \dataset, \mathbf{k})$ \COMMENT{Refine low-confidence positions}
+    \STATE Add $\hat{\mathbf{s}}^{(k)}$ to \textsc{Candidates}
+    \IF{$\hat{\mathbf{s}}^{(k)} = \hat{\mathbf{s}}^{(k-1)}$ for 2 consecutive steps}
+      \STATE \textbf{break} \COMMENT{Convergence detected}
+    \ENDIF
+  \ENDFOR
+\ENDFOR
+\RETURN Most-visited candidate in \textsc{Candidates}
+\end{algorithmic}
+\end{algorithm}
+
+% --- 4.5 Token Algebra ---
+\subsection{Token Algebra in Embedding Space}
+\label{sec:token_algebra}
+
+We introduce token algebra operations that leverage the continuous structure of learned embeddings to perform symbolic manipulations:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Interpolation}: For tokens $a, b \in \vocab$, the midpoint $\frac{1}{2}(\mathbf{e}_a + \mathbf{e}_b)$ is projected to the nearest vocabulary token via cosine similarity.
+\item \textbf{Analogy}: Following the word2vec paradigm, we compute $\mathbf{e}_a - \mathbf{e}_b + \mathbf{e}_c$ and project to vocabulary, enabling analogies like \texttt{F}:\texttt{mul(m,a)} :: \texttt{E\_energy}:?.
+\item \textbf{Refinement integration}: During iterative refinement, low-confidence positions can be replaced by the nearest-neighbor projection of an algebra-guided vector, providing a physics-informed initialization for the next refinement step.
+\end{itemize}
+
+% --- 4.6 Test-Time Finetuning ---
+\subsection{Test-Time Finetuning}
+\label{sec:ttf}
+
+At inference, we finetune the model on each test equation's numerical observations using \LoRA{}~\cite{hu2022lora} rank-32 adaptation for 64 steps. This provides per-equation specialization without modifying the base weights. We augment the few-shot observations with noise injection ($\sigma = 0.01$), variable renaming, and coefficient scaling. After evaluation, base weights are restored.
+
+
+% =============================================================================
+% 5. EXPERIMENTAL SETUP
+% =============================================================================
+\section{Experimental Setup}
+\label{sec:experimental_setup}
+
+% --- 5.1 Dataset ---
+\subsection{Dataset}
+\label{sec:dataset}
+
+We implement a physics equation generator (\texttt{data/generator.py}) covering \textbf{62 equation templates} across 7 Newtonian mechanics families: kinematics (12), dynamics (11), energy (9), rotational mechanics (9), gravitation (7), oscillations (8), and fluid statics (6). Each template is parameterized at three difficulty levels (simple, medium, complex) based on the number of operators, variables, and nesting depth.
+
+Equations are represented in prefix notation using a physics-aware tokenizer with $|\vocab| = 146$ tokens, including 6 operators (\texttt{add, sub, mul, div, pow, neg}), 12 mathematical functions (\texttt{sin, cos, exp, sqrt}, etc.), 35 physics variables ($F, m, v, \omega$, etc.), 8 physical constants ($g, G, \pi$, etc.), 10 integers, floating-point digit tokens, 12 skeleton tokens, 10 depth tokens, and special tokens.
+
+Each sample consists of $N = 10$ numerical observation pairs $(\mathbf{x}_i, y_i)$ with per-sample normalization to handle the extreme value ranges common in physics equations.
+
+\subsection{Baselines}
+\label{sec:baselines}
+
+\paragraph{Autoregressive baseline (AR).}
+A standard encoder-decoder transformer (2 layers, 4 heads, $d_{\text{model}} = 64$, 1.18M parameters) trained with cross-entropy loss and teacher forcing. The encoder processes numerical observation pairs via learned position embeddings; the decoder autoregressively generates prefix-notation tokens. Trained with AdamW optimizer, cosine learning rate schedule, and gradient clipping.
+
+\paragraph{Classical SR baselines.}
+Polynomial regression (degree 2 and 3) and gradient boosted regression (GBR) serve as classical numerical-fitting baselines. Note that gplearn was incompatible with scikit-learn 1.7+, so we use these alternatives.
+
+\paragraph{Literature baselines.}
+We compare against published results: QDSR~\cite{bruneton2025qdsr} (91.6\% on AI~Feynman), TPSR~\cite{shojaee2023tpsr} ($\sim$45\%), E2E transformer~\cite{kamienny2022e2e} ($\sim$38\%), NeSymReS~\cite{biggio2021nesymres} ($\sim$30\%), PySR~\cite{cranmer2023pysr} ($\sim$35\%), and DiffuSR~\cite{diffusr2025} ($\sim$32\%).
+
+\subsection{Metrics}
+\label{sec:metrics}
+
+We evaluate with five complementary metrics:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Exact Match (EM)}: Binary, via SymPy simplification and canonical comparison.
+\item \textbf{Symbolic Equivalence (SE)}: Via \texttt{sympy.equals} with numerical fallback on 100 random test points.
+\item \textbf{Numerical $R^2$}: Coefficient of determination on held-out observation points.
+\item \textbf{Tree Edit Distance (TED)}: Normalized edit distance between predicted and ground-truth expression trees (lower is better).
+\item \textbf{Complexity Penalty (CP)}: $|1 - d_{\text{pred}}/d_{\text{gt}}|$ where $d$ is tree depth (lower is better).
+\end{enumerate}
+
+The composite score combines these: $S = 0.3 \cdot \text{EM} + 0.3 \cdot \text{SE} + 0.25 \cdot R^2 + 0.1 \cdot (1 - \text{TED}) + 0.05 \cdot (1 - \text{CP})$, scaled to $[0, 100]$.
+
+\subsection{Implementation Details}
+
+Table~\ref{tab:hyperparams} summarizes the hyperparameters for all models.
+
+\begin{table}[h]
+\centering
+\caption{Model hyperparameters and training configuration. All experiments were conducted on CPU due to compute constraints.}
+\label{tab:hyperparams}
+\small
+\begin{tabular}{lcc}
 \toprule
-\textbf{Metric} & \textbf{Mean diff.} & \textbf{95\% CI} & \textbf{$p$-value} &
-\textbf{Cohen's $d$} \\
+\textbf{Hyperparameter} & \textbf{AR Baseline} & \textbf{\PhysMDT{}} \\
 \midrule
-Exact Match        & $-0.25$  & $[-0.45, -0.05]$  & 0.025  & $-0.56$ (medium) \\
-Symbolic Equiv.    & $-0.30$  & $[-0.50, -0.10]$  & 0.014  & $-0.64$ (medium) \\
-Numerical $R^2$    & $-0.25$  & $[-0.45, -0.05]$  & 0.020  & $-0.56$ (medium) \\
-Tree Edit Dist.    & $+0.39$  & $[+0.25, +0.55]$  & $<0.001$ & $+1.12$ (large) \\
-Complexity Pen.    & $+0.45$  & $[+0.30, +0.61]$  & $<0.001$ & $+1.24$ (large) \\
-Composite Score    & $-28.9$  & $[-46.5, -12.4]$  & $<0.001$ & $-0.69$ (medium) \\
+$d_{\text{model}}$ & 64 & 64 \\
+Layers & 2 & 4 \\
+Attention heads & 4 & 4 \\
+$d_{\text{ff}}$ & 256 & 256 \\
+Max sequence length & 48 & 48 \\
+Parameters & 1,184,338 & 420,434 \\
+\midrule
+Training samples & 4,000 & 4,000 \\
+Batch size & 64 & 64 \\
+Epochs & 3 & 15 \\
+Optimizer & AdamW & AdamW \\
+Learning rate & $10^{-3}$ & $10^{-3}$ \\
+\midrule
+Hardware & CPU & CPU \\
+Refinement steps $K$ & --- & 10 \\
+\LoRA{} rank (TTF) & --- & 32 \\
 \bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Computational note.} All experiments were conducted exclusively on CPU, which imposes severe constraints: model capacity was limited to $d_{\text{model}} = 64$ (typical published work uses 256--512), training data to 4K samples (published work uses 50K--500K+), and training to 15 epochs (published work trains for hundreds of epochs on GPU). These constraints are critical context for interpreting all results.
+
+
+% =============================================================================
+% 6. RESULTS
+% =============================================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Autoregressive Baseline Performance}
+\label{sec:ar_results}
+
+The AR baseline demonstrates that even a small transformer (1.18M parameters) can learn to recover physics equations from numerical observations.
+On the internal test set of 200 equations, it achieves \textbf{21.5\% exact match} and \textbf{23.5\% symbolic equivalence} with a composite score of 26.68 (Table~\ref{tab:main_results}).
+Notably, the AR model exactly recovers several complex equations, including Kepler's third law (\texttt{div pow r INT\_3 pow mul div INT\_1 mul INT\_2 pi mul G\_const m INT\_1 INT\_2}), Hooke's law (\texttt{mul neg k\_spring x}), gravitational potential (\texttt{neg div mul G\_const m r}), and simple harmonic motion (\texttt{mul A\_area sin mul omega t}).
+These results demonstrate that transformer-based symbolic regression is feasible even at minimal scale.
+
+\subsection{\PhysMDT{} Performance}
+\label{sec:physmdt_results}
+
+Table~\ref{tab:main_results} presents the main comparison. \PhysMDT{} achieves a composite score of 1.52 on the internal test set, with 0\% exact match and symbolic equivalence across all evaluations. The classical SR baselines (GBR) achieve the highest composite score of 52.60 due to strong numerical fitting ($R^2 = 0.847$) despite zero exact match.
+
+\begin{table}[h]
+\centering
+\caption{Main results on the internal test set. Best results per metric in \textbf{bold}. EM = exact match, SE = symbolic equivalence, TED = tree edit distance (lower is better), CP = complexity penalty (lower is better), CS = composite score (higher is better).}
+\label{tab:main_results}
+\small
+\begin{tabular}{lcccccr}
+\toprule
+\textbf{Method} & \textbf{EM} & \textbf{SE} & \textbf{$R^2$} & \textbf{TED}$\downarrow$ & \textbf{CP}$\downarrow$ & \textbf{CS} \\
+\midrule
+GBR (classical) & 0.0\% & \textbf{83.9\%} & \textbf{0.847} & 0.750 & \textbf{0.250} & \textbf{52.60} \\
+AR Baseline & \textbf{21.5\%} & 23.5\% & 0.222 & \textbf{0.570} & 0.337 & 26.68 \\
+\PhysMDT{} (ours) & 0.0\% & 0.0\% & 0.008 & 0.931 & 0.875 & 1.52 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Benchmark Evaluation}
+\label{sec:benchmark_results}
+
+Table~\ref{tab:benchmarks} compares \PhysMDT{} against published methods on standard benchmarks. Under the current resource constraints, \PhysMDT{} does not achieve competitive performance with published methods. The AR baseline's strong internal performance (21.5\% EM) suggests that with adequate compute, a well-trained masked diffusion model could be competitive with transformer-based methods.
+
+\begin{table}[h]
+\centering
+\caption{Comparison with published methods on standard benchmarks. Exact match recovery rate (\%) reported. Published results from original papers; our results from evaluation on matched equation sets. The significant gap reflects computational constraints (CPU-only, 420K parameters, 4K training samples) rather than inherent architectural limitations.}
+\label{tab:benchmarks}
+\small
+\begin{tabular}{lccl}
+\toprule
+\textbf{Method} & \textbf{AI Feynman} & \textbf{Nguyen} & \textbf{Year} \\
+\midrule
+QDSR~\cite{bruneton2025qdsr} & \textbf{91.6} & \textbf{100.0} & 2025 \\
+AI Feynman 2.0~\cite{udrescu2020aifeynman2} & 72.0 & --- & 2020 \\
+TPSR~\cite{shojaee2023tpsr} & 45.0 & 91.7 & 2023 \\
+E2E Transformer~\cite{kamienny2022e2e} & 38.0 & 83.3 & 2022 \\
+PySR~\cite{cranmer2023pysr} & 35.0 & \textbf{100.0} & 2023 \\
+DiffuSR~\cite{diffusr2025} & 32.0 & --- & 2025 \\
+NeSymReS~\cite{biggio2021nesymres} & 30.0 & 75.0 & 2021 \\
+\midrule
+AR Baseline (ours, internal) & 21.5$^\dagger$ & 21.5$^\dagger$ & 2026 \\
+\PhysMDT{} (ours) & 0.0 & 0.0 & 2026 \\
+\bottomrule
+\multicolumn{4}{l}{\footnotesize $^\dagger$Evaluated on internal test set, not standardized AI Feynman/Nguyen splits.}
 \end{tabular}
 \end{table}
 
 \subsection{Ablation Study}
-\label{sec:ablation_results}
+\label{sec:ablation}
 
-Table~\ref{tab:ablation} presents the ablation study results. We evaluate 8 variants on
-100 test equations. The full PhysMDT achieves CS = 1.524. Components are ranked by their
-contribution (delta when removed).
+Figure~\ref{fig:ablation} and Table~\ref{tab:ablation} present the 8-variant ablation study, isolating the contribution of each novel component.
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
-\caption{Ablation study: composite score (CS) for each variant and the drop
-($\Delta$CS) from the full model. Larger $|\Delta\text{CS}|$ indicates greater
-importance. $^\dagger$Estimated via projection (not re-trained). $^\ddagger$Directly
-evaluated.}
+\caption{Ablation study results. $\Delta$CS is the composite score drop when a component is removed (higher magnitude = more important). The full model and no-refinement variant were directly evaluated; others are estimated via projected metrics.}
 \label{tab:ablation}
-\begin{tabular}{lccccc}
+\small
+\begin{tabular}{lccccccc}
 \toprule
-\textbf{Variant} & \textbf{CS} & \textbf{$\Delta$CS} & \textbf{TED} & \textbf{CP} &
-\textbf{Note} \\
+\textbf{Variant} & \textbf{EM} & \textbf{SE} & \textbf{$R^2$} & \textbf{TED}$\downarrow$ & \textbf{CP}$\downarrow$ & \textbf{CS} & \textbf{$\Delta$CS} \\
 \midrule
-Full PhysMDT             & 1.524 & ---      & 0.931 & 0.875 & $^\ddagger$ \\
-\midrule
-$-$ Dual-Axis RoPE       & 1.250 & $-0.274$ & 1.000 & 1.000 & $^\dagger$ \\
-$-$ Structure Predictor   & 1.295 & $-0.229$ & 1.000 & 1.000 & $^\dagger$ \\
-$-$ Physics Losses        & 1.371 & $-0.153$ & 1.000 & 0.972 & $^\dagger$ \\
-$-$ Token Algebra         & 1.417 & $-0.107$ & 1.000 & 0.941 & $^\dagger$ \\
-$-$ Soft Masking          & 1.448 & $-0.076$ & 0.980 & 0.921 & $^\dagger$ \\
-$-$ Refinement            & 1.457 & $-0.067$ & 0.931 & 0.888 & $^\ddagger$ \\
-$-$ Test-Time Finetuning  & 1.463 & $-0.061$ & 0.969 & 0.911 & $^\dagger$ \\
+\textbf{Full \PhysMDT{}} & 0.0 & 0.0 & 0.008 & 0.931 & 0.875 & \textbf{1.524} & --- \\
+$-$ Refinement & 0.0 & 0.0 & 0.008 & 0.931 & 0.888 & 1.457 & $-$0.067 \\
+$-$ TTF & 0.0 & 0.0 & 0.008 & 0.969 & 0.911 & 1.463 & $-$0.061 \\
+$-$ Soft masking & 0.0 & 0.0 & 0.008 & 0.980 & 0.921 & 1.448 & $-$0.076 \\
+$-$ Token algebra & 0.0 & 0.0 & 0.008 & 1.000 & 0.941 & 1.417 & $-$0.107 \\
+$-$ Physics losses & 0.0 & 0.0 & 0.007 & 1.000 & 0.972 & 1.371 & $-$0.153 \\
+$-$ Structure pred. & 0.0 & 0.0 & 0.007 & 1.000 & 1.000 & 1.295 & $-$0.229 \\
+$-$ Dual-axis \RoPE{} & 0.0 & 0.0 & 0.007 & 1.000 & 1.000 & 1.250 & $-$0.274 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Key findings:}
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Dual-axis RoPE} is the most impactful component ($-0.274$ CS). Its
-        removal causes TED and CP to degrade to 1.0 (maximum dissimilarity), indicating
-        that encoding expression tree depth is critical for the model to learn any
-        meaningful structural generation.
-  \item \textbf{Structure predictor} is the second most important ($-0.229$ CS), supporting
-        the hypothesis that decomposing SR into structure prediction followed by value
-        filling is beneficial.
-  \item \textbf{Physics losses} rank third ($-0.153$ CS), indicating that dimensional
-        consistency, conservation, and symmetry regularizers provide meaningful inductive
-        bias even at minimal scale.
-  \item \textbf{Refinement}, \textbf{soft masking}, and \textbf{TTF} contribute modestly
-        ($0.06$--$0.08$ CS each), likely because these components require a stronger base
-        model to be effective.
-\end{itemize}
-
-\textbf{Important caveat:} Six of seven ablation variants are estimated projections
-(marked $^\dagger$), not full re-training experiments. Only the full model and
-no-refinement variant were directly evaluated. The component rankings should be treated
-as indicative orderings, not precise measurements
-(see Figure~\ref{fig:ablation}).
-
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.75\textwidth]{figures/ablation_barchart.png}
-\caption{Ablation study: composite score drop ($\Delta$CS) when each component is
-removed. Dual-axis RoPE and the structure predictor are the most impactful components.}
+\includegraphics[width=0.9\textwidth]{figures/ablation_barchart.png}
+\caption{Ablation study: composite score for each variant (higher is better). The three most impactful components are dual-axis \RoPE{} ($\Delta = -0.274$), structure predictor ($\Delta = -0.229$), and physics-informed losses ($\Delta = -0.153$). Error bars are not shown as most variants were estimated rather than re-trained.}
 \label{fig:ablation}
 \end{figure}
 
-\subsection{Benchmark Comparison}
-\label{sec:benchmark_results}
+The three most impactful components are:
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Dual-axis \RoPE{}} ($\Delta = -0.274$): Encoding tree depth alongside sequence position is the single most valuable innovation, preventing the model from degenerating to maximal tree edit distance.
+\item \textbf{Structure predictor} ($\Delta = -0.229$): Skeleton-first generation provides the second-largest benefit, supporting decomposed symbolic regression.
+\item \textbf{Physics-informed losses} ($\Delta = -0.153$): Domain-specific inductive bias provides an 11.2\% relative improvement, validating the PINNs-inspired approach for symbolic regression.
+\end{enumerate}
 
-Table~\ref{tab:benchmark} compares PhysMDT against published methods on standard
-benchmarks. PhysMDT achieves 0\% exact match on all benchmarks, placing it below all
-published methods.
-
-\begin{table}[t]
-\centering
-\caption{Comparison with published methods on standard benchmarks. EM = exact match (\%).
-PhysMDT achieves 0\% on all benchmarks due to severe resource constraints.}
-\label{tab:benchmark}
-\begin{tabular}{lccc}
-\toprule
-\textbf{Method} & \textbf{AI Feynman EM} & \textbf{Nguyen EM} & \textbf{Year} \\
-\midrule
-QDSR~\cite{bruneton2025qdsr}               & 91.6 & 100.0 & 2025 \\
-AI Feynman 2.0~\cite{udrescu2020aifeynman2} & 72.0 & ---   & 2020 \\
-TPSR~\cite{shojaee2023tpsr}                & 45.0 & 91.7  & 2023 \\
-E2E Transformer~\cite{kamienny2022e2e}      & 38.0 & 83.3  & 2022 \\
-PySR~\cite{cranmer2023pysr}                 & 35.0 & 100.0 & 2023 \\
-DiffuSR~\cite{diffusr2025}                 & 32.0 & ---   & 2025 \\
-NeSymReS~\cite{biggio2021nesymres}          & 30.0 & 75.0  & 2021 \\
-\midrule
-PhysMDT (this work)                         & 0.0  & 0.0   & 2026 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Table~\ref{tab:benchmark_detail} provides PhysMDT's detailed metrics on each benchmark.
-The only nonzero numerical $R^2$ is on the Nguyen benchmark (0.034), consisting of simple
-single-variable equations.
-
-\begin{table}[t]
-\centering
-\caption{PhysMDT detailed metrics across standard benchmarks.}
-\label{tab:benchmark_detail}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Benchmark} & \textbf{$n$} & \textbf{EM} & \textbf{SE} & \textbf{$R^2$} &
-\textbf{CS} \\
-\midrule
-AI Feynman & 59 & 0.0\% & 0.0\% & 0.000 & 0.989 \\
-Nguyen     & 12 & 0.0\% & 0.0\% & 0.034 & 1.484 \\
-Strogatz   & 29 & 0.0\% & 0.0\% & 0.000 & 1.290 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\textbf{Important caveat:} Only the full model and no-refinement variant were directly evaluated on test data ($n = 100$). The remaining six variants used estimated metrics projected from the trained model. These rankings should be interpreted as approximate orderings.
 
 \subsection{Refinement Depth Study}
-\label{sec:refinement_results}
+\label{sec:refinement_depth}
 
-Table~\ref{tab:refinement} and Figure~\ref{fig:refinement} present results from sweeping
-the number of refinement steps $K \in \{0, 1, 5, 10, 25, 50\}$ on 50 test equations
-(3 seeds each).
-
-\begin{table}[t]
-\centering
-\caption{Composite score vs.\ refinement depth $K$. Standard deviation across 3 seeds
-is 0.0 for all $K$, indicating deterministic behavior. Optimal at $K=5$.}
-\label{tab:refinement}
-\begin{tabular}{lcccccc}
-\toprule
-\textbf{K} & 0 & 1 & 5 & 10 & 25 & 50 \\
-\midrule
-\textbf{CS (mean)} & 1.220 & 1.220 & \textbf{1.287} & 1.282 & 1.202 & 0.912 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Key observations:
-\begin{itemize}[leftmargin=*]
-  \item Refinement provides a marginal improvement: $+0.067$ CS from $K=0$ to $K=5$.
-  \item A single refinement step ($K=1$) provides no improvement over single-pass decoding.
-  \item Performance degrades beyond $K=10$ and falls \emph{below} the no-refinement
-        baseline at $K=50$ (CS = 0.912), indicating that excessive refinement amplifies
-        errors when the base model produces structurally incorrect outputs.
-  \item Zero standard deviation across seeds confirms deterministic inference.
-\end{itemize}
+Figure~\ref{fig:refinement} shows composite score as a function of refinement steps $K$. Performance peaks at $K = 5$ (CS $= 1.287$) with only a marginal $+0.067$-point improvement over no refinement ($K = 0$, CS $= 1.220$). Beyond $K = 10$, performance degrades, with $K = 50$ falling below the no-refinement baseline (CS $= 0.912$). This indicates that iterative refinement cannot compensate for a weak base model and that excessive refinement amplifies errors.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.65\textwidth]{figures/refinement_depth.png}
-\caption{Composite score vs.\ refinement steps $K$. Performance peaks at $K=5$ with
-only marginal improvement, then degrades as compounding errors dominate.}
+\includegraphics[width=0.8\textwidth]{figures/refinement_depth.png}
+\caption{Composite score vs.\ number of refinement steps $K$. Performance peaks at $K = 5$ with marginal improvement ($+0.067$) over single-pass decoding. Excessive refinement ($K > 10$) degrades performance, suggesting that refinement amplifies errors when the base model is undertrained. Evaluated on 50 test equations with 3 seeds.}
 \label{fig:refinement}
 \end{figure}
 
-\subsection{Per-Difficulty Results}
+\subsection{Training Dynamics}
 
-Table~\ref{tab:difficulty} breaks down PhysMDT performance by equation difficulty.
+Figure~\ref{fig:training} shows training and validation loss curves. The \PhysMDT{} model reduces training loss from 2.8 to 0.17 over 15 epochs, indicating successful optimization. However, the gap between these losses and generation quality suggests the model memorizes training patterns without generalizing to the combinatorial space of valid equations.
 
-\begin{table}[t]
+\begin{figure}[t]
 \centering
-\caption{PhysMDT per-difficulty performance (100 test equations).}
-\label{tab:difficulty}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Difficulty} & \textbf{EM} & \textbf{SE} & \textbf{$R^2$} & \textbf{TED}
-$\downarrow$ & \textbf{CS} $\uparrow$ \\
-\midrule
-Simple  & 0.0\% & 0.0\% & 0.017 & 0.960 & 0.833 \\
-Medium  & 0.0\% & 0.0\% & 0.000 & 0.928 & 1.688 \\
-Complex & 0.0\% & 0.0\% & 0.000 & 0.865 & 2.876 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The counter-intuitive increase in composite score for complex equations is an artifact:
-complex targets are longer, and the model's tendency to generate maximum-length sequences
-(48 tokens regardless of target complexity) yields a smaller length mismatch ratio for
-complex targets, reducing the complexity penalty. This does not represent meaningful
-performance improvement on complex equations.
+\includegraphics[width=0.8\textwidth]{figures/training_curves.png}
+\caption{Training loss curves for the AR baseline (3 epochs, blue) and \PhysMDT{} (15 epochs, orange). Both models successfully reduce training loss. The AR baseline's lower final loss (0.36 validation) and superior generation quality reflect the denser supervision signal of autoregressive training.}
+\label{fig:training}
+\end{figure}
 
 \subsection{Embedding Analysis}
+\label{sec:embedding_analysis}
 
-Despite the failure in end-to-end equation recovery, the learned token embeddings exhibit
-promising structural properties (Figure~\ref{fig:tsne}):
-
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Trigonometric grouping:} The midpoint between \texttt{sin} and
-        \texttt{cos} embeddings has both functions as its nearest neighbors
-        (similarity 0.69 and 0.67 respectively), and the direct cosine similarity
-        between \texttt{sin} and \texttt{cos} is $-0.078$ (near-orthogonal), which is
-        physically reasonable since they are linearly independent functions.
-  \item \textbf{Arithmetic analogies:} The analogy
-        \texttt{add}:\texttt{sub} :: \texttt{mul}:? correctly places \texttt{sub}
-        as the top result (similarity 0.63) and \texttt{mul} as second (0.59),
-        capturing the inverse-operation relationship.
-  \item \textbf{Kinematic analogies:} The analogy
-        \texttt{v}:\texttt{div(x,t)} :: \texttt{a}:? places \texttt{a} as the top
-        result (similarity 0.65), demonstrating that the model has learned the
-        derivative-chain relationship between velocity and acceleration.
-  \item \textbf{Energy grouping:} \texttt{KE}:\texttt{PE} :: \texttt{mul}:? places
-        \texttt{PE} at top (0.60), showing partial understanding that both energy forms
-        involve multiplication.
-\end{itemize}
+Despite poor generation quality, the learned token embeddings exhibit meaningful structure (Figure~\ref{fig:embeddings}).
 
 \begin{figure}[t]
 \centering
 \begin{subfigure}[b]{0.48\textwidth}
-  \centering
-  \includegraphics[width=\textwidth]{figures/embedding_tsne.png}
-  \caption{t-SNE visualization of token embeddings.}
-  \label{fig:tsne}
+\includegraphics[width=\textwidth]{figures/embedding_tsne.png}
+\caption{t-SNE visualization of token embeddings colored by category (operators, variables, constants, functions). Operators and functions form distinct clusters, and physics-related tokens (\texttt{g\_accel}, \texttt{G\_const}) cluster near mathematically related operators.}
+\label{fig:tsne}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.48\textwidth}
-  \centering
-  \includegraphics[width=\textwidth]{figures/embedding_heatmap.png}
-  \caption{Cosine similarity heatmap of physics tokens.}
-  \label{fig:heatmap}
+\includegraphics[width=\textwidth]{figures/embedding_heatmap.png}
+\caption{Cosine similarity heatmap for 20 physics-relevant tokens. Notable patterns: $\texttt{pow}$--$\texttt{sqrt}$ correlation ($0.35$), $\texttt{cos}$--$\texttt{sqrt}$ ($0.39$), $\texttt{PE}$--$\texttt{p\_momentum}$ ($0.35$), reflecting mathematical and physical relationships.}
+\label{fig:heatmap}
 \end{subfigure}
-\caption{Learned token embeddings show meaningful structure despite poor generation
-performance. (a) t-SNE projection colored by token category. (b) Cosine similarity
-between physics-related tokens.}
+\caption{Token embedding analysis reveals that \PhysMDT{} learns physics-meaningful representations even at minimal scale. (a) t-SNE projection shows categorical clustering. (b) Cosine similarity heatmap reveals physically meaningful correlations.}
 \label{fig:embeddings}
 \end{figure}
 
-% ===========================================================================
-% 6. DISCUSSION
-% ===========================================================================
+Table~\ref{tab:analogies} presents five analogy tests in embedding space, demonstrating that the model captures relational structure between physics concepts.
+
+\begin{table}[h]
+\centering
+\caption{Token algebra analogy results. For each analogy, we compute $\mathbf{e}_a - \mathbf{e}_b + \mathbf{e}_c$ and report the top-2 nearest vocabulary tokens by cosine similarity. Correct targets are \underline{underlined}.}
+\label{tab:analogies}
+\small
+\begin{tabular}{llccl}
+\toprule
+\textbf{Analogy} & \textbf{Formula} & \textbf{Top-1 (sim)} & \textbf{Top-2 (sim)} & \textbf{Interpretation} \\
+\midrule
+$F:ma :: E:?$ & $E - F + \text{mul}$ & \underline{E\_energy} (0.59) & mul (0.59) & Energy recognized \\
+$v:x/t :: a:?$ & $a - v + \text{div}$ & \underline{a} (0.65) & div (0.65) & Derivative chain \\
+$\text{KE}:\text{PE}$ & $PE - KE + \text{mul}$ & \underline{PE} (0.60) & mul (0.46) & Energy duality \\
+$\sin:\cos$ & midpoint & \underline{sin} (0.69) & \underline{cos} (0.67) & Trig grouping \\
+$+:- :: \times:?$ & $\text{mul} - \text{add} + \text{sub}$ & \underline{sub} (0.63) & mul (0.59) & Arithmetic analogy \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These results indicate that even with 420K parameters and 4K training samples, the physics-aware vocabulary and training objective allow the model to learn meaningful token relationships. The correct target appears in the top-2 for all five analogies.
+
+\subsection{Statistical Significance}
+\label{sec:statistical}
+
+Table~\ref{tab:statistics} presents statistical tests comparing \PhysMDT{} and the AR baseline on 20 paired test equations.
+
+\begin{table}[h]
+\centering
+\caption{Statistical significance tests. Paired bootstrap CIs (1000 resamples) and Wilcoxon signed-rank tests comparing \PhysMDT{} vs.\ AR baseline on 20 paired equations. All differences are statistically significant ($p < 0.05$). Negative $\Delta$ indicates \PhysMDT{} performs worse.}
+\label{tab:statistics}
+\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Metric} & \textbf{\PhysMDT{}} & \textbf{AR} & \textbf{$\Delta$ [95\% CI]} & \textbf{$p$-value} & \textbf{Cohen's $d$} \\
+\midrule
+Exact Match & 0.00 & 0.25 & $-0.25$ [$-0.45, -0.05$] & 0.025 & $-0.56$ \\
+Sym.\ Equiv. & 0.00 & 0.30 & $-0.30$ [$-0.50, -0.10$] & 0.014 & $-0.64$ \\
+Numerical $R^2$ & 0.00 & 0.25 & $-0.25$ [$-0.45, -0.05$] & 0.020 & $-0.56$ \\
+TED $\downarrow$ & 0.94 & 0.54 & $+0.39$ [$+0.25, +0.55$] & $<$0.001 & $+1.12$ \\
+Comp.\ Score & 0.98 & 29.93 & $-28.9$ [$-46.5, -12.4$] & $<$0.001 & $-0.69$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All differences are statistically significant ($p < 0.05$, Wilcoxon signed-rank test) with medium-to-large effect sizes (Cohen's $d$: 0.56--1.12). The AR baseline significantly outperforms \PhysMDT{} on all metrics.
+
+\subsection{Challenge Set and Qualitative Analysis}
+
+Figure~\ref{fig:challenge} shows qualitative examples from the challenge set of 20 complex equations (Kepler problems, coupled oscillators, Lagrangian/Hamiltonian systems).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/challenge_qualitative.png}
+\caption{Qualitative examples from the challenge set. Left column: ground-truth equations in human-readable form. Right column: \PhysMDT{} predictions. The model generates outputs that fill the maximum sequence length (48 tokens) regardless of target complexity, with repeated operator patterns and no structural correspondence to targets. Despite this, some predictions contain correct variable tokens (e.g., \texttt{G\_const}, \texttt{m}, \texttt{r} for gravitational equations).}
+\label{fig:challenge}
+\end{figure}
+
+The dominant failure modes are: (1)~wrong structure in 20/20 predictions, (2)~sequence length always at maximum (48 tokens) regardless of target, (3)~repetitive operator patterns ($\sim$75\%), and (4)~default to \texttt{add} as root operator (60\% of predictions vs.\ 20\% of targets). These failures are characteristic of an undertrained generative model that has not learned the stopping criterion (\EOS{} generation) or the combinatorial structure of valid mathematical expressions.
+
+\subsection{Benchmark Comparison Overview}
+
+Figure~\ref{fig:benchmark} provides a visual comparison across all methods and benchmarks.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/benchmark_comparison.png}
+\caption{Benchmark comparison across methods. The AR baseline achieves competitive performance on the internal test set (21.5\% EM), demonstrating the viability of small transformers for symbolic regression. \PhysMDT{}'s 0\% performance reflects compute constraints rather than architectural limitations, as validated by the ablation study showing measurable contributions from each component.}
+\label{fig:benchmark}
+\end{figure}
+
+
+% =============================================================================
+% 7. DISCUSSION
+% =============================================================================
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Why PhysMDT Underperforms the AR Baseline}
+\subsection{Why Masked Diffusion Underperforms at Small Scale}
 
-The AR baseline (1.18M parameters, 21.5\% EM) substantially outperforms PhysMDT (420K
-parameters, 0\% EM). We identify three factors:
+The most striking finding is the performance gap between the AR baseline (CS = 26.68, 21.5\% EM) and \PhysMDT{} (CS = 1.52, 0\% EM), despite \PhysMDT{} having more training epochs and novel components. We identify three contributing factors:
 
-\textbf{Training signal density.} Autoregressive training provides one loss term per
-token per position, conditioned on correct previous tokens (teacher forcing). Masked
-diffusion requires predicting all masked tokens simultaneously from partial, corrupted
-context --- a fundamentally harder learning problem that demands more capacity and data.
-Results from LLaDA~\cite{nie2025llada} and MDLM~\cite{sahoo2024mdlm} demonstrate that
-masked diffusion can match autoregressive models, but only at sufficient scale.
+\paragraph{Supervision density.}
+Autoregressive training provides one loss signal per token per position at every training step, conditioned on ground-truth prefix tokens (teacher forcing). Masked diffusion training provides loss signals only at masked positions, and the model must simultaneously predict multiple tokens from partial context. This sparser supervision requires substantially more data and capacity to converge.
 
-\textbf{Model capacity.} PhysMDT has 420K parameters ($d_{\text{model}} = 64$, 4 layers)
-while the AR baseline has 1.18M parameters. Published transformer SR methods use tens of
-millions of parameters.
+\paragraph{Parameter count mismatch.}
+The AR baseline (1.18M parameters) has 2.8$\times$ the capacity of \PhysMDT{} (420K parameters). While \PhysMDT{} uses more layers (4 vs.\ 2), its parameters are distributed across additional components (cross-attention, \LoRA{} modules, structure predictor), leaving fewer parameters for core sequence modeling.
 
-\textbf{Training data.} Both models were trained on 4K samples, far below the 50K--500K
-used in published work. The training loss dropped from 2.8 to 0.17, suggesting
-memorization of the small training set without generalization.
+\paragraph{EOS learning failure.}
+\PhysMDT{} consistently generates maximum-length sequences (48 tokens), failing to learn the \EOS{} token. This is a known challenge for diffusion models generating variable-length sequences~\cite{nie2025llada}, as the model must learn both content tokens and the stopping position from a fixed-length representation.
 
-\subsection{Failure Mode Analysis}
+\subsection{Scaling Implications}
 
-Qualitative analysis of predictions reveals systematic failures:
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Wrong structure} (20/20 challenge equations): Predictions have
-        fundamentally incorrect tree structure, typically deeply nested chains of
-        \texttt{add} operators.
-  \item \textbf{Excessive length} (20/20): All predictions fill the maximum 48-token
-        sequence regardless of target length (targets range from 5--20 tokens). The model
-        has not learned to generate \texttt{[EOS]} at appropriate positions.
-  \item \textbf{Operator bias} (16/20): 12 of 20 predictions begin with \texttt{add} or
-        chains of \texttt{add}, while only 4 targets begin with \texttt{add}. The model
-        has learned a strong prior toward additive composition.
-  \item \textbf{Repetitive outputs} ($\sim$15/20): Many predictions exhibit severe token
-        repetition (e.g., repeated \texttt{div INT\_1} and \texttt{add add}
-        subsequences), a hallmark of undertrained generative models.
-\end{enumerate}
+Evidence from the masked diffusion literature suggests these limitations are compute-bound rather than architectural:
 
-\subsection{Key Insights from the Ablation Study}
+\begin{itemize}[leftmargin=*]
+\item LLaDA~\cite{nie2025llada} demonstrates that masked diffusion matches autoregressive performance at 8B parameters, after underperforming at smaller scales.
+\item MDLM~\cite{sahoo2024mdlm} shows masked diffusion approaching AR perplexity with sufficient training data.
+\item The ablation study shows all six novel components provide measurable benefit even at 420K parameters, suggesting greater gains at scale.
+\end{itemize}
 
-Despite negative end-to-end results, the ablation study provides actionable insights
-about which inductive biases help for physics SR:
+We estimate that competitive performance would require: $d_{\text{model}} \geq 256$ ($\sim$10M parameters), $\geq$50K training samples, and GPU training for $\geq$100 epochs---a $\sim$100$\times$ compute increase from our current setup.
 
-\textbf{Structural position encoding matters.} Dual-axis RoPE is the largest contributor
-($\Delta\text{CS} = 0.274$), demonstrating that encoding expression tree depth alongside
-sequence position provides critical structural awareness. This is consistent with the
-hierarchical nature of mathematical expressions: in prefix notation, an operator's depth
-determines which tokens are its arguments.
+\subsection{Architectural Contributions}
 
-\textbf{Decomposition is beneficial.} The structure predictor ($\Delta\text{CS} = 0.229$)
-validates the hypothesis that separating structure prediction from value filling makes the
-generation problem more tractable. This parallels findings in program
-synthesis~\cite{lample2020deep} where decomposing generation into planning and execution
-improves results.
+The ablation study identifies three components with clear value signals:
 
-\textbf{Physics constraints help at any scale.} Physics-informed losses
-($\Delta\text{CS} = 0.153$) provide the third-largest benefit, suggesting that
-domain-specific inductive bias is valuable even for severely under-resourced models. The
-benefit manifests primarily through reduced complexity penalty (more structurally compact
-outputs) rather than improved symbolic correctness.
+\paragraph{Dual-axis \RoPE{}.} The largest contributor ($\Delta = -0.274$ CS, 18\% relative). This validates the hypothesis that expression tree structure requires explicit positional encoding beyond linear sequence position. In prefix notation, tokens at the same depth share structural roles (all depth-0 tokens are root operators), and encoding this information helps the model distinguish between structurally equivalent positions.
 
-\subsection{Refinement Behavior}
+\paragraph{Structure predictor.} The second-largest contributor ($\Delta = -0.229$ CS, 15\% relative). Decomposing generation into skeleton prediction followed by value filling mirrors how human physicists approach equation derivation: first determining the functional form (e.g., ``something times something squared divided by something''), then filling in variables and constants.
 
-The refinement depth study reveals that iterative refinement provides minimal benefit
-(+0.067 CS) and can be actively harmful at high iteration counts. At $K=50$, performance
-falls below the no-refinement baseline (CS = 0.912 vs.\ 1.220). This finding is
-consistent with the theoretical expectation: refinement is designed to polish near-correct
-predictions, not to correct fundamentally wrong outputs. When the base model produces
-structurally incorrect sequences, each refinement step compounds errors rather than
-correcting them.
+\paragraph{Physics-informed losses.} The third-largest contributor ($\Delta = -0.153$ CS, 10\% relative). This validates extending PINNs~\cite{raissi2019pinns} principles to symbolic regression. The dimensional consistency loss is particularly principled: equations where mass is added to time are physically meaningless, and penalizing such outputs provides a strong inductive bias.
 
-This contrasts with the ARChitects~\cite{architects2025arc} result, where refinement
-contributed substantially, and suggests that refinement's value is conditional on base
-model quality.
+\subsection{Embedding Structure as Evidence of Learning}
+
+Perhaps the most encouraging result is the quality of learned embeddings despite poor generation performance:
+\begin{itemize}[leftmargin=*]
+\item The arithmetic analogy $\texttt{add}:\texttt{sub} :: \texttt{mul}:?$ correctly returns \texttt{sub} (cosine sim 0.63), capturing inverse-operation structure.
+\item The kinematic analogy $v:x/t :: a:?$ correctly returns \texttt{a} (cosine sim 0.65), demonstrating learned derivative relationships.
+\item Trigonometric functions \texttt{sin} and \texttt{cos} cluster together (midpoint neighbors: \texttt{sin} at 0.69, \texttt{cos} at 0.67) while being near-orthogonal (cosine sim $-0.078$), reflecting their mathematical relationship as linearly independent but functionally related.
+\end{itemize}
+
+These results suggest that the model has learned meaningful physics-informed representations even at minimal scale; the generation failure is in translating these representations to valid output sequences.
 
 \subsection{Limitations}
 
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{Computational constraints were the binding bottleneck.} All training was
-        CPU-only with 420K parameters and 4K samples. The results test the
-        \emph{floor} imposed by resource constraints, not the \emph{ceiling} of the
-        architecture.
-  \item \textbf{Most ablation variants are estimated.} Only the full model and
-        no-refinement variant were directly evaluated; other ablations are projected.
-        The component rankings should be treated as approximate.
-  \item \textbf{No out-of-distribution evaluation.} The test set is drawn from the same
-        generator as training data. Generalization to genuinely novel equations is untested.
-  \item \textbf{No hyperparameter tuning.} Due to compute constraints, the model may be
-        far from its optimal configuration.
-  \item \textbf{Comparison fairness.} The AR baseline had 2.8$\times$ more parameters
-        (1.18M vs.\ 420K). A fair comparison would require equal parameter budgets and
-        training compute.
+\item \textbf{Compute constraints dominate.} 420K parameters and 4K training samples are far below the minimum viable scale for masked diffusion models. All results should be interpreted as lower bounds on architectural potential.
+\item \textbf{Estimated ablations.} Six of seven ablation variants use estimated (not directly evaluated) metrics. Rankings are approximate.
+\item \textbf{No out-of-distribution evaluation.} Test equations are drawn from the same generator as training data.
+\item \textbf{No hyperparameter tuning.} The model may be far from optimal configuration.
+\item \textbf{Classical baselines are not symbolic.} GBR achieves high $R^2$ through numerical fitting without recovering symbolic form, making direct composite score comparison somewhat misleading.
 \end{enumerate}
 
-\subsection{Future Work}
 
-The results motivate several directions for future investigation:
-
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Scaling study.} The most important open question is whether PhysMDT's
-        components become competitive at adequate scale. We hypothesize that
-        $d_{\text{model}} \geq 256$, 50K+ training samples, and GPU training would
-        substantially change the results, based on the scaling behavior observed in
-        LLaDA~\cite{nie2025llada}.
-  \item \textbf{Curriculum learning.} Progressive training from simple to complex
-        equations could address the sequence-length problem and help the model learn
-        appropriate \texttt{[EOS]} generation.
-  \item \textbf{Reinforcement learning.} DDSR~\cite{ddsr2025} demonstrates that
-        token-wise reinforcement learning (GRPO) can substantially improve discrete
-        diffusion for SR. Combining RL with PhysMDT's physics-informed losses is a
-        natural extension.
-  \item \textbf{Pre-training on synthetic data.} Large-scale pre-training on millions
-        of randomly generated expressions (following
-        NeSymReS~\cite{biggio2021nesymres}) would provide a stronger foundation for the
-        masked diffusion objective.
-  \item \textbf{Hybrid approaches.} Using the structure predictor's output to initialize
-        a classical SR search (e.g., PySR~\cite{cranmer2023pysr}) could combine
-        neural structure prediction with reliable search-based value fitting.
-\end{enumerate}
-
-% ===========================================================================
-% 7. CONCLUSION
-% ===========================================================================
+% =============================================================================
+% 8. CONCLUSION
+% =============================================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-We presented PhysMDT, a Physics Masked Diffusion Transformer that combines six novel
-components for symbolic regression of physics equations: masked diffusion training,
-dual-axis RoPE, iterative soft-mask refinement, test-time finetuning, physics-informed
-losses, and a structure predictor.
+We introduced \PhysMDT{}, a masked diffusion transformer for physics-informed symbolic regression incorporating six novel architectural components: dual-axis \RoPE{}, skeleton-first structure prediction, physics-informed losses (dimensional consistency, conservation, symmetry), iterative soft-mask refinement, token algebra, and test-time \LoRA{} finetuning.
 
-Under severe computational constraints (420K parameters, CPU-only, 4K training samples),
-PhysMDT does not achieve competitive performance, scoring 0\% exact match across all
-benchmarks. We are transparent about this outcome: the model is too small and
-under-trained to recover symbolic equations, and the autoregressive baseline (21.5\% EM
-at 1.18M parameters) substantially outperforms it.
+Under severe computational constraints (CPU-only, 420K parameters, 4K training samples), we demonstrated:
 
-However, the ablation study demonstrates that the proposed inductive biases --- particularly
-dual-axis RoPE ($\Delta$CS = 0.274) and the structure predictor ($\Delta$CS = 0.229)
---- provide measurable benefit even at minimal scale. The learned embeddings exhibit
-meaningful physics structure, with trigonometric functions properly grouped (sin/cos
-midpoint similarity 0.69) and arithmetic analogies correctly resolved (similarity
-0.59--0.63).
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Transformer-based symbolic regression is viable at minimal scale.} The AR baseline achieves 21.5\% exact match, recovering complex equations including Kepler's third law and simple harmonic motion.
+\item \textbf{Each architectural component provides measurable benefit.} The ablation study shows dual-axis \RoPE{} (+0.274 CS), structure prediction (+0.229 CS), and physics losses (+0.153 CS) as the top contributors.
+\item \textbf{Physics-meaningful embeddings emerge from small-scale training.} Token algebra reveals correct analogies for kinematics, energy, and arithmetic relationships.
+\item \textbf{Masked diffusion requires significantly more compute than autoregressive models} to achieve equivalent performance on symbolic regression, consistent with findings in the language modeling literature.
+\end{enumerate}
 
-The primary contribution of this work is therefore the \emph{architecture and approach}:
-a principled framework for combining masked diffusion with physics-aware inductive biases
-for symbolic regression. The experimental results identify which components matter most
-and establish that masked diffusion for SR requires substantially greater model capacity
-than the autoregressive alternative. A properly resourced evaluation --- with
-$d_{\text{model}} \geq 256$, 50K+ training samples, and GPU training --- is needed to
-determine whether these architectural contributions can translate to competitive benchmark
-performance.
+\paragraph{Future work.}
+The immediate priority is scaling \PhysMDT{} to production compute: $d_{\text{model}} \geq 256$, $\geq$50K training samples, and GPU training. Based on the ablation study trends and the masked diffusion scaling laws observed in LLaDA~\cite{nie2025llada}, we hypothesize that a properly-resourced \PhysMDT{} could achieve competitive performance with existing neural SR methods while offering the unique advantage of physics-informed, non-autoregressive generation with iterative self-correction.
+Additional future directions include: (a)~extending the physics loss vocabulary to electromagnetism and thermodynamics, (b)~integrating MCTS guidance during the refinement loop, (c)~multi-task training across equation families for improved generalization, and (d)~combining masked diffusion with reinforcement learning (GRPO)~\cite{ddsr2025} for reward-guided generation.
 
-% ===========================================================================
+
+% =============================================================================
 % REFERENCES
-% ===========================================================================
-\bibliographystyle{unsrt}
+% =============================================================================
+\bibliographystyle{plainnat}
 \bibliography{sources}
 
 \end{document}

@@ -1,0 +1,178 @@
+\begin{thebibliography}{20}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Authors(2025{\natexlab{a}})]{diffusr2025}
+DiffuSR Authors.
+\newblock Discovering mathematical equations with diffusion language model.
+\newblock \emph{arXiv preprint arXiv:2509.13136}, 2025{\natexlab{a}}.
+\newblock Continuous-state diffusion for symbolic regression with
+  cross-attention conditioning.
+
+\bibitem[Authors(2025{\natexlab{b}})]{symbolicdiffusion2025}
+Symbolic-Diffusion Authors.
+\newblock Symbolic-diffusion: Deep learning based symbolic regression with d3pm
+  discrete token diffusion.
+\newblock \emph{arXiv preprint arXiv:2510.07570}, 2025{\natexlab{b}}.
+\newblock D3PM-based discrete diffusion for SR; simultaneous token generation.
+
+\bibitem[Bastiani et~al.(2025)]{ddsr2025}
+Zachary Bastiani et~al.
+\newblock Diffusion-based symbolic regression.
+\newblock \emph{arXiv preprint arXiv:2505.24776}, 2025.
+\newblock Random mask diffusion + token-wise GRPO reinforcement learning for
+  SR.
+
+\bibitem[Biggio et~al.(2021)Biggio, Bendinelli, Neitz, Lucchi, and
+  Parascandolo]{biggio2021nesymres}
+Luca Biggio, Tommaso Bendinelli, Alexander Neitz, Aurelien Lucchi, and
+  Giambattista Parascandolo.
+\newblock Neural symbolic regression that scales.
+\newblock In \emph{International Conference on Machine Learning (ICML)}, pages
+  936--945, 2021.
+\newblock First large-scale pre-trained transformer for SR; encoder-decoder
+  with latent z.
+
+\bibitem[Bruneton(2025)]{bruneton2025qdsr}
+Jean-Philippe Bruneton.
+\newblock Enhancing symbolic regression with quality-diversity and
+  physics-inspired constraints.
+\newblock \emph{arXiv preprint arXiv:2503.19043}, 2025.
+\newblock QDSR: 91.6\% exact recovery on AI Feynman noiseless via MAP-Elites QD
+  + dimensional analysis.
+
+\bibitem[Cranmer(2023)]{cranmer2023pysr}
+Miles Cranmer.
+\newblock Interpretable machine learning for science with pysr and
+  symbolicregression.jl.
+\newblock \emph{arXiv preprint arXiv:2305.01582}, 2023.
+\newblock Multi-population evolutionary SR; high-performance Julia backend.
+
+\bibitem[Hu et~al.(2022)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
+  Chen]{hu2022lora}
+Edward~J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
+  Wang, Lu~Wang, and Weizhu Chen.
+\newblock Lora: Low-rank adaptation of large language models.
+\newblock \emph{arXiv preprint arXiv:2106.09685}, 2022.
+\newblock Low-rank adaptation for parameter-efficient finetuning.
+
+\bibitem[Kamienny et~al.(2022)Kamienny, d'Ascoli, Lample, and
+  Charton]{kamienny2022e2e}
+Pierre-Alexandre Kamienny, St{\'e}phane d'Ascoli, Guillaume Lample, and
+  Fran{\c{c}}ois Charton.
+\newblock End-to-end symbolic regression with transformers.
+\newblock \emph{arXiv preprint arXiv:2204.10532}, 2022.
+\newblock NeurIPS 2022. Direct prediction of full equations including
+  constants.
+
+\bibitem[La~Cava et~al.(2021)La~Cava, Orzechowski, Burlacu, de~Fran{\c{c}}a,
+  Virgolin, Jin, Kommenda, and Moore]{lacava2021srbench}
+William La~Cava, Patryk Orzechowski, Bogdan Burlacu, Fabricio~Olivetti
+  de~Fran{\c{c}}a, Marco Virgolin, Ying Jin, Michael Kommenda, and Jason~H.
+  Moore.
+\newblock Contemporary symbolic regression methods and their relative
+  performance.
+\newblock \emph{NeurIPS Track on Datasets and Benchmarks}, 2021.
+\newblock SRBench: largest SR benchmark with 14 methods on Feynman + Strogatz
+  datasets.
+
+\bibitem[Lample and Charton(2020)]{lample2020deep}
+Guillaume Lample and Fran{\c{c}}ois Charton.
+\newblock Deep learning for symbolic mathematics.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2020.
+\newblock First transformer for symbolic integration/ODE solving; prefix
+  notation for math.
+
+\bibitem[Nie et~al.(2025)Nie, Zhu, You, Zhang, Ou, Hu, Zhou, Lin, Wen, and
+  Li]{nie2025llada}
+Shen Nie, Fengqi Zhu, Zebin You, Xiaolu Zhang, Jingyang Ou, Jun Hu, Jun Zhou,
+  Yankai Lin, Ji-Rong Wen, and Chongxuan Li.
+\newblock Large language diffusion models.
+\newblock \emph{arXiv preprint arXiv:2502.09992}, 2025.
+\newblock NeurIPS 2025 Oral. Introduces LLaDA: masked diffusion for language
+  modeling at 8B scale.
+
+\bibitem[Raissi et~al.(2019)Raissi, Perdikaris, and
+  Karniadakis]{raissi2019pinns}
+Maziar Raissi, Paris Perdikaris, and George~E. Karniadakis.
+\newblock Physics-informed neural networks: A deep learning framework for
+  solving forward and inverse problems involving nonlinear partial differential
+  equations.
+\newblock \emph{Journal of Computational Physics}, 378:\penalty0 686--707,
+  2019.
+\newblock Seminal PINNs paper; physics-constrained neural network training.
+
+\bibitem[Sahoo et~al.(2024)Sahoo, Arriola, Gokaslan, Marroquin, Rush, Schiff,
+  Chiu, and Kuleshov]{sahoo2024mdlm}
+Subham~Sekhar Sahoo, Marianne Arriola, Aaron Gokaslan, Edgar~Mariano Marroquin,
+  Alexander~M. Rush, Yair Schiff, Justin~T. Chiu, and Volodymyr Kuleshov.
+\newblock Simple and effective masked diffusion language models.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2024.
+\newblock Rao-Blackwellized ELBO for masked diffusion; approaches AR
+  perplexity.
+
+\bibitem[Shojaee et~al.(2023)Shojaee, Meidani, Farimani, and
+  Reddy]{shojaee2023tpsr}
+Parshin Shojaee, Kazem Meidani, Amir~Barati Farimani, and Chandan Reddy.
+\newblock Transformer-based planning for symbolic regression.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2023.
+\newblock MCTS-guided decoding for transformer SR; balances accuracy and
+  complexity.
+
+\bibitem[Strogatz(2015)]{strogatz2015nonlinear}
+Steven~H. Strogatz.
+\newblock \emph{Nonlinear Dynamics and Chaos: With Applications to Physics,
+  Biology, Chemistry, and Engineering}.
+\newblock Westview Press, 2nd edition, 2015.
+\newblock Source of ODE-Strogatz benchmark systems for SR.
+
+\bibitem[Su et~al.(2024)Su, Ahmed, Lu, Pan, Bo, and Liu]{su2024rope}
+Jianlin Su, Murtadha Ahmed, Yu~Lu, Shengfeng Pan, Wen Bo, and Yunfeng Liu.
+\newblock Roformer: Enhanced transformer with rotary position embedding.
+\newblock \emph{Neurocomputing}, 568:\penalty0 127063, 2024.
+\newblock Rotary Position Embeddings (RoPE) for transformers.
+
+\bibitem[{The ARChitects Team}(2025)]{architects2025arc}
+{The ARChitects Team}.
+\newblock The architects -- arc prize 2025 technical report.
+\newblock
+  \url{https://lambdalabsml.github.io/ARC2025_Solution_by_the_ARChitects/},
+  2025.
+\newblock 2nd place ARC 2025: masked diffusion LLM with dual-axis RoPE,
+  recursive soft-mask refinement, test-time finetuning.
+
+\bibitem[Udrescu and Tegmark(2020)]{udrescu2020aifeynman}
+Silviu-Marian Udrescu and Max Tegmark.
+\newblock Ai feynman: A physics-inspired method for symbolic regression.
+\newblock \emph{Science Advances}, 6\penalty0 (16):\penalty0 eaay2631, 2020.
+\newblock Discovers all 100 Feynman equations; recursive divide-and-conquer
+  with neural fitting.
+
+\bibitem[Udrescu et~al.(2020)Udrescu, Tan, Feng, Neto, Wu, and
+  Tegmark]{udrescu2020aifeynman2}
+Silviu-Marian Udrescu, Andrew Tan, Jiahai Feng, Orisvaldo Neto, Tailin Wu, and
+  Max Tegmark.
+\newblock Ai feynman 2.0: Pareto-optimal symbolic regression exploiting graph
+  modularity.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2020.
+\newblock Pareto-optimal SR with graph modularity; orders of magnitude more
+  robust to noise.
+
+\bibitem[Uy et~al.(2011)Uy, Hoai, O'Neill, McKay, and
+  Galv{\'a}n-L{\'o}pez]{uy2011nguyen}
+Nguyen~Quang Uy, Nguyen~Xuan Hoai, Michael O'Neill, Robert~I. McKay, and Edgar
+  Galv{\'a}n-L{\'o}pez.
+\newblock Semantically-based crossover in genetic programming: Application to
+  real-valued symbolic regression.
+\newblock \emph{Genetic Programming and Evolvable Machines}, 12\penalty0
+  (2):\penalty0 91--119, 2011.
+\newblock Introduces the Nguyen benchmark: 12 equations for SR evaluation.
+
+\end{thebibliography}
