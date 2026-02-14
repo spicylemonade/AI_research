@@ -1,0 +1,59 @@
+{
+  "per_tier": {
+    "1": {
+      "exact_match_rate": 0.8356807511737089,
+      "exact_match_ci": [
+        0.818242790073776,
+        0.8544600938967136
+      ],
+      "r2_score": 0.7443213856098636,
+      "tree_edit_distance": 0.052969526561075855,
+      "complexity_adjusted_accuracy": 0.8356807511737089,
+      "n_samples": 1491
+    },
+    "2": {
+      "exact_match_rate": 0.9544854881266491,
+      "exact_match_ci": [
+        0.9432717678100264,
+        0.9643799472295514
+      ],
+      "r2_score": 0.9906788982971664,
+      "tree_edit_distance": 0.0072999120492524185,
+      "complexity_adjusted_accuracy": 0.9544854881266491,
+      "n_samples": 1516
+    },
+    "3": {
+      "exact_match_rate": 0.9050683829444891,
+      "exact_match_ci": [
+        0.8881737731295254,
+        0.9211584875301689
+      ],
+      "r2_score": 0.9856137990154358,
+      "tree_edit_distance": 0.008466808064555449,
+      "complexity_adjusted_accuracy": 0.9050683829444891,
+      "n_samples": 1243
+    },
+    "4": {
+      "exact_match_rate": 0.788,
+      "exact_match_ci": [
+        0.76,
+        0.8186666666666667
+      ],
+      "r2_score": 0.8912632471347541,
+      "tree_edit_distance": 0.04003346828609987,
+      "complexity_adjusted_accuracy": 0.788,
+      "n_samples": 750
+    }
+  },
+  "overall": {
+    "exact_match_rate": 0.8818,
+    "r2_score": 0.9043085258565556,
+    "tree_edit_distance": 0.026118714881609616,
+    "complexity_adjusted_accuracy": 0.8818,
+    "n_samples": 5000
+  },
+  "inference": {
+    "samples_per_second": 7954.465974269907,
+    "avg_latency_ms": 0.12571554183959963
+  }
+}
