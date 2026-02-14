@@ -55,8 +55,8 @@
           "id": "item_003",
           "description": "Survey and document physics equation discovery benchmarks: Feynman Symbolic Regression Database (FSReD \u2014 100+20 equations), SRSD benchmark (120 datasets: easy/medium/hard), SRBench, and LLM-SRBench. Document evaluation metrics used across the field: solution rate, R\u00b2, RMSE, Normalized Edit Distance (NED), symbolic accuracy, and computational cost",
           "acceptance_criteria": "A document (docs/benchmarks.md) listing all four benchmarks with their equation counts, difficulty levels, variable ranges, and data sizes; a table comparing at least 6 SOTA methods (SymbolicGPT, AI Feynman, PhyE2E, ODEFormer, TPSR, Eureqa) on FSReD with their published solution rates; definition and rationale for each of the 6 evaluation metrics; all claims backed by citations in sources.bib",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "docs/benchmarks.md created covering FSReD, SRSD, SRBench, LLM-SRBench with equation counts, difficulty levels, variable ranges. SOTA comparison table with 8 methods. All 6 evaluation metrics defined with rationale. All claims cited from sources.bib.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 2,
+    "completed": 3,
     "in_progress": 0,
     "failed": 0,
-    "pending": 23
+    "pending": 22
   }
 }
