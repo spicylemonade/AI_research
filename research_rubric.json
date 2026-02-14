@@ -94,8 +94,8 @@
           "id": "item_007",
           "description": "Build the dataset generation and loading pipeline: create a data generator that produces (input_data_matrix, target_equation_tokens) pairs from the FSReD benchmark and from procedurally generated Newtonian physics equations. Implement data loading with configurable noise levels (0%, 1%, 5%, 10% Gaussian), variable count filtering, and train/val/test splits",
           "acceptance_criteria": "A Python module src/data/dataset.py that: (1) loads all 120 FSReD equations and generates 100K data points each, (2) procedurally generates at least 50,000 additional Newtonian physics equations with random coefficients, (3) adds configurable Gaussian noise, (4) creates 80/10/10 train/val/test splits, (5) returns PyTorch DataLoader objects with batch collation handling variable-length sequences; verified by tests/test_dataset.py with at least 10 test cases passing",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "src/data/dataset.py: 120 FSReD equations, 50K procedural Newtonian, noise, 80/10/10 splits, PyTorch DataLoaders. 16/16 tests pass.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 6,
+    "completed": 7,
     "in_progress": 0,
     "failed": 0,
-    "pending": 19
+    "pending": 18
   }
 }
