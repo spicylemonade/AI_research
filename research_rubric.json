@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T00:00:00Z",
-  "updated_at": "2026-02-14T09:23:17.374762+00:00",
+  "updated_at": "2026-02-14T09:26:34.811083+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -251,16 +251,16 @@
           "id": "item_024",
           "description": "Synthesize key findings: identify which components contribute most, where the model succeeds/fails, and how results compare to SOTA",
           "acceptance_criteria": "Document docs/key_findings.md containing: (1) ranked list of component contributions from ablation study with effect sizes, (2) failure mode analysis categorizing errors (wrong operator, wrong constant, wrong structure, timeout), (3) per-difficulty-level breakdown (simple/medium/complex), (4) honest comparison against SOTA from literature citing specific papers from sources.bib, (5) clear statement of whether each hypothesis H1-H3 is supported/refuted with evidence.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Key findings doc with ranked ablation contributions, failure modes, per-difficulty breakdown, honest SOTA comparison, hypothesis assessment.",
           "error": null
         },
         {
           "id": "item_025",
           "description": "Generate all publication-quality figures for the research paper",
           "acceptance_criteria": "Script scripts/generate_figures.py producing at least 8 figures in figures/: (1) architecture diagram, (2) training curves (loss and accuracy vs. epoch), (3) ablation bar chart with error bars, (4) benchmark comparison grouped bar chart, (5) refinement depth curve, (6) challenge set qualitative examples, (7) embedding t-SNE, (8) embedding similarity heatmap. All figures must use consistent styling, readable fonts (>=10pt), and colorblind-friendly palettes.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "8 figures generated: architecture diagram, training curves, ablation barchart, benchmark comparison, refinement depth, challenge qualitative, t-SNE, heatmap.",
           "error": null
         },
         {
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 23,
+    "completed": 25,
     "in_progress": 0,
     "failed": 0,
-    "pending": 5
+    "pending": 3
   }
 }
