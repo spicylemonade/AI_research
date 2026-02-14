@@ -1,0 +1,1729 @@
+{
+  "model": "AR-Baseline",
+  "training_epochs": 50,
+  "best_val_loss": 1.4423,
+  "per_equation": [
+    {
+      "equation_id": 0,
+      "true_expr": "x1*x2",
+      "pred_expr": "x1*x2",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999964,
+        "rmse": 3.320697575131328e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.08329892158508301
+      }
+    },
+    {
+      "equation_id": 1,
+      "true_expr": "x1*x2**2/2",
+      "pred_expr": "x1*x2",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.530200309954658,
+        "rmse": 9.582990131127122,
+        "ned": 0.8333333333333334,
+        "symbolic_accuracy": 0.09090909090909091,
+        "inference_time": 0.10776996612548828
+      }
+    },
+    {
+      "equation_id": 2,
+      "true_expr": "x1*x2 + x3",
+      "pred_expr": "x1 2 ^ x2 2 ^ + -2 x1 * x2 * x3 * + * +",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.05263157894736842,
+        "inference_time": 0.2737448215484619
+      }
+    },
+    {
+      "equation_id": 3,
+      "true_expr": "x1 + x2 + x3",
+      "pred_expr": "x1 + x2 + x3",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999892,
+        "rmse": 2.504680862494643e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.09893321990966797
+      }
+    },
+    {
+      "equation_id": 4,
+      "true_expr": "x1*x2*x3",
+      "pred_expr": "x1*x2*x3",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.999999999999994,
+        "rmse": 1.2606394318135273e-06,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.11429524421691895
+      }
+    },
+    {
+      "equation_id": 5,
+      "true_expr": "x1/x2",
+      "pred_expr": "x1/x2",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999961,
+        "rmse": 2.1930458055129955e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.11531662940979004
+      }
+    },
+    {
+      "equation_id": 6,
+      "true_expr": "x1**2",
+      "pred_expr": "x1**3",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -20.734728088598775,
+        "rmse": 33.282250350251175,
+        "ned": 0.3333333333333333,
+        "symbolic_accuracy": 0.8,
+        "inference_time": 0.05954694747924805
+      }
+    },
+    {
+      "equation_id": 7,
+      "true_expr": "x1**3",
+      "pred_expr": "x1**3",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999826,
+        "rmse": 4.8453487716161e-06,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.05785059928894043
+      }
+    },
+    {
+      "equation_id": 8,
+      "true_expr": "sqrt(x1)",
+      "pred_expr": "sqrt(x1)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999886,
+        "rmse": 4.95154110260722e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.04630708694458008
+      }
+    },
+    {
+      "equation_id": 9,
+      "true_expr": "x1*sin(x2)",
+      "pred_expr": "x1*sin(x2)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999928,
+        "rmse": 1.6596877838881222e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.11654806137084961
+      }
+    },
+    {
+      "equation_id": 10,
+      "true_expr": "x1*cos(x2)",
+      "pred_expr": "x1*cos(x2)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999901,
+        "rmse": 2.0223718715949104e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.10932302474975586
+      }
+    },
+    {
+      "equation_id": 11,
+      "true_expr": "x1*exp(x2)",
+      "pred_expr": "x1*exp(x2)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999742,
+        "rmse": 1.3648955724285953e-05,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.18042731285095215
+      }
+    },
+    {
+      "equation_id": 12,
+      "true_expr": "log(x1)",
+      "pred_expr": "sqrt(x1)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.19614698332374836,
+        "rmse": 0.9433032084313424,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.75,
+        "inference_time": 0.09918522834777832
+      }
+    },
+    {
+      "equation_id": 13,
+      "true_expr": "x1**2 + x2**2",
+      "pred_expr": "x1*x2",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.36617429040680993,
+        "rmse": 11.663429636543013,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.2222222222222222,
+        "inference_time": 0.0880594253540039
+      }
+    },
+    {
+      "equation_id": 14,
+      "true_expr": "x1*x2 - x3*x4",
+      "pred_expr": "x1*x2 - x3*x4",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999966,
+        "rmse": 4.2338523378937e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.23258662223815918
+      }
+    },
+    {
+      "equation_id": 15,
+      "true_expr": "x1/(x2*x3)",
+      "pred_expr": "x1/(x2*x3)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999996,
+        "rmse": 1.8119897413519312e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.1784820556640625
+      }
+    },
+    {
+      "equation_id": 16,
+      "true_expr": "x1*x2/(x3**2)",
+      "pred_expr": "sqrt(x1*x2/x3)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.025843015841913397,
+        "rmse": 32.641239163175584,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.5,
+        "inference_time": 0.1668999195098877
+      }
+    },
+    {
+      "equation_id": 17,
+      "true_expr": "(x1+x2)*x3",
+      "pred_expr": "x3*(x1 + x2)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999937,
+        "rmse": 6.714439065115306e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.12593507766723633
+      }
+    },
+    {
+      "equation_id": 18,
+      "true_expr": "x1**2*x2",
+      "pred_expr": "x1*x2",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.023292033769219955,
+        "rmse": 23.004674779549394,
+        "ned": 0.8,
+        "symbolic_accuracy": 0.14285714285714285,
+        "inference_time": 0.09557867050170898
+      }
+    },
+    {
+      "equation_id": 19,
+      "true_expr": "sin(x1)*cos(x2)",
+      "pred_expr": "x1*sin(x2)**2",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -14.524626692368592,
+        "rmse": 1.9290913828069962,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.125,
+        "inference_time": 0.15230870246887207
+      }
+    },
+    {
+      "equation_id": 20,
+      "true_expr": "x1*x2 + x1*x3",
+      "pred_expr": "x1*log(x2*x3 + 1)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.34674510744548215,
+        "rmse": 10.491819489052592,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.2,
+        "inference_time": 0.1734604835510254
+      }
+    },
+    {
+      "equation_id": 21,
+      "true_expr": "x1/(1+x2)",
+      "pred_expr": "x1 1 1 1 1 x2 + / *",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.36363636363636365,
+        "inference_time": 0.27152085304260254
+      }
+    },
+    {
+      "equation_id": 22,
+      "true_expr": "(x1-x2)**2",
+      "pred_expr": "(x1 - x2)**2",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999883,
+        "rmse": 4.925328062698402e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.13791942596435547
+      }
+    },
+    {
+      "equation_id": 23,
+      "true_expr": "sqrt(x1**2+x2**2)",
+      "pred_expr": "x1**2 + x2**2",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -96.72780846374577,
+        "rmse": 13.953683057836733,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.8,
+        "inference_time": 0.14144277572631836
+      }
+    },
+    {
+      "equation_id": 24,
+      "true_expr": "x1*sin(x2*x3)",
+      "pred_expr": "x1*sin(x2*x3)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.999999999999872,
+        "rmse": 7.264421168964505e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.254810094833374
+      }
+    },
+    {
+      "equation_id": 25,
+      "true_expr": "x1*exp(-x2)",
+      "pred_expr": "x1*exp(-x2)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999974,
+        "rmse": 4.3326447922497436e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.1466991901397705
+      }
+    },
+    {
+      "equation_id": 26,
+      "true_expr": "x1*cos(x2+x3)",
+      "pred_expr": "x1*log(x2/x3)",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -3.074035292544118,
+        "rmse": 3.911089836252482,
+        "ned": 0.8333333333333334,
+        "symbolic_accuracy": 0.4,
+        "inference_time": 0.25560927391052246
+      }
+    },
+    {
+      "equation_id": 27,
+      "true_expr": "x1**2/(2*x2)",
+      "pred_expr": "x1 1 1 1 1 x2 + / *",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.07692307692307693,
+        "inference_time": 0.1725635528564453
+      }
+    },
+    {
+      "equation_id": 28,
+      "true_expr": "x1*x2*x3/x4",
+      "pred_expr": "x1*x2*x3/x4",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999953,
+        "rmse": 2.4949179037435453e-06,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.2037196159362793
+      }
+    },
+    {
+      "equation_id": 29,
+      "true_expr": "x1 + x2*x3",
+      "pred_expr": "x1*x2*x3",
+      "difficulty": "easy",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -5.598482077085731,
+        "rmse": 14.841191205141957,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.5714285714285714,
+        "inference_time": 0.1579575538635254
+      }
+    },
+    {
+      "equation_id": 30,
+      "true_expr": "x1*x2**2/(2*x3)",
+      "pred_expr": "sqrt(x1*x2/x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.03014935542202346,
+        "rmse": 32.86907416322201,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.06666666666666667,
+        "inference_time": 0.1811518669128418
+      }
+    },
+    {
+      "equation_id": 31,
+      "true_expr": "x1*x2*x3/(x4**2)",
+      "pred_expr": "x1*x2*x3/x4**2",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999988,
+        "rmse": 5.506380644020415e-06,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.19695067405700684
+      }
+    },
+    {
+      "equation_id": 32,
+      "true_expr": "sqrt(x1*x2/x3)",
+      "pred_expr": "sqrt(x1*x2/x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999981,
+        "rmse": 8.493683835526328e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.3145780563354492
+      }
+    },
+    {
+      "equation_id": 33,
+      "true_expr": "x1*sin(2*x2)/x3",
+      "pred_expr": "x1*sin(2*x2)/x3",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999606,
+        "rmse": 3.362463773831915e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.37690043449401855
+      }
+    },
+    {
+      "equation_id": 34,
+      "true_expr": "x1*exp(-x2*x3)",
+      "pred_expr": "x1*exp(-x2*x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999971,
+        "rmse": 3.656872105209033e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.2806682586669922
+      }
+    },
+    {
+      "equation_id": 35,
+      "true_expr": "x1*cos(x2*x3+x4)",
+      "pred_expr": "x1*cos(x2*x3 + x4)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999316,
+        "rmse": 5.675381120974805e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.39341282844543457
+      }
+    },
+    {
+      "equation_id": 36,
+      "true_expr": "x1**2*x2/(2*x3**2)",
+      "pred_expr": "x1**2*x2/(2*x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.5666002873860596,
+        "rmse": 13.91330954506986,
+        "ned": 0.1111111111111111,
+        "symbolic_accuracy": 0.8,
+        "inference_time": 0.19892621040344238
+      }
+    },
+    {
+      "equation_id": 37,
+      "true_expr": "sqrt(x1**2+x2**2+x3**2)",
+      "pred_expr": "sqrt(x1**2 + x2**2 + x3**2)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999888,
+        "rmse": 1.5706636079072156e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.20581984519958496
+      }
+    },
+    {
+      "equation_id": 38,
+      "true_expr": "(x1-x2)/(x3+x4)",
+      "pred_expr": "x1*exp(-x4/x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -6.5441302710464315,
+        "rmse": 1.4479230669175387,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.15384615384615385,
+        "inference_time": 0.24827003479003906
+      }
+    },
+    {
+      "equation_id": 39,
+      "true_expr": "x1*x2/(x3*x4)",
+      "pred_expr": "x1*x2/(x3*x4)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999972,
+        "rmse": 4.691463773669374e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.22478389739990234
+      }
+    },
+    {
+      "equation_id": 40,
+      "true_expr": "x1*sin(x2)**2",
+      "pred_expr": "x1*sin(x2)**2",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999803,
+        "rmse": 1.7903107568267962e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.14546871185302734
+      }
+    },
+    {
+      "equation_id": 41,
+      "true_expr": "x1*cos(x2)**2 + x3*sin(x2)**2",
+      "pred_expr": "x1*cos(x2)**2 + x3*sin(x2)**2",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999875,
+        "rmse": 1.3466230249427623e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.2987329959869385
+      }
+    },
+    {
+      "equation_id": 42,
+      "true_expr": "x1*exp(-x2**2/x3)",
+      "pred_expr": "x1*exp(-x2**2/x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999971,
+        "rmse": 5.7214439001168154e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.5072236061096191
+      }
+    },
+    {
+      "equation_id": 43,
+      "true_expr": "log(x1*x2)",
+      "pred_expr": "log(x1*x2)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999969,
+        "rmse": 5.926959204826707e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.20534563064575195
+      }
+    },
+    {
+      "equation_id": 44,
+      "true_expr": "x1*x2*sin(x3)/x4",
+      "pred_expr": "x1*x2*sin(x3/x4)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.1873300419293329,
+        "rmse": 13.791343626761162,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.6666666666666666,
+        "inference_time": 0.23556113243103027
+      }
+    },
+    {
+      "equation_id": 45,
+      "true_expr": "x1/(x2**2 + x3**2)",
+      "pred_expr": "x1/(x2**2 + x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.8447444840297866,
+        "rmse": 0.2760461716602766,
+        "ned": 0.36363636363636365,
+        "symbolic_accuracy": 0.5384615384615384,
+        "inference_time": 0.2281966209411621
+      }
+    },
+    {
+      "equation_id": 46,
+      "true_expr": "sqrt(2*x1*x2)",
+      "pred_expr": "x1*x2",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -8.994016062618213,
+        "rmse": 5.339217029128119,
+        "ned": 0.8571428571428571,
+        "symbolic_accuracy": 0.1111111111111111,
+        "inference_time": 0.19666624069213867
+      }
+    },
+    {
+      "equation_id": 47,
+      "true_expr": "x1*x2**2 + x3*x4**2",
+      "pred_expr": "x1*x2 + x3*x4",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.30472955015582626,
+        "rmse": 39.72403089803719,
+        "ned": 0.5454545454545454,
+        "symbolic_accuracy": 0.23076923076923078,
+        "inference_time": 0.22729825973510742
+      }
+    },
+    {
+      "equation_id": 48,
+      "true_expr": "x1*(1-exp(-x2*x3))",
+      "pred_expr": "x1 1 -1 -1 -1 -1 * * * * x5 * exp * x2 * + *",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.4,
+        "inference_time": 0.39550018310546875
+      }
+    },
+    {
+      "equation_id": 49,
+      "true_expr": "x1*x2 + x3*x4 + x5",
+      "pred_expr": "x1 1 x5 x6 + / * -1 x2 * x3 * + * x4 * exp *",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.1,
+        "inference_time": 0.26809167861938477
+      }
+    },
+    {
+      "equation_id": 50,
+      "true_expr": "(x1*x2 + x3*x4)/(x5+x6)",
+      "pred_expr": "(x1*x2 + x3*x4)/(x5 + x6)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999961,
+        "rmse": 1.7567573964884926e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.3870861530303955
+      }
+    },
+    {
+      "equation_id": 51,
+      "true_expr": "x1**2*sin(x2)*cos(x3)",
+      "pred_expr": "x1**2*sin(x2)*cos(x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999859,
+        "rmse": 7.802090656013702e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.21205425262451172
+      }
+    },
+    {
+      "equation_id": 52,
+      "true_expr": "x1*exp(-x2/x3)*cos(x4)",
+      "pred_expr": "x1*exp(-x2/x3)*cos(x4)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999886,
+        "rmse": 9.213568597664968e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.5196332931518555
+      }
+    },
+    {
+      "equation_id": 53,
+      "true_expr": "sqrt(x1/x2)*x3",
+      "pred_expr": "x1**2/(x2 + x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.7648260026231792,
+        "rmse": 3.4539363888560692,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.09090909090909091,
+        "inference_time": 0.2428138256072998
+      }
+    },
+    {
+      "equation_id": 54,
+      "true_expr": "x1*x2/(x3+x4+x5)",
+      "pred_expr": "x1*x2/(x3 + x4 + x5)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999963,
+        "rmse": 5.8126501643411353e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.28368544578552246
+      }
+    },
+    {
+      "equation_id": 55,
+      "true_expr": "x1*log(x2/x3)",
+      "pred_expr": "x1*log(x2/x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.999999999999997,
+        "rmse": 1.8266483226069088e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.34180641174316406
+      }
+    },
+    {
+      "equation_id": 56,
+      "true_expr": "x1**2*x2 + x3**2*x4",
+      "pred_expr": "x1*x2 + x3*x4",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.39506785875158457,
+        "rmse": 40.31914223455179,
+        "ned": 0.7272727272727273,
+        "symbolic_accuracy": 0.07692307692307693,
+        "inference_time": 0.2545595169067383
+      }
+    },
+    {
+      "equation_id": 57,
+      "true_expr": "x1*sin(x2+x3)*exp(-x4)",
+      "pred_expr": "x1*exp(-x2/x3)*cos(x4)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -2.738313431727894,
+        "rmse": 1.281973795555983,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.26666666666666666,
+        "inference_time": 0.3629622459411621
+      }
+    },
+    {
+      "equation_id": 58,
+      "true_expr": "x1*cos(x2)*sin(x3)",
+      "pred_expr": "x1*sin(x3)*cos(x2)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999839,
+        "rmse": 1.9958161206897258e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.181427001953125
+      }
+    },
+    {
+      "equation_id": 59,
+      "true_expr": "x1/(x2*x3+x4)",
+      "pred_expr": "x1/(x2*x3 + x4)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999967,
+        "rmse": 2.684338107608534e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.2888948917388916
+      }
+    },
+    {
+      "equation_id": 60,
+      "true_expr": "x1*x2**3/x3",
+      "pred_expr": "sqrt(x1*x2/x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.1994267187088563,
+        "rmse": 148.00949584560254,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.2727272727272727,
+        "inference_time": 0.3423924446105957
+      }
+    },
+    {
+      "equation_id": 61,
+      "true_expr": "x1**2/(x2+x3)",
+      "pred_expr": "1 2 / x1 * 2 ^ * 1 x3 / * 1 2 / ^ * 1 2 / ^ * 1 2 / 1 2 / 1 2 / ^ * 1 2 / 1 2 / 1 2 / 1 2 / 1 2 / 1 2 / ^ * 1 2 / 1 2 / 1 2 / 1",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.03125,
+        "inference_time": 0.5060737133026123
+      }
+    },
+    {
+      "equation_id": 62,
+      "true_expr": "sqrt(x1*x2 + x3*x4)",
+      "pred_expr": "x1*x2 + x3*x4",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -94.96434625486057,
+        "rmse": 10.934542660060233,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.8,
+        "inference_time": 0.2784311771392822
+      }
+    },
+    {
+      "equation_id": 63,
+      "true_expr": "x1*exp(x2)*sin(x3)",
+      "pred_expr": "x1*exp(x2)*sin(x3)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999842,
+        "rmse": 1.2131459211646596e-05,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.1780385971069336
+      }
+    },
+    {
+      "equation_id": 64,
+      "true_expr": "x1*cos(x2/x3)",
+      "pred_expr": "x1*sin(2*x2)/x3",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -3.194310941037255,
+        "rmse": 3.147883873078545,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.25,
+        "inference_time": 0.30060338973999023
+      }
+    },
+    {
+      "equation_id": 65,
+      "true_expr": "x1*x2*exp(-x3/x4)",
+      "pred_expr": "x1*x2/(x3*x4 + x5*x6)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": 3.745930174558831,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.4,
+        "inference_time": 0.3662865161895752
+      }
+    },
+    {
+      "equation_id": 66,
+      "true_expr": "(x1+x2)**2*(x3+x4)",
+      "pred_expr": "x1*x2 + x3*x4",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -1.169471967490244,
+        "rmse": 192.00288450596946,
+        "ned": 0.7777777777777778,
+        "symbolic_accuracy": 0.2727272727272727,
+        "inference_time": 0.23119401931762695
+      }
+    },
+    {
+      "equation_id": 67,
+      "true_expr": "x1*sin(x2)*exp(-x3)",
+      "pred_expr": "x1*exp(-x3)*sin(x2)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999954,
+        "rmse": 3.074154624195905e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.21807193756103516
+      }
+    },
+    {
+      "equation_id": 68,
+      "true_expr": "x1*x2/(x3**2+x4**2)",
+      "pred_expr": "x1*x2/(x3*x4)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -3.4207336966509034,
+        "rmse": 5.326302401507033,
+        "ned": 0.8333333333333334,
+        "symbolic_accuracy": 0.4,
+        "inference_time": 0.2830038070678711
+      }
+    },
+    {
+      "equation_id": 69,
+      "true_expr": "x1*log(1+x2*x3)",
+      "pred_expr": "x1*log(x2*x3 + 1)",
+      "difficulty": "medium",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999951,
+        "rmse": 2.2857348320410068e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.38317108154296875
+      }
+    },
+    {
+      "equation_id": 70,
+      "true_expr": "x1*exp(-x2*x3)*cos(x4*x3+x5)",
+      "pred_expr": "x1*exp(-x2*x3)*cos(x3*x4 + x5)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.999999999999993,
+        "rmse": 4.5318267933741485e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.6282055377960205
+      }
+    },
+    {
+      "equation_id": 71,
+      "true_expr": "x1/sqrt((x2**2-x3**2)**2 + (2*x4*x3)**2)",
+      "pred_expr": "x1*sin(2*x2)/x3",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -14.692203403004783,
+        "rmse": 2.801186398551789,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.06896551724137931,
+        "inference_time": 0.6561160087585449
+      }
+    },
+    {
+      "equation_id": 72,
+      "true_expr": "sqrt((x1+x2)/x3 + x2/x3)",
+      "pred_expr": "1 2 / x2 * x1 2 ^ * 1 x3 / * 1 2 ^ * 1 x3 / x4 *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.08333333333333333,
+        "inference_time": 0.4123106002807617
+      }
+    },
+    {
+      "equation_id": 73,
+      "true_expr": "x1*x2**2*sin(x3)*cos(x4)/(x5*x6)",
+      "pred_expr": "x1*x2**2*sin(x3)*cos(x4)/(x5*x6)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999947,
+        "rmse": 3.4012261438593194e-06,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.4409911632537842
+      }
+    },
+    {
+      "equation_id": 74,
+      "true_expr": "x1*exp(-x2)*sin(x3*x4+x5)+x6",
+      "pred_expr": "x1*exp(-x2)*sin(x3*x4 + x5) + x6",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999885,
+        "rmse": 1.450310391590755e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.5708973407745361
+      }
+    },
+    {
+      "equation_id": 75,
+      "true_expr": "sqrt(x1**2*x2**2 + x3**2*x4**2)",
+      "pred_expr": "x1*x2 + x3*x4",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.6585930232174242,
+        "rmse": 3.508273065495501,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.1111111111111111,
+        "inference_time": 0.3650541305541992
+      }
+    },
+    {
+      "equation_id": 76,
+      "true_expr": "x1*x2/(x3**2)*(1-exp(-x4*x5))",
+      "pred_expr": "x1 x2 * x3 -2 ^ * 1 -1 -1 -1 -1 -1 x4 * x5 * exp * + *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.4782608695652174,
+        "inference_time": 0.530451774597168
+      }
+    },
+    {
+      "equation_id": 77,
+      "true_expr": "x1*sin(x2)*cos(x3)*exp(-x4/x5)",
+      "pred_expr": "x1 x4 x3 cos * -1 x2 * 1 x3 / * exp *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.1111111111111111,
+        "inference_time": 0.47162914276123047
+      }
+    },
+    {
+      "equation_id": 78,
+      "true_expr": "(x1*x2+x3*x4)/(x5**2+x6**2)*sin(x7)",
+      "pred_expr": "(x1*x2 + x3*x4)*sin(x7)/(x5**2 + x6**2)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.999999999999975,
+        "rmse": 2.495536072018888e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.5698239803314209
+      }
+    },
+    {
+      "equation_id": 79,
+      "true_expr": "x1*exp(-x2**2/(2*x3**2))/sqrt(2*pi*x3**2)",
+      "pred_expr": "x1/(x2**2 + x3**2)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -9.721326919943134,
+        "rmse": 0.7957108300391601,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.02702702702702703,
+        "inference_time": 0.45172929763793945
+      }
+    },
+    {
+      "equation_id": 80,
+      "true_expr": "x1*x2*sin(x3)**2/(x4*(x5+x6))",
+      "pred_expr": "x1*x2 + 1/(2*x3)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -8.197500643937984,
+        "rmse": 7.913181851350265,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.25,
+        "inference_time": 0.4038422107696533
+      }
+    },
+    {
+      "equation_id": 81,
+      "true_expr": "sqrt(x1**2+x2**2-2*x1*x2*cos(x3))",
+      "pred_expr": "sqrt(x1**2 - 2*x1*x2*cos(x3) + x2**2)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999928,
+        "rmse": 1.5958623847606693e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.361264705657959
+      }
+    },
+    {
+      "equation_id": 82,
+      "true_expr": "x1*log(x2/x3)*exp(-x4/x5)",
+      "pred_expr": "x1 -1 x4 * 1 x5 / * exp * x2 1 x3 / *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.8421052631578947,
+        "inference_time": 0.588036298751831
+      }
+    },
+    {
+      "equation_id": 83,
+      "true_expr": "x1**2*x2/(2*x3) + x4*x5**2/(2*x6)",
+      "pred_expr": "1 2 / 1 x3 / * x1 x2 * + 2 ^ * x4 * 1 x5 * 1 x6 * +",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.1724137931034483,
+        "inference_time": 0.5045721530914307
+      }
+    },
+    {
+      "equation_id": 84,
+      "true_expr": "x1*cos(x2*x3)*exp(-x4*x3)*sin(x5*x3)",
+      "pred_expr": "x1*exp(-x3*x4)*sin(x3*x5)*cos(x2*x3)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999675,
+        "rmse": 9.387738419072895e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.6976361274719238
+      }
+    },
+    {
+      "equation_id": 85,
+      "true_expr": "(x1-x2)**2/(2*x3) + x4*x5*x6",
+      "pred_expr": "x4*x5*x6 + (x1 - x2)**2/(2*x3)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999971,
+        "rmse": 1.1022114151764563e-06,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.43734169006347656
+      }
+    },
+    {
+      "equation_id": 86,
+      "true_expr": "x1*x2*exp(-x3*x4)/(x5+x6*x7)",
+      "pred_expr": "x1*x2*exp(-x3*x4)/(x5 + x6*x7)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.999999999999999,
+        "rmse": 1.654024317857008e-08,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.6277947425842285
+      }
+    },
+    {
+      "equation_id": 87,
+      "true_expr": "sin(x1*x2+x3)*cos(x4*x5+x6)",
+      "pred_expr": "sin(x1*x2 + x3)*cos(x4*x5 + x6)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999997844,
+        "rmse": 2.1080064767081153e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.6931765079498291
+      }
+    },
+    {
+      "equation_id": 88,
+      "true_expr": "x1*sqrt(x2**2+x3**2)*exp(-x4*x5)",
+      "pred_expr": "x1*sqrt(x2**2 + x3**2)*exp(-x4*x5)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999953,
+        "rmse": 2.021009291991208e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.5041899681091309
+      }
+    },
+    {
+      "equation_id": 89,
+      "true_expr": "x1/(x2+x3*exp(-x4*x5))",
+      "pred_expr": "x1/(x2 + x3*exp(-x4*x5))",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999948,
+        "rmse": 1.8206317092390194e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.8737449645996094
+      }
+    },
+    {
+      "equation_id": 90,
+      "true_expr": "x1*x2**2*cos(x3)/(x4*x5) + x6*sin(x7)",
+      "pred_expr": "x1*x2**2*cos(x3)/(x4*x5) + x6*sin(x7)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.999999999999958,
+        "rmse": 6.6630861092209825e-06,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.5391135215759277
+      }
+    },
+    {
+      "equation_id": 91,
+      "true_expr": "sqrt(x1*x2/(x3*x4+x5*x6))",
+      "pred_expr": "x4*x5*x6 + (x1 - x2)**2/(2*x3)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -2782.0196554322915,
+        "rmse": 27.303135677547726,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.17391304347826086,
+        "inference_time": 3.905784845352173
+      }
+    },
+    {
+      "equation_id": 92,
+      "true_expr": "x1*sin(x2/x3)*exp(-x4*x5)+x6*cos(x7)",
+      "pred_expr": "x1*exp(-x4*x5)*sin(x2/x3) + x6*cos(x7)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999897,
+        "rmse": 1.9455552201599103e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.7290380001068115
+      }
+    },
+    {
+      "equation_id": 93,
+      "true_expr": "x1**2*x2*x3/(x4**2*x5)",
+      "pred_expr": "x1**2*x2*x3/(x4**2*x5)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999999999999977,
+        "rmse": 2.1899902518434724e-05,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.3131716251373291
+      }
+    },
+    {
+      "equation_id": 94,
+      "true_expr": "x1*(x2-x3)*exp(-x4/x5)/x6",
+      "pred_expr": "x1*(x2 - x3)*exp(-x4/x5)/x6",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.99999999999998,
+        "rmse": 1.209245713466691e-06,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time": 0.5694417953491211
+      }
+    },
+    {
+      "equation_id": 95,
+      "true_expr": "x1*x2*sin(x3*x4)/(x5**2+x6**2)",
+      "pred_expr": "x1*x2*sin(x3*x4)/(x5 + x6)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.04888431505762003,
+        "rmse": 0.752446029947346,
+        "ned": 0.375,
+        "symbolic_accuracy": 0.3,
+        "inference_time": 0.5488736629486084
+      }
+    },
+    {
+      "equation_id": 96,
+      "true_expr": "sqrt(x1**2/(x2*x3)+x4**2/(x5*x6))",
+      "pred_expr": "x1*x2 + x3*x4/(x5*x6 + 1)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -11.454421913197736,
+        "rmse": 9.856953994169515,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.07692307692307693,
+        "inference_time": 0.6271159648895264
+      }
+    },
+    {
+      "equation_id": 97,
+      "true_expr": "(x1+x2*cos(x3))*(x4+x5*sin(x6))",
+      "pred_expr": "1 x3 x4 * x5 * + / x1 x2 *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.13333333333333333,
+        "inference_time": 0.42121267318725586
+      }
+    },
+    {
+      "equation_id": 98,
+      "true_expr": "x1*exp(-x2*x3)*sin(x4*x5)/(x6+x7)",
+      "pred_expr": "x1*exp(-x4*x5)*sin(x2/x3) + x6*cos(x7)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -62.580824240588626,
+        "rmse": 2.026380444519901,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.2727272727272727,
+        "inference_time": 0.7162151336669922
+      }
+    },
+    {
+      "equation_id": 99,
+      "true_expr": "x1*x2/(x3*x4) + x5*x6/(x7*x8)",
+      "pred_expr": "sin(x1*x2 + x3)*cos(x4*x5 + x6)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.42658239696472755,
+        "rmse": 13.47653851848025,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.04,
+        "inference_time": 0.5528006553649902
+      }
+    },
+    {
+      "equation_id": 100,
+      "true_expr": "x1*x2+x3**2",
+      "pred_expr": "sqrt(x1**2 + x2**2 + x3**2)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.8040919576634373,
+        "rmse": 12.82234319595994,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.2857142857142857,
+        "inference_time": 0.17691636085510254
+      }
+    },
+    {
+      "equation_id": 101,
+      "true_expr": "x1*cos(x2+x3*x4)",
+      "pred_expr": "x1 x2 * 1 x3 x4 / *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.5,
+        "inference_time": 0.48802661895751953
+      }
+    },
+    {
+      "equation_id": 102,
+      "true_expr": "x1*x2*x3*x4",
+      "pred_expr": "x1*x2**2 + x3*x4**2",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.6796576763869722,
+        "rmse": 32.174849741315285,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.3076923076923077,
+        "inference_time": 0.18333220481872559
+      }
+    },
+    {
+      "equation_id": 103,
+      "true_expr": "x1**2-x2**2",
+      "pred_expr": "x1 1 x2 + / *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.18181818181818182,
+        "inference_time": 0.13347434997558594
+      }
+    },
+    {
+      "equation_id": 104,
+      "true_expr": "x1*sin(x2)+x3*cos(x4)",
+      "pred_expr": "x1/(x2*x3 + x4)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.054723619066259,
+        "rmse": 2.9893959822536083,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.36363636363636365,
+        "inference_time": 0.25861549377441406
+      }
+    },
+    {
+      "equation_id": 105,
+      "true_expr": "x1*x2**2+x3**2*x4",
+      "pred_expr": "x1**2*x2**2 + x3*x4**2",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -11.501806241344102,
+        "rmse": 111.8579034049598,
+        "ned": 0.5454545454545454,
+        "symbolic_accuracy": 0.13333333333333333,
+        "inference_time": 0.2609548568725586
+      }
+    },
+    {
+      "equation_id": 106,
+      "true_expr": "x1*exp(-x2)/(x3+x4)",
+      "pred_expr": "x1/sqrt(4*x3**2*x4**2 + (x2**2 - x3**2)**2)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -3.965187959877368,
+        "rmse": 0.49276217945148193,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.06896551724137931,
+        "inference_time": 0.3669240474700928
+      }
+    },
+    {
+      "equation_id": 107,
+      "true_expr": "sqrt(x1*x2)*sin(x3)",
+      "pred_expr": "x1*exp(x2)*sin(x3)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -3568.370672502001,
+        "rmse": 112.08734357083001,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.7777777777777778,
+        "inference_time": 0.24956512451171875
+      }
+    },
+    {
+      "equation_id": 108,
+      "true_expr": "(x1+x2)/(x3-x4)",
+      "pred_expr": "x1 x4 * 1 x2 x3 * + / *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.07692307692307693,
+        "inference_time": 0.27059459686279297
+      }
+    },
+    {
+      "equation_id": 109,
+      "true_expr": "x1*log(x2)*x3",
+      "pred_expr": "x1*log(x2/x3)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.3059588240607942,
+        "rmse": 9.172875520090239,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.3,
+        "inference_time": 0.19184231758117676
+      }
+    },
+    {
+      "equation_id": 110,
+      "true_expr": "x1*x2+x3*x4+x5*x6",
+      "pred_expr": "sin(x1*x2 + x3)*cos(x4*x5 + x6)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -4.0954478139218455,
+        "rmse": 22.48163224084147,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.2,
+        "inference_time": 0.47800302505493164
+      }
+    },
+    {
+      "equation_id": 111,
+      "true_expr": "x1**3+x2**3",
+      "pred_expr": "x1*x2",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -1.0831355133946596,
+        "rmse": 69.22568625046539,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.2222222222222222,
+        "inference_time": 0.09527993202209473
+      }
+    },
+    {
+      "equation_id": 112,
+      "true_expr": "sin(x1)**2+cos(x1)**2",
+      "pred_expr": "x1*cos(x2)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": 1.0,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.18181818181818182,
+        "inference_time": 0.11943483352661133
+      }
+    },
+    {
+      "equation_id": 113,
+      "true_expr": "x1*x2*cos(x3*x4)",
+      "pred_expr": "x1*cos(x2*x3 + x4)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.21347220514434695,
+        "rmse": 7.163087157106839,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.6,
+        "inference_time": 0.3301970958709717
+      }
+    },
+    {
+      "equation_id": 114,
+      "true_expr": "x1/(x2+x3)**2",
+      "pred_expr": "x1/(x2**2 + x3)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.2364332739686532,
+        "rmse": 0.41376014426576657,
+        "ned": 0.7142857142857143,
+        "symbolic_accuracy": 0.18181818181818182,
+        "inference_time": 0.1871471405029297
+      }
+    },
+    {
+      "equation_id": 115,
+      "true_expr": "x1*sqrt(x2)*exp(-x3)",
+      "pred_expr": "sqrt(x1*x2/x3)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.4156467078165873,
+        "rmse": 1.262284541416072,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.36363636363636365,
+        "inference_time": 0.20125055313110352
+      }
+    },
+    {
+      "equation_id": 116,
+      "true_expr": "x1*x2/(x3+1)",
+      "pred_expr": "1 2 / x1 * x2 2 ^ * 1 x3 / * 1 2 ^ * 1 2 ^ * 1 2 / * 1 2 / ^ * 1 x3 / ^ *",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.0,
+        "rmse": Infinity,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.05405405405405406,
+        "inference_time": 0.3484046459197998
+      }
+    },
+    {
+      "equation_id": 117,
+      "true_expr": "x1**2*x2**2",
+      "pred_expr": "x1*x2",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.35695005897998544,
+        "rmse": 132.23322024462922,
+        "ned": 0.8571428571428571,
+        "symbolic_accuracy": 0.2222222222222222,
+        "inference_time": 0.12364411354064941
+      }
+    },
+    {
+      "equation_id": 118,
+      "true_expr": "(x1*x2)**2+x3",
+      "pred_expr": "x1*log(x2*x3 + 1)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.44198534514807375,
+        "rmse": 136.51977794865022,
+        "ned": 1.0,
+        "symbolic_accuracy": 0.18181818181818182,
+        "inference_time": 0.18349671363830566
+      }
+    },
+    {
+      "equation_id": 119,
+      "true_expr": "x1*sin(x2**2)",
+      "pred_expr": "x1*sin(x2)",
+      "difficulty": "hard",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": -0.2429749332844231,
+        "rmse": 2.2653005167748392,
+        "ned": 0.5,
+        "symbolic_accuracy": 0.375,
+        "inference_time": 0.30045652389526367
+      }
+    }
+  ],
+  "aggregate_by_difficulty": {
+    "easy": {
+      "count": 30,
+      "solution_rate": 0.5333,
+      "mean_r_squared": -4.1696,
+      "mean_ned": 0.4267,
+      "mean_symbolic_accuracy": 0.7032
+    },
+    "medium": {
+      "count": 40,
+      "solution_rate": 0.525,
+      "mean_r_squared": -2.5109,
+      "mean_ned": 0.4054,
+      "mean_symbolic_accuracy": 0.6732
+    },
+    "hard": {
+      "count": 50,
+      "solution_rate": 0.3,
+      "mean_r_squared": -129.2698,
+      "mean_ned": 0.6598,
+      "mean_symbolic_accuracy": 0.4744
+    }
+  },
+  "comparison": {
+    "AR_Baseline": {
+      "overall_solution_rate": 0.4333,
+      "easy_solution_rate": 0.5333,
+      "medium_solution_rate": 0.525,
+      "hard_solution_rate": 0.3,
+      "mean_r_squared": -55.7418,
+      "mean_ned": 0.5167
+    },
+    "SymbolicGPT_published": {
+      "overall_solution_rate": 0.35,
+      "easy_solution_rate": 0.62,
+      "medium_solution_rate": 0.33,
+      "hard_solution_rate": 0.18,
+      "mean_r_squared": null,
+      "mean_ned": null,
+      "source": "valipour2021symbolicgpt"
+    }
+  }
+}
