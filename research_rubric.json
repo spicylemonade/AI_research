@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T00:00:00Z",
-  "updated_at": "2026-02-14T06:22:41.777146+00:00",
+  "updated_at": "2026-02-14T06:31:53.596871+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -47,8 +47,8 @@
           "id": "item_002",
           "description": "Conduct comprehensive literature review via web search on transformer-based symbolic regression, masked diffusion models for discrete sequences, and physics equation discovery",
           "acceptance_criteria": "At least 15 relevant papers cited in sources.bib with complete BibTeX entries. Must include: (1) LLaDA (Nie et al. 2025), (2) MDLM (Sahoo et al. 2024), (3) DiffuSR (2025), (4) DDSR (2025), (5) TPSR (NeurIPS 2023), (6) NeSymReS (Biggio et al. 2021), (7) E2E Symbolic Regression (Kamienny et al. 2022), (8) AI Feynman 1.0 & 2.0 (Udrescu et al. 2020), (9) Lample & Charton (2020), (10) QDSR (2025). A summary document (docs/literature_review.md) with per-paper synopsis, key results, and identified gaps.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "21 BibTeX entries in sources.bib covering all 10 required papers plus 11 additional. Literature review in docs/literature_review.md with per-paper synopsis and gap analysis.",
           "error": null
         },
         {
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 1,
+    "completed": 2,
     "in_progress": 0,
     "failed": 0,
-    "pending": 27
+    "pending": 26
   }
 }

@@ -1,2 +1,185 @@
 % Bibliography for research project: PhysMDT - Physics Masked Diffusion Transformer
 % Maintained throughout the research process. Every source consulted is recorded here.
+
+@article{nie2025llada,
+  title={Large Language Diffusion Models},
+  author={Nie, Shen and Zhu, Fengqi and You, Zebin and Zhang, Xiaolu and Ou, Jingyang and Hu, Jun and Zhou, Jun and Lin, Yankai and Wen, Ji-Rong and Li, Chongxuan},
+  journal={arXiv preprint arXiv:2502.09992},
+  year={2025},
+  note={NeurIPS 2025 Oral. Introduces LLaDA: masked diffusion for language modeling at 8B scale}
+}
+
+@inproceedings{sahoo2024mdlm,
+  title={Simple and Effective Masked Diffusion Language Models},
+  author={Sahoo, Subham Sekhar and Arriola, Marianne and Gokaslan, Aaron and Marroquin, Edgar Mariano and Rush, Alexander M. and Schiff, Yair and Chiu, Justin T. and Kuleshov, Volodymyr},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2024},
+  note={Rao-Blackwellized ELBO for masked diffusion; approaches AR perplexity}
+}
+
+@article{diffusr2025,
+  title={Discovering Mathematical Equations with Diffusion Language Model},
+  author={DiffuSR Authors},
+  journal={arXiv preprint arXiv:2509.13136},
+  year={2025},
+  note={Continuous-state diffusion for symbolic regression with cross-attention conditioning}
+}
+
+@article{ddsr2025,
+  title={Diffusion-Based Symbolic Regression},
+  author={Bastiani, Zachary and others},
+  journal={arXiv preprint arXiv:2505.24776},
+  year={2025},
+  note={Random mask diffusion + token-wise GRPO reinforcement learning for SR}
+}
+
+@inproceedings{shojaee2023tpsr,
+  title={Transformer-based Planning for Symbolic Regression},
+  author={Shojaee, Parshin and Meidani, Kazem and Farimani, Amir Barati and Reddy, Chandan},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2023},
+  note={MCTS-guided decoding for transformer SR; balances accuracy and complexity}
+}
+
+@inproceedings{biggio2021nesymres,
+  title={Neural Symbolic Regression that Scales},
+  author={Biggio, Luca and Bendinelli, Tommaso and Neitz, Alexander and Lucchi, Aurelien and Parascandolo, Giambattista},
+  booktitle={International Conference on Machine Learning (ICML)},
+  pages={936--945},
+  year={2021},
+  note={First large-scale pre-trained transformer for SR; encoder-decoder with latent z}
+}
+
+@article{kamienny2022e2e,
+  title={End-to-end symbolic regression with transformers},
+  author={Kamienny, Pierre-Alexandre and d'Ascoli, St{\'e}phane and Lample, Guillaume and Charton, Fran{\c{c}}ois},
+  journal={arXiv preprint arXiv:2204.10532},
+  year={2022},
+  note={NeurIPS 2022. Direct prediction of full equations including constants}
+}
+
+@article{udrescu2020aifeynman,
+  title={AI Feynman: A physics-inspired method for symbolic regression},
+  author={Udrescu, Silviu-Marian and Tegmark, Max},
+  journal={Science Advances},
+  volume={6},
+  number={16},
+  pages={eaay2631},
+  year={2020},
+  publisher={AAAS},
+  note={Discovers all 100 Feynman equations; recursive divide-and-conquer with neural fitting}
+}
+
+@inproceedings{udrescu2020aifeynman2,
+  title={AI Feynman 2.0: Pareto-optimal symbolic regression exploiting graph modularity},
+  author={Udrescu, Silviu-Marian and Tan, Andrew and Feng, Jiahai and Neto, Orisvaldo and Wu, Tailin and Tegmark, Max},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2020},
+  note={Pareto-optimal SR with graph modularity; orders of magnitude more robust to noise}
+}
+
+@inproceedings{lample2020deep,
+  title={Deep Learning for Symbolic Mathematics},
+  author={Lample, Guillaume and Charton, Fran{\c{c}}ois},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2020},
+  note={First transformer for symbolic integration/ODE solving; prefix notation for math}
+}
+
+@article{bruneton2025qdsr,
+  title={Enhancing Symbolic Regression with Quality-Diversity and Physics-Inspired Constraints},
+  author={Bruneton, Jean-Philippe},
+  journal={arXiv preprint arXiv:2503.19043},
+  year={2025},
+  note={QDSR: 91.6\% exact recovery on AI Feynman noiseless via MAP-Elites QD + dimensional analysis}
+}
+
+@article{raissi2019pinns,
+  title={Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations},
+  author={Raissi, Maziar and Perdikaris, Paris and Karniadakis, George E.},
+  journal={Journal of Computational Physics},
+  volume={378},
+  pages={686--707},
+  year={2019},
+  publisher={Elsevier},
+  note={Seminal PINNs paper; physics-constrained neural network training}
+}
+
+@article{cranmer2023pysr,
+  title={Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl},
+  author={Cranmer, Miles},
+  journal={arXiv preprint arXiv:2305.01582},
+  year={2023},
+  note={Multi-population evolutionary SR; high-performance Julia backend}
+}
+
+@article{lacava2021srbench,
+  title={Contemporary Symbolic Regression Methods and their Relative Performance},
+  author={La Cava, William and Orzechowski, Patryk and Burlacu, Bogdan and de Fran{\c{c}}a, Fabricio Olivetti and Virgolin, Marco and Jin, Ying and Kommenda, Michael and Moore, Jason H.},
+  journal={NeurIPS Track on Datasets and Benchmarks},
+  year={2021},
+  note={SRBench: largest SR benchmark with 14 methods on Feynman + Strogatz datasets}
+}
+
+@article{uy2011nguyen,
+  title={Semantically-based Crossover in Genetic Programming: Application to Real-valued Symbolic Regression},
+  author={Uy, Nguyen Quang and Hoai, Nguyen Xuan and O'Neill, Michael and McKay, Robert I. and Galv{\'a}n-L{\'o}pez, Edgar},
+  journal={Genetic Programming and Evolvable Machines},
+  volume={12},
+  number={2},
+  pages={91--119},
+  year={2011},
+  note={Introduces the Nguyen benchmark: 12 equations for SR evaluation}
+}
+
+@book{strogatz2015nonlinear,
+  title={Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering},
+  author={Strogatz, Steven H.},
+  year={2015},
+  publisher={Westview Press},
+  edition={2nd},
+  note={Source of ODE-Strogatz benchmark systems for SR}
+}
+
+@misc{architects2025arc,
+  title={The ARChitects -- ARC Prize 2025 Technical Report},
+  author={{The ARChitects Team}},
+  year={2025},
+  howpublished={\url{https://lambdalabsml.github.io/ARC2025_Solution_by_the_ARChitects/}},
+  note={2nd place ARC 2025: masked diffusion LLM with dual-axis RoPE, recursive soft-mask refinement, test-time finetuning}
+}
+
+@article{symbolicdiffusion2025,
+  title={Symbolic-Diffusion: Deep Learning Based Symbolic Regression with D3PM Discrete Token Diffusion},
+  author={Symbolic-Diffusion Authors},
+  journal={arXiv preprint arXiv:2510.07570},
+  year={2025},
+  note={D3PM-based discrete diffusion for SR; simultaneous token generation}
+}
+
+@article{vaswani2017attention,
+  title={Attention is All You Need},
+  author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, Lukasz and Polosukhin, Illia},
+  journal={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2017},
+  note={Original transformer architecture}
+}
+
+@article{su2024rope,
+  title={RoFormer: Enhanced Transformer with Rotary Position Embedding},
+  author={Su, Jianlin and Ahmed, Murtadha and Lu, Yu and Pan, Shengfeng and Bo, Wen and Liu, Yunfeng},
+  journal={Neurocomputing},
+  volume={568},
+  pages={127063},
+  year={2024},
+  publisher={Elsevier},
+  note={Rotary Position Embeddings (RoPE) for transformers}
+}
+
+@article{hu2022lora,
+  title={LoRA: Low-Rank Adaptation of Large Language Models},
+  author={Hu, Edward J. and Shen, Yelong and Wallis, Phillip and Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Wang, Lu and Chen, Weizhu},
+  journal={arXiv preprint arXiv:2106.09685},
+  year={2022},
+  note={Low-rank adaptation for parameter-efficient finetuning}
+}
