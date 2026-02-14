@@ -1,0 +1,276 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-14T12:00:00Z",
+  "updated_at": "2026-02-14T09:58:24.832916+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-14T12:00:00Z",
+      "completed_at": "2026-02-14T09:58:24.832887+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Analyze the ARChitects ARC 2025 solution architecture (LLaDA-8B masked diffusion, 2D RoPE, token algebra, recursive soft-masking sampling) and document which techniques transfer to physics equation derivation",
+          "acceptance_criteria": "Written document (architecture_analysis.md) covering: (1) LLaDA masked diffusion mechanism, (2) 2D RoPE adaptation rationale, (3) token algebra / soft-masking iterative refinement, (4) test-time finetuning with LoRA, (5) most-visited-candidate selection. Explicit mapping of each technique to physics equation derivation feasibility. Minimum 1500 words.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Conduct comprehensive literature review on transformer-based symbolic regression via web search, covering NeSymReS, ODEFormer, TPSR, SymFormer, E2E-Transformer, AI Feynman, PySR, and masked diffusion language models",
+          "acceptance_criteria": "At least 15 relevant papers identified and summarized in literature_review.md. Each entry includes: paper title, authors, year, venue, core method, key results, and relevance to our approach. Papers must span: (a) transformer SR (>=5 papers), (b) physics-informed ML (>=3 papers), (c) masked diffusion / discrete diffusion models (>=3 papers), (d) ARC/reasoning architectures (>=2 papers), (e) benchmarks (>=2 papers).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Create and populate sources.bib with BibTeX entries for all consulted literature",
+          "acceptance_criteria": "sources.bib exists in repo root with valid BibTeX entries for at least 15 papers. Must include entries for: Udrescu & Tegmark 2020 (AI Feynman), Biggio et al. 2021 (NeSymReS), d'Ascoli et al. 2024 (ODEFormer), Shojaee et al. 2023 (TPSR), Kamienny et al. 2022 (E2E-Transformer), Vaswani et al. 2017 (Attention is All You Need), the ARChitects ARC 2025 solution, Nie et al. 2024 (LLaDA), Shi et al. 2024 (MD4), and Svete et al. 2025 (MDM reasoning). All entries parseable by standard BibTeX tools.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Define the Feynman-Physics equation benchmark suite: select 120 equations from the Feynman Symbolic Regression Database spanning 5 difficulty tiers (trivial, simple, moderate, complex, multi-step derivation)",
+          "acceptance_criteria": "JSON file (benchmarks/feynman_equations.json) containing 120 equations partitioned into 5 tiers with: (1) symbolic expression in prefix notation, (2) LaTeX rendering, (3) variable names and physical units, (4) number of variables (1-9), (5) number of operators, (6) difficulty tier assignment with rationale. Tier distribution: ~20 trivial (1-2 vars, <=3 ops), ~25 simple (2-3 vars, <=5 ops), ~30 moderate (3-5 vars, <=8 ops), ~25 complex (4-7 vars, <=12 ops), ~20 multi-step (5-9 vars, >=10 ops or compositional).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Formalize the problem: define what 'deriving physics equations' means for a transformer \u2014 input representation, output representation, tokenization scheme, and evaluation metrics",
+          "acceptance_criteria": "Technical specification document (problem_formalization.md) defining: (1) input format \u2014 numerical observation pairs (x, y) with IEEE-754 half-precision multi-hot encoding (per NeSymReS) OR learned embedding, with justification; (2) output format \u2014 prefix-notation symbolic expression token sequence; (3) tokenizer vocabulary \u2014 all operators (+, -, *, /, sin, cos, exp, log, sqrt, pow, etc.), variables (x1..x9), constants (C placeholder + fitted values), parentheses; (4) primary metrics: exact symbolic match rate, R\u00b2 fit score, normalized tree-edit distance; (5) secondary metrics: equation complexity (node count), inference time, derivation depth for multi-step equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_006",
+          "description": "Analyze CPU-only constraints and design architecture decisions accordingly: quantization strategy, model size budget, inference optimization plan",
+          "acceptance_criteria": "Document (cpu_constraints.md) with: (1) memory budget analysis (assume 16GB RAM), (2) target model size <=150M parameters with justification, (3) quantization plan (INT8 or mixed-precision), (4) inference time budget (<=30s per equation on single CPU core), (5) training feasibility analysis with estimated epoch times, (6) framework selection (PyTorch with torch.compile or ONNX Runtime) with benchmarks of alternatives.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_007",
+          "description": "Implement synthetic training data generator: sample random symbolic expression trees, evaluate them on random input points, and produce (observations, equation) pairs following the NeSymReS data generation protocol",
+          "acceptance_criteria": "Python module (src/data/generator.py) that: (1) generates expression trees with configurable depth (1-8), variable count (1-9), and operator set; (2) samples 200 support points per equation uniformly in [-5, 5]; (3) applies dimensional consistency checks; (4) filters degenerate equations (division by zero, overflow, NaN); (5) outputs in both prefix-token and LaTeX format; (6) generates at minimum 100K unique equations per hour on CPU; (7) unit tests pass with 100% coverage of generator functions.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement the input encoder: set-transformer encoder that maps variable-length (x, y) observation sets to a fixed-dimensional latent vector, using IEEE-754 multi-hot bit representation",
+          "acceptance_criteria": "Python module (src/model/encoder.py) implementing: (1) IEEE-754 half-precision multi-hot encoding (16-bit per scalar); (2) set-transformer architecture with induced set attention blocks (ISAB) for permutation invariance; (3) configurable number of layers (default 4), heads (default 8), embedding dim (default 256); (4) handles variable number of support points (50-500) and variables (1-9); (5) output is a single latent vector z of dimension 256; (6) total encoder parameters <=15M; (7) forward pass on 200 support points completes in <100ms on CPU.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Implement the autoregressive decoder baseline: standard transformer decoder that generates prefix-notation equation tokens conditioned on the encoder latent vector",
+          "acceptance_criteria": "Python module (src/model/decoder.py) implementing: (1) standard transformer decoder with 8 layers, 8 heads, dim 256; (2) cross-attention to encoder output z; (3) learned positional encodings; (4) vocabulary of ~50 tokens (operators, variables, constants, EOS, PAD); (5) greedy decoding and beam search (beam width 1-10) inference modes; (6) teacher forcing training mode; (7) total decoder parameters <=30M; (8) generates a 30-token equation in <500ms on CPU with beam width 5.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Implement evaluation pipeline: symbolic equivalence checker, R\u00b2 scorer, tree-edit distance, and complexity metrics",
+          "acceptance_criteria": "Python module (src/eval/metrics.py) implementing: (1) symbolic equivalence via SymPy simplification with timeout (5s); (2) R\u00b2 score on held-out test points (1000 points); (3) normalized tree-edit distance between predicted and ground-truth expression trees; (4) equation complexity score (total node count in expression tree); (5) aggregation functions for per-tier and overall metrics; (6) unit tests verifying: sin(x) == sin(x) (exact match), x+x == 2*x (algebraic equivalence), partial credit for near-misses. All tests pass.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_011",
+          "description": "Train and evaluate the autoregressive baseline on the synthetic dataset, establishing baseline performance numbers on the Feynman benchmark",
+          "acceptance_criteria": "Training script (scripts/train_baseline.py) and results file (results/baseline_results.json) showing: (1) model trained for at least 50 epochs on >=500K synthetic equations; (2) convergence plot saved to figures/baseline_loss.png; (3) Feynman benchmark results broken down by difficulty tier; (4) overall exact match rate reported (expected baseline: 30-50% on trivial/simple tiers); (5) R\u00b2 > 0.9 on at least 40% of equations; (6) full results table with per-equation scores; (7) comparison against published NeSymReS and ODEFormer numbers from literature review (item_002).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_012",
+          "description": "Design and implement the novel PhysDiffuser architecture: a masked discrete diffusion transformer that iteratively refines equation token sequences, inspired by LLaDA's masked diffusion and ARChitects' token-algebra soft-masking",
+          "acceptance_criteria": "Python module (src/model/phys_diffuser.py) implementing: (1) masked diffusion forward process \u2014 randomly mask equation tokens with variable masking ratio [0.0, 1.0]; (2) reverse denoising \u2014 transformer predicts masked tokens conditioned on encoder latent z and unmasked context; (3) token algebra soft-masking \u2014 add learnable mask embeddings to all positions for iterative refinement (per ARChitects); (4) architecture: 8 layers, 8 heads, dim 256, ~35M params; (5) training loss: cross-entropy on masked positions only; (6) inference: recursive soft-mask refinement loop (configurable 10-100 steps); (7) most-visited-candidate selection across refinement trajectories; (8) full forward and backward pass completes on CPU within memory budget.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement physics-informed structural priors: dimensional analysis consistency loss, operator arity constraints, and symmetry-aware data augmentation",
+          "acceptance_criteria": "Python module (src/model/physics_priors.py) implementing: (1) dimensional analysis auxiliary loss that penalizes dimensionally inconsistent sub-expressions (units must balance across = sign); (2) hard operator arity constraint in decoding \u2014 binary ops always followed by two subtrees, unary by one; (3) symmetry augmentation \u2014 for each training equation, generate permutation-equivalent forms (e.g., x+y -> y+x) and unit-rescaled versions; (4) compositionality prior \u2014 decompose complex equations into sub-expression derivation chains; (5) all priors are toggleable via config flags; (6) unit tests verify dimensional analysis catches known violations (e.g., adding meters to seconds).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement test-time adaptation: per-equation LoRA finetuning that specializes the model on the specific observation pattern at inference time, inspired by ARChitects' test-time finetuning",
+          "acceptance_criteria": "Python module (src/model/test_time_adapt.py) implementing: (1) rank-8 LoRA adapters applied to query/value projections in all transformer layers; (2) per-equation adaptation loop: 32 steps with batch size 1; (3) self-supervised objective \u2014 mask random subsets of the current best-guess equation and train to reconstruct; (4) augmentation \u2014 add noise to observation points and retrain; (5) adapter parameters <=500K (fits in CPU memory alongside base model); (6) total test-time adaptation completes in <=20s per equation on CPU; (7) ablation flag to disable for comparison.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement multi-step derivation chain generator: for complex equations, produce intermediate derivation steps (sub-expressions) as chain-of-thought supervision, enabling the model to derive complex equations compositionally",
+          "acceptance_criteria": "Python module (src/data/derivation_chains.py) implementing: (1) given a complex equation, decompose into a sequence of 2-5 intermediate sub-expressions leading to the final form (e.g., F=ma -> [a=dv/dt, F=m*dv/dt, ...integrals/derivatives...]); (2) at least 3 decomposition strategies: algebraic substitution, dimensional building, and functional composition; (3) training format: sequence of (sub_expression_1, sub_expression_2, ..., final_equation); (4) generate derivation chains for all 45 complex/multi-step tier equations in the benchmark; (5) human-verified sample of 10 chains confirms physical validity; (6) chain-of-thought loss: auxiliary loss on intermediate steps weighted at 0.3x the final equation loss.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Implement the combined PhysDiffuser+ model integrating all novel components: masked diffusion core + physics priors + test-time adaptation + derivation chains",
+          "acceptance_criteria": "Python module (src/model/phys_diffuser_plus.py) that: (1) combines PhysDiffuser, physics priors, TTA, and chain-of-thought into a unified model; (2) configurable ablation flags for each component; (3) total parameter count <=80M (base) + 500K (LoRA adapters); (4) single-equation inference pipeline: encode observations -> masked diffusion refinement (50 steps) -> test-time adaptation (32 steps) -> candidate selection -> constant fitting via BFGS; (5) end-to-end inference <=60s per equation on CPU; (6) training script that jointly optimizes all losses with configurable weights.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_017",
+          "description": "Run full ablation study: evaluate PhysDiffuser+ with each component individually removed to quantify the contribution of masked diffusion, physics priors, test-time adaptation, and derivation chains",
+          "acceptance_criteria": "Results file (results/ablation_study.json) and figure (figures/ablation_bar_chart.png) showing: (1) 6 model variants tested: full model, no-diffusion (AR only), no-physics-priors, no-TTA, no-derivation-chains, baseline-AR; (2) each variant evaluated on all 120 Feynman benchmark equations; (3) metrics reported: exact match rate, R\u00b2, tree-edit distance, per-tier breakdown; (4) statistical significance via bootstrap confidence intervals (n=1000, 95% CI); (5) clear identification of which component contributes most to performance on complex equations; (6) results compared against baseline from item_011.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Run Feynman benchmark evaluation: evaluate the full PhysDiffuser+ model on all 120 equations and compare against published state-of-the-art results (NeSymReS, ODEFormer, TPSR, PySR, AI Feynman)",
+          "acceptance_criteria": "Results file (results/feynman_benchmark.json) and table (figures/sota_comparison_table.png) showing: (1) PhysDiffuser+ exact match rate on each difficulty tier; (2) side-by-side comparison with published numbers from at least 4 prior methods cited in sources.bib; (3) overall exact match rate target: >=65% (demonstrating competitive performance); (4) on complex/multi-step tiers: >=40% exact match (demonstrating novel capability); (5) R\u00b2 > 0.95 on >=70% of all equations; (6) per-equation detailed results CSV (results/per_equation_results.csv); (7) wall-clock inference time per equation reported.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Conduct noise robustness experiment: evaluate model performance with Gaussian noise added to observations at levels sigma = {0.0, 0.01, 0.05, 0.1, 0.2}",
+          "acceptance_criteria": "Results file (results/noise_robustness.json) and figure (figures/noise_robustness_curve.png) showing: (1) exact match rate and R\u00b2 at each noise level across all 120 equations; (2) comparison with published ODEFormer noise robustness results; (3) graceful degradation demonstrated \u2014 performance at sigma=0.01 within 5% of noiseless; (4) test-time adaptation contribution quantified at each noise level (with/without TTA); (5) results demonstrate that iterative masked diffusion refinement provides inherent noise robustness versus single-pass AR decoding.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Run out-of-distribution generalization test: evaluate on 20 equations NOT in the Feynman database (e.g., Navier-Stokes simplified forms, Schrodinger 1D, Maxwell's relations, thermodynamic identities) to test genuine derivation ability",
+          "acceptance_criteria": "Results file (results/ood_generalization.json) with: (1) 20 hand-curated OOD physics equations defined in benchmarks/ood_equations.json with source citations; (2) exact match rate and R\u00b2 for each; (3) qualitative analysis of predicted equations \u2014 even when not exact, are predicted forms physically meaningful?; (4) at least 5/20 equations recovered exactly or to algebraic equivalence; (5) R\u00b2 > 0.9 on at least 12/20 equations; (6) analysis document (results/ood_analysis.md) discussing what the model 'understands' about physics structure.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Measure and report CPU performance profile: inference latency breakdown, memory usage, throughput, and comparison of quantized vs full-precision models",
+          "acceptance_criteria": "Results file (results/cpu_performance.json) and figure (figures/latency_breakdown.png) showing: (1) per-component latency: encoding, diffusion refinement steps, TTA, constant fitting, total; (2) peak memory usage during inference; (3) INT8 quantized model vs FP32: accuracy delta and speedup factor; (4) throughput: equations solved per minute on single CPU core; (5) comparison against NeSymReS published CPU inference times; (6) all inference completes within the 60s budget from item_016.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_022",
+          "description": "Perform attention visualization and interpretability analysis: examine what the transformer attends to during equation derivation to provide evidence that the model learns physics structure",
+          "acceptance_criteria": "Analysis document (results/interpretability_analysis.md) and figures (figures/attention_maps/) with: (1) attention heatmaps for at least 10 representative equations across difficulty tiers; (2) analysis of encoder attention \u2014 does the model identify relevant input dimensions?; (3) analysis of decoder cross-attention \u2014 does the model attend to appropriate observation regions when generating each operator/variable?; (4) diffusion refinement trajectory visualization \u2014 show how masked tokens are progressively resolved over 50 steps for 3 example equations; (5) evidence that attention patterns correlate with physical structure (e.g., attending to periodic patterns when generating sin/cos).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Write the technical report documenting the full research: motivation, related work, method, experiments, results, analysis, and conclusions",
+          "acceptance_criteria": "LaTeX document (paper/main.tex) compiled to (paper/main.pdf) containing: (1) abstract (<=250 words) stating the problem, method, key result; (2) introduction with clear research question and contributions list; (3) related work section citing >=10 papers from sources.bib; (4) method section with architecture diagrams, loss functions, and algorithm pseudocode; (5) experiments section covering all Phase 4 results with properly formatted tables and figures; (6) analysis section with interpretability findings from item_022; (7) discussion of limitations and future work; (8) minimum 8 pages, maximum 12 pages in NeurIPS format; (9) all figures are vector graphics or >=300 DPI.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Create a reproducibility package: requirements.txt, training/evaluation scripts, pretrained model weights, and a README with step-by-step instructions",
+          "acceptance_criteria": "Repository contains: (1) requirements.txt with pinned versions of all dependencies; (2) scripts/train.py \u2014 full training pipeline with configurable hyperparameters; (3) scripts/evaluate.py \u2014 evaluation on any equation set; (4) scripts/demo.py \u2014 interactive demo that takes observation data and outputs a derived equation; (5) models/ directory with saved model checkpoint (<=500MB after quantization); (6) README.md updated with: installation instructions, training command, evaluation command, demo usage, expected results; (7) single command 'python scripts/evaluate.py --benchmark feynman' reproduces main results within 2% of reported numbers.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Compile final results summary with headline claims supported by evidence, and a 'wow results' showcase of the most impressive equation derivations",
+          "acceptance_criteria": "Document (results/final_summary.md) containing: (1) headline result: overall exact match rate vs SOTA with statistical significance; (2) top-5 most impressive derivations \u2014 complex multi-variable physics equations the model derived from raw data alone, with side-by-side (predicted vs ground truth) and R\u00b2 scores; (3) showcase of iterative refinement \u2014 step-by-step diffusion trajectory showing an equation emerging from noise for at least 2 complex equations; (4) key finding: quantified evidence that transformers can derive physics equations autonomously (exact match on >=10 equations with >=5 variables and >=8 operators); (5) comparison table showing PhysDiffuser+ performance vs all baselines and prior work from sources.bib; (6) figures/wow_showcase.png with publication-quality visualization of results.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 25,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 25
+  }
+}
