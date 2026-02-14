@@ -197,10 +197,13 @@ def generate_dataset(n_samples: int, n_points: int = 200,
                      min_depth: int = 1, max_depth: int = 5,
                      seed: int = 42) -> List[Tuple[np.ndarray, List[str], List[int]]]:
     """Generate a dataset of (observation_table, prefix_tokens, token_ids) tuples."""
+    import warnings
+    warnings.filterwarnings('ignore', category=RuntimeWarning)
+
     rng = np.random.default_rng(seed)
     dataset = []
     attempts = 0
-    max_attempts = n_samples * 10
+    max_attempts = n_samples * 5
 
     while len(dataset) < n_samples and attempts < max_attempts:
         attempts += 1
@@ -237,7 +240,7 @@ def generate_dataset(n_samples: int, n_points: int = 200,
 
         dataset.append((table, prefix, token_ids))
 
-        if len(dataset) % 10000 == 0:
+        if len(dataset) % 5000 == 0:
             print(f"Generated {len(dataset)}/{n_samples} samples ({attempts} attempts)")
 
     print(f"Generated {len(dataset)} samples in {attempts} attempts "
