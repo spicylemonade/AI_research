@@ -47,8 +47,8 @@
           "id": "item_002",
           "description": "Conduct comprehensive literature review via web search on transformer-based symbolic regression and physics equation discovery: cover SymbolicGPT, AI Feynman (1 & 2), PhyE2E, ODEFormer, TPSR, E2E-Transformer, NeSymReS, Sym-Q, LLM-SRBench, and masked diffusion models (LLaDA, MaskDiT, MDLM). Search for papers on test-time compute scaling, iterative refinement at inference, and physics-informed neural symbolic methods",
           "acceptance_criteria": "A file sources.bib in the repo root containing at least 15 BibTeX entries for consulted papers; entries must include SymbolicGPT (Valipour et al. 2021), AI Feynman (Udrescu & Tegmark 2020), AI Feynman 2.0, PhyE2E (2025), ODEFormer (d'Ascoli et al. 2024), TPSR (Shojaee et al. 2024), LLaDA (Nie et al. 2025), the ARChitects ARC2025 solution report, and at least 7 additional relevant works; each entry must have title, authors, year, and venue/URL",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "sources.bib created with 20 BibTeX entries covering all required papers: SymbolicGPT, AI Feynman 1&2, PhyE2E, ODEFormer, TPSR, LLaDA, ARChitects ARC2025, E2E-Transformer, NeSymReS, Sym-Q, LLM-SR, MDLM, SRBench, SRSD, MDTv2, MaskDiT, RoPE, LoRA, LLM-SRBench.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 1,
+    "completed": 2,
     "in_progress": 0,
     "failed": 0,
-    "pending": 24
+    "pending": 23
   }
 }
