@@ -1,0 +1,207 @@
+% Bibliography for research project - Physics-Aware Recursive Refinement (PARR) Transformer
+% for Autonomous Newtonian Physics Equation Derivation
+% Generated via comprehensive web literature search
+
+% ============================================================================
+% TRANSFORMER-BASED SYMBOLIC REGRESSION
+% ============================================================================
+
+@inproceedings{kamienny2022end,
+  title={End-to-end symbolic regression with transformers},
+  author={Kamienny, Pierre-Alexandre and d'Ascoli, St{\'e}phane and Lample, Guillaume and Charton, Fran{\c{c}}ois},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={10269--10281},
+  year={2022},
+  note={arXiv:2204.10532},
+  url={https://arxiv.org/abs/2204.10532},
+  abstract={Challenges the two-step procedure of symbolic regression (skeleton prediction then constant fitting) by training a Transformer to directly predict the full mathematical expression including numerical constants in a single forward pass. The predicted constants can be refined via non-convex optimization as an informed initialization. Achieves performance approaching state-of-the-art genetic programming on the SRBench benchmark with orders-of-magnitude faster inference.}
+}
+
+@inproceedings{shojaee2023tpsr,
+  title={{TPSR}: Transformer-based Planning for Symbolic Regression},
+  author={Shojaee, Parshin and Meidani, Kazem and Farimani, Amir Barati and Reddy, Chandan K.},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={36},
+  pages={45907--45919},
+  year={2023},
+  note={arXiv:2303.06833},
+  url={https://arxiv.org/abs/2303.06833},
+  abstract={Incorporates Monte Carlo Tree Search (MCTS) into the transformer decoding process for symbolic regression, enabling integration of non-differentiable feedback such as fitting accuracy and expression complexity as external knowledge sources. The MCTS-guided lookahead planning interacts with pre-trained transformer sampling and beam search, outperforming state-of-the-art methods on fitting-complexity trade-off, extrapolation, and noise robustness.}
+}
+
+@article{valipour2021symbolicgpt,
+  title={{SymbolicGPT}: A Generative Transformer Model for Symbolic Regression},
+  author={Valipour, Mojtaba and You, Bowen and Panju, Maysum and Ghodsi, Ali},
+  journal={arXiv preprint arXiv:2106.14131},
+  year={2021},
+  url={https://arxiv.org/abs/2106.14131},
+  abstract={Presents a GPT-style transformer language model for symbolic regression that is trained once on procedurally generated equation-data pairs and then used to rapidly solve new symbolic regression instances as individual captioning tasks. Provides an order-of-magnitude speed boost over genetic programming while maintaining competitive accuracy in reconstructing mathematical equations from numerical datasets.}
+}
+
+@inproceedings{biggio2021neural,
+  title={Neural Symbolic Regression that Scales},
+  author={Biggio, Luca and Bendinelli, Tommaso and Neitz, Alexander and Lucchi, Aurelien and Parascandolo, Giambattista},
+  booktitle={Proceedings of the 38th International Conference on Machine Learning (ICML)},
+  pages={936--945},
+  year={2021},
+  note={arXiv:2106.06427},
+  url={https://arxiv.org/abs/2106.06427},
+  abstract={Introduces the first symbolic regression method leveraging large-scale pre-training, procedurally generating an unbounded set of equations and simultaneously pre-training a Transformer to predict symbolic equations from input-output pairs. At test time, the model output guides the search for equations, demonstrating that pre-trained transformers can serve as effective equation generators for symbolic regression.}
+}
+
+% ============================================================================
+% ODE AND DYNAMICAL SYSTEMS DISCOVERY
+% ============================================================================
+
+@inproceedings{dascoli2024odeformer,
+  title={{ODEFormer}: Symbolic Regression of Dynamical Systems with Transformers},
+  author={d'Ascoli, St{\'e}phane and Becker, S{\"o}ren and Mathis, Alexander and Schwaller, Philippe and Kilbertus, Niki},
+  booktitle={Proceedings of the 12th International Conference on Learning Representations (ICLR)},
+  year={2024},
+  note={arXiv:2310.05573},
+  url={https://arxiv.org/abs/2310.05573},
+  abstract={The first transformer able to infer multidimensional ordinary differential equation (ODE) systems in symbolic form from the observation of a single solution trajectory. Introduces ODEBench, a curated collection of 63 one-to-four-dimensional systems from the literature. Consistently outperforms existing methods with substantially improved robustness to noisy and irregularly sampled observations and faster inference.}
+}
+
+% ============================================================================
+% PHYSICS LAW DISCOVERY AND AI-DRIVEN SCIENCE
+% ============================================================================
+
+@article{fang2025ainewton,
+  title={{AI-Newton}: A Concept-Driven Physical Law Discovery System without Prior Physical Knowledge},
+  author={Fang, You-Le and Jian, Dong-Shan and Li, Xiang and Ma, Yan-Qing},
+  journal={arXiv preprint arXiv:2504.01538},
+  year={2025},
+  url={https://arxiv.org/abs/2504.01538},
+  abstract={A novel framework for concept-driven scientific discovery that autonomously derives general physical laws directly from raw multi-experiment data without supervision or prior physical knowledge. Core innovations include proposing interpretable physical concepts to construct laws and progressively generalizing laws to broader domains. Applied to noisy mechanics experiments, it rediscovers Newton's second law, conservation of energy, and universal gravitation. Featured in Nature news coverage.}
+}
+
+@article{ying2025phye2e,
+  title={A Neural Symbolic Model for Space Physics},
+  author={Ying, Jie and Lin, Haowei and Yue, Chao and Chen, Yajie and Xiao, Chao and Shi, Quanqi and Liang, Yitao and Yau, Shing-Tung and Zhou, Yuan and Ma, Jianzhu},
+  journal={Nature Machine Intelligence},
+  volume={7},
+  pages={1726--1741},
+  year={2025},
+  note={arXiv:2503.07994},
+  url={https://arxiv.org/abs/2503.07994},
+  abstract={Introduces PhyE2E, which simplifies symbolic regression by decomposing it into sub-problems using second-order derivatives of an oracle neural network, then employs a transformer to translate data into symbolic formulas end-to-end. Uses an LLM (fine-tuned OpenLLaMA2-3B) to synthesize 264K training formulas resembling real physics. Refines output via MCTS and genetic programming. Applied to five critical space physics problems including upgrading NASA's 1993 solar activity formula.}
+}
+
+@article{udrescu2020aifeynman,
+  title={{AI Feynman}: A Physics-Inspired Method for Symbolic Regression},
+  author={Udrescu, Silviu-Marian and Tegmark, Max},
+  journal={Science Advances},
+  volume={6},
+  number={16},
+  pages={eaay2631},
+  year={2020},
+  note={arXiv:1905.11481},
+  url={https://arxiv.org/abs/1905.11481},
+  abstract={A recursive multidimensional symbolic regression algorithm combining neural network fitting with physics-inspired techniques including dimensional analysis, symmetry detection, and separability. Discovers all 100 equations from the Feynman Lectures on Physics benchmark (previous best: 71/100). Introduces the Feynman Symbolic Regression Database as a standard benchmark for the field.}
+}
+
+@inproceedings{cranmer2020discovering,
+  title={Discovering Symbolic Models from Deep Learning with Inductive Biases},
+  author={Cranmer, Miles and Sanchez-Gonzalez, Alvaro and Battaglia, Peter and Xu, Rui and Cranmer, Kyle and Spergel, David and Ho, Shirley},
+  booktitle={Advances in Neural Information Processing Systems},
+  volume={33},
+  year={2020},
+  note={arXiv:2006.11287},
+  url={https://arxiv.org/abs/2006.11287},
+  abstract={Develops a general approach to distill symbolic representations from learned deep models by introducing strong inductive biases into Graph Neural Networks (GNNs). Encourages sparse latent representations during training, then applies symbolic regression to GNN components to extract explicit physical relations (force laws, Hamiltonians). Applied to a dark matter simulation, discovering a new analytic formula for dark matter concentration. The extracted symbolic expressions generalize better to out-of-distribution data than the GNN itself.}
+}
+
+% ============================================================================
+% UNIVERSAL TRANSFORMERS AND ABSTRACT REASONING
+% ============================================================================
+
+@inproceedings{dehghani2019universal,
+  title={Universal Transformers},
+  author={Dehghani, Mostafa and Gouws, Stephan and Vinyals, Oriol and Uszkoreit, Jakob and Kaiser, {\L}ukasz},
+  booktitle={Proceedings of the 7th International Conference on Learning Representations (ICLR)},
+  year={2019},
+  note={arXiv:1807.03819},
+  url={https://arxiv.org/abs/1807.03819},
+  abstract={Proposes the Universal Transformer (UT), a parallel-in-time recurrent self-attentive sequence model that combines the parallelizability and global receptive field of feed-forward Transformers with the recurrent inductive bias of RNNs. Includes a dynamic per-position halting mechanism for adaptive computation. Under certain assumptions, UTs can be shown to be Turing-complete, unlike standard Transformers. Outperforms standard Transformers on algorithmic and language understanding tasks.}
+}
+
+@article{gao2025urm,
+  title={Universal Reasoning Model},
+  author={Gao, Zitian and Chen, Lynx and Xiao, Yihao and Xing, He and Tao, Ran and Luo, Haoming and Zhou, Joey and Dai, Bryan},
+  journal={arXiv preprint arXiv:2512.14693},
+  year={2025},
+  url={https://arxiv.org/abs/2512.14693},
+  abstract={Systematically analyzes Universal Transformer variants and shows that improvements on ARC-AGI primarily arise from recurrent inductive bias and strong nonlinear components rather than elaborate architectural designs. Proposes URM with ConvSwiGLU (depthwise 1D convolution over gated components) and Truncated Backpropagation Through Loops (TBPTL). Achieves 53.8\% pass@1 on ARC-AGI-1 (vs 40.0\% for TRM) and 16.0\% on ARC-AGI-2, demonstrating substantial improvements in abstract reasoning.}
+}
+
+@article{liao2025compressarc,
+  title={{ARC-AGI} Without Pretraining},
+  author={Liao, Isaac and Gu, Albert},
+  journal={arXiv preprint arXiv:2512.06104},
+  year={2025},
+  url={https://arxiv.org/abs/2512.06104},
+  abstract={Introduces CompressARC, a 76K parameter model without any pretraining that solves 20\% of ARC-AGI-1 evaluation puzzles by minimizing the description length (MDL) of the target puzzle purely during inference time. Formulates ARC solving as a code-golfing problem: finding the shortest self-contained program that outputs the puzzle data. Uses a VAE loss with decoder regularization as a substitute for combinatorial search, requiring only gradient descent at test time on a single RTX 4070. Won 3rd Place in the ARC Prize 2025 Paper Award.}
+}
+
+% ============================================================================
+% MASKED DIFFUSION LANGUAGE MODELS
+% ============================================================================
+
+@inproceedings{nie2025llada,
+  title={Large Language Diffusion Models},
+  author={Nie, Shen and Zhu, Fengqi and You, Zebin and Zhang, Xiaolu and Ou, Jingyang and Hu, Jun and Zhou, Jun and Lin, Yankai and Wen, Ji-Rong and Li, Chongxuan},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2025},
+  note={Oral presentation. arXiv:2502.09992},
+  url={https://arxiv.org/abs/2502.09992},
+  abstract={Introduces LLaDA, a masked diffusion language model trained from scratch under the pre-training and SFT paradigm at an unprecedented 8B parameter scale. Employs a forward data masking process with uniformly random masking ratios (unlike BERT's fixed ratio) and a reverse generation process parameterized by a Transformer. Demonstrates performance comparable to LLaMA3 8B across benchmarks on general tasks, math, and code, while addressing the reversal curse and surpassing GPT-4o on reversal poem completion.}
+}
+
+% ============================================================================
+% ADDITIONAL RELEVANT WORKS
+% ============================================================================
+
+@article{lample2020deep,
+  title={Deep Learning for Symbolic Mathematics},
+  author={Lample, Guillaume and Charton, Fran{\c{c}}ois},
+  booktitle={Proceedings of the 8th International Conference on Learning Representations (ICLR)},
+  year={2020},
+  note={arXiv:1912.01412},
+  url={https://arxiv.org/abs/1912.01412},
+  abstract={Demonstrates that neural networks can be surprisingly effective at symbolic mathematics tasks including integration and solving differential equations. Trains sequence-to-sequence transformers on synthetically generated mathematical expressions, achieving performance that outperforms commercial computer algebra systems on certain integration tasks. Establishes the paradigm of treating symbolic mathematics as a sequence translation problem.}
+}
+
+@article{makke2024interpretable,
+  title={Interpretable scientific discovery with symbolic regression: a review},
+  author={Makke, Nour and Chawla, Sanjay},
+  journal={Artificial Intelligence Review},
+  volume={57},
+  number={2},
+  pages={1--68},
+  year={2024},
+  doi={10.1007/s10462-023-10622-0},
+  abstract={Comprehensive survey of symbolic regression methods covering genetic programming, deep learning transformers, and reinforcement learning approaches. Reviews adoption of these methods for scientific model discovery across fundamental and applied sciences. Categorizes methods by representation (expression trees with operators as internal nodes and operands as terminals) and search strategy.}
+}
+
+@inproceedings{la2024lasr,
+  title={{LaSR}: Large Language Model Assisted Symbolic Regression},
+  author={La Cava, William and others},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2024},
+  abstract={Enhances genetic algorithms for symbolic regression by inducing a library of abstract textual concepts via zero-shot LLM queries. Discovers and evolves concepts from known high-performing hypotheses. Discovers 66 of 100 Feynman equations versus 59 for the best existing approach, demonstrating how LLMs can accelerate symbolic scientific discovery.}
+}
+
+@article{tenachi2023physo,
+  title={Deep symbolic regression for physics guided by units constraints: toward the automated discovery of physical laws},
+  author={Tenachi, Wassim and Ibata, Rodrigo and Diakogiannis, Foivos I.},
+  journal={The Astrophysical Journal},
+  volume={959},
+  number={2},
+  pages={99},
+  year={2023},
+  note={arXiv:2303.03192},
+  url={https://arxiv.org/abs/2303.03192},
+  abstract={Introduces Physical Symbolic Optimization (Phi-SO), a framework for recovering symbolic expressions from physics data using deep reinforcement learning with unit constraints. Proposes solutions where physical units are consistent by construction, vastly improving performance on physics-specific symbolic regression tasks. Addresses the critical gap that most SR methods ignore dimensional analysis.}
+}
