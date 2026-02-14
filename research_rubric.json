@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T00:00:00Z",
-  "updated_at": "2026-02-14T06:38:26.577667+00:00",
+  "updated_at": "2026-02-14T06:39:43.704051+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -102,8 +102,8 @@
           "id": "item_008",
           "description": "Implement the tokenizer module with bidirectional conversion between equation strings and token sequences",
           "acceptance_criteria": "Module src/tokenizer.py that: (1) implements encode() and decode() with the full vocabulary from item_005, (2) achieves 100% round-trip fidelity on all 60+ generator templates, (3) handles edge cases (nested functions, multi-variable expressions, constants), (4) passes >=6 unit tests in tests/test_tokenizer.py.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Tokenizer with 147-token vocab, 100% round-trip on all 62 templates, 12/12 tests pass.",
           "error": null
         },
         {
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 7,
+    "completed": 8,
     "in_progress": 0,
     "failed": 0,
-    "pending": 21
+    "pending": 20
   }
 }
