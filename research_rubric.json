@@ -71,8 +71,8 @@
           "id": "item_005",
           "description": "Design the PhysMDT (Physics Masked Diffusion Transformer) architecture on paper: specify the encoder-decoder structure, tokenization scheme for symbolic expressions (reverse Polish notation with physics-aware tokens), tree-structured positional encoding inspired by ARC2025's 2D Golden Gate RoPE, soft-masking recursion mechanism adapted for equation tokens, and test-time finetuning protocol for per-equation specialization",
           "acceptance_criteria": "A detailed architecture document (docs/architecture.md) with: (1) block diagram of the full PhysMDT pipeline (data \u2192 tokenizer \u2192 encoder \u2192 masked diffusion decoder \u2192 symbolic output), (2) specification of model dimensions (embedding dim, num layers, num heads, FFN dim) for a base model (\u226450M params) and a scaled model (\u2264200M params), (3) mathematical formulation of the tree-aware 2D positional encoding, (4) pseudocode for the soft-masking recursion inference loop with at least 10 refinement steps, (5) test-time finetuning protocol (LoRA rank, learning rate, steps per equation)",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "docs/architecture.md contains: (1) ASCII block diagram of full pipeline, (2) base model ~45M params and scaled model ~180M params with full dimension specs, (3) tree-aware 2D Golden Gate RoPE formulation with 4 directional components, (4) 50-step soft-masking recursion pseudocode with cold restarts and most-visited selection, (5) TTF protocol with LoRA rank 32, 128 steps/equation, augmentation details. YAML configs included.",
           "error": null
         }
       ]
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 4,
+    "completed": 5,
     "in_progress": 0,
     "failed": 0,
-    "pending": 21
+    "pending": 20
   }
 }
