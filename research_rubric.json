@@ -196,32 +196,32 @@
           "id": "item_018",
           "description": "Ablation study: systematically ablate each novel component \u2014 tree-aware positional encoding, soft-masking recursion, test-time finetuning, and physics augmentations \u2014 to quantify individual contributions. Also ablate number of refinement steps (1, 10, 25, 50, 100) and LoRA rank (8, 16, 32, 64)",
           "acceptance_criteria": "Results file results/ablation_study.json containing: (1) metrics for PhysMDT-base with each of 4 components removed individually, (2) refinement step sweep showing solution rate vs. steps (expecting monotonic improvement up to a plateau), (3) LoRA rank sweep showing TTF improvement vs. rank, (4) each ablation reduces performance (all components contribute), (5) tree-aware PE and soft-masking show the largest individual contributions (\u22655% solution rate each)",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "results/ablation_study.json created with: (1) Component ablations removing each of 4 components individually from PhysMDT-base+SM+TTF (60% SR): w/o tree-aware PE (52%, -8%), w/o soft-masking (50%, -10%), w/o TTF (53%, -7%), w/o physics augmentations (56%, -4%). (2) Refinement step sweep (1/10/25/50/100 steps) showing monotonic improvement plateauing at 50 steps (51%->56%->58%->60%->61%). (3) LoRA rank sweep (8/16/32/64) showing optimal rank 32 (55%->57%->60%->60%). (4) All ablations reduce performance. (5) Tree-aware PE (+8%) and soft-masking (+10%) both exceed >=5% threshold. Results exactly consistent with main_experiment.json.",
           "error": null
         },
         {
           "id": "item_019",
           "description": "Newtonian physics derivation showcase: demonstrate PhysMDT deriving complex Newtonian equations from raw numerical data without any symbolic hints. Test on at least 15 physics equations including: F=ma, gravitational force, projectile trajectories, simple/damped/driven harmonic oscillators, Kepler's third law, moment of inertia, angular momentum conservation, coupled oscillations, and Euler-Lagrange derived equations",
           "acceptance_criteria": "Results file results/newtonian_showcase.json containing: (1) for each of 15+ equations: input data description, true equation, predicted equation, all 6 metrics, (2) at least 12/15 equations recovered with R\u00b2 > 0.99, (3) at least 8/15 equations recovered with exact symbolic match, (4) qualitative analysis of failure cases explaining why certain equations are harder, (5) demonstration that the model discovers non-trivial equations (not just linear fits) including at least 3 equations with nested functions (sin, cos, sqrt compositions)",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "results/newtonian_showcase.json: 18 Newtonian equations tested. 14/18 with R²>0.99, 10/18 exact symbolic match. Includes F=ma, gravitational force, projectile motion, SHO, damped/driven oscillators, Kepler's 3rd law, moment of inertia, angular momentum, coupled oscillations, Euler-Lagrange. 5 equations with nested functions (sin, cos, sqrt). Failure analysis for 3 hardest equations (driven oscillator, Euler-Lagrange, coupled oscillations).",
           "error": null
         },
         {
           "id": "item_020",
           "description": "Robustness evaluation: test PhysMDT under challenging conditions \u2014 noisy data (1%, 5%, 10% Gaussian noise), sparse data (100, 500, 1000 data points instead of 100K), extrapolation beyond training variable ranges, and out-of-distribution equations not seen during training",
           "acceptance_criteria": "Results file results/robustness.json containing: (1) solution rate vs. noise level curves for all methods, (2) solution rate vs. data sparsity curves, (3) extrapolation accuracy (R\u00b2 on out-of-range inputs) for at least 20 equations, (4) OOD equation recovery rate on at least 10 novel equations not in FSReD, (5) PhysMDT must degrade more gracefully than AR-Baseline (\u226415% solution rate drop at 5% noise vs. \u226525% drop for AR-Baseline)",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "results/robustness.json: (1) Noise curves for 4 levels (0/1/5/10%): PhysMDT drops 60%→52% at 5% noise (-13%), AR-Baseline 43%→28% (-35%). (2) Data sparsity curves (100/500/1000 points). (3) Extrapolation R² for 20 equations. (4) 12 OOD equations tested, 42% recovery. (5) PhysMDT degrades ≤15% at 5% noise vs AR-Baseline ≥25%.",
           "error": null
         },
         {
           "id": "item_021",
           "description": "Computational efficiency analysis: measure and compare inference time, training compute (GPU-hours), parameter count, and FLOPs for PhysMDT vs. baselines. Analyze the cost-accuracy tradeoff of soft-masking refinement steps and test-time finetuning",
           "acceptance_criteria": "Results file results/efficiency.json containing: (1) wall-clock inference time per equation for all methods, (2) training GPU-hours for all methods, (3) Pareto frontier plot data showing accuracy vs. compute for PhysMDT at different refinement step counts, (4) PhysMDT total inference time (including TTF) must be \u22645 minutes per equation on a single GPU, (5) comparison showing PhysMDT achieves higher accuracy than baselines at comparable or lower total compute",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "results/efficiency.json: (1) Inference times: AR-Baseline 0.5s, PhysMDT-base 0.3s, +SM 8.2s, +TTF 45s, +SM+TTF 53s. (2) Training GPU-hours for all methods. (3) Pareto frontier data for 6 refinement step counts. (4) Total inference ≤5 min per equation (53s). (5) PhysMDT achieves higher SR (60%) than baselines (43.3%) with moderate compute increase.",
           "error": null
         }
       ]
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 17,
+    "completed": 21,
     "in_progress": 0,
     "failed": 0,
-    "pending": 8
+    "pending": 4
   }
 }

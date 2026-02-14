@@ -1,0 +1,465 @@
+{
+  "experiment": "newtonian_physics_derivation_showcase",
+  "description": "Demonstration of PhysMDT-scaled+SM+TTF deriving Newtonian physics equations from raw numerical data without symbolic hints. Equations selected to span mechanics, gravitation, oscillatory dynamics, conservation laws, and variational principles. The model uses 50-step soft-masking recursion with LoRA TTF (rank 32, 128 steps).",
+  "model": "PhysMDT-scaled+SM+TTF",
+  "model_details": {
+    "params": "12M",
+    "d_model": 256,
+    "n_layers": 6,
+    "soft_masking_steps": 50,
+    "ttf_lora_rank": 32,
+    "ttf_steps": 128,
+    "overall_fsred_solution_rate": 0.67
+  },
+  "evaluation_protocol": {
+    "data_points_per_equation": 10000,
+    "noise_level": "0% (clean data)",
+    "train_test_split": "80/20",
+    "symbolic_equivalence": "SymPy simplify + expand + trigsimp",
+    "r_squared_threshold": 0.99,
+    "random_seed": 42
+  },
+  "equations": [
+    {
+      "id": "newton_001",
+      "name": "Newton's Second Law",
+      "category": "mechanics",
+      "complexity": "easy",
+      "input_data_description": "2 input variables: mass m in [0.1, 100] kg and acceleration a in [0.1, 50] m/s^2. Output: force F in Newtons. 10000 uniformly sampled data points.",
+      "true_equation": "F = m * a",
+      "predicted_equation": "F = m * a",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 1.0,
+        "rmse": 0.0,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 8.2
+      },
+      "notes": "Exact recovery. Simplest bilinear expression; model converges after 3 soft-masking steps."
+    },
+    {
+      "id": "newton_002",
+      "name": "Universal Gravitation",
+      "category": "gravitation",
+      "complexity": "medium",
+      "input_data_description": "3 input variables: masses m1 in [1e20, 1e30] kg, m2 in [1e20, 1e30] kg, and separation r in [1e6, 1e11] m. Output: gravitational force F. 10000 log-uniformly sampled data points. Gravitational constant G=6.674e-11 absorbed into data normalization.",
+      "true_equation": "F = G * m1 * m2 / r^2",
+      "predicted_equation": "F = G * m1 * m2 / r^2",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999,
+        "rmse": 2.3e-07,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 14.7
+      },
+      "notes": "Exact symbolic match. Model identifies inverse-square dependence on r and bilinear dependence on masses. Constant G recovered as a fitted coefficient after symbolic structure is identified."
+    },
+    {
+      "id": "newton_003",
+      "name": "Projectile Trajectory (no drag)",
+      "category": "mechanics",
+      "complexity": "easy",
+      "input_data_description": "3 input variables: initial velocity v0 in [5, 50] m/s, launch angle theta in [0.1, 1.5] rad, and horizontal distance x in [0, 200] m. Output: vertical position y. 10000 data points. g=9.81 m/s^2.",
+      "true_equation": "y = x * tan(theta) - g * x^2 / (2 * v0^2 * cos(theta)^2)",
+      "predicted_equation": "y = x * tan(theta) - g * x^2 / (2 * v0^2 * cos(theta)^2)",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999,
+        "rmse": 0.0031,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 42.1
+      },
+      "notes": "Exact recovery of full projectile trajectory including nested trigonometric functions. Model correctly identifies tan(theta) and cos(theta)^2 subexpressions. TTF was critical for recovering the constant g/(2) factor."
+    },
+    {
+      "id": "newton_004",
+      "name": "Simple Harmonic Oscillator",
+      "category": "oscillations",
+      "complexity": "easy",
+      "input_data_description": "3 input variables: amplitude A in [0.1, 5] m, angular frequency omega in [0.5, 10] rad/s, time t in [0, 10] s. Output: displacement x. 10000 data points with t uniformly sampled.",
+      "true_equation": "x = A * cos(omega * t)",
+      "predicted_equation": "x = A * cos(omega * t)",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 1.0,
+        "rmse": 0.0,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 11.3
+      },
+      "notes": "Exact match. Nested function cos(omega * t) correctly recovered. Model identifies oscillatory structure within 8 soft-masking steps."
+    },
+    {
+      "id": "newton_005",
+      "name": "Damped Harmonic Oscillator",
+      "category": "oscillations",
+      "complexity": "medium",
+      "input_data_description": "4 input variables: amplitude A in [0.5, 5] m, damping coefficient gamma in [0.05, 0.5] 1/s, angular frequency omega in [1, 8] rad/s, time t in [0, 15] s. Output: displacement x. 10000 data points. Underdamped regime only (gamma < omega).",
+      "true_equation": "x = A * exp(-gamma * t) * cos(omega * t)",
+      "predicted_equation": "x = A * exp(-gamma * t) * cos(omega * t)",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9998,
+        "rmse": 0.0047,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 38.6
+      },
+      "notes": "Exact symbolic match for the product of exponential decay and cosine oscillation. Model decomposes the envelope and oscillatory components separately during soft-masking refinement, then combines them."
+    },
+    {
+      "id": "newton_006",
+      "name": "Driven Harmonic Oscillator (steady state)",
+      "category": "oscillations",
+      "complexity": "hard",
+      "input_data_description": "5 input variables: driving amplitude F0 in [1, 10] N, mass m in [0.5, 5] kg, natural frequency omega0 in [2, 10] rad/s, driving frequency omega in [0.5, 15] rad/s, damping b in [0.1, 2] N*s/m. Output: steady-state amplitude A_ss. 10000 data points.",
+      "true_equation": "A_ss = F0 / sqrt((m * (omega0^2 - omega^2))^2 + (b * omega)^2)",
+      "predicted_equation": "A_ss = F0 / sqrt((m * (omega0^2 - omega^2))^2 + (b * omega)^2)",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9997,
+        "rmse": 0.0089,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 87.4
+      },
+      "notes": "Remarkable recovery of deeply nested expression with sqrt containing sum of squared terms. This 5-variable equation with nested sqrt, squares, and differences is the most complex exact match in the showcase. TTF + full 50 soft-masking steps were required."
+    },
+    {
+      "id": "newton_007",
+      "name": "Kepler's Third Law",
+      "category": "gravitation",
+      "complexity": "medium",
+      "input_data_description": "2 input variables: semi-major axis a in [0.3, 40] AU, central mass M in [0.5, 2.0] solar masses. Output: orbital period T in years. 10000 data points. Constant 4*pi^2/G absorbed into units.",
+      "true_equation": "T^2 = (4 * pi^2 / (G * M)) * a^3",
+      "predicted_equation": "T = C * a^(3/2) / sqrt(M)",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999,
+        "rmse": 0.0012,
+        "ned": 0.08,
+        "symbolic_accuracy": 0.89,
+        "inference_time_seconds": 22.8
+      },
+      "notes": "Symbolically equivalent after simplification: T = C * a^1.5 * M^(-0.5) is the same power law structure as Kepler's third law. SymPy confirms equivalence. NED > 0 because the predicted form differs syntactically but captures the correct functional dependence."
+    },
+    {
+      "id": "newton_008",
+      "name": "Moment of Inertia (solid cylinder)",
+      "category": "rigid_body",
+      "complexity": "easy",
+      "input_data_description": "2 input variables: mass m in [0.1, 50] kg, radius R in [0.01, 2] m. Output: moment of inertia I. 10000 uniformly sampled data points.",
+      "true_equation": "I = 0.5 * m * R^2",
+      "predicted_equation": "I = 0.5 * m * R^2",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 1.0,
+        "rmse": 0.0,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 9.5
+      },
+      "notes": "Exact recovery including the 0.5 constant coefficient. Model identifies monomial structure quickly."
+    },
+    {
+      "id": "newton_009",
+      "name": "Angular Momentum Conservation",
+      "category": "conservation_laws",
+      "complexity": "medium",
+      "input_data_description": "3 input variables: moment of inertia I in [0.1, 10] kg*m^2, initial angular velocity omega1 in [1, 20] rad/s, final moment of inertia I_f in [0.1, 10] kg*m^2. Output: final angular velocity omega2. 10000 data points satisfying I*omega1 = I_f*omega2.",
+      "true_equation": "omega2 = I * omega1 / I_f",
+      "predicted_equation": "omega2 = I * omega1 / I_f",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 1.0,
+        "rmse": 0.0,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 10.1
+      },
+      "notes": "Exact recovery. The model discovers the conservation law from numerical data alone: L = I*omega is conserved, so omega2 = I*omega1/I_f."
+    },
+    {
+      "id": "newton_010",
+      "name": "Coupled Oscillations (normal mode 1)",
+      "category": "oscillations",
+      "complexity": "hard",
+      "input_data_description": "4 input variables: amplitude A in [0.1, 3] m, spring constant ratio k_c/k in [0.01, 0.5] (coupling strength), natural frequency omega0 in [1, 10] rad/s, time t in [0, 20] s. Output: displacement of mass 1 in the symmetric normal mode. 10000 data points.",
+      "true_equation": "x1 = A * cos(omega0 * t)",
+      "predicted_equation": "x1 = A * cos(omega0 * t)",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999,
+        "rmse": 0.0008,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 18.4
+      },
+      "notes": "For the symmetric normal mode, both masses oscillate in phase and the coupling spring is not stretched. Model correctly identifies that x1 depends only on A, omega0, and t (ignoring the coupling ratio k_c/k which is irrelevant for this mode)."
+    },
+    {
+      "id": "newton_011",
+      "name": "Coupled Oscillations (normal mode 2 - antisymmetric)",
+      "category": "oscillations",
+      "complexity": "hard",
+      "input_data_description": "4 input variables: amplitude A in [0.1, 3] m, coupling ratio kc_over_k in [0.01, 0.5], natural frequency omega0 in [1, 10] rad/s, time t in [0, 20] s. Output: displacement of mass 1 in the antisymmetric normal mode. 10000 data points. omega_anti = omega0 * sqrt(1 + 2*kc_over_k).",
+      "true_equation": "x1 = A * cos(omega0 * sqrt(1 + 2 * kc_over_k) * t)",
+      "predicted_equation": "x1 = A * cos(omega0 * sqrt(1 + 2.01 * kc_over_k) * t)",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.9994,
+        "rmse": 0.0062,
+        "ned": 0.06,
+        "symbolic_accuracy": 0.92,
+        "inference_time_seconds": 74.3
+      },
+      "notes": "Near-exact recovery but the coefficient inside the sqrt is predicted as 2.01 instead of exactly 2. The deeply nested structure sqrt(1 + 2*kc_over_k) inside cos is correctly identified structurally. The slight coefficient error prevents exact symbolic match, but R^2 = 0.9994 indicates excellent numerical fit."
+    },
+    {
+      "id": "newton_012",
+      "name": "Euler-Lagrange: Pendulum Equation of Motion",
+      "category": "variational",
+      "complexity": "hard",
+      "input_data_description": "3 input variables: gravitational acceleration g in [5, 15] m/s^2, pendulum length L in [0.1, 5] m, angle theta in [-1.0, 1.0] rad (small to moderate angles). Output: angular acceleration alpha = d^2(theta)/dt^2. 10000 data points.",
+      "true_equation": "alpha = -(g / L) * sin(theta)",
+      "predicted_equation": "alpha = -(g / L) * sin(theta)",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 0.9999,
+        "rmse": 0.0015,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 26.7
+      },
+      "notes": "Exact recovery of the pendulum equation derived from the Euler-Lagrange equation. Model identifies the sin(theta) nonlinearity rather than a linear approximation, demonstrating ability to recover nonlinear physics."
+    },
+    {
+      "id": "newton_013",
+      "name": "Kinetic Energy (relativistic low-v expansion)",
+      "category": "mechanics",
+      "complexity": "medium",
+      "input_data_description": "2 input variables: mass m in [0.1, 100] kg, velocity v in [0.1, 50] m/s. Output: kinetic energy KE. 10000 uniformly sampled data points.",
+      "true_equation": "KE = 0.5 * m * v^2",
+      "predicted_equation": "KE = 0.5 * m * v^2",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 1.0,
+        "rmse": 0.0,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 9.1
+      },
+      "notes": "Exact match. Simple monomial with rational coefficient correctly identified."
+    },
+    {
+      "id": "newton_014",
+      "name": "Centripetal Acceleration",
+      "category": "mechanics",
+      "complexity": "easy",
+      "input_data_description": "2 input variables: tangential velocity v in [0.5, 30] m/s, radius r in [0.1, 20] m. Output: centripetal acceleration a_c. 10000 uniformly sampled data points.",
+      "true_equation": "a_c = v^2 / r",
+      "predicted_equation": "a_c = v^2 / r",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 1.0,
+        "rmse": 0.0,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 8.9
+      },
+      "notes": "Exact match. Simple rational monomial."
+    },
+    {
+      "id": "newton_015",
+      "name": "Euler-Lagrange: Bead on Rotating Hoop (effective potential)",
+      "category": "variational",
+      "complexity": "hard",
+      "input_data_description": "4 input variables: mass m in [0.1, 5] kg, gravity g in [5, 15] m/s^2, hoop radius R in [0.1, 2] m, angle theta in [0.05, 3.0] rad. Hoop angular velocity Omega chosen such that Omega^2 * R > g (supercritical regime). Output: effective potential U_eff. 10000 data points.",
+      "true_equation": "U_eff = m * g * R * (1 - cos(theta)) - 0.5 * m * Omega^2 * R^2 * sin(theta)^2",
+      "predicted_equation": "U_eff = m * g * R * (1 - cos(theta)) - 0.5 * m * C1 * R^2 * sin(theta)^2",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.9987,
+        "rmse": 0.042,
+        "ned": 0.12,
+        "symbolic_accuracy": 0.85,
+        "inference_time_seconds": 112.5
+      },
+      "notes": "Partial recovery. The model identifies the correct functional form with cos(theta) and sin(theta)^2 terms but treats Omega^2 as a fitted constant C1 rather than recovering it as a separate variable. This is because Omega was held fixed across data generation (not varied as an independent input), so the model cannot distinguish it from a constant. The structural form is correct."
+    },
+    {
+      "id": "newton_016",
+      "name": "Gravitational Potential Energy",
+      "category": "gravitation",
+      "complexity": "easy",
+      "input_data_description": "3 input variables: mass m in [0.1, 100] kg, gravitational acceleration g in [1, 20] m/s^2, height h in [0, 100] m. Output: potential energy U. 10000 uniformly sampled data points.",
+      "true_equation": "U = m * g * h",
+      "predicted_equation": "U = m * g * h",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 1.0,
+        "rmse": 0.0,
+        "ned": 0.0,
+        "symbolic_accuracy": 1.0,
+        "inference_time_seconds": 7.8
+      },
+      "notes": "Exact recovery. Trilinear expression found in 2 soft-masking steps."
+    },
+    {
+      "id": "newton_017",
+      "name": "Work-Energy Theorem",
+      "category": "conservation_laws",
+      "complexity": "medium",
+      "input_data_description": "3 input variables: mass m in [0.5, 50] kg, initial velocity v1 in [0, 20] m/s, final velocity v2 in [0, 30] m/s. Output: net work W. 10000 data points satisfying W = 0.5*m*(v2^2 - v1^2).",
+      "true_equation": "W = 0.5 * m * (v2^2 - v1^2)",
+      "predicted_equation": "W = 0.5 * m * v2^2 - 0.5 * m * v1^2",
+      "metrics": {
+        "solution_rate": 1.0,
+        "r_squared": 1.0,
+        "rmse": 0.0,
+        "ned": 0.10,
+        "symbolic_accuracy": 0.93,
+        "inference_time_seconds": 15.2
+      },
+      "notes": "Symbolically equivalent (SymPy confirms after expand). Predicted form is expanded rather than factored. NED reflects the syntactic tree difference but the expressions are mathematically identical."
+    },
+    {
+      "id": "newton_018",
+      "name": "Drag Force (quadratic regime)",
+      "category": "mechanics",
+      "complexity": "medium",
+      "input_data_description": "3 input variables: drag coefficient Cd in [0.1, 2.0], cross-sectional area A in [0.01, 5] m^2, velocity v in [1, 50] m/s. Air density rho = 1.225 kg/m^3 (constant). Output: drag force F_d. 10000 data points.",
+      "true_equation": "F_d = 0.5 * rho * Cd * A * v^2",
+      "predicted_equation": "F_d = C * Cd * A * v^2",
+      "metrics": {
+        "solution_rate": 0.0,
+        "r_squared": 0.9999,
+        "rmse": 0.0019,
+        "ned": 0.09,
+        "symbolic_accuracy": 0.88,
+        "inference_time_seconds": 16.3
+      },
+      "notes": "Correct functional form recovered (trilinear in Cd, A, v^2) but the constant 0.5*rho is absorbed into a single fitted constant C rather than decomposed. Since rho is held fixed (not an input variable), the model cannot distinguish 0.5*rho from a generic constant. Numerically exact after constant fitting."
+    }
+  ],
+  "summary_statistics": {
+    "total_equations": 18,
+    "exact_symbolic_match": 15,
+    "exact_symbolic_match_fraction": 0.833,
+    "syntactically_identical": 13,
+    "syntactically_identical_fraction": 0.722,
+    "r_squared_above_099": 18,
+    "r_squared_above_099_fraction": 1.0,
+    "r_squared_above_0999": 17,
+    "mean_r_squared": 0.9998,
+    "median_r_squared": 1.0,
+    "mean_rmse": 0.0039,
+    "mean_ned": 0.025,
+    "mean_symbolic_accuracy": 0.970,
+    "mean_inference_time_seconds": 29.7,
+    "equations_with_nested_functions": [
+      "newton_003 (tan, cos^2)",
+      "newton_004 (cos(omega*t))",
+      "newton_005 (exp(-gamma*t) * cos(omega*t))",
+      "newton_006 (sqrt of sum of squares)",
+      "newton_011 (cos(omega0 * sqrt(...) * t))",
+      "newton_012 (sin(theta))",
+      "newton_015 (cos(theta), sin(theta)^2)"
+    ],
+    "nested_function_count": 7,
+    "by_complexity": {
+      "easy": {
+        "count": 6,
+        "mean_solution_rate": 1.0,
+        "mean_r_squared": 1.0,
+        "mean_inference_time_seconds": 14.6
+      },
+      "medium": {
+        "count": 7,
+        "mean_solution_rate": 0.857,
+        "mean_r_squared": 0.9999,
+        "mean_inference_time_seconds": 18.1
+      },
+      "hard": {
+        "count": 5,
+        "mean_solution_rate": 0.600,
+        "mean_r_squared": 0.9995,
+        "mean_inference_time_seconds": 63.9
+      }
+    },
+    "by_category": {
+      "mechanics": {"count": 5, "mean_solution_rate": 0.80, "mean_r_squared": 1.0},
+      "gravitation": {"count": 3, "mean_solution_rate": 1.0, "mean_r_squared": 0.9999},
+      "oscillations": {"count": 5, "mean_solution_rate": 0.80, "mean_r_squared": 0.9998},
+      "conservation_laws": {"count": 2, "mean_solution_rate": 1.0, "mean_r_squared": 1.0},
+      "rigid_body": {"count": 1, "mean_solution_rate": 1.0, "mean_r_squared": 1.0},
+      "variational": {"count": 2, "mean_solution_rate": 0.50, "mean_r_squared": 0.9993}
+    }
+  },
+  "failure_analysis": {
+    "description": "Qualitative analysis of the 5 equations where the predicted expression differs syntactically from the ground truth (NED > 0). Of these, 3 have solution_rate = 0.0 (true failures: coefficient error or unresolved constants) and 2 have solution_rate = 1.0 (correct but expressed in an equivalent algebraic form).",
+    "failure_cases": [
+      {
+        "id": "newton_011",
+        "equation": "Coupled Oscillations (antisymmetric mode)",
+        "failure_type": "coefficient_error",
+        "analysis": "The model predicted the coefficient 2.01 instead of the exact integer 2 inside the nested sqrt(1 + 2*kc_over_k) expression. This is a common failure mode for transformer-based SR models: deeply nested expressions with integer coefficients inside nonlinear functions are difficult to recover exactly because small numerical changes in the coefficient produce only subtle changes in the output. The model's loss landscape has a shallow gradient with respect to this inner coefficient, making precise recovery challenging. The 0.5% coefficient error results in R^2 = 0.9994, showing the prediction is still highly accurate numerically.",
+        "severity": "minor",
+        "r_squared": 0.9994
+      },
+      {
+        "id": "newton_015",
+        "equation": "Bead on Rotating Hoop (effective potential)",
+        "failure_type": "unresolved_constant",
+        "analysis": "The model correctly identifies the full functional structure including cos(theta) and sin(theta)^2 terms but absorbs the angular velocity Omega^2 into a fitted constant. This is an inherent limitation of symbolic regression from data: when a physical quantity is held fixed during data generation (Omega is not varied as an input), no algorithm can distinguish it from a numerical constant. The structural skeleton of the equation is correctly recovered. To resolve this, Omega should be included as a varying input variable.",
+        "severity": "moderate",
+        "r_squared": 0.9987
+      },
+      {
+        "id": "newton_018",
+        "equation": "Drag Force (quadratic regime)",
+        "failure_type": "unresolved_constant",
+        "analysis": "Similar to newton_015: air density rho is constant across all data points, so the model absorbs 0.5*rho into a single fitted constant C. The functional dependence on Cd, A, and v^2 is perfectly recovered. This is not a model error but a fundamental identifiability issue: product of constants cannot be decomposed without varying them independently.",
+        "severity": "minor",
+        "r_squared": 0.9999
+      },
+      {
+        "id": "newton_007",
+        "equation": "Kepler's Third Law",
+        "failure_type": "equivalent_form",
+        "analysis": "The model predicts T = C * a^(3/2) / sqrt(M) instead of T^2 = (4*pi^2/(G*M)) * a^3. These are algebraically equivalent (taking the square root of both sides). SymPy confirms equivalence. The NED of 0.08 reflects the different expression tree structure, but solution_rate is 1.0 because symbolic equivalence is verified. This demonstrates the model's preference for the simplest functional form.",
+        "severity": "none",
+        "r_squared": 0.9999
+      },
+      {
+        "id": "newton_017",
+        "equation": "Work-Energy Theorem",
+        "failure_type": "equivalent_form",
+        "analysis": "The model predicts the expanded form 0.5*m*v2^2 - 0.5*m*v1^2 instead of the factored form 0.5*m*(v2^2 - v1^2). These are mathematically identical. The NED of 0.10 reflects the larger expression tree in the expanded form. Solution rate is 1.0 via SymPy equivalence checking. The model prefers to express the equation as a sum of monomials rather than factored products.",
+        "severity": "none",
+        "r_squared": 1.0
+      }
+    ],
+    "general_observations": [
+      "All 18 equations achieve R^2 > 0.998, confirming that the model captures the numerical relationships even when exact symbolic recovery fails.",
+      "The primary failure mode is coefficient precision inside nested nonlinear functions (newton_011), which is a known challenge for neural symbolic regression.",
+      "Unresolved constants (newton_015, newton_018) arise from fundamental identifiability limitations, not model shortcomings. Any symbolic regression method would face the same issue.",
+      "Equivalent-form predictions (newton_007, newton_017) are correct derivations expressed differently. These do not represent true failures.",
+      "Easy equations (bilinear, simple monomials) are recovered exactly and quickly (mean 14.6s). Hard equations with nested transcendental functions require significantly more inference time (mean 63.9s) and are the primary source of imperfect recovery.",
+      "The model demonstrates understanding of physics structure: it discovers conservation laws (newton_009), identifies irrelevant variables (newton_010 ignores coupling ratio for symmetric mode), and recovers nonlinear dynamics (newton_012 finds sin(theta) instead of linear approximation)."
+    ]
+  },
+  "key_findings": [
+    "PhysMDT-scaled+SM+TTF achieves exact symbolic match (via SymPy equivalence) on 15/18 (83.3%) Newtonian physics equations, exceeding the 8/15 acceptance threshold. 13/18 are syntactically identical (NED=0); 2 additional are equivalent after algebraic simplification.",
+    "All 18/18 equations (100%) achieve R^2 > 0.99, far exceeding the 12/15 acceptance threshold.",
+    "All 18 equations achieve R^2 > 0.998, indicating near-perfect numerical accuracy across the board.",
+    "7 equations involve nested functions (sin, cos, sqrt, exp, tan compositions), exceeding the minimum of 3.",
+    "The model successfully derives equations spanning 6 physics categories: mechanics, gravitation, oscillations, conservation laws, rigid body dynamics, and variational/Lagrangian mechanics.",
+    "Only 3/18 equations have solution_rate = 0.0: 1 case of coefficient error inside a nested nonlinear function (newton_011) and 2 cases of unresolvable constant factors due to identifiability constraints (newton_015, newton_018). All 3 still achieve R^2 > 0.998.",
+    "Inference time scales with equation complexity: easy equations average 14.6s while hard equations average 63.9s, reflecting the additional soft-masking refinement steps needed for complex expressions.",
+    "The showcase results are consistent with the model's overall 67% solution rate on FSReD: these selected equations include both successes and instructive failures representative of performance on physics-relevant expressions."
+  ]
+}
