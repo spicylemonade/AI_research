@@ -1,0 +1,292 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-14T12:00:00Z",
+  "updated_at": "2026-02-14T10:00:49.533618+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-14T12:00:00Z",
+      "completed_at": "2026-02-14T10:00:49.533527+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Analyze repository structure and establish project scaffolding",
+          "acceptance_criteria": "Create a documented project layout with directories: src/, data/, configs/, checkpoints/, results/, figures/. Produce ARCHITECTURE.md listing every module, its purpose, input/output contracts, and inter-module dependencies. All directories must exist and be importable where applicable.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Conduct comprehensive literature review on transformer-based symbolic regression and physics equation discovery",
+          "acceptance_criteria": "Search the web for and read at least 15 papers/resources covering: (a) transformer symbolic regression (TPSR, SymFormer, SymbolicGPT, PhyE2E, SR4MDL/MDLformer), (b) physics equation discovery (AI-Newton, AI Feynman, SciNet, GNN+SR for gravitation), (c) test-time training for reasoning (Aky\u00fcrek et al., ARC2025 ARChitects solution, recurrent depth approaches), (d) efficient small-model and CPU-friendly training (knowledge distillation, LoRA, quantization). Summarize each in literature_review.md with method, key results, and relevance to this project. At least 15 relevant papers cited in sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Create and maintain sources.bib with BibTeX entries for all consulted sources",
+          "acceptance_criteria": "sources.bib exists in repo root with valid BibTeX entries for at least 15 papers including: Lample & Charton 2019 (Deep Learning for Symbolic Mathematics), Udrescu & Tegmark 2020 (AI Feynman), Valipour et al. 2021 (SymbolicGPT), Shojaee et al. 2023 (TPSR), Vastl et al. 2024 (SymFormer), Yang et al. 2025 (PhyE2E), the ARChitects ARC2025 solution, Aky\u00fcrek et al. 2024 (TTT for ARC), and at least 7 additional relevant works. Each entry must have title, authors, year, venue, and DOI/URL where available.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Define the physics equation taxonomy and complexity hierarchy",
+          "acceptance_criteria": "Produce physics_taxonomy.json enumerating at least 40 Newtonian physics equations organized into 5 complexity tiers: Tier 1 (linear: F=ma, v=d/t, p=mv), Tier 2 (polynomial: kinematic equations, work-energy theorem), Tier 3 (multi-variable: universal gravitation, Coulomb's law, drag force), Tier 4 (composite/nested: orbital mechanics, coupled oscillators, Lagrangian formulations), Tier 5 (differential/integral: equations of motion under variable forces, damped oscillators, Kepler problem derivations). Each equation must have: LaTeX form, prefix-notation parse tree, variable count, operator count, and complexity score.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Design the symbolic tokenization and equation representation scheme",
+          "acceptance_criteria": "Implement a tokenizer in src/tokenizer.py supporting: (a) prefix-notation expression trees with tokens for operators (+, -, *, /, ^, sin, cos, sqrt, log, exp, diff, int), variables (x, t, m, F, v, a, r, G, k, etc.), numeric constants (integer and float via digit-level or scientific notation encoding), and special tokens (PAD, BOS, EOS, SEP, MASK). (b) Vocabulary size documented and justified (target: 80-150 tokens). (c) Bidirectional encode/decode verified on all 40+ taxonomy equations with 100% round-trip fidelity. Unit tests in tests/test_tokenizer.py passing.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_006",
+          "description": "Analyze ARChitects ARC2025 solution for transferable architectural innovations",
+          "acceptance_criteria": "Produce arc_analysis.md documenting: (1) masked diffusion model approach and how it can be adapted for equation generation, (2) recursive soft-masking and its analogue for iterative equation refinement, (3) 2D positional encoding insights and how custom positional encodings can encode equation tree structure, (4) test-time training via per-instance LoRA and its application to per-equation-family specialization, (5) augmentation and ensemble strategies transferable to symbolic math. Each section must include a concrete design proposal for adaptation to our physics domain.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_007",
+          "description": "Build synthetic physics equation dataset generator",
+          "acceptance_criteria": "Implement src/data/equation_generator.py that procedurally generates equation-data pairs: (a) for each of the 40+ taxonomy equations, generate numerical datasets of (input_variables -> output_value) with configurable noise levels (0%, 1%, 5%, 10%), sample counts (50-1000 points per equation), and variable ranges. (b) Generate augmented equations via variable renaming, constant perturbation, algebraic identity rewrites (e.g., F=ma <-> a=F/m), and composition. (c) Produce at least 100,000 training pairs and 5,000 validation pairs and 5,000 test pairs. (d) Output format: JSON-lines with fields {input_points, target_equation_prefix, target_equation_latex, complexity_tier, metadata}. (e) Data generation completes in <30 minutes on CPU.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement baseline encoder-decoder transformer model",
+          "acceptance_criteria": "Implement src/model/baseline_transformer.py with: (a) a set-transformer encoder (attention over unordered input data points) that processes numerical (x,y) pairs into a fixed-dimension latent representation, (b) an autoregressive decoder that generates prefix-notation equation tokens, (c) model size constrained to <50M parameters for CPU feasibility, (d) configurable hyperparameters: d_model in {128,256}, n_heads in {4,8}, n_layers in {4,6,8}, d_ff in {512,1024}. (e) Forward pass completes in <2 seconds for batch_size=1 on CPU. (f) Model architecture documented in model_card.md.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Implement training pipeline with CPU-optimized training loop",
+          "acceptance_criteria": "Implement src/training/trainer.py with: (a) mixed-precision training via torch.amp (bfloat16 where supported on CPU), (b) gradient accumulation to simulate larger batch sizes, (c) learning rate scheduling (warmup + cosine decay), (d) gradient clipping, (e) checkpoint saving/loading every N steps, (f) WandB or TensorBoard logging of loss, learning rate, gradient norm, and token-level accuracy, (g) training on the 100K dataset completes within 24 hours on a modern CPU (estimated ~4-8 hours for small model). Verified by running 1000 steps and confirming loss decreases monotonically over first 500 steps.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Define and implement comprehensive evaluation metrics",
+          "acceptance_criteria": "Implement src/evaluation/metrics.py with the following metrics: (a) Exact Match Rate: predicted prefix sequence exactly matches ground truth, (b) Symbolic Equivalence Rate: predicted and target equations are symbolically equivalent (via SymPy simplification), (c) Normalized Tree Edit Distance (NTED): edit distance between predicted and target expression trees normalized by target size, (d) R\u00b2 Fit Score: R\u00b2 of predicted equation evaluated on held-out numerical data points, (e) Complexity-Weighted Accuracy: accuracy broken down by complexity tier 1-5, (f) Novel Derivation Score: fraction of correctly derived equations not in the training set (for generalization tests). All metrics must have unit tests. Metrics must be compared against prior work baselines from literature review (e.g., SymbolicGPT accuracy, TPSR fitting scores).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_011",
+          "description": "Train and evaluate baseline model to establish performance floor",
+          "acceptance_criteria": "Train the baseline transformer on the full 100K training set for at least 50 epochs or until validation loss plateaus. Report on the 5K test set: (a) Tier 1 exact match >= 60%, (b) Tier 2 exact match >= 30%, (c) overall symbolic equivalence >= 25%, (d) mean R\u00b2 fit score >= 0.80 for Tiers 1-3. Results logged to results/baseline_results.json with full hyperparameter configuration. Training completed on CPU within the 24-hour budget.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_012",
+          "description": "Implement Tree-Positional Encoding inspired by ARChitects' 2D RoPE adaptation",
+          "acceptance_criteria": "Implement src/model/tree_positional_encoding.py that extends standard positional encoding with equation-tree-aware structure: (a) Encode token positions using both sequence position AND tree depth/breadth coordinates (inspired by ARChitects' 2D positional encoding for grid structure, adapted here for parse-tree structure). (b) Use a learned combination of sinusoidal basis functions encoding: horizontal position in prefix sequence, depth in expression tree, left/right child indicator, and operator-operand role. (c) Integrate into the decoder as a drop-in replacement for standard positional encoding. (d) Ablation test: Tree-PE model achieves >= 3 percentage point improvement in symbolic equivalence over baseline on Tier 3+ equations. (e) Unit tests verifying encoding uniqueness and dimensional correctness.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement Recursive Refinement Decoding inspired by ARChitects' soft-masking",
+          "acceptance_criteria": "Implement src/model/recursive_refinement.py adapting the ARChitects' recursive soft-masking innovation for equation generation: (a) After initial autoregressive decoding, embed the predicted tokens and add a learned 'refine' embedding (analogous to adding <mask> embeddings) to all positions. (b) Pass through the decoder again, treating logits as soft inputs for iterative refinement (inspired by the continuous-space token algebra from masked diffusion). (c) Repeat for K refinement steps (configurable, default K=3). (d) Implement 'most-visited-candidate' selection across refinement iterations. (e) Demonstrate that refinement improves symbolic equivalence by >= 5 percentage points on Tier 4-5 equations compared to single-pass decoding. (f) Refinement adds <50% wall-clock overhead per sample on CPU.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement Physics-Aware Test-Time Training (PA-TTT) for per-equation-family adaptation",
+          "acceptance_criteria": "Implement src/training/test_time_training.py that performs per-instance weight adaptation at inference time, inspired by ARChitects' per-task TTT and Aky\u00fcrek et al.: (a) Given a new set of data points at test time, generate augmented versions (add noise, subsample, extrapolate) as pseudo-demonstrations. (b) Fine-tune only the MLP layers (freeze attention and embeddings, per TTT-E2E findings) using a rank-16 LoRA adapter for 32-64 steps with batch size 1. (c) Incorporate a physics-consistency loss: predicted equation must satisfy dimensional analysis constraints and boundary conditions from the data. (d) TTT adaptation completes in <60 seconds per equation on CPU. (e) PA-TTT improves overall symbolic equivalence by >= 8 percentage points over the non-TTT model, with largest gains on Tier 4-5 equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement Dimensional Analysis Constraint Module",
+          "acceptance_criteria": "Implement src/model/dimensional_analysis.py: (a) Assign dimensional signatures (M^a L^b T^c) to all variables in the vocabulary. (b) During decoding, compute the dimensional signature of partial expressions and mask out tokens that would create dimensionally inconsistent subexpressions. (c) This constrained decoding reduces the search space and ensures all generated equations are physically meaningful. (d) Verify: 100% of generated equations pass dimensional consistency checks (vs. estimated <70% without constraints). (e) Constrained decoding adds <20% overhead to generation time. (f) Compare approach against unconstrained generation and report improvement in symbolic equivalence and R\u00b2 fit.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Implement Curriculum Learning with Complexity Scaffolding",
+          "acceptance_criteria": "Implement src/training/curriculum.py: (a) Train in phases: first on Tier 1 equations only until convergence, then progressively introduce Tier 2, 3, 4, 5 equations using a pacing function. (b) Implement anti-forgetting replay buffer that mixes 20% lower-tier equations into each training batch. (c) Demonstrate curriculum training achieves >= 5 percentage point higher accuracy on Tier 4-5 equations compared to uniform random sampling, without degrading Tier 1-2 accuracy by more than 2 points. (d) Log curriculum schedule and per-tier accuracy curves to figures/curriculum_progression.png.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_017",
+          "description": "Implement Equation Augmentation and Algebraic Data Enrichment pipeline",
+          "acceptance_criteria": "Implement src/data/augmentation.py with: (a) algebraic identity rewrites (commutative reordering, distributive expansion/factoring, associative regrouping), (b) variable substitution (rename variables while preserving structure), (c) constant scaling (multiply both sides by random constant), (d) equation composition (combine two simpler equations into a derived relationship), (e) noise injection in numerical data at multiple levels. (f) Augmentation pipeline expands training set by >= 5x. (g) Model trained with augmented data improves symbolic equivalence by >= 4 percentage points on held-out equations not seen during training (generalization test), compared to model trained without augmentation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_018",
+          "description": "Run full ablation study over all novel components",
+          "acceptance_criteria": "Train and evaluate the following model configurations on the same test set: (1) Baseline only, (2) +Tree-PE, (3) +Recursive Refinement, (4) +Dimensional Constraints, (5) +Curriculum Learning, (6) +Augmentation, (7) +PA-TTT, (8) Full model (all components). Report all 6 metrics from item_010 for each configuration. Results saved to results/ablation_study.json. Generate ablation comparison table in figures/ablation_table.png. Each component must show statistically measurable improvement (>= 2pp) on at least one metric. Full model must achieve the highest overall score.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Evaluate generalization to unseen equation families",
+          "acceptance_criteria": "Hold out 5 complete equation families from training (e.g., damped oscillation, Kepler orbits, projectile with drag, coupled spring systems, gravitational potential energy). Train the full model without these families. Evaluate: (a) the model's ability to derive held-out equations from numerical data alone, (b) R\u00b2 fit >= 0.85 on at least 3 of 5 held-out families, (c) symbolic equivalence >= 15% on held-out families (demonstrating genuine derivation, not memorization). Results in results/generalization_results.json. This is the key 'wow' result: the transformer derives equations it has never seen.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Benchmark against prior work baselines from literature review",
+          "acceptance_criteria": "Compare full model against: (a) SymbolicGPT (reimplemented or results from paper) on overlapping equation sets, (b) AI Feynman benchmark equations (at least 20 Feynman equations from the public dataset that overlap with Newtonian physics), (c) TPSR (using published accuracy numbers on comparable complexity). Report comparison table with our model's symbolic equivalence, R\u00b2 fit, and inference time vs. each baseline. Our model must match or exceed at least one prior method on at least one metric. Results in results/benchmark_comparison.json and figures/benchmark_comparison.png. All compared methods must be cited in sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Run computational efficiency analysis for CPU deployment",
+          "acceptance_criteria": "Profile and report: (a) training throughput (samples/second) on CPU with and without mixed precision, (b) inference latency per equation (with and without TTT, with and without recursive refinement), (c) peak memory usage during training and inference, (d) total wall-clock training time for full model, (e) comparison of model sizes: 10M, 25M, 50M parameter variants with accuracy-vs-compute Pareto frontier. All results in results/efficiency_analysis.json and figures/pareto_frontier.png. The recommended model configuration must fit in <4GB RAM during inference.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_022",
+          "description": "Demonstrate end-to-end physics derivation showcase",
+          "acceptance_criteria": "Create a compelling demonstration in notebooks/physics_derivation_demo.ipynb showing: (a) Feed the model raw trajectory data (x,y,t) from a simulated projectile and watch it derive y = v0*t*sin(theta) - 0.5*g*t\u00b2, (b) Feed planetary orbit data and derive Kepler's third law T\u00b2 \u221d a\u00b3, (c) Feed spring-mass oscillation data and derive x(t) = A*cos(\u03c9t + \u03c6), (d) Feed collision data and derive conservation of momentum. Each demonstration must show: input data plot, model's step-by-step token generation, final predicted equation, and fit overlay. At least 3 of 4 demonstrations must achieve R\u00b2 >= 0.95.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Evaluate robustness to noisy and sparse data",
+          "acceptance_criteria": "Test the full model under degraded input conditions: (a) Gaussian noise at 1%, 5%, 10%, 20% of signal magnitude, (b) sparse data: 10, 25, 50, 100, 500 data points per equation, (c) missing variables: remove one input variable and test if the model can still recover the correct functional form with the remaining variables. Report symbolic equivalence and R\u00b2 as functions of noise level and data sparsity. Model must maintain symbolic equivalence >= 50% of clean-data performance at 10% noise. Results in results/robustness_analysis.json and figures/robustness_curves.png.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_024",
+          "description": "Perform qualitative error analysis and failure mode categorization",
+          "acceptance_criteria": "Analyze all incorrect predictions on the test set and categorize failures into: (a) structural errors (wrong tree topology), (b) constant errors (correct form but wrong constants), (c) partial derivations (correct subexpression but incomplete), (d) dimensional violations (if any bypass the constraint module), (e) complete misses. Report distribution of failure modes per complexity tier. Identify the top-3 systematic failure patterns with examples. Save analysis to results/error_analysis.json and produce figures/failure_mode_distribution.png.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Generate attention visualization and interpretability analysis",
+          "acceptance_criteria": "For at least 5 representative equations (one per tier), extract and visualize: (a) encoder attention heatmaps showing which input data points the model attends to, (b) decoder self-attention patterns showing equation structure formation, (c) cross-attention patterns showing which data points inform which equation tokens, (d) refinement-step attention evolution (how attention changes across recursive refinement iterations). Produce figures/attention_analysis/ directory with at least 15 visualizations. Write a 500+ word interpretability analysis in results/attention_interpretation.md linking attention patterns to physical reasoning.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_026",
+          "description": "Write comprehensive research report",
+          "acceptance_criteria": "Produce report.md (3000+ words) structured as: (1) Abstract summarizing key findings, (2) Introduction with motivation and research questions, (3) Related Work section citing all papers from sources.bib and positioning this work relative to TPSR, SymbolicGPT, AI Feynman, PhyE2E, ARChitects, (4) Method section with architecture diagrams, (5) Experiments section with all tables and figures from Phase 4, (6) Analysis section with interpretability findings and failure modes, (7) Discussion of limitations and why certain approaches worked/failed, (8) Conclusion with contributions summary. All claims supported by experimental evidence from results/.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_027",
+          "description": "Produce reproducibility package and final artifact verification",
+          "acceptance_criteria": "Ensure: (a) requirements.txt with pinned versions of all dependencies, (b) a single run_all.sh script that executes the full pipeline (data generation -> training -> evaluation -> figures) end-to-end, (c) README.md updated with project overview, installation instructions, usage examples, and key results summary, (d) all checkpoints saved to checkpoints/ directory, (e) all figures referenced in report.md exist in figures/, (f) all JSON results files are valid and parseable, (g) sources.bib has >= 15 entries and is valid BibTeX. Run a final verification: python -m pytest tests/ passes with >= 90% of tests green.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 27,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 27
+  }
+}
