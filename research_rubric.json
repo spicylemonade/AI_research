@@ -94,23 +94,23 @@
           "id": "item_007",
           "description": "Implement the autoregressive transformer baseline (E2ESR-style) as the primary comparison model.",
           "acceptance_criteria": "A Python module baselines/autoregressive.py implementing: (1) a standard encoder-decoder transformer (6 encoder layers, 6 decoder layers, d_model=512, 8 heads, ~50M parameters), (2) set-transformer encoder for numerical input, (3) autoregressive decoder with teacher forcing, (4) beam search decoding (beam width 10), (5) training script that runs on single A100 with batch size \u226532, (6) a smoke test confirming the model can overfit to 10 simple equations (e.g., F=ma, E=mc^2 style) within 1000 steps.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "53.8M params. Set-Transformer encoder (4 ISAB layers), 6-layer causal decoder. Smoke test: 10/10 exact matches overfitting in 1000 steps. Beam search working.",
           "error": null
         },
         {
           "id": "item_008",
           "description": "Define and implement the full evaluation metrics suite for symbolic equation recovery.",
           "acceptance_criteria": "A Python module evaluation/metrics.py implementing: (1) Exact Symbolic Match rate (after canonical simplification via SymPy), (2) Normalized Edit Distance (NED) between predicted and ground-truth expression trees, (3) Numerical R\u00b2 score on held-out test points (10,000 points per equation), (4) Symbolic Complexity Ratio (predicted complexity / ground truth complexity), (5) Dimensional Consistency Check (binary: does the predicted equation have consistent physical dimensions), (6) Tier-stratified reporting (separate metrics for each of the 4 complexity tiers from item_004), (7) unit tests for each metric with known inputs/outputs. All metrics must be compatible with both autoregressive and masked-diffusion model outputs.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "All 6 metrics implemented: exact_symbolic_match, NED, R², complexity_ratio, dimensional_consistency, tier_stratified_report. 8 unit tests pass. Includes paired_bootstrap_test for statistical significance.",
           "error": null
         },
         {
           "id": "item_009",
           "description": "Train the autoregressive baseline to convergence and establish benchmark numbers on the Newtonian equation test set.",
           "acceptance_criteria": "Baseline training completed with: (1) training loss curve saved to results/baseline_training.json, (2) converged model checkpoint saved, (3) evaluation results on full test set reported in results/baseline_results.json including all 6 metrics from item_008, (4) per-tier breakdown showing Exact Match rates (expected rough range: Tier 1 > 60%, Tier 2 > 30%, Tier 3 > 15%, Tier 4 > 5% based on literature), (5) total training time logged and confirmed to be under 24 hours on single A100, (6) at least 3 qualitative examples per tier showing predicted vs ground-truth equations.",
-          "status": "pending",
+          "status": "in_progress",
           "notes": null,
           "error": null
         }
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 6,
-    "in_progress": 0,
+    "completed": 8,
+    "in_progress": 1,
     "failed": 0,
-    "pending": 19
+    "pending": 16
   }
 }
