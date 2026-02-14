@@ -1,0 +1,276 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-14T18:00:00Z",
+  "updated_at": "2026-02-14T18:07:52.660828+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-14T18:00:00Z",
+      "completed_at": "2026-02-14T18:07:52.660802+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Conduct comprehensive literature review on transformer-based symbolic regression for physics equation discovery",
+          "acceptance_criteria": "Web search completed for at least 15 relevant papers across: (a) transformer symbolic regression (SymbolicGPT, NeSymReS, E2E, TPSR, SymFormer, T-JST), (b) masked diffusion language models (LLaDA, MDLM, DiffuSR), (c) physics-informed SR (AI Feynman, PiSR, PhyE2E), (d) test-time training for reasoning (Aky\u00fcrek et al., Gozeten et al.), (e) ARC2025 ARChitects solution. At least 15 relevant papers cited in sources.bib with complete BibTeX entries including title, authors, year, venue.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Analyze the ARChitects ARC2025 solution architecture in depth, identifying transferable techniques",
+          "acceptance_criteria": "Written analysis document (results/arc_analysis.md) covering: (1) LLaDA-8B masked diffusion architecture and its training objective, (2) Golden Gate 2D RoPE positional encoding, (3) recursive soft-mask refinement with token algebra, (4) test-time LoRA fine-tuning strategy (rank-512 pretrain, rank-32 TTT), (5) most-visited-candidate selection, (6) specific mapping of each technique to the physics equation derivation domain with justification for inclusion or exclusion.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Define the SRSD-Feynman benchmark setup and equation complexity taxonomy",
+          "acceptance_criteria": "Document (results/benchmark_spec.md) specifying: (1) SRSD-Feynman Easy (30 equations), Medium (40 equations), and Hard (50 equations) datasets downloaded from HuggingFace, (2) equation complexity taxonomy covering polynomial, trigonometric, exponential, logarithmic, composed/nested, and multi-variable (up to 9 vars) forms, (3) mapping of Newtonian mechanics equations in the dataset (e.g., gravitational force, Kepler's laws, projectile motion, harmonic oscillation, Coulomb's law, wave equations), (4) definition of 'complex Newtonian physics' scope for this work: equations with >= 3 variables, nested operations, or physical constants.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Design the PhysDiff architecture: a masked-diffusion transformer for physics equation derivation",
+          "acceptance_criteria": "Architecture design document (results/architecture_design.md) specifying: (1) Set-Transformer encoder for permutation-invariant numerical data embedding (ISAB + PMA blocks), (2) masked diffusion transformer decoder operating on equation token sequences with cross-attention to data embeddings, (3) training objective as masked token prediction with variable masking ratio [0,1] following LLaDA, (4) recursive soft-mask refinement loop inspired by ARChitects' token algebra (soft-mask -> predict -> refine -> repeat for K steps), (5) test-time training via low-rank LoRA adaptation on per-equation demonstration pairs, (6) model size budget for single A100 (40/80GB): target ~150M-350M parameters with estimated memory and compute requirements, (7) equation tokenization scheme using prefix notation with operator/variable/constant vocabulary.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Create and maintain sources.bib with BibTeX entries for all consulted literature",
+          "acceptance_criteria": "File sources.bib in repo root containing valid BibTeX entries for at least 15 papers including: Valipour et al. (SymbolicGPT), Biggio et al. (NeSymReS), Kamienny et al. (E2E), Nie et al. (LLaDA), Udrescu & Tegmark (AI Feynman 1.0 & 2.0), Matsubara et al. (SRSD benchmark), Shojaee et al. (TPSR), Vastl et al. (SymFormer), Li et al. (T-JST), Aky\u00fcrek et al. (TTT for reasoning), ARChitects ARC2025 solution, Sharlin & Josephson (PiSR with LLMs), PhyE2E, DiffuSR, and at least 1 paper on dimensional analysis in ML. Each entry must have title, authors, year, and venue/journal.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_006",
+          "description": "Implement data pipeline: synthetic equation generation and SRSD-Feynman dataset loading",
+          "acceptance_criteria": "Python module (src/data/) that: (1) generates synthetic equations via random expression tree construction (operators: +,-,*,/,sin,cos,exp,log,sqrt,pow; variables: up to 9; constants: sampled from [-5,5]) with prefix-notation tokenization, (2) samples (x,y) point sets per equation (configurable N=20-500 points per sample), (3) loads SRSD-Feynman Easy/Medium/Hard from HuggingFace datasets, (4) implements physics-aware data augmentation (unit scaling, variable permutation, Gaussian noise injection at sigma=0.01-0.1), (5) creates train/val/test DataLoaders with configurable batch size. Unit tests pass for all components with >= 90% code coverage on data module.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_007",
+          "description": "Implement the Set-Transformer encoder for numerical data embedding",
+          "acceptance_criteria": "PyTorch module (src/model/encoder.py) implementing: (1) Induced Set Attention Blocks (ISAB) with configurable number of inducing points (default m=32), (2) Pooling by Multihead Attention (PMA) producing fixed-size data embedding, (3) input: batch of point sets with shape (B, N, d_in) where d_in = num_variables + 1, (4) output: data embedding tensor of shape (B, L_enc, d_model) where L_enc is configurable (default 64), d_model=512, (5) verified permutation invariance: encoder(shuffle(X)) == encoder(X) for random inputs within tolerance 1e-6. Unit tests pass.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement the masked diffusion transformer decoder for equation token generation",
+          "acceptance_criteria": "PyTorch module (src/model/decoder.py) implementing: (1) transformer decoder with bidirectional (non-causal) self-attention following LLaDA design, (2) cross-attention layers attending to Set-Transformer encoder output, (3) configurable depth (default 8 layers), heads (default 8), d_model=512, d_ff=2048, (4) masked token prediction head outputting logits over equation vocabulary, (5) forward pass accepts (equation_tokens, mask_indicators, encoder_output) and predicts masked token logits, (6) variable masking ratio sampled uniformly from [0,1] during training per LLaDA objective, (7) total parameter count logged and within budget (target 150M-350M total model). Unit tests verify forward pass shapes and gradient flow.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Implement evaluation metrics suite for symbolic regression",
+          "acceptance_criteria": "Python module (src/metrics.py) implementing: (1) R-squared (R\u00b2) between predicted equation output and ground truth on held-out points, (2) Normalized Mean Squared Error (NMSE) on held-out point sets, (3) Normalized Edit Distance (NED) between predicted and ground-truth equation trees following SRSD benchmark protocol, (4) exact symbolic recovery rate: fraction of test equations where SymPy simplify(pred - truth) == 0, (5) skeleton recovery rate: fraction where tree structure matches ignoring constants, (6) BFGS constant optimization applied to skeleton predictions before R\u00b2 and NMSE evaluation, (7) complexity penalty metric (number of nodes in expression tree). All metrics tested against known equation pairs with expected outputs.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Train and evaluate an autoregressive transformer baseline (SymbolicGPT-style) on SRSD-Feynman",
+          "acceptance_criteria": "Baseline model trained on synthetic data + SRSD-Feynman Easy/Medium: (1) standard autoregressive transformer decoder with causal attention (same parameter budget ~200M), (2) Set-Transformer encoder from item_007, (3) trained for at least 50 epochs on synthetic data (>= 500K generated equations) then fine-tuned on SRSD, (4) evaluation results on SRSD-Feynman Easy/Medium/Hard reported as: exact recovery rate, skeleton recovery rate, R\u00b2 > 0.99 rate, mean NED, (5) results saved to results/baseline_results.json, (6) training curves (loss, validation metrics per epoch) saved as figures/baseline_training.png, (7) total training time on single A100 logged. This establishes the performance floor to beat.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_011",
+          "description": "Implement recursive soft-mask refinement (RSR) for iterative equation derivation",
+          "acceptance_criteria": "Module (src/model/refinement.py) implementing the novel RSR procedure inspired by ARChitects' token algebra: (1) initial forward pass: fully masked equation -> model predicts all tokens, (2) soft-masking step: instead of discrete re-masking, add scaled mask embedding to all token embeddings (alpha * e_mask + (1-alpha) * e_predicted) with learned or scheduled alpha, (3) iterative refinement loop for K steps (configurable, default K=50) where each step refines predictions bidirectionally, (4) confidence-based unmasking: tokens with prediction confidence > threshold tau are frozen (hard-committed) while uncertain tokens continue refinement, (5) most-visited-candidate tracking: across refinement steps, track token-level prediction frequency histograms and select most-visited tokens as final output, (6) ablation hooks to disable individual RSR components. Verified that RSR produces valid equation token sequences on synthetic examples.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_012",
+          "description": "Implement physics-informed dimensional analysis module as architectural prior",
+          "acceptance_criteria": "Module (src/model/dim_analysis.py) implementing: (1) dimensional annotation layer: each input variable is tagged with its SI dimension vector (mass, length, time, charge, temperature), (2) dimensional consistency scoring: predicted equations are scored for dimensional homogeneity using null-space analysis, (3) integration as auxiliary loss term: L_dim = lambda_dim * dimensional_inconsistency_penalty added to training loss, (4) at inference time, dimensionally inconsistent candidate equations are down-weighted in the most-visited-candidate selection, (5) configurable lambda_dim (default 0.1) with ablation support. Verified on 10 known physics equations that dimensionally correct equations score 0 penalty and intentionally wrong ones score > 0.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement test-time training (TTT) with LoRA adaptation for per-equation specialization",
+          "acceptance_criteria": "Module (src/model/ttt.py) implementing: (1) LoRA (Low-Rank Adaptation) injection into decoder self-attention and cross-attention layers with configurable rank (default r=32), (2) per-equation TTT loop: given K input-output demonstration pairs for a new equation, perform N gradient steps (default N=64) updating only LoRA parameters on masked prediction loss over the demonstration pairs, (3) data augmentation during TTT: variable permutation, point subsampling, noise injection per ARChitects strategy, (4) learning rate schedule: cosine warmup over TTT steps with peak lr=1e-4, (5) memory-efficient implementation: LoRA parameter reset between equations, gradient checkpointing, (6) TTT overhead profiled: wall-clock time per equation on A100 logged and under 30 seconds per equation. End-to-end test: TTT on 5 SRSD-Feynman equations shows measurable metric improvement over no-TTT baseline (R\u00b2 improvement > 0.01 on at least 3/5).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Full PhysDiff model integration: encoder + masked diffusion decoder + RSR + dim analysis + TTT",
+          "acceptance_criteria": "Integrated model class (src/model/physdiff.py) combining all components: (1) single forward API: model.derive(point_set, num_variables, dim_annotations=None) -> predicted_equation, (2) training mode: masked diffusion training with dimensional analysis auxiliary loss, (3) inference mode: RSR refinement loop with optional TTT, (4) configurable inference pipeline: (a) base inference (no RSR, no TTT), (b) RSR only, (c) TTT only, (d) full pipeline (TTT + RSR), (5) model serialization: save/load checkpoints including LoRA state, (6) total parameter count between 150M-350M, (7) single A100 GPU fits batch_size >= 16 for training and batch_size >= 1 for inference with RSR K=50 steps. Integration test passes on 3 synthetic equations end-to-end.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_015",
+          "description": "Pre-train PhysDiff on large-scale synthetic equation dataset",
+          "acceptance_criteria": "PhysDiff model pre-trained on >= 1M synthetically generated equations: (1) equation complexity distribution covering all operator types with up to 9 variables and tree depth up to 6, (2) training on single A100 GPU with mixed-precision (bf16/fp16), gradient accumulation to effective batch size >= 128, (3) training loss converges (final loss < 2x minimum observed validation loss), (4) validation masked-token prediction accuracy >= 70% on held-out synthetic equations, (5) checkpoint saved to results/checkpoints/physdiff_pretrained.pt, (6) training log with loss curves saved to results/pretrain_log.json, (7) training completed within feasible A100 budget (log total GPU-hours).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Fine-tune PhysDiff on SRSD-Feynman training splits and evaluate on all difficulty levels",
+          "acceptance_criteria": "Fine-tuned model evaluated on SRSD-Feynman Easy/Medium/Hard with results in results/srsd_results.json: (1) fine-tuning on SRSD training data for at least 100 epochs with early stopping on validation NED, (2) for each difficulty level, report: exact recovery rate, skeleton recovery rate, R\u00b2 > 0.99 rate, mean NED, mean NMSE, (3) PhysDiff (base, no RSR/TTT) must outperform the autoregressive baseline from item_010 on at least 2 of 3 difficulty levels by >= 2 percentage points on exact recovery rate, (4) results table formatted for comparison against prior work (SymbolicGPT, NeSymReS, E2E recovery rates from literature), (5) statistical significance: report mean +/- std over 3 random seeds.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_017",
+          "description": "Evaluate PhysDiff with RSR refinement and measure iterative improvement dynamics",
+          "acceptance_criteria": "RSR evaluation results in results/rsr_results.json: (1) evaluate PhysDiff + RSR with K in {10, 25, 50, 100} refinement steps on SRSD-Feynman all splits, (2) for each K, report all metrics from item_016, (3) RSR improves exact recovery rate by >= 3 percentage points over base PhysDiff (no RSR) at optimal K on at least Medium+Hard combined, (4) plot refinement dynamics: accuracy vs refinement step K for Easy/Medium/Hard (saved as figures/rsr_dynamics.png), (5) plot token confidence evolution: mean prediction entropy across refinement steps (saved as figures/rsr_confidence.png), (6) qualitative examples: for 5 specific Newtonian physics equations, show the equation prediction at steps K=0,10,25,50 demonstrating progressive refinement.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Evaluate PhysDiff with TTT and full pipeline (TTT + RSR) on complex Newtonian equations",
+          "acceptance_criteria": "TTT evaluation results in results/ttt_results.json: (1) evaluate PhysDiff + TTT (no RSR) on all SRSD splits, (2) evaluate full pipeline PhysDiff + TTT + RSR on all SRSD splits, (3) TTT improves exact recovery rate by >= 2 percentage points over base PhysDiff on Hard split, (4) full pipeline (TTT + RSR) achieves highest overall exact recovery rate, beating all individual ablations, (5) specific Newtonian physics equation evaluation: curate subset of >= 10 complex Newtonian equations from SRSD-Hard (gravitational potential, Kepler period, wave equation, coupled oscillation, etc.) and report per-equation recovery success, (6) comparison table: Base vs RSR-only vs TTT-only vs Full pipeline, per difficulty level.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Ablation study: quantify contribution of each novel component",
+          "acceptance_criteria": "Ablation results in results/ablation_results.json and figures/ablation_chart.png: (1) ablations on SRSD-Feynman Medium+Hard combined: (a) full PhysDiff, (b) without dimensional analysis loss, (c) without RSR (standard single-pass decoding), (d) without TTT, (e) without soft-masking (use hard re-masking in RSR), (f) autoregressive baseline, (2) each ablation run with 3 seeds, report mean +/- std for exact recovery rate and R\u00b2 > 0.99 rate, (3) bar chart comparing all ablations saved as figures/ablation_chart.png, (4) statistical significance test (paired t-test or Wilcoxon) between full model and each ablation, p-values reported, (5) written interpretation: which component contributes most to performance on complex equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Generalization test: evaluate on held-out physics equations not in training distribution",
+          "acceptance_criteria": "Generalization results in results/generalization_results.json: (1) curate 10 complex Newtonian/classical physics equations NOT present in SRSD-Feynman or synthetic training set (e.g., Navier-Stokes simplified forms, Lagrangian mechanics, Euler-Bernoulli beam equation, relativistic kinetic energy, Biot-Savart law), (2) generate numerical data from these equations and evaluate PhysDiff full pipeline, (3) report: exact recovery, skeleton recovery, best-R\u00b2 achieved, (4) PhysDiff recovers exact or skeleton form for >= 4/10 held-out equations, (5) for equations not recovered, report closest predicted equation and its R\u00b2 fit, (6) this demonstrates genuine derivation capability beyond memorization of training distribution.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_021",
+          "description": "Comparative analysis against state-of-the-art symbolic regression methods from literature",
+          "acceptance_criteria": "Comparison document (results/sota_comparison.md) and table (results/sota_comparison.json): (1) compare PhysDiff full pipeline results against published numbers from: SymbolicGPT, NeSymReS, E2E, TPSR, SymFormer, AI Feynman 2.0, QDSR, KAN-SR on overlapping benchmarks, (2) on SRSD-Feynman Easy: compare against QDSR (91.6% reported), KAN-SR (93.3% reported), PySR (44.7% reported), (3) identify PhysDiff's relative strengths (expected: complex multi-variable equations, Newtonian physics subset) and weaknesses, (4) all comparison numbers cite specific papers from sources.bib, (5) discussion of compute efficiency: PhysDiff single-A100 results vs. methods requiring more compute.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_022",
+          "description": "Qualitative analysis: showcase transformer deriving complex Newtonian physics equations",
+          "acceptance_criteria": "Visualization and analysis (figures/ and results/qualitative_analysis.md): (1) for 5 complex Newtonian equations successfully derived, create step-by-step refinement visualizations showing equation tokens evolving through RSR steps (saved as figures/refinement_viz_*.png), (2) attention map analysis: extract and visualize cross-attention weights showing which input data points the model attends to when generating each equation token (saved as figures/attention_*.png), (3) for each showcased equation, include: the equation in LaTeX, the number of RSR steps to convergence, the R\u00b2 achieved, the NED score, (4) narrative explaining what the model 'learned' about each physics principle (e.g., inverse-square law structure, trigonometric periodicity), (5) these visualizations must be compelling evidence that the transformer is genuinely deriving equations rather than memorizing.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Error analysis and failure mode characterization",
+          "acceptance_criteria": "Error analysis document (results/error_analysis.md): (1) categorize failure modes on SRSD-Feynman Hard equations that were not recovered: (a) wrong operator, (b) missing term, (c) incorrect variable dependency, (d) constant fitting failure, (e) dimensional inconsistency, (2) quantify percentage of failures in each category, (3) identify specific equation characteristics that predict failure (number of variables, tree depth, operator type), (4) correlation analysis: failure rate vs. equation complexity (tree depth, num variables, num operations), (5) at least 3 specific failure case studies with predicted vs. true equation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Write comprehensive results report documenting the PhysDiff research contribution",
+          "acceptance_criteria": "Final report (results/physdiff_report.md) containing: (1) Abstract summarizing key finding: transformers with masked diffusion and recursive refinement can derive complex Newtonian physics equations from numerical data, (2) Introduction with motivation and research question, (3) Related work section citing >= 12 papers from sources.bib, (4) Method section detailing PhysDiff architecture with diagrams, (5) Experimental setup: datasets, baselines, metrics, compute, (6) Results section with all tables and figures from Phase 4, (7) Analysis section incorporating ablation, error analysis, and qualitative findings, (8) Discussion addressing: can transformers genuinely derive physics vs. pattern match, implications for AI-driven scientific discovery, limitations, (9) Conclusion with key takeaways, (10) total report length >= 3000 words.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Reproducibility package: ensure all experiments can be reproduced from a single entry point",
+          "acceptance_criteria": "Reproducibility artifacts: (1) requirements.txt or pyproject.toml with all dependencies pinned, (2) single entry point script (run_all.sh) that executes: data generation, pre-training, fine-tuning, evaluation, ablation, and figure generation, (3) random seeds fixed and documented (default seeds: 42, 123, 456), (4) README.md updated with: hardware requirements (single A100), estimated total runtime, how to reproduce all results, (5) all checkpoints, logs, and figures are saved to results/ and figures/ respectively, (6) final git commit with clean state: no uncommitted changes, all results reproducible.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 25,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 25
+  }
+}
