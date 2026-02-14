@@ -1,0 +1,276 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-14T18:05:00Z",
+  "updated_at": "2026-02-14T18:06:41.161928+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-14T18:05:00Z",
+      "completed_at": "2026-02-14T18:06:41.161905+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Define the research problem: Can a masked-diffusion transformer autonomously derive complex Newtonian physics equations from numerical observation data, and can recursive self-refinement (inspired by ARC2025 LLaDA soft-masking) improve symbolic recovery over autoregressive baselines?",
+          "acceptance_criteria": "A written problem statement document (problem_statement.md) in the repo root clearly defining: (1) input format (numerical data tables with physical quantities), (2) output format (symbolic equations in Polish/prefix notation), (3) complexity tiers of target equations (simple linear, polynomial, transcendental, multi-variable coupled Newtonian), (4) the key hypothesis that recursive masked-diffusion refinement outperforms single-pass autoregressive decoding for physics equation discovery, and (5) scope constraints (single A100 GPU, Newtonian mechanics focus).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Conduct a comprehensive literature review via web search covering: (a) transformer-based symbolic regression (E2ESR, NeSymReS, SymbolicGPT, TPSR, SNIP, MDLformer), (b) masked diffusion language models (LLaDA, MDLM, DDSR, LoMDM), (c) physics-informed equation discovery (AI Feynman 1.0/2.0, PySR, PhyE2E, SI-SR), (d) test-time training for reasoning (ARC2025 TTT, Akyurek et al.), and (e) the ARC2025 ARChitects solution architecture (recursive soft-masking, 2D positional encoding, stateful candidate selection).",
+          "acceptance_criteria": "A literature_review.md document in the repo root summarizing at least 15 papers/resources across all five sub-areas, with a comparison table of methods (architecture type, training data, benchmark performance, key innovation). Each entry must include the paper title, authors, year, venue, and a 3-5 sentence summary of relevance to our project.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Create and maintain sources.bib with BibTeX entries for all consulted sources throughout the project.",
+          "acceptance_criteria": "sources.bib exists in the repo root with at least 15 valid BibTeX entries covering: Udrescu & Tegmark (AI Feynman), Kamienny et al. (E2ESR), Biggio et al. (NeSymReS), Valipour et al. (SymbolicGPT), Shojaee et al. (TPSR), Nie et al. (LLaDA), Sahoo et al. (MDLM), the ARC2025 ARChitects solution, Ying et al. (PhyE2E), Gozeten et al. (TTT for transformers), Matsubara et al. (SRSD benchmark), at least 2 masked-diffusion papers (DDSR, LoMDM), and at least 2 additional physics-SR papers. Each entry must have correct fields (author, title, year, journal/booktitle).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Analyze the Feynman Symbolic Regression Database (FSRD) and SRSD benchmark datasets to identify the specific Newtonian mechanics equations that will serve as our evaluation targets, stratified by complexity.",
+          "acceptance_criteria": "A dataset_analysis.md document listing: (1) at least 30 Newtonian-relevant equations from the Feynman/SRSD datasets categorized into 4 tiers \u2014 Tier 1: single-variable kinematics (e.g., s = v*t, F = m*a), Tier 2: multi-variable dynamics (e.g., gravitational force, spring-mass systems, projectile motion), Tier 3: energy/momentum conservation laws (e.g., kinetic energy, elastic collisions, orbital mechanics), Tier 4: coupled multi-body and transcendental equations (e.g., Kepler's laws, damped oscillator, Lagrangian-derived equations). Each equation must list its variables, complexity (number of operators/nesting depth), and source reference.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Design the novel architecture: PhysDiffuse \u2014 a masked-diffusion transformer for physics equation derivation that combines (a) an encoder processing numerical observation data into latent representations, (b) a masked-diffusion decoder operating on symbolic token sequences in prefix notation, (c) recursive soft-masking refinement loops (inspired by ARC2025), (d) physics-informed dimensional-analysis constraints as auxiliary loss, and (e) per-equation test-time training with data augmentation.",
+          "acceptance_criteria": "An architecture_design.md document with: (1) a complete architecture diagram (ASCII or described in sufficient detail for figure generation), (2) mathematical formulation of the soft-masking refinement loop including logit normalization, (3) specification of the encoder (set-transformer or DeepSets style for permutation-invariant input), (4) specification of the decoder (transformer with masked-diffusion training objective), (5) the dimensional-analysis constraint loss formulation, (6) tokenization scheme for symbolic expressions (operator vocabulary, constant handling, variable naming), (7) estimated parameter count confirming feasibility on single A100 (target: 100M-300M parameters), and (8) pseudocode for the full forward pass and inference loop.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_006",
+          "description": "Implement the data generation pipeline: create a system that generates training pairs of (numerical_observations, symbolic_equation) for Newtonian physics, including the Feynman/SRSD benchmark equations plus procedurally generated equations from a physics-informed grammar.",
+          "acceptance_criteria": "A Python module data/ with: (1) data_generator.py that procedurally generates at least 500,000 unique (observation_table, equation_tree) pairs using a context-free grammar over Newtonian physics operators (+, -, *, /, sqrt, sin, cos, exp, log, pow) with physically meaningful variable ranges, (2) feynman_loader.py that loads and preprocesses all Feynman/SRSD Newtonian equations, (3) tokenizer.py implementing prefix-notation tokenization with a vocabulary of \u2264128 tokens, (4) augmentation.py implementing at least 4 augmentation types (variable permutation, noise injection at 1%/5%/10% levels, unit rescaling, observation subsampling), (5) unit tests confirming round-trip tokenization fidelity and data loader correctness. Pipeline must generate a full training set in under 2 hours on single A100.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_007",
+          "description": "Implement the autoregressive transformer baseline (E2ESR-style) as the primary comparison model.",
+          "acceptance_criteria": "A Python module baselines/autoregressive.py implementing: (1) a standard encoder-decoder transformer (6 encoder layers, 6 decoder layers, d_model=512, 8 heads, ~50M parameters), (2) set-transformer encoder for numerical input, (3) autoregressive decoder with teacher forcing, (4) beam search decoding (beam width 10), (5) training script that runs on single A100 with batch size \u226532, (6) a smoke test confirming the model can overfit to 10 simple equations (e.g., F=ma, E=mc^2 style) within 1000 steps.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Define and implement the full evaluation metrics suite for symbolic equation recovery.",
+          "acceptance_criteria": "A Python module evaluation/metrics.py implementing: (1) Exact Symbolic Match rate (after canonical simplification via SymPy), (2) Normalized Edit Distance (NED) between predicted and ground-truth expression trees, (3) Numerical R\u00b2 score on held-out test points (10,000 points per equation), (4) Symbolic Complexity Ratio (predicted complexity / ground truth complexity), (5) Dimensional Consistency Check (binary: does the predicted equation have consistent physical dimensions), (6) Tier-stratified reporting (separate metrics for each of the 4 complexity tiers from item_004), (7) unit tests for each metric with known inputs/outputs. All metrics must be compatible with both autoregressive and masked-diffusion model outputs.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Train the autoregressive baseline to convergence and establish benchmark numbers on the Newtonian equation test set.",
+          "acceptance_criteria": "Baseline training completed with: (1) training loss curve saved to results/baseline_training.json, (2) converged model checkpoint saved, (3) evaluation results on full test set reported in results/baseline_results.json including all 6 metrics from item_008, (4) per-tier breakdown showing Exact Match rates (expected rough range: Tier 1 > 60%, Tier 2 > 30%, Tier 3 > 15%, Tier 4 > 5% based on literature), (5) total training time logged and confirmed to be under 24 hours on single A100, (6) at least 3 qualitative examples per tier showing predicted vs ground-truth equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_010",
+          "description": "Implement the PhysDiffuse masked-diffusion decoder: a transformer decoder trained with the masked diffusion language modeling objective, where random subsets of output tokens are masked and the model learns to reconstruct them conditioned on unmasked tokens and the encoder output.",
+          "acceptance_criteria": "A Python module model/phys_diffuse.py implementing: (1) a transformer decoder (8 layers, d_model=512, 8 heads) with masked-diffusion training objective (random masking probability per sequence, cross-entropy loss only on masked positions), (2) soft-masking inference: adding mask embeddings to all positions and iteratively refining (as in ARC2025 LLaDA), (3) logit normalization between refinement iterations, (4) configurable number of refinement steps (default 32), (5) the combined encoder-decoder model with total parameter count between 100M-300M, (6) a smoke test showing the model can overfit to 10 simple equations within 2000 steps, (7) GPU memory usage confirmed to be under 40GB on A100 during training with batch size \u226516.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_011",
+          "description": "Implement the physics-informed dimensional analysis constraint as an auxiliary training loss and inference-time filter.",
+          "acceptance_criteria": "An extension to model/phys_diffuse.py and evaluation/metrics.py: (1) a dimensional analysis module that assigns SI base-unit exponents ([M, L, T]) to each variable and propagates them through the expression tree, (2) an auxiliary loss term penalizing dimensional inconsistency (weighted by lambda_dim, default 0.1), (3) an inference-time constraint that rejects or down-weights candidates failing dimensional analysis, (4) unit tests verifying correct dimensional propagation for at least 10 known equations (e.g., F=ma yields [M*L*T^-2] on both sides), (5) ablation flag to enable/disable the dimensional constraint for later experiments.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_012",
+          "description": "Implement per-equation test-time training (TTT) with augmented data, inspired by the ARC2025 approach of fine-tuning a low-rank adapter on each test instance.",
+          "acceptance_criteria": "A Python module model/ttt.py implementing: (1) LoRA adapter (rank 16-32) that can be attached to the PhysDiffuse decoder layers, (2) per-equation TTT loop: for a given test observation table, generate K=64 augmented versions (noise, subsampling, variable permutation), run 64-128 gradient steps on the self-supervised masked reconstruction objective using only the test instance augmentations, (3) stateful candidate selection: sample N=128 candidate equations from the TTT-adapted model, select the top-2 most-visited candidates (as in ARC2025), (4) TTT must complete in under 60 seconds per equation on single A100, (5) a test confirming TTT improves Exact Match on at least 3 held-out equations compared to the base model without TTT.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement the recursive refinement sampling strategy with cold restarts, combining soft-masking loops with candidate diversity mechanisms.",
+          "acceptance_criteria": "An extension to model/phys_diffuse.py inference: (1) recursive refinement with configurable total steps T (default 64), split into R=2 rounds with cold restarts (re-masking all positions between rounds), (2) within each round, apply distinct random augmentations to the input at each refinement step, (3) temperature-controlled sampling with annealing schedule, (4) most-visited-candidate selection across all rounds, (5) optional MCTS-guided token selection at each refinement step (inspired by TPSR), with a flag to enable/disable, (6) inference benchmark showing the full pipeline processes one equation in under 30 seconds without TTT.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement the SymPy-based post-processing and constant refinement module that takes candidate symbolic expressions and optimizes their numerical constants via BFGS.",
+          "acceptance_criteria": "A Python module model/postprocess.py implementing: (1) SymPy-based canonical simplification of predicted expressions, (2) BFGS optimization of all numerical constants in the expression to minimize MSE on the observation data, (3) complexity-aware Pareto filtering (remove dominated solutions on the accuracy-complexity frontier), (4) ensemble of top-K candidates after constant refinement, (5) unit tests showing constant refinement improves R\u00b2 by at least 0.05 on 5 test equations with imprecise initial constants.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_015",
+          "description": "Train PhysDiffuse to convergence on the full training set and evaluate on the Newtonian equation test set, comparing against the autoregressive baseline.",
+          "acceptance_criteria": "Training completed with: (1) training loss curve saved to results/phys_diffuse_training.json, (2) converged checkpoint saved, (3) full test set evaluation in results/phys_diffuse_results.json with all 6 metrics, (4) PhysDiffuse must achieve statistically significant improvement (p < 0.05 via paired bootstrap test, 1000 resamples) over the autoregressive baseline on at least 2 of the 3 primary metrics (Exact Match, NED, R\u00b2), (5) training completed in under 48 hours on single A100, (6) per-tier breakdown included.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Run the full ablation study isolating the contribution of each novel component: (A) masked diffusion vs autoregressive, (B) recursive soft-masking refinement (0, 8, 16, 32, 64 steps), (C) dimensional analysis constraint (on/off), (D) test-time training (on/off), (E) MCTS-guided refinement (on/off), (F) cold restarts (1 vs 2 rounds).",
+          "acceptance_criteria": "Results saved to results/ablation_study.json containing: (1) at least 10 distinct ablation configurations, (2) all 6 metrics for each configuration on the full test set, (3) a clear winner identified for each component with statistical significance (p < 0.05), (4) the full PhysDiffuse system (all components on) must outperform every partial ablation on Exact Match rate, (5) a markdown table in results/ablation_summary.md showing all configurations and their metrics side-by-side.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_017",
+          "description": "Evaluate PhysDiffuse with test-time training on the full test set and compare against all baselines and ablations.",
+          "acceptance_criteria": "Results saved to results/phys_diffuse_ttt_results.json with: (1) per-equation TTT applied to the full test set, (2) all 6 metrics reported, (3) PhysDiffuse+TTT must achieve the highest Exact Match rate among all configurations, (4) TTT must improve Exact Match by at least 5 absolute percentage points over PhysDiffuse without TTT, (5) total inference time for the full test set logged (must be under 2 hours for ~30 test equations), (6) per-tier breakdown showing TTT benefit is largest on Tier 3-4 equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Compare PhysDiffuse against published state-of-the-art results from the literature review on overlapping benchmark equations (Feynman/SRSD Newtonian subset).",
+          "acceptance_criteria": "A comparison table in results/sota_comparison.md showing: (1) PhysDiffuse metrics vs at least 5 methods from the literature (E2ESR, TPSR, PySR, AI Feynman, PhyE2E) on the overlapping equation set, (2) for methods without public code, use reported numbers from their papers (cited in sources.bib), (3) PhysDiffuse+TTT must achieve competitive or superior Exact Match (within 5% of the best published result on Newtonian equations, or exceeding it), (4) highlight any equations that PhysDiffuse uniquely solves that other methods miss, (5) discussion of fair comparison caveats (different training data, compute budgets).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Run a novel 'derivation from scratch' experiment: provide PhysDiffuse with only raw kinematic observation data (position, velocity, time series) without variable labels, and test if it can derive fundamental Newtonian laws (F=ma, conservation of energy, gravitational law) from first principles.",
+          "acceptance_criteria": "Results saved to results/derivation_from_scratch.json with: (1) at least 5 fundamental Newtonian laws tested (Newton's 2nd law, universal gravitation, kinetic energy, conservation of momentum, Hooke's law), (2) for each law, generate synthetic observation data simulating the physical system (e.g., projectile trajectories for F=ma, planetary orbits for gravitation), (3) report whether PhysDiffuse recovers the correct symbolic form (Exact Match or symbolically equivalent after simplification), (4) at least 3 out of 5 laws must be correctly derived, (5) include visualization of the derivation process (refinement steps showing how the equation evolves from random tokens to the final form), (6) this is the 'wow result' \u2014 document it with publication-quality figures saved to figures/.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Run generalization experiments: test PhysDiffuse on held-out equation families never seen during training (e.g., rotational dynamics, fluid mechanics basics, wave equations) to measure out-of-distribution symbolic reasoning.",
+          "acceptance_criteria": "Results saved to results/generalization.json with: (1) at least 8 held-out equations from domains adjacent to Newtonian mechanics, (2) R\u00b2 and NED metrics for each, (3) comparison with the autoregressive baseline on the same OOD set, (4) PhysDiffuse must achieve R\u00b2 > 0.9 on at least 50% of OOD equations (numerical fit even if symbolic form is imperfect), (5) qualitative analysis of failure modes (what equation structures cause the model to fail).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_021",
+          "description": "Generate all publication-quality figures: training curves, ablation bar charts, tier-stratified performance plots, the derivation-from-scratch refinement visualization, and the SOTA comparison table.",
+          "acceptance_criteria": "At least 8 figures saved to figures/ as both PNG (300 DPI) and PDF: (1) training loss curves for baseline and PhysDiffuse, (2) bar chart comparing all ablation configurations on Exact Match, (3) per-tier performance grouped bar chart (baseline vs PhysDiffuse vs PhysDiffuse+TTT), (4) refinement step visualization showing equation evolution for 3 example derivations, (5) R\u00b2 scatter plot (predicted vs ground truth numerical accuracy), (6) SOTA comparison table as a formatted figure, (7) inference time vs accuracy trade-off plot, (8) dimensional consistency rate across tiers. All figures must use consistent styling (matplotlib with a publication-ready theme, readable fonts, proper axis labels).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_022",
+          "description": "Write the complete technical report (paper-style) documenting the PhysDiffuse architecture, experiments, and results.",
+          "acceptance_criteria": "A report.md (or report.tex) in the repo root with: (1) Abstract (200 words), (2) Introduction with motivation and contributions (3 key contributions listed), (3) Related Work section citing at least 12 papers from sources.bib, (4) Method section with architecture details, training procedure, and TTT procedure, (5) Experiments section with all results from Phase 4, (6) Ablation Study subsection, (7) Discussion section analyzing why masked-diffusion refinement helps for physics equations specifically, (8) Conclusion with limitations and future work, (9) all figures from item_021 referenced inline, (10) total length between 8-15 pages (NeurIPS format equivalent).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Perform error analysis on failure cases: categorize equations that PhysDiffuse fails to recover and identify systematic patterns.",
+          "acceptance_criteria": "An error_analysis.md document with: (1) categorization of all failure cases into at least 4 failure modes (e.g., excessive nesting depth, rare operator combinations, numerical precision issues, dimensional ambiguity), (2) for each failure mode, at least 2 concrete examples with the predicted vs ground-truth equation, (3) analysis of whether the failure is in the symbolic structure or the constant values, (4) proposed mitigations for each failure mode (as future work), (5) correlation analysis between equation complexity metrics and model success rate.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Ensure full reproducibility: finalize all code, configuration files, random seeds, and documentation so that results can be independently reproduced.",
+          "acceptance_criteria": "(1) A requirements.txt or environment.yml pinning all dependencies with exact versions, (2) a configs/ directory with YAML config files for every experiment (baseline training, PhysDiffuse training, all ablations, TTT), (3) a run_all.sh master script that reproduces all experiments end-to-end, (4) fixed random seeds documented in configs, (5) README.md updated with: project overview, installation instructions, how to reproduce each experiment, expected runtime per experiment, and hardware requirements, (6) all model checkpoints saved to results/checkpoints/ with clear naming.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Final validation: re-run the core experiment (PhysDiffuse+TTT on full test set) from a clean environment to confirm reproducibility, and verify all claimed results match.",
+          "acceptance_criteria": "(1) Clean re-run completed using only run_all.sh and documented configs, (2) all 6 metrics match the reported results within 2% tolerance (accounting for stochastic variation with fixed seeds), (3) sources.bib contains at least 15 valid entries, (4) all figures regenerated and match, (5) a final results/reproducibility_check.json logging the re-run metrics alongside original metrics, (6) git commit with all final artifacts tagged as v1.0.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 25,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 25
+  }
+}
