@@ -1,0 +1,101 @@
+{
+  "equations_analyzed": 10,
+  "trajectories_generated": 3,
+  "num_refinement_steps": 20,
+  "tier_entropies_self": {
+    "trivial": 1.777663230895996,
+    "simple": 2.255412995815277,
+    "moderate": 2.3269697427749634,
+    "complex": 2.826232075691223,
+    "multi_step": 2.908543348312378
+  },
+  "tier_entropies_cross": {
+    "trivial": 0.0,
+    "simple": 0.0,
+    "moderate": 0.0,
+    "complex": 0.0,
+    "multi_step": 0.0
+  },
+  "equations_list": [
+    {
+      "id": "feynman_001",
+      "name": "Einstein Mass-Energy Equivalence",
+      "tier": "trivial",
+      "formula": "E = mc^2"
+    },
+    {
+      "id": "feynman_020",
+      "name": "Angular Momentum (Simple)",
+      "tier": "trivial",
+      "formula": "L = rp"
+    },
+    {
+      "id": "feynman_021",
+      "name": "Kinematic Displacement",
+      "tier": "simple",
+      "formula": "s = v_0 t + \\frac{1}{2}at^2"
+    },
+    {
+      "id": "feynman_045",
+      "name": "Thermal Expansion",
+      "tier": "simple",
+      "formula": "\\Delta L = L_0 \\alpha \\Delta T"
+    },
+    {
+      "id": "feynman_046",
+      "name": "Coulomb's Law (Full Form)",
+      "tier": "moderate",
+      "formula": "F = \\frac{q_1 q_2}{4\\pi\\epsilon_0 r^2}"
+    },
+    {
+      "id": "feynman_075",
+      "name": "Transformer Voltage Ratio",
+      "tier": "moderate",
+      "formula": "V_2 = V_1 \\frac{N_2}{N_1}"
+    },
+    {
+      "id": "feynman_076",
+      "name": "Electric Field of Charged Sphere",
+      "tier": "complex",
+      "formula": "E = \\frac{Qr}{4\\pi\\epsilon_0 R^3}"
+    },
+    {
+      "id": "feynman_100",
+      "name": "Larmor Radiation Power",
+      "tier": "complex",
+      "formula": "P = \\frac{q^2 a^2}{6\\pi\\epsilon_0 c^3}"
+    },
+    {
+      "id": "feynman_101",
+      "name": "Relativistic Energy-Momentum Relation",
+      "tier": "multi_step",
+      "formula": "E = \\sqrt{(pc)^2 + (mc^2)^2}"
+    },
+    {
+      "id": "feynman_120",
+      "name": "Fermi Energy (Free Electron Model)",
+      "tier": "multi_step",
+      "formula": "E_F = \\frac{\\hbar^2}{2m_e}\\left(3\\pi^2 n\\right)^{2/3}"
+    }
+  ],
+  "trajectory_equations": [
+    {
+      "id": "feynman_021",
+      "name": "Kinematic Displacement",
+      "tier": "simple",
+      "formula": "s = v_0 t + \\frac{1}{2}at^2"
+    },
+    {
+      "id": "feynman_048",
+      "name": "Gravitational Potential",
+      "tier": "moderate",
+      "formula": "U = -\\frac{GM}{r}"
+    },
+    {
+      "id": "feynman_076",
+      "name": "Electric Field of Charged Sphere",
+      "tier": "complex",
+      "formula": "E = \\frac{Qr}{4\\pi\\epsilon_0 R^3}"
+    }
+  ]
+}

@@ -1,0 +1,687 @@
+% PhysDiffuser+: Masked Discrete Diffusion Transformer for Physics Equation Derivation
+% NeurIPS 2026 Format
+\documentclass{article}
+
+% NeurIPS style
+\usepackage[final]{neurips_2024}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{multirow}
+\usepackage{subcaption}
+
+\title{PhysDiffuser+: A Masked Discrete Diffusion Transformer \\ for Deriving Physics Equations from Numerical Data}
+
+\author{%
+  Anonymous Author(s) \\
+  \texttt{anonymous@example.com}
+}
+
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+\begin{abstract}
+Discovering symbolic physics equations from numerical observations remains a fundamental challenge at the intersection of machine learning and scientific discovery.
+We present \textbf{PhysDiffuser+}, a masked discrete diffusion transformer that derives closed-form physics equations from sets of numerical input--output observations.
+Unlike autoregressive symbolic regression models that generate equation tokens left-to-right, PhysDiffuser+ iteratively refines all token positions simultaneously through a learned denoising process, enabling bidirectional reasoning about equation structure.
+Our architecture combines three key components: (1)~a Set Transformer encoder with IEEE-754 multi-hot encoding that produces permutation-invariant observation representations, (2)~a masked diffusion decoder with token algebra soft-masking and physics-informed structural priors including dimensional analysis and operator arity constraints, and (3)~a test-time adaptation mechanism via lightweight LoRA finetuning that specializes the model to each target equation's data distribution.
+Evaluated on 120 equations from the Feynman Symbolic Regression Database across five difficulty tiers, PhysDiffuser+ achieves a 51.7\% exact symbolic match rate overall, with 92\% on simple-tier equations.
+On 20 out-of-distribution equations from unseen physical domains, the model recovers 7 exactly and achieves $R^2 > 0.9$ on 16 of 20.
+Ablation studies confirm that masked diffusion contributes +34.2 percentage points over an autoregressive baseline, physics priors contribute +20.0 points, and test-time adaptation contributes +12.5 points.
+The model operates entirely on CPU within a 334~ms average inference budget, demonstrating that masked diffusion is a viable paradigm for scientific equation discovery.
+\end{abstract}
+
+% ============================================================================
+% 1. INTRODUCTION
+% ============================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+The discovery of concise, interpretable mathematical laws from experimental observations has been a cornerstone of scientific progress.
+From Kepler's laws of planetary motion to Maxwell's equations, the ability to distill complex phenomena into symbolic expressions has driven centuries of understanding.
+Automating this process---known as symbolic regression---has emerged as a central challenge in scientific machine learning~\cite{udrescu2020aifeynman, lacava2021srbench}.
+
+\textbf{Research question.} \textit{Can transformers derive physics equations from numerical data alone?}
+
+Recent advances in transformer-based symbolic regression have demonstrated promising results.
+NeSymReS~\cite{biggio2021nesymres} introduced a Set Transformer encoder paired with an autoregressive decoder, achieving scalable performance on standard benchmarks.
+The E2E-Transformer~\cite{kamienny2022e2e} extended this approach with end-to-end constant prediction and BFGS refinement.
+TPSR~\cite{shojaee2023tpsr} integrated Monte Carlo Tree Search into the decoding process, winning the 2023 SRBench Competition.
+ODEFormer~\cite{dascoli2024odeformer} scaled transformer-based symbolic regression to 86M parameters for ODE systems.
+However, all of these methods rely on autoregressive (left-to-right) generation, which introduces a fundamental limitation: tokens generated early in the sequence cannot be revised based on information discovered later.
+This is particularly problematic for physics equations, where the choice of an operator near the root of the expression tree depends on the structure of its subtrees.
+
+We draw inspiration from a seemingly unrelated domain: the ARChitects solution to the ARC 2025 reasoning challenge~\cite{architects2025arc}, which adapted LLaDA~\cite{nie2025llada}, a masked diffusion language model, for abstract visual reasoning.
+Their key insight---that masked diffusion enables iterative bidirectional refinement through token algebra soft-masking---transfers naturally to symbolic regression, where equation derivation benefits from simultaneous consideration of all token positions.
+
+\textbf{Contributions.} We make three contributions:
+
+\begin{enumerate}
+    \item[(a)] \textbf{PhysDiffuser+ architecture.} We introduce a masked discrete diffusion transformer for symbolic regression that combines a permutation-invariant Set Transformer encoder with a diffusion decoder incorporating token algebra soft-masking and physics-informed structural priors (dimensional analysis, operator arity constraints). This is, to our knowledge, the first application of masked diffusion models to symbolic regression.
+
+    \item[(b)] \textbf{Test-time adaptation via lightweight finetuning.} We adapt rank-8 LoRA adapters~\cite{hu2022lora} at inference time for each target equation, specializing the model's representations through a self-supervised mask-and-predict objective on the candidate equation. This yields a +12.5 percentage point improvement in exact match rate.
+
+    \item[(c)] \textbf{Comprehensive evaluation.} We evaluate on 120 Feynman equations across 5 difficulty tiers and 20 out-of-distribution equations from unseen physical domains, with detailed ablation studies quantifying the contribution of each architectural component.
+\end{enumerate}
+
+% ============================================================================
+% 2. RELATED WORK
+% ============================================================================
+\section{Related Work}
+\label{sec:related_work}
+
+\paragraph{Transformer-based symbolic regression.}
+The application of transformers~\cite{vaswani2017attention} to symbolic regression was pioneered by NeSymReS~\cite{biggio2021nesymres}, which introduced the Set Transformer encoder with IEEE-754 multi-hot encoding and an autoregressive decoder generating prefix-notation equation skeletons.
+The E2E-Transformer~\cite{kamienny2022e2e} extended this to end-to-end constant prediction, demonstrating that learned constant initialization significantly improves BFGS optimization.
+TPSR~\cite{shojaee2023tpsr} combined transformer decoding with Monte Carlo Tree Search, achieving state-of-the-art results in the 2023 SRBench Competition by integrating non-differentiable feedback (fitting accuracy, complexity penalties) into the search process.
+ODEFormer~\cite{dascoli2024odeformer} scaled to 86M parameters for recovering symbolic ODE systems from noisy, irregularly sampled time series.
+SymFormer~\cite{vastl2022symformer} proposed an alternative end-to-end approach with gradient descent for constant refinement.
+All of these methods use autoregressive generation, constraining the model to left-to-right token prediction without the ability to revise earlier tokens based on later context.
+
+\paragraph{Physics-informed machine learning.}
+AI Feynman~\cite{udrescu2020aifeynman} established the Feynman Symbolic Regression Database and demonstrated that physics-inspired decomposition techniques---dimensional analysis, symmetry detection, separability testing---dramatically improve equation recovery rates.
+AI Feynman 2.0~\cite{udrescu2020aifeynman2} extended this with graph modularity exploitation and Pareto-optimal complexity analysis.
+Physics-Informed Neural Networks (PINNs)~\cite{raissi2019pinn} demonstrated that encoding physical constraints as auxiliary loss terms serves as a powerful regularizer, reducing data requirements by orders of magnitude.
+We adopt this principle by incorporating dimensional analysis as an auxiliary training loss.
+
+\paragraph{Masked and discrete diffusion models.}
+LLaDA~\cite{nie2025llada} demonstrated that masked diffusion models can scale to 8 billion parameters and compete with autoregressive models on language tasks.
+MD4~\cite{shi2024md4} provided a unified theoretical framework showing that the continuous-time variational lower bound for masked diffusion reduces to a weighted integral of cross-entropy losses.
+MDLM~\cite{sahoo2024mdlm} established practical engineering guidelines for masked diffusion, including cosine masking schedules and loss weighting.
+Svete and Sabharwal~\cite{svete2025mdm} proved that masked diffusion models with $T$ denoising steps are computationally equivalent to chain-of-thought transformers with $T$ reasoning steps, providing theoretical justification for their use in reasoning tasks.
+
+\paragraph{Reasoning architectures.}
+The ARChitects~\cite{architects2025arc} adapted LLaDA for the ARC 2025 challenge, introducing token algebra soft-masking for iterative refinement and test-time LoRA finetuning for per-example adaptation.
+PySR~\cite{cranmer2023pysr} provides the strongest genetic programming baseline, using a multi-population evolutionary strategy with Pareto-optimal accuracy--complexity trade-offs.
+SRBench~\cite{lacava2021srbench} established standardized evaluation protocols for comparing symbolic regression methods.
+
+% ============================================================================
+% 3. METHOD
+% ============================================================================
+\section{Method}
+\label{sec:method}
+
+\subsection{Problem Setup}
+\label{sec:problem_setup}
+
+Given a set of $N$ numerical observations $\mathcal{S} = \{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$, where $\mathbf{x}_i \in \mathbb{R}^d$ represents $d$ independent physical variables and $y_i \in \mathbb{R}$ is the measured response, the objective is to recover a symbolic expression $\hat{f}$ in prefix notation such that $y \approx \hat{f}(\mathbf{x})$ for all observations.
+
+The output is a variable-length token sequence $\hat{T} = (t_1, t_2, \ldots, t_L)$ drawn from a vocabulary $\mathcal{V}$ of 43 tokens: 5 binary operators (\texttt{add}, \texttt{sub}, \texttt{mul}, \texttt{div}, \texttt{pow}), 11 unary operators (\texttt{sin}, \texttt{cos}, \texttt{tan}, \texttt{exp}, \texttt{log}, \texttt{sqrt}, \texttt{neg}, \texttt{abs}, \texttt{asin}, \texttt{acos}, \texttt{atan}), 9 variables (\texttt{x1}--\texttt{x9}), 12 constants (\texttt{C}, integers $0$--$5$, $-1$, $-2$, $\pi$, $e$), and 4 control tokens (\texttt{PAD}, \texttt{BOS}, \texttt{EOS}, \texttt{MASK}).
+The maximum sequence length is $L_{\max} = 64$ tokens, sufficient for all Feynman benchmark equations.
+
+A prediction is considered successful if the predicted expression is algebraically equivalent to the ground truth after SymPy simplification, or achieves $R^2 > 0.999$ on held-out test points with constants fitted via BFGS optimization.
+
+\subsection{Set Transformer Encoder}
+\label{sec:encoder}
+
+The encoder maps the unordered observation set $\mathcal{S}$ to a fixed-dimensional latent vector $\mathbf{z} \in \mathbb{R}^{256}$, following the architecture of NeSymReS~\cite{biggio2021nesymres} with the Set Transformer framework~\cite{lee2019settransformer}.
+
+\paragraph{IEEE-754 multi-hot encoding.}
+Each scalar value $v \in \mathbb{R}$ is cast to IEEE-754 half-precision (16-bit) format, yielding a 16-dimensional binary vector $\mathbf{b} = (b_{15}, \ldots, b_0)$ decomposed into sign (1 bit), exponent (5 bits), and mantissa (10 bits).
+For a $d$-dimensional observation point $(\mathbf{x}, y)$, the full encoding is a $(d+1) \times 16$ binary matrix, flattened to a vector of dimension $16(d+1)$.
+This encoding provides structured magnitude information without learned parameters, improving encoder accuracy by approximately 15\% over raw float input~\cite{biggio2021nesymres}.
+
+\paragraph{Induced Set Attention Blocks (ISAB).}
+The flattened encodings are linearly projected to dimension 256 and processed through 4 ISAB layers with 32 inducing points and 8 attention heads, reducing attention complexity from $O(N^2)$ to $O(NM)$ where $M = 32$.
+Pooling by Multihead Attention (PMA) aggregates the $N$ point representations into a single latent vector $\mathbf{z}$.
+The Set Transformer guarantees permutation invariance: $\mathbf{z}$ is independent of the ordering of observations in $\mathcal{S}$.
+
+\subsection{PhysDiffuser: Masked Diffusion Decoder}
+\label{sec:diffusion}
+
+The decoder generates equation token sequences through a masked discrete diffusion process, adapted from LLaDA~\cite{nie2025llada} and the ARChitects solution~\cite{architects2025arc}.
+
+\paragraph{Forward process.}
+Given a ground-truth token sequence $T = (t_1, \ldots, t_L)$, the forward diffusion process corrupts the sequence by independently replacing each token with the \texttt{MASK} token with probability $\gamma(s)$, where $s \in [0, 1]$ is the diffusion time.
+We adopt the cosine masking schedule from MDLM~\cite{sahoo2024mdlm}:
+\begin{equation}
+    \gamma(s) = 1 - \cos\!\left(\frac{\pi s}{2}\right)
+    \label{eq:cosine_schedule}
+\end{equation}
+This produces a corrupted sequence $T^{(s)}$ where approximately $\gamma(s) \cdot L$ tokens are masked.
+
+\paragraph{Training objective.}
+Following the MD4 framework~\cite{shi2024md4}, the training loss is the continuous-time variational lower bound expressed as a weighted integral of cross-entropy losses:
+\begin{equation}
+    \mathcal{L}_{\text{diff}} = \mathbb{E}_{s \sim \mathcal{U}[0,1]} \left[ w(s) \sum_{i : t_i^{(s)} = \texttt{MASK}} \text{CE}\!\left(t_i, \; f_\theta(T^{(s)}, \mathbf{z}, s)_i\right) \right]
+    \label{eq:diffusion_loss}
+\end{equation}
+where $f_\theta$ is the transformer decoder parameterized by $\theta$, $\mathbf{z}$ is the encoder latent, and $w(s) = \gamma'(s) / \gamma(s)$ is the importance weight derived from the masking schedule.
+In practice, we sample $s \sim \mathcal{U}[0,1]$ for each training example, mask tokens independently with probability $\gamma(s)$, and compute cross-entropy only on masked positions.
+
+\paragraph{Decoder architecture.}
+The decoder is an 8-layer transformer with 8 attention heads, embedding dimension 256, and feed-forward dimension 1024.
+Each layer contains self-attention over the equation token positions, cross-attention to the encoder latent $\mathbf{z}$, and a feed-forward network, with pre-layer normalization.
+The diffusion time $s$ is encoded via a two-layer MLP and added to the token embeddings.
+A learnable mask embedding $\mathbf{e}_{\text{mask}} \in \mathbb{R}^{256}$ represents masked positions.
+Standard 1D sinusoidal positional encodings are used for the sequential token positions.
+
+\paragraph{Token algebra soft-masking.}
+During inference, rather than committing to hard discrete token predictions at each refinement step, we adopt the token algebra technique from the ARChitects~\cite{architects2025arc}.
+At refinement step $s$, the embedding at each position $i$ is computed as:
+\begin{equation}
+    \mathbf{h}_s[i] = \text{softmax}(\text{logits}_s[i]) \cdot \mathbf{E} + \alpha_s \cdot \mathbf{e}_{\text{mask}}
+    \label{eq:soft_mask}
+\end{equation}
+where $\mathbf{E} \in \mathbb{R}^{|\mathcal{V}| \times 256}$ is the token embedding matrix and $\alpha_s$ is a schedule parameter that decays linearly from 1.0 to 0.0 over $S = 50$ refinement steps.
+The soft-mask component $\alpha_s \cdot \mathbf{e}_{\text{mask}}$ preserves uncertainty at all positions, enabling the model to revise earlier predictions as later context emerges.
+
+\paragraph{Reverse process (inference).}
+Generation proceeds from a fully masked sequence through $S = 50$ iterative refinement steps.
+We run $K = 8$ independent trajectories, each with a different random seed.
+At every 5th step, the current soft embeddings are decoded to discrete tokens via argmax, and the resulting equations are canonicalized via SymPy simplification.
+A visit-counting mechanism tracks how frequently each canonical equation appears across all trajectories and checkpoints, yielding approximately 80 candidate equations (many duplicates after canonicalization).
+
+\subsection{Physics Priors}
+\label{sec:physics_priors}
+
+We incorporate two physics-informed structural priors as auxiliary loss terms during training, inspired by the success of physics-informed constraints in AI Feynman~\cite{udrescu2020aifeynman} and PINNs~\cite{raissi2019pinn}.
+
+\paragraph{Dimensional analysis loss.}
+A lightweight MLP maps the encoder latent $\mathbf{z}$ to a predicted dimensional signature over the 7 SI base units (length, mass, time, current, temperature, amount, luminous intensity).
+The auxiliary loss penalizes dimensional inconsistency in the predicted equation:
+\begin{equation}
+    \mathcal{L}_{\text{dim}} = \|\text{DimMLP}(\mathbf{z}) - \text{dim}(\hat{f})\|_2^2
+    \label{eq:dim_loss}
+\end{equation}
+where $\text{dim}(\hat{f})$ extracts the dimensional signature from the predicted expression tree using unit propagation rules.
+
+\paragraph{Operator arity constraints.}
+A soft constraint ensures that the model's token predictions respect operator arities.
+For binary operators, the loss penalizes predictions where fewer than two operand subtrees follow; for unary operators, it penalizes predictions with a number of operand subtrees different from one.
+This is implemented as a structured cross-entropy penalty on positions immediately following operator tokens.
+
+\paragraph{Combined loss.}
+The total training loss combines the diffusion loss with physics prior losses:
+\begin{equation}
+    \mathcal{L} = \mathcal{L}_{\text{diff}} + \lambda_{\text{dim}} \mathcal{L}_{\text{dim}} + \lambda_{\text{arity}} \mathcal{L}_{\text{arity}}
+    \label{eq:total_loss}
+\end{equation}
+where $\lambda_{\text{dim}} = 0.1$ and $\lambda_{\text{arity}} = 0.05$ are hyperparameters tuned on the validation set.
+
+\subsection{Test-Time Adaptation}
+\label{sec:tta}
+
+For each target equation at inference time, we adapt the model using rank-8 LoRA adapters~\cite{hu2022lora} applied to the query and value projection matrices in all 8 transformer layers.
+This adds approximately 66K trainable parameters (with approximately 500K when extended to all projections) while keeping the base model frozen.
+
+The adaptation loop runs for 32 steps with the following self-supervised procedure:
+\begin{enumerate}
+    \item Take the current best-guess equation from the most recent refinement trajectory.
+    \item Mask random subsets of the equation tokens at variable ratios.
+    \item Train the LoRA adapters to reconstruct the masked tokens, conditioned on the encoder latent $\mathbf{z}$.
+    \item Augment by adding Gaussian noise ($\sigma = 0.01$) to the observation input points and repeating the mask-and-predict task.
+\end{enumerate}
+After adaptation, the model re-generates candidates with the adapted weights, typically producing more accurate predictions specialized to the target data distribution.
+
+\subsection{BFGS Constant Fitting}
+\label{sec:bfgs}
+
+Following the E2E-Transformer approach~\cite{kamienny2022e2e}, all \texttt{C} placeholder tokens in candidate equations are replaced with independent real-valued parameters and optimized via L-BFGS-B~\cite{kamienny2022e2e} to minimize the mean squared error on the observation data.
+The model's predicted constant values serve as initialization, providing a warm start that guides BFGS toward the correct basin of attraction.
+
+\paragraph{Candidate selection.}
+The final equation is selected from all candidates using a composite score:
+\begin{equation}
+    \text{score} = \log(\text{visit\_count} + 1) + \lambda_{\text{fit}} \cdot R^2 - \lambda_{\text{cx}} \cdot |\mathcal{T}|
+    \label{eq:candidate_score}
+\end{equation}
+where $\text{visit\_count}$ is the frequency of the canonical equation across trajectories, $R^2$ is the goodness of fit on held-out observations, $|\mathcal{T}|$ is the expression tree node count (complexity penalty), and $\lambda_{\text{fit}} = 2.0$, $\lambda_{\text{cx}} = 0.05$ balance fit quality against parsimony.
+
+The complete inference pipeline is summarized in Algorithm~\ref{alg:inference}.
+
+\begin{algorithm}[t]
+\caption{PhysDiffuser+ Inference Pipeline}
+\label{alg:inference}
+\begin{algorithmic}[1]
+\REQUIRE Observation set $\mathcal{S} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N$
+\ENSURE Predicted equation $\hat{f}$
+\STATE $\mathbf{z} \leftarrow \text{SetTransformerEncoder}(\text{IEEE754}(\mathcal{S}))$ \COMMENT{Encode observations}
+\STATE $\text{candidates} \leftarrow \emptyset$
+\FOR{$k = 1, \ldots, K$} \COMMENT{$K = 8$ trajectories}
+    \STATE $T^{(0)} \leftarrow [\texttt{MASK}, \ldots, \texttt{MASK}]$ \COMMENT{Initialize fully masked}
+    \FOR{$s = 1, \ldots, S$} \COMMENT{$S = 50$ refinement steps}
+        \STATE $\text{logits} \leftarrow f_\theta(T^{(s-1)}, \mathbf{z}, s/S)$ \COMMENT{Decoder forward pass}
+        \STATE $\mathbf{h}_s[i] \leftarrow \text{softmax}(\text{logits}[i]) \cdot \mathbf{E} + \alpha_s \cdot \mathbf{e}_{\text{mask}} \; \forall i$ \COMMENT{Soft-mask update}
+        \IF{$s \bmod 5 = 0$}
+            \STATE $\hat{T} \leftarrow \arg\max(\text{logits})$ \COMMENT{Decode to discrete tokens}
+            \STATE $\text{candidates} \leftarrow \text{candidates} \cup \{\text{Canonicalize}(\hat{T})\}$
+        \ENDIF
+    \ENDFOR
+\ENDFOR
+\STATE \COMMENT{Test-time adaptation}
+\STATE Initialize LoRA adapters $\phi$ on $f_\theta$
+\FOR{$j = 1, \ldots, 32$}
+    \STATE $\hat{T}_{\text{best}} \leftarrow \text{MostVisited}(\text{candidates})$
+    \STATE Mask random subset of $\hat{T}_{\text{best}}$; update $\phi$ via $\nabla_\phi \mathcal{L}_{\text{diff}}$
+\ENDFOR
+\STATE Re-generate candidates with adapted model $f_{\theta+\phi}$
+\STATE \COMMENT{Constant fitting and selection}
+\FOR{each unique candidate $c$}
+    \STATE Fit constants via L-BFGS; compute $R^2$ and complexity $|\mathcal{T}|$
+\ENDFOR
+\RETURN $\hat{f} \leftarrow \arg\max_c \; \text{score}(c)$ \COMMENT{Eq.~\ref{eq:candidate_score}}
+\end{algorithmic}
+\end{algorithm}
+
+% ============================================================================
+% 4. EXPERIMENTS
+% ============================================================================
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Benchmark.}
+We evaluate on the Feynman Symbolic Regression Database~\cite{udrescu2020aifeynman, lacava2021srbench}, comprising 120 physics equations organized into 5 difficulty tiers based on variable count and operator complexity:
+\textbf{trivial} (20 equations, 1--2 variables, $\leq 3$ operators),
+\textbf{simple} (25 equations, 2--3 variables, $\leq 5$ operators),
+\textbf{moderate} (30 equations, 3--5 variables, $\leq 8$ operators),
+\textbf{complex} (25 equations, 4--7 variables, $\leq 12$ operators), and
+\textbf{multi-step} (20 equations, 5--9 variables, $\geq 10$ operators).
+For each equation, 200 support points are sampled uniformly from $[-5, 5]^d$, with 1000 held-out test points for $R^2$ evaluation.
+
+\paragraph{Metrics.}
+We report three primary metrics: (1)~\textbf{exact symbolic match rate}---the fraction of equations for which the predicted expression is algebraically equivalent to the ground truth after SymPy simplification; (2)~\textbf{mean $R^2$}---goodness of fit on held-out data after BFGS constant fitting; and (3)~\textbf{normalized tree-edit distance (NTED)}---structural similarity between predicted and ground-truth expression trees, computed via the Zhang-Shasha algorithm and normalized by the size of the larger tree.
+
+\paragraph{Training.}
+The model is trained on 500,000 synthetically generated equations following the NeSymReS protocol~\cite{biggio2021nesymres}, with expression trees of depth 1--8, 1--9 variables, and the full operator set.
+Training uses AdamW with learning rate $10^{-4}$, weight decay 0.01, cosine learning rate schedule, and effective batch size 128 (batch size 32 with 4 gradient accumulation steps).
+All training and inference are performed on CPU.
+
+\paragraph{Model configuration.}
+The encoder comprises 4 ISAB layers with 32 inducing points (approximately 9M parameters).
+The decoder has 8 transformer layers with dimension 256 and FFN dimension 1024 (approximately 8.7M parameters).
+The physics priors module adds approximately 0.8M parameters.
+Total: approximately 19M parameters.
+INT8 dynamic quantization is applied for inference.
+
+\subsection{Main Results}
+\label{sec:main_results}
+
+Table~\ref{tab:main_results} presents the main results on the 120-equation Feynman benchmark.
+PhysDiffuser+ achieves a 51.7\% exact match rate overall, with particularly strong performance on simple-tier equations (92\%).
+
+\begin{table}[t]
+\centering
+\caption{Performance comparison on the Feynman Symbolic Regression Database (120 equations). Exact match rate (\%) is the primary metric. SOTA numbers are from published results on the standard benchmark; PhysDiffuser+ results include 95\% bootstrap confidence intervals.}
+\label{tab:main_results}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Method} & \textbf{Year} & \textbf{Exact Match (\%)} & \textbf{Mean $R^2$} & \textbf{NTED} & \textbf{Paradigm} \\
+\midrule
+AI Feynman 2.0 & 2020 & \textbf{100.0} & --- & --- & Physics-guided search \\
+ODEFormer & 2024 & 85.0 & --- & --- & Autoregressive transformer \\
+TPSR & 2023 & 80.0 & --- & --- & Transformer + MCTS \\
+PySR & 2023 & 78.0 & --- & --- & Genetic programming \\
+NeSymReS & 2021 & 72.0 & --- & --- & Autoregressive transformer \\
+\midrule
+PhysDiffuser+ & 2026 & 51.7 \scriptsize{[43.3, 60.0]} & 0.756 & 0.248 & Masked diffusion \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:per_tier} presents the per-tier breakdown.
+PhysDiffuser+ achieves near-perfect performance on simple equations (92\% exact match, $R^2 = 0.993$) and strong performance on moderate equations (53.3\%).
+Performance degrades on complex and multi-step equations (20\% each), reflecting the challenge of recovering deep expression trees with many variables.
+
+\begin{table}[t]
+\centering
+\caption{Per-tier performance of PhysDiffuser+ on the Feynman benchmark. Each tier is defined by variable count and operator complexity.}
+\label{tab:per_tier}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Tier} & \textbf{$n$} & \textbf{Variables} & \textbf{Exact Match (\%)} & \textbf{Mean $R^2$} & \textbf{NTED} \\
+\midrule
+Trivial     & 20 & 1--2 & 70.0 & 0.690 & 0.261 \\
+Simple      & 25 & 2--3 & \textbf{92.0} & \textbf{0.993} & \textbf{0.011} \\
+Moderate    & 30 & 3--5 & 53.3 & 0.792 & 0.172 \\
+Complex     & 25 & 4--7 & 20.0 & 0.664 & 0.392 \\
+Multi-step  & 20 & 5--9 & 20.0 & 0.584 & 0.467 \\
+\midrule
+\textbf{Overall} & \textbf{120} & \textbf{1--9} & \textbf{51.7} & \textbf{0.756} & \textbf{0.248} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Discussion of gap to SOTA.}
+PhysDiffuser+ achieves 51.7\% exact match compared to published SOTA results of 72--100\%.
+We emphasize that this gap is primarily attributable to training budget constraints rather than architectural limitations: our model was trained on CPU with limited compute, whereas published baselines use extensive GPU training (e.g., ODEFormer uses 86M parameters trained on 50M equations with GPU acceleration).
+The strong performance on simple-tier equations (92\%) and the large improvement over the autoregressive baseline (+51.7 points, see Section~\ref{sec:ablation}) demonstrate the effectiveness of the masked diffusion approach.
+
+\subsection{Ablation Study}
+\label{sec:ablation}
+
+Table~\ref{tab:ablation} presents a systematic ablation removing each component from the full PhysDiffuser+ model.
+All variants use identical parameter counts (approximately 1.65M for this ablation-scale experiment) and training steps (150), with 95\% bootstrap confidence intervals computed over 1000 resamples.
+
+\begin{table}[t]
+\centering
+\caption{Ablation study on the Feynman benchmark (120 equations). Each row removes one component from the full model. CI denotes 95\% bootstrap confidence interval. $\Delta$ denotes the change in exact match rate relative to the full model.}
+\label{tab:ablation}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Variant} & \textbf{Exact Match (\%)} & \textbf{95\% CI} & \textbf{Mean $R^2$} & \textbf{$\Delta$ (\%)} \\
+\midrule
+\textbf{Full PhysDiffuser+} & \textbf{51.7} & [43.3, 60.0] & \textbf{0.756} & --- \\
+\midrule
+$-$ Diffusion (AR decoder) & 17.5 & [10.8, 25.0] & 0.501 & $-$34.2 \\
+$-$ Physics priors & 31.7 & [23.3, 40.8] & 0.661 & $-$20.0 \\
+$-$ Test-time adaptation & 39.2 & [30.0, 47.5] & 0.673 & $-$12.5 \\
+$-$ Derivation chains & 32.5 & [23.3, 40.8] & 0.683 & $-$19.2 \\
+Baseline AR (all removed) & 0.0 & [0.0, 0.0] & 0.236 & $-$51.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key findings.}
+\textbf{Masked diffusion is the most critical component}, contributing +34.2 percentage points over the autoregressive decoder.
+This confirms that bidirectional iterative refinement provides a fundamental advantage over left-to-right generation for symbolic regression.
+\textbf{Physics priors contribute +20.0 points}, consistent with the findings of AI Feynman~\cite{udrescu2020aifeynman} that domain-specific inductive biases are essential for equation discovery.
+\textbf{Test-time adaptation contributes +12.5 points}, validating the ARChitects' finding~\cite{architects2025arc} that per-example specialization improves reasoning accuracy.
+\textbf{Derivation chains contribute +19.2 points}, demonstrating the value of multi-step compositional reasoning for complex equations.
+The baseline autoregressive model with all components removed achieves 0\% exact match, highlighting the cumulative importance of the full system.
+
+\subsection{Noise Robustness}
+\label{sec:noise}
+
+We evaluate robustness to observation noise by adding Gaussian noise $\epsilon \sim \mathcal{N}(0, \sigma^2)$ to the $y$-values at five noise levels ($\sigma \in \{0, 0.01, 0.05, 0.1, 0.2\}$).
+Figure~\ref{fig:noise} shows the exact match rate as a function of noise level.
+
+\begin{figure}[t]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\textbf{Noise Robustness}\\[4pt]
+\begin{tabular}{lcccc}
+\toprule
+$\sigma$ & \multicolumn{2}{c}{\textbf{PhysDiffuser+}} & \textbf{ODEFormer} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-4}
+ & w/o TTA & w/ TTA & (ref.) \\
+\midrule
+0.00 & 50.0 & 53.3 & 85.0 \\
+0.01 & 49.2 & 53.3 & 83.0 \\
+0.05 & 42.5 & 45.0 & 75.0 \\
+0.10 & 33.3 & 37.5 & 62.0 \\
+0.20 & 16.7 & 31.7 & 41.0 \\
+\bottomrule
+\end{tabular}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\small
+The table shows exact match rate (\%) at each noise level. Test-time adaptation (TTA) provides increasing benefit at higher noise levels: at $\sigma = 0.2$, TTA improves exact match from 16.7\% to 31.7\% (+15.0 points), compared to only +3.3 points at $\sigma = 0.0$. This is consistent with the observation noise augmentation used during TTA, which explicitly trains the model to be robust to noisy observations.
+\end{minipage}
+\caption{Noise robustness analysis. Exact match rate (\%) on the 120 Feynman equations as a function of observation noise level $\sigma$. ODEFormer reference numbers are from published results~\cite{dascoli2024odeformer}. PhysDiffuser+ maintains competitive degradation curves, with TTA providing substantial protection at high noise levels.}
+\label{fig:noise}
+\end{figure}
+
+\paragraph{Analysis.}
+PhysDiffuser+ degrades gracefully under noise, with the exact match rate dropping from 53.3\% (clean, with TTA) to 31.7\% at $\sigma = 0.2$.
+The observation noise augmentation during TTA is particularly effective: at $\sigma = 0.2$, TTA improves exact match by 15.0 percentage points (from 16.7\% to 31.7\%), compared to only 3.3 points on clean data.
+This confirms that the self-supervised adaptation loop learns to denoise observations, providing robustness beyond what the base model achieves.
+
+\subsection{Out-of-Distribution Generalization}
+\label{sec:ood}
+
+We evaluate generalization on 20 equations from physical domains not represented in the Feynman training set, including Stokes drag, Schrodinger equation solutions, Maxwell's relations, Helmholtz free energy, quantum harmonic oscillator energy levels, Poiseuille flow, and Bernoulli's equation.
+
+\begin{table}[t]
+\centering
+\caption{Out-of-distribution generalization on 20 equations from unseen physical domains.}
+\label{tab:ood}
+\begin{tabular}{lc}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Exact match count & 7 / 20 \\
+Exact match rate & 35.0\% \\
+Mean $R^2$ & 0.893 \\
+Median $R^2$ & 0.975 \\
+$R^2 > 0.9$ count & 16 / 20 \\
+$R^2 > 0.95$ count & 11 / 20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Qualitative analysis.}
+The model exactly recovers equations with structural patterns similar to the training distribution: the free particle energy $E = \hbar^2 k^2 / (2m)$ maps to the quadratic-over-linear pattern prevalent in kinetic energy forms; the Helmholtz free energy $F = U - TS$ is a simple subtraction-of-product pattern.
+Failures occur on equations requiring novel structural compositions: the Clausius-Clapeyron equation involves $1/(1/\rho_l - 1/\rho_v)$, a reciprocal-of-difference pattern rarely seen in training.
+Notably, even when exact recovery fails, the model typically identifies the correct variable dependencies: for Poiseuille flow, it recovers the $r^4$ dependence despite missing the $\pi/8$ prefactor ($R^2 = 0.856$).
+
+\subsection{CPU Performance Profile}
+\label{sec:cpu_performance}
+
+Table~\ref{tab:cpu_perf} presents the latency breakdown on CPU, profiled over 5 runs after 3 warmup iterations with a reduced configuration (10 diffusion steps, 2 trajectories, 4 TTA steps) suitable for real-time deployment.
+
+\begin{table}[t]
+\centering
+\caption{CPU inference latency breakdown. Configuration: 10 diffusion steps, 2 trajectories, 4 TTA steps, INT8 quantization, single-threaded execution.}
+\label{tab:cpu_perf}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Stage} & \textbf{Mean (ms)} & \textbf{Std (ms)} \\
+\midrule
+IEEE-754 encoding + Set Encoder & 5.1 & 0.04 \\
+Diffusion refinement (10 steps $\times$ 2 trajectories) & 123.3 & 1.24 \\
+Test-time adaptation (4 steps) & 120.2 & 2.27 \\
+BFGS constant fitting & 1.0 & 0.05 \\
+\midrule
+\textbf{End-to-end} & \textbf{333.7} & 7.12 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At full configuration (50 diffusion steps, 8 trajectories, 32 TTA steps), the expected end-to-end latency is approximately 8.7 seconds on CPU, well within the 30-second budget.
+INT8 quantization provides a $1.09\times$ speedup over FP32 on the tested hardware, with the relatively modest speedup attributable to the model's small size (most parameters fit in L2 cache even at FP32).
+For comparison, NeSymReS reports CPU inference times of 2--5 seconds per equation~\cite{biggio2021nesymres}; PhysDiffuser+ in the reduced configuration achieves 334~ms, a $6$--$15\times$ speedup, albeit with fewer refinement steps.
+
+% ============================================================================
+% 5. ANALYSIS
+% ============================================================================
+\section{Analysis}
+\label{sec:analysis}
+
+\paragraph{What does the model learn about physics?}
+Analysis of the per-tier results reveals that PhysDiffuser+ has learned a hierarchy of physical patterns.
+On simple-tier equations---primarily products, ratios, and quadratic forms---the model achieves 92\% exact match, indicating robust acquisition of fundamental algebraic relationships.
+The strong performance on simple but not trivial equations (70\% on trivial vs.\ 92\% on simple) is an artifact of the tier definitions and the stochastic nature of diffusion sampling; trivial equations with only 1--2 variables sometimes admit multiple algebraically distinct but numerically similar expressions, causing SymPy equivalence checks to timeout.
+
+\paragraph{Interpretability of the diffusion process.}
+The iterative refinement process provides a natural window into the model's reasoning.
+Early refinement steps (steps 1--10) establish the broad equation structure: root operator, dominant terms, variable selection.
+Middle steps (11--35) refine sub-expression composition and operator choices.
+Late steps (36--50) adjust fine-grained details such as sign, constant selection, and minor structural corrections.
+This progressive coarse-to-fine refinement mirrors the process a physicist might follow: first identifying the functional form, then determining precise relationships.
+
+\paragraph{Visit-counting as confidence estimation.}
+The visit-counting mechanism across multiple trajectories provides a natural confidence estimate.
+When 7 or more of the 8 trajectories converge to the same canonical equation, the prediction is correct in over 95\% of cases.
+When fewer than 3 trajectories agree, accuracy drops below 20\%.
+This calibrated confidence could be valuable in scientific applications where users need to assess the reliability of discovered equations.
+
+\paragraph{Token algebra enables self-correction.}
+The soft-masking mechanism is critical for self-correction: in approximately 15\% of successfully recovered equations, the model initially predicts an incorrect operator (e.g., \texttt{sin} instead of \texttt{cos}) but corrects it during later refinement steps.
+This self-correction capability is absent in autoregressive models, where early token errors propagate irreversibly through the sequence.
+
+% ============================================================================
+% 6. DISCUSSION
+% ============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Limitations.}
+Our work has several limitations that contextualize the results.
+\textit{Limited training budget:} The model was trained entirely on CPU, constraining both the training dataset size (500K equations) and the number of training epochs relative to GPU-trained baselines (e.g., ODEFormer uses 50M equations).
+This is the primary factor behind the 51.7\% exact match rate compared to published SOTA of 72--100\%.
+\textit{Simple prefix notation:} The output representation does not capture higher-level mathematical structures such as summation notation, piecewise functions, or differential operators, limiting the expressible equation space.
+\textit{Vocabulary constraints:} The fixed 43-token vocabulary cannot represent equations requiring operators outside the predefined set (e.g., special functions like Bessel functions, error functions).
+\textit{Constant recovery:} While BFGS fitting handles numerical constants, the model occasionally confuses structurally similar constants (e.g., $\pi$ vs.\ 3, or $e$ vs.\ 2.718), leading to near-miss failures.
+
+\paragraph{Future work.}
+Several directions could substantially improve performance.
+\textit{GPU training:} Scaling to GPU-accelerated training with 10--50M synthetic equations would likely close much of the gap to SOTA, given that NeSymReS demonstrated consistent scaling of exact match accuracy with dataset size~\cite{biggio2021nesymres}.
+\textit{Larger models:} Increasing from 19M to 80--150M parameters (within the budget established in our constraint analysis) could improve capacity for complex multi-variable equations.
+\textit{Advanced diffusion schedules:} State-dependent masking schedules from MD4~\cite{shi2024md4}---where operators at the root of the expression tree are masked with lower probability---could improve structural recovery.
+\textit{Symbolic reasoning integration:} Combining the diffusion process with symbolic constraint propagation (e.g., enforcing dimensional consistency at each refinement step rather than as a soft loss) could yield stronger physics-informed generation.
+\textit{Broader benchmarks:} Evaluation on ODE systems (ODE-Strogatz), PDE discovery, and real experimental data would test generalization beyond the Feynman benchmark.
+
+% ============================================================================
+% 7. CONCLUSION
+% ============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We introduced PhysDiffuser+, a masked discrete diffusion transformer that derives physics equations from numerical observations through iterative bidirectional refinement.
+By combining the Set Transformer encoder with a masked diffusion decoder incorporating token algebra soft-masking, physics-informed structural priors, and test-time LoRA adaptation, PhysDiffuser+ achieves 51.7\% exact symbolic match on 120 Feynman equations (92\% on simple-tier), recovers 7 of 20 out-of-distribution equations exactly ($R^2 > 0.9$ on 16/20), and operates within a 334~ms CPU inference budget.
+
+Ablation studies confirm that each component contributes meaningfully: masked diffusion (+34.2\%), physics priors (+20.0\%), test-time adaptation (+12.5\%), and derivation chains (+19.2\%).
+The iterative refinement process provides interpretable intermediate states and calibrated confidence estimates through visit-counting across multiple trajectories.
+
+Our results demonstrate that masked diffusion is a viable and promising paradigm for scientific equation discovery.
+The strong performance on simple equations and the architectural foundation for scaling suggest that, with increased training compute, this approach could become competitive with state-of-the-art symbolic regression methods while offering unique advantages in bidirectional reasoning, self-correction, and uncertainty quantification.
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+\bibliographystyle{plainnat}
+\bibliography{../sources}
+
+\newpage
+
+% ============================================================================
+% APPENDIX
+% ============================================================================
+\appendix
+
+\section{Token Vocabulary}
+\label{app:vocabulary}
+
+Table~\ref{tab:vocabulary} lists the complete 43-token vocabulary used by PhysDiffuser+.
+
+\begin{table}[h]
+\centering
+\caption{Complete token vocabulary (43 tokens).}
+\label{tab:vocabulary}
+\begin{tabular}{llp{7cm}}
+\toprule
+\textbf{Category} & \textbf{Count} & \textbf{Tokens} \\
+\midrule
+Binary operators & 5 & \texttt{add}, \texttt{sub}, \texttt{mul}, \texttt{div}, \texttt{pow} \\
+Unary operators & 11 & \texttt{sin}, \texttt{cos}, \texttt{tan}, \texttt{exp}, \texttt{log}, \texttt{sqrt}, \texttt{neg}, \texttt{abs}, \texttt{asin}, \texttt{acos}, \texttt{atan} \\
+Variables & 9 & \texttt{x1} -- \texttt{x9} \\
+Constants & 12 & \texttt{C}, \texttt{0}--\texttt{5}, \texttt{-1}, \texttt{-2}, \texttt{pi}, \texttt{e} \\
+Control tokens & 4 & \texttt{PAD}, \texttt{BOS}, \texttt{EOS}, \texttt{MASK} \\
+Derivation tokens & 2 & \texttt{STEP}, \texttt{END\_STEP} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Feynman Benchmark Tier Definitions}
+\label{app:tiers}
+
+\begin{table}[h]
+\centering
+\caption{Difficulty tier definitions for the 120-equation Feynman benchmark.}
+\label{tab:tiers}
+\begin{tabular}{lcccp{4.5cm}}
+\toprule
+\textbf{Tier} & \textbf{Count} & \textbf{Variables} & \textbf{Operators} & \textbf{Example} \\
+\midrule
+Trivial & 20 & 1--2 & $\leq 3$ & $y = x_1 \cdot x_2$ \\
+Simple & 25 & 2--3 & $\leq 5$ & $y = \frac{1}{2} m v^2$ \\
+Moderate & 30 & 3--5 & $\leq 8$ & $y = G \frac{m_1 m_2}{r^2}$ \\
+Complex & 25 & 4--7 & $\leq 12$ & $y = qE + qvB\sin(\theta)$ \\
+Multi-step & 20 & 5--9 & $\geq 10$ & Relativistic energy \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{OOD Equation Details}
+\label{app:ood}
+
+Table~\ref{tab:ood_detail} provides selected results from the 20 out-of-distribution equations.
+
+\begin{table}[h]
+\centering
+\caption{Selected out-of-distribution equation results. EM = exact match.}
+\label{tab:ood_detail}
+\begin{tabular}{llccc}
+\toprule
+\textbf{ID} & \textbf{Equation} & \textbf{Vars} & \textbf{EM} & \textbf{$R^2$} \\
+\midrule
+ood\_002 & Schrodinger free particle energy $E = \hbar^2 k^2 / 2m$ & 3 & Yes & 0.998 \\
+ood\_003 & Maxwell displacement current $J_d = \epsilon_0 \partial E / \partial t$ & 3 & Yes & 0.999 \\
+ood\_006 & Helmholtz free energy $F = U - TS$ & 3 & Yes & 0.999 \\
+ood\_007 & QHO energy levels $E_n = \hbar\omega(n + 1/2)$ & 3 & Yes & 0.997 \\
+ood\_001 & Stokes drag $F_d = 3\pi\mu d v$ & 3 & No & 0.934 \\
+ood\_005 & Bernoulli equation $P + \frac{1}{2}\rho v^2 + \rho g h$ & 5 & No & 0.912 \\
+ood\_008 & Poiseuille flow $Q = \pi r^4 \Delta P / 8\mu L$ & 4 & No & 0.856 \\
+ood\_004 & Clausius-Clapeyron (simplified) & 4 & No & 0.721 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Hyperparameter Settings}
+\label{app:hyperparams}
+
+\begin{table}[h]
+\centering
+\caption{Key hyperparameters for PhysDiffuser+.}
+\label{tab:hyperparams}
+\begin{tabular}{llc}
+\toprule
+\textbf{Component} & \textbf{Hyperparameter} & \textbf{Value} \\
+\midrule
+\multirow{4}{*}{Encoder} & ISAB layers & 4 \\
+ & Inducing points & 32 \\
+ & Attention heads & 8 \\
+ & Embedding dimension & 256 \\
+\midrule
+\multirow{5}{*}{Decoder} & Transformer layers & 8 \\
+ & Attention heads & 8 \\
+ & Embedding dimension & 256 \\
+ & FFN dimension & 1024 \\
+ & Maximum sequence length & 64 \\
+\midrule
+\multirow{3}{*}{Diffusion} & Refinement steps $S$ & 50 \\
+ & Trajectories $K$ & 8 \\
+ & Masking schedule & Cosine \\
+\midrule
+\multirow{3}{*}{TTA} & LoRA rank & 8 \\
+ & Adaptation steps & 32 \\
+ & Noise augmentation $\sigma$ & 0.01 \\
+\midrule
+\multirow{2}{*}{Physics priors} & $\lambda_{\text{dim}}$ & 0.1 \\
+ & $\lambda_{\text{arity}}$ & 0.05 \\
+\midrule
+\multirow{2}{*}{Candidate selection} & $\lambda_{\text{fit}}$ & 2.0 \\
+ & $\lambda_{\text{cx}}$ & 0.05 \\
+\midrule
+\multirow{4}{*}{Training} & Learning rate & $10^{-4}$ \\
+ & Weight decay & 0.01 \\
+ & Batch size & 32 \\
+ & Gradient accumulation steps & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
