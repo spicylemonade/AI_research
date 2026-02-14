@@ -1,0 +1,219 @@
+{
+  "model": "PhysMDT",
+  "benchmark": "nguyen",
+  "config": {
+    "d_model": 64,
+    "n_heads": 4,
+    "n_layers": 4,
+    "d_ff": 256,
+    "max_seq_len": 48,
+    "max_vars": 5,
+    "n_points": 10,
+    "total_params": 420434,
+    "seed": 42,
+    "refinement_steps": 4
+  },
+  "description": "Nguyen-style: 12 simple single-variable kinematics equations",
+  "test_metrics": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.03405793704846497,
+    "tree_edit_distance": 0.9645390070921986,
+    "complexity_penalty": 0.9444444444444443,
+    "composite_score": 1.4838361330674168
+  },
+  "n_evaluated": 12,
+  "elapsed_sec": 2.1,
+  "per_difficulty": {
+    "simple": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.03405793704846497,
+      "tree_edit_distance": 0.9645390070921986,
+      "complexity_penalty": 0.9444444444444443,
+      "composite_score": 1.4838361330674168
+    }
+  },
+  "per_family": {
+    "kinematics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.03405793704846497,
+      "tree_edit_distance": 0.9645390070921986,
+      "complexity_penalty": 0.9444444444444443,
+      "composite_score": 1.4838361330674168
+    }
+  },
+  "per_sample_results": [
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "template_name": "free_fall_vel",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "add add add add h sqrt P_pressure add add h pi mul P_pressure P_pressure add add h h P_pressure P_pressure add add h sqrt P_pressure P_pressure add add h pi pi P_pressure P_pressure add add add add add P_pressure add div h pi P_pressure P_pressure add add",
+      "gt_prefix": "mul g_accel t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "avg_velocity",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "div add v0 v INT_2"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "template_name": "free_fall_vel",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "P_pressure add add add h sqrt P_pressure add add h pi mul P_pressure P_pressure add add h h P_pressure P_pressure add add h pow P_pressure P_pressure P_pressure add h pi pi P_pressure P_pressure add add add add add P_pressure add div h pi P_pressure P_pressure add add",
+      "gt_prefix": "mul g_accel t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "template_name": "uniform_velocity",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "m m div pow pow pow pow pow pow INT_2 mul mul m m m div pow pow pow m div div INT_1 mul m m m pow pow pow pow m m m div pow m m m div div INT_2 pow m m m div",
+      "gt_prefix": "mul v t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 1.0,
+      "complexity_penalty": 0.3333333333333333,
+      "composite_score": 3.333333333333334,
+      "template_name": "free_fall_dist",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "P_pressure add add P_pressure P_pressure P_pressure P_pressure P_pressure add P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure add add P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure P_pressure add P_pressure P_pressure P_pressure P_pressure P_pressure add P_pressure",
+      "gt_prefix": "mul mul div INT_1 INT_2 g_accel pow t INT_2"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "template_name": "free_fall_vel",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "add add add add h sqrt P_pressure add add h pi mul P_pressure add add add h h P_pressure P_pressure add add h sqrt add P_pressure add add h pi sqrt P_pressure P_pressure add add add add add P_pressure add div h pi P_pressure P_pressure add add",
+      "gt_prefix": "mul g_accel t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "avg_velocity",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "div add v0 v INT_2"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "template_name": "uniform_velocity",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "m pow div INT_1 INT_3 pow pow pow INT_3 INT_2 mul mul m m pow div INT_3 pow pow pow pow div INT_3 pow m m pow pow INT_3 pi pi mul m pow div INT_3 pow m m pow INT_1 INT_3 pi pow m pow div",
+      "gt_prefix": "mul v t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "template_name": "uniform_velocity",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "m m div INT_1 pow pow pow pow INT_2 INT_2 mul mul m m m div pow pow pow m div div INT_1 mul m m m pow pow pow pow m m m div mul m m m div div INT_2 pow m m m div",
+      "gt_prefix": "mul v t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "avg_velocity",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "div add v0 v INT_2"
+    }
+  ],
+  "literature_context": {
+    "PySR (Cranmer 2023)": {
+      "exact_recovery_pct": 100.0,
+      "equations_solved": "12/12"
+    },
+    "QDSR (Bruneton 2025)": {
+      "exact_recovery_pct": 100.0,
+      "equations_solved": "12/12"
+    },
+    "TPSR (Shojaee 2023)": {
+      "exact_recovery_pct": 91.7,
+      "equations_solved": "11/12"
+    },
+    "E2E Transformer (Kamienny 2022)": {
+      "exact_recovery_pct": 83.3,
+      "equations_solved": "10/12"
+    },
+    "NeSymReS (Biggio 2021)": {
+      "exact_recovery_pct": 75.0,
+      "equations_solved": "9/12"
+    }
+  },
+  "baselines": {
+    "ar_baseline": {
+      "exact_match": 0.215,
+      "symbolic_equivalence": 0.235,
+      "numerical_r2": 0.22244524904711482,
+      "tree_edit_distance": 0.5698966962689873,
+      "complexity_penalty": 0.33724999999999994,
+      "composite_score": 26.675914263487996
+    },
+    "sr_baseline": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.8394160583941606,
+      "numerical_r2": 0.846667658213041,
+      "tree_edit_distance": 0.75,
+      "complexity_penalty": 0.25,
+      "composite_score": 52.59917320715084
+    }
+  }
+}

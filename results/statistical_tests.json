@@ -1,0 +1,131 @@
+{
+  "description": "Statistical significance tests comparing PhysMDT vs AR baseline. Positive mean_diff indicates PhysMDT > AR baseline.",
+  "n_paired_samples": 20,
+  "bootstrap_config": {
+    "n_resamples": 1000,
+    "ci_level": 0.95,
+    "seed": 42
+  },
+  "per_metric": {
+    "exact_match": {
+      "phys_mdt_mean": 0.0,
+      "ar_baseline_mean": 0.25,
+      "bootstrap_ci": {
+        "mean_diff": -0.25,
+        "ci_lower": -0.45,
+        "ci_upper": -0.05,
+        "ci_level": 0.95,
+        "n_resamples": 1000
+      },
+      "wilcoxon": {
+        "statistic": 0.0,
+        "p_value": 0.025347318677468252,
+        "significant_at_0.05": true
+      },
+      "cohens_d": {
+        "d": -0.5627314338711377,
+        "magnitude": "medium"
+      }
+    },
+    "symbolic_equivalence": {
+      "phys_mdt_mean": 0.0,
+      "ar_baseline_mean": 0.3,
+      "bootstrap_ci": {
+        "mean_diff": -0.3,
+        "ci_lower": -0.5,
+        "ci_upper": -0.1,
+        "ci_level": 0.95,
+        "n_resamples": 1000
+      },
+      "wilcoxon": {
+        "statistic": 0.0,
+        "p_value": 0.014305878435429648,
+        "significant_at_0.05": true
+      },
+      "cohens_d": {
+        "d": -0.6380774695464941,
+        "magnitude": "medium"
+      }
+    },
+    "numerical_r2": {
+      "phys_mdt_mean": 0.0,
+      "ar_baseline_mean": 0.2501183602657434,
+      "bootstrap_ci": {
+        "mean_diff": -0.2501183602657434,
+        "ci_lower": -0.45,
+        "ci_upper": -0.05035508079723029,
+        "ci_level": 0.95,
+        "n_resamples": 1000
+      },
+      "wilcoxon": {
+        "statistic": 0.0,
+        "p_value": 0.019630657257290667,
+        "significant_at_0.05": true
+      },
+      "cohens_d": {
+        "d": -0.5630863240416444,
+        "magnitude": "medium"
+      }
+    },
+    "tree_edit_distance": {
+      "phys_mdt_mean": 0.9382978723404255,
+      "ar_baseline_mean": 0.5447068699274581,
+      "bootstrap_ci": {
+        "mean_diff": 0.3935910024129674,
+        "ci_lower": 0.24855985160021454,
+        "ci_upper": 0.5459164878717444,
+        "ci_level": 0.95,
+        "n_resamples": 1000
+      },
+      "wilcoxon": {
+        "statistic": 2.0,
+        "p_value": 0.00011943826132027338,
+        "significant_at_0.05": true
+      },
+      "cohens_d": {
+        "d": 1.1170219367546304,
+        "magnitude": "large"
+      }
+    },
+    "complexity_penalty": {
+      "phys_mdt_mean": 0.9266666666666665,
+      "ar_baseline_mean": 0.4758333333333333,
+      "bootstrap_ci": {
+        "mean_diff": 0.45083333333333336,
+        "ci_lower": 0.3007708333333334,
+        "ci_upper": 0.6083541666666666,
+        "ci_level": 0.95,
+        "n_resamples": 1000
+      },
+      "wilcoxon": {
+        "statistic": 0.0,
+        "p_value": 0.0006289394206546052,
+        "significant_at_0.05": true
+      },
+      "cohens_d": {
+        "d": 1.235270978698782,
+        "magnitude": "large"
+      }
+    },
+    "composite_score": {
+      "phys_mdt_mean": 0.9836879432624116,
+      "ar_baseline_mean": 29.926723640702335,
+      "bootstrap_ci": {
+        "mean_diff": -28.943035697439928,
+        "ci_lower": -46.49691158610198,
+        "ci_upper": -12.431403771273922,
+        "ci_level": 0.95,
+        "n_resamples": 1000
+      },
+      "wilcoxon": {
+        "statistic": 0.0,
+        "p_value": 8.819870204194453e-05,
+        "significant_at_0.05": true
+      },
+      "cohens_d": {
+        "d": -0.6943937231573032,
+        "magnitude": "medium"
+      }
+    }
+  }
+}

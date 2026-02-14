@@ -1,0 +1,239 @@
+{
+  "model": "PhysMDT",
+  "benchmark": "strogatz",
+  "config": {
+    "d_model": 64,
+    "n_heads": 4,
+    "n_layers": 4,
+    "d_ff": 256,
+    "max_seq_len": 48,
+    "max_vars": 5,
+    "n_points": 10,
+    "total_params": 420434,
+    "seed": 42,
+    "refinement_steps": 4
+  },
+  "description": "Strogatz-style: ODE-related (oscillations + rotational)",
+  "test_metrics": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 0.9126925898752752,
+    "complexity_penalty": 0.9166666666666666,
+    "composite_score": 1.289740767913915
+  },
+  "n_evaluated": 29,
+  "elapsed_sec": 12.34,
+  "per_difficulty": {
+    "medium": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9224924012158056,
+      "complexity_penalty": 0.8809523809523808,
+      "composite_score": 1.3703140830800404
+    },
+    "complex": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8888888888888888,
+      "complexity_penalty": 0.9166666666666666,
+      "composite_score": 1.527777777777778
+    },
+    "simple": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9255319148936169,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.7446808510638299
+    }
+  },
+  "per_family": {
+    "oscillations": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9159574468085108,
+      "complexity_penalty": 0.8791666666666668,
+      "composite_score": 1.4445921985815604
+    },
+    "rotational": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9054373522458629,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.9456264775413713
+    }
+  },
+  "per_sample_results": [
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8723404255319149,
+      "complexity_penalty": 1.0,
+      "composite_score": 1.276595744680851,
+      "template_name": "spring_frequency",
+      "family": "oscillations",
+      "difficulty": "medium",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "div INT_1 mul INT_2 pi sqrt div m k_spring"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9148936170212766,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.8510638297872343,
+      "template_name": "spring_period",
+      "family": "oscillations",
+      "difficulty": "complex",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "mul mul INT_2 pi sqrt div m k_spring"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8085106382978723,
+      "complexity_penalty": 1.0,
+      "composite_score": 1.9148936170212774,
+      "template_name": "damped_oscillation",
+      "family": "oscillations",
+      "difficulty": "complex",
+      "pred_prefix": "rho A_area A_area exp exp mul mul mul exp exp mul mul mul mul A_area A_area exp INT_3 mul mul A_area A_area exp mul mul rho mul exp exp mul mul mul mul A_area A_area mul mul m mul A_area exp exp mul mul mul mul A_area",
+      "gt_prefix": "mul mul A_area exp neg mul mul div INT_1 INT_2 mul mu div t m sin mul omega t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.4255319148936165,
+      "template_name": "shm_velocity",
+      "family": "oscillations",
+      "difficulty": "medium",
+      "pred_prefix": "add add add A_area pow P_pressure P_pressure add add add pow m rho add add A_area pow pow P_pressure P_pressure A_area A_area A_area pow m P_pressure add A_area t pow m m P_pressure add A_area pow m P_pressure P_pressure A_area A_area t t m P_pressure add add",
+      "gt_prefix": "mul mul A_area omega cos mul omega t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9148936170212766,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.8510638297872343,
+      "template_name": "spring_period",
+      "family": "oscillations",
+      "difficulty": "complex",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "mul mul INT_2 pi sqrt div m k_spring"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8936170212765957,
+      "complexity_penalty": 1.0,
+      "composite_score": 1.063829787234043,
+      "template_name": "shm_energy",
+      "family": "oscillations",
+      "difficulty": "medium",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "mul div INT_1 INT_2 mul k_spring pow A_area INT_2"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.4255319148936165,
+      "template_name": "shm_position",
+      "family": "oscillations",
+      "difficulty": "medium",
+      "pred_prefix": "add add add A_area pow m m add add t pow m rho add add A_area pow pow P_pressure P_pressure A_area A_area A_area pow m P_pressure add A_area t pow m m P_pressure add A_area pow m P_pressure P_pressure A_area A_area t t m P_pressure add add",
+      "gt_prefix": "mul A_area sin mul omega t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8723404255319149,
+      "complexity_penalty": 1.0,
+      "composite_score": 1.276595744680851,
+      "template_name": "spring_frequency",
+      "family": "oscillations",
+      "difficulty": "medium",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "div INT_1 mul INT_2 pi sqrt div m k_spring"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 0.3333333333333333,
+      "composite_score": 3.7588652482269502,
+      "template_name": "shm_position",
+      "family": "oscillations",
+      "difficulty": "medium",
+      "pred_prefix": "add add add add omega m P_pressure add add t t m P_pressure add add A_area omega pow P_pressure P_pressure A_area A_area A_area pow m P_pressure add A_area t t m m P_pressure add A_area pow m add P_pressure A_area A_area t t m P_pressure add add",
+      "gt_prefix": "mul A_area sin mul omega t"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.4255319148936165,
+      "template_name": "shm_position",
+      "family": "oscillations",
+      "difficulty": "medium",
+      "pred_prefix": "add add add add pow P_pressure P_pressure add add t t m P_pressure add add A_area omega pow P_pressure P_pressure A_area A_area A_area pow m P_pressure add A_area t t m m P_pressure add add pow m add P_pressure A_area A_area t t m P_pressure add add",
+      "gt_prefix": "mul A_area sin mul omega t"
+    }
+  ],
+  "literature_context": {
+    "AI Feynman (Udrescu 2020)": {
+      "solution_rate_pct": 40.0,
+      "avg_r2": 0.92
+    },
+    "GP-GOMEA (La Cava 2021)": {
+      "solution_rate_pct": 35.0,
+      "avg_r2": 0.94
+    },
+    "PySR (Cranmer 2023)": {
+      "solution_rate_pct": 35.0,
+      "avg_r2": 0.93
+    },
+    "DSR (Petersen 2021)": {
+      "solution_rate_pct": 30.0,
+      "avg_r2": 0.9
+    }
+  },
+  "baselines": {
+    "ar_baseline": {
+      "exact_match": 0.215,
+      "symbolic_equivalence": 0.235,
+      "numerical_r2": 0.22244524904711482,
+      "tree_edit_distance": 0.5698966962689873,
+      "complexity_penalty": 0.33724999999999994,
+      "composite_score": 26.675914263487996
+    },
+    "sr_baseline": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.8394160583941606,
+      "numerical_r2": 0.846667658213041,
+      "tree_edit_distance": 0.75,
+      "complexity_penalty": 0.25,
+      "composite_score": 52.59917320715084
+    }
+  }
+}

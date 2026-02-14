@@ -1,0 +1,98 @@
+{
+  "experiment": "refinement_depth_study",
+  "model_path": "/home/codex/work/repo/results/phys_mdt/model.pt",
+  "K_values": [
+    0,
+    1,
+    5,
+    10,
+    25,
+    50
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "n_test_samples": 50,
+  "config": {
+    "d_model": 64,
+    "n_heads": 4,
+    "n_layers": 4,
+    "d_ff": 256,
+    "max_seq_len": 48,
+    "max_vars": 5,
+    "n_points": 10
+  },
+  "refinement_config": {
+    "cold_restart": false,
+    "soft_masking": false,
+    "candidate_tracking": true,
+    "convergence_detection": true,
+    "confidence_threshold": 0.9,
+    "convergence_patience": 2
+  },
+  "results": {
+    "0": {
+      "mean": 1.2199290780141845,
+      "std": 0.0,
+      "scores": [
+        1.2199290780141845,
+        1.2199290780141845,
+        1.2199290780141845
+      ],
+      "n_seeds": 3
+    },
+    "1": {
+      "mean": 1.2199290780141845,
+      "std": 0.0,
+      "scores": [
+        1.2199290780141845,
+        1.2199290780141845,
+        1.2199290780141845
+      ],
+      "n_seeds": 3
+    },
+    "5": {
+      "mean": 1.2865957446808511,
+      "std": 0.0,
+      "scores": [
+        1.2865957446808511,
+        1.2865957446808511,
+        1.2865957446808511
+      ],
+      "n_seeds": 3
+    },
+    "10": {
+      "mean": 1.282340425531915,
+      "std": 0.0,
+      "scores": [
+        1.282340425531915,
+        1.282340425531915,
+        1.282340425531915
+      ],
+      "n_seeds": 3
+    },
+    "25": {
+      "mean": 1.2021985815602836,
+      "std": 0.0,
+      "scores": [
+        1.2021985815602836,
+        1.2021985815602836,
+        1.2021985815602836
+      ],
+      "n_seeds": 3
+    },
+    "50": {
+      "mean": 0.9117021276595745,
+      "std": 0.0,
+      "scores": [
+        0.9117021276595745,
+        0.9117021276595745,
+        0.9117021276595745
+      ],
+      "n_seeds": 3
+    }
+  },
+  "elapsed_seconds": 186.0722188949585
+}

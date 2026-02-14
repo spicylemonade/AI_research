@@ -1,0 +1,211 @@
+{
+  "model": "PhysMDT",
+  "config": {
+    "d_model": 64,
+    "n_heads": 4,
+    "n_layers": 4,
+    "d_ff": 256,
+    "total_params": 420434,
+    "seed": 42
+  },
+  "benchmarks": {
+    "ai_feynman": {
+      "metrics": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 0.9188604399567256,
+        "complexity_penalty": 0.964406779661017,
+        "composite_score": 0.9893617021276596
+      },
+      "n_evaluated": 59,
+      "description": "AI Feynman-style: energy, gravitation, dynamics equations"
+    },
+    "nguyen": {
+      "metrics": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.03405793704846497,
+        "tree_edit_distance": 0.9645390070921986,
+        "complexity_penalty": 0.9444444444444443,
+        "composite_score": 1.4838361330674168
+      },
+      "n_evaluated": 12,
+      "description": "Nguyen-style: 12 simple single-variable kinematics equations"
+    },
+    "strogatz": {
+      "metrics": {
+        "exact_match": 0.0,
+        "symbolic_equivalence": 0.0,
+        "numerical_r2": 0.0,
+        "tree_edit_distance": 0.9126925898752752,
+        "complexity_penalty": 0.9166666666666666,
+        "composite_score": 1.289740767913915
+      },
+      "n_evaluated": 29,
+      "description": "Strogatz-style: ODE-related (oscillations + rotational)"
+    }
+  },
+  "per_family": {
+    "kinematics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.020434762229078984,
+      "tree_edit_distance": 0.9404255319148938,
+      "complexity_penalty": 0.8041666666666666,
+      "composite_score": 2.085780403244706
+    },
+    "dynamics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.945531914893617,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.5446808510638301
+    },
+    "energy": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9097872340425532,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.9021276595744682
+    },
+    "rotational": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9148936170212766,
+      "complexity_penalty": 0.9666666666666666,
+      "composite_score": 1.017730496453901
+    },
+    "gravitation": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.926808510638298,
+      "complexity_penalty": 0.9159999999999999,
+      "composite_score": 1.1519148936170212
+    },
+    "oscillations": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9159574468085108,
+      "complexity_penalty": 0.8791666666666668,
+      "composite_score": 1.4445921985815604
+    },
+    "fluid_statics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.95,
+      "complexity_penalty": 0.9666666666666666,
+      "composite_score": 0.6666666666666669
+    }
+  },
+  "baselines": {
+    "ar_baseline": {
+      "exact_match": 0.215,
+      "symbolic_equivalence": 0.235,
+      "numerical_r2": 0.22244524904711482,
+      "tree_edit_distance": 0.5698966962689873,
+      "complexity_penalty": 0.33724999999999994,
+      "composite_score": 26.675914263487996
+    },
+    "sr_baseline": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.8394160583941606,
+      "numerical_r2": 0.846667658213041,
+      "tree_edit_distance": 0.75,
+      "complexity_penalty": 0.25,
+      "composite_score": 52.59917320715084
+    }
+  },
+  "literature_context": {
+    "ai_feynman": {
+      "QDSR (Bruneton 2025)": {
+        "exact_recovery_pct": 91.6,
+        "dataset": "AI Feynman noiseless"
+      },
+      "AI Feynman 2.0 (Udrescu 2020)": {
+        "exact_recovery_pct": 72.0,
+        "dataset": "AI Feynman noiseless"
+      },
+      "TPSR (Shojaee 2023)": {
+        "exact_recovery_pct": 45.0,
+        "dataset": "AI Feynman noiseless"
+      },
+      "E2E Transformer (Kamienny 2022)": {
+        "exact_recovery_pct": 38.0,
+        "dataset": "AI Feynman noiseless"
+      },
+      "NeSymReS (Biggio 2021)": {
+        "exact_recovery_pct": 30.0,
+        "dataset": "AI Feynman noiseless"
+      },
+      "DiffuSR (2025)": {
+        "exact_recovery_pct": 32.0,
+        "dataset": "AI Feynman noiseless"
+      },
+      "PySR (Cranmer 2023)": {
+        "exact_recovery_pct": 35.0,
+        "dataset": "AI Feynman noiseless"
+      }
+    },
+    "nguyen": {
+      "PySR (Cranmer 2023)": {
+        "exact_recovery_pct": 100.0,
+        "equations_solved": "12/12"
+      },
+      "QDSR (Bruneton 2025)": {
+        "exact_recovery_pct": 100.0,
+        "equations_solved": "12/12"
+      },
+      "TPSR (Shojaee 2023)": {
+        "exact_recovery_pct": 91.7,
+        "equations_solved": "11/12"
+      },
+      "E2E Transformer (Kamienny 2022)": {
+        "exact_recovery_pct": 83.3,
+        "equations_solved": "10/12"
+      },
+      "NeSymReS (Biggio 2021)": {
+        "exact_recovery_pct": 75.0,
+        "equations_solved": "9/12"
+      }
+    },
+    "strogatz": {
+      "AI Feynman (Udrescu 2020)": {
+        "solution_rate_pct": 40.0,
+        "avg_r2": 0.92
+      },
+      "GP-GOMEA (La Cava 2021)": {
+        "solution_rate_pct": 35.0,
+        "avg_r2": 0.94
+      },
+      "PySR (Cranmer 2023)": {
+        "solution_rate_pct": 35.0,
+        "avg_r2": 0.93
+      },
+      "DSR (Petersen 2021)": {
+        "solution_rate_pct": 30.0,
+        "avg_r2": 0.9
+      }
+    }
+  },
+  "performance_targets": {
+    "ai_feynman_exact_match_target": ">=15% (comparable to NeSymReS on harder subset)",
+    "nguyen_exact_match_target": ">=25% (3/12, competitive with NeSymReS)",
+    "composite_vs_ar_baseline": ">=2x AR baseline composite score"
+  },
+  "target_achievement": {
+    "ai_feynman_em_ge_15pct": false,
+    "ai_feynman_em_actual": "0.0%",
+    "nguyen_em_ge_25pct": false,
+    "nguyen_em_actual": "0.0%",
+    "composite_ge_2x_ar": false,
+    "avg_composite": 1.25,
+    "ar_baseline_composite": 26.68
+  }
+}

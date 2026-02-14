@@ -1,0 +1,259 @@
+{
+  "model": "PhysMDT",
+  "benchmark": "ai_feynman",
+  "config": {
+    "d_model": 64,
+    "n_heads": 4,
+    "n_layers": 4,
+    "d_ff": 256,
+    "max_seq_len": 48,
+    "max_vars": 5,
+    "n_points": 10,
+    "total_params": 420434,
+    "seed": 42,
+    "refinement_steps": 4
+  },
+  "description": "AI Feynman-style: energy, gravitation, dynamics equations",
+  "test_metrics": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.0,
+    "tree_edit_distance": 0.9188604399567256,
+    "complexity_penalty": 0.964406779661017,
+    "composite_score": 0.9893617021276596
+  },
+  "n_evaluated": 59,
+  "elapsed_sec": 8.82,
+  "per_difficulty": {
+    "medium": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9075568598679385,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.9244314013206163
+    },
+    "simple": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9632495164410059,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.36750483558994207
+    },
+    "complex": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.910414333706607,
+      "complexity_penalty": 0.8894736842105262,
+      "composite_score": 1.4484882418812994
+    }
+  },
+  "per_family": {
+    "energy": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9097872340425532,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.9021276595744682
+    },
+    "gravitation": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.926808510638298,
+      "complexity_penalty": 0.9159999999999999,
+      "composite_score": 1.1519148936170212
+    },
+    "dynamics": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9219858156028368,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.7801418439716316
+    }
+  },
+  "per_sample_results": [
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "gravitational_pe",
+      "family": "energy",
+      "difficulty": "medium",
+      "pred_prefix": "mul add div INT_1 pow pow pow mul INT_1 INT_2 INT_2 mul mul mul add div INT_1 pow pow mul div div INT_1 pow mul sub mul div INT_1 pow pow mul mul div div INT_2 sub sub add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "neg div mul G_const mul m1 m2 r"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.4255319148936165,
+      "template_name": "elastic_pe",
+      "family": "energy",
+      "difficulty": "simple",
+      "pred_prefix": "P_pressure add add pow pow pow m mul add pow mul m m P_pressure add add pow pow m P_pressure m add pow pow m P_pressure P_pressure add pow pow pow m m m m pow m P_pressure P_pressure add pow pow pow m m m add",
+      "gt_prefix": "mul div INT_1 INT_2 mul k_spring pow x INT_2"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "template_name": "power",
+      "family": "energy",
+      "difficulty": "simple",
+      "pred_prefix": "add add div INT_1 pow pow pow mul INT_1 INT_2 mul mul mul add add div INT_1 pi sub mul div div INT_1 mul sub add add add INT_1 pi pi mul mul add div INT_1 sub add add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "mul F v"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "gravitational_pe",
+      "family": "energy",
+      "difficulty": "medium",
+      "pred_prefix": "mul add div INT_1 pow pow pow mul INT_1 INT_2 INT_2 mul mul mul add div INT_1 pow pow mul div div INT_1 pow mul sub mul div INT_1 pow pow mul mul div div INT_2 sub sub add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "neg div mul G_const mul m1 m2 r"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "potential_energy",
+      "family": "energy",
+      "difficulty": "simple",
+      "pred_prefix": "m m div INT_1 pow pow pow pow INT_1 INT_2 mul mul m m m div INT_3 pow pow m div div INT_1 mul m m m pow INT_3 pow pow m m m div mul m m m div div INT_2 pow mul m m div",
+      "gt_prefix": "mul m mul g_accel h"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "potential_energy",
+      "family": "energy",
+      "difficulty": "simple",
+      "pred_prefix": "m m div pow pow pow pow pow pow INT_2 mul mul m m m div pow pow pow m div div INT_1 mul m m m pow pow pow pow m m m div mul m m m div div INT_2 pow m m m div",
+      "gt_prefix": "mul m mul g_accel h"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "template_name": "work_force_dist",
+      "family": "energy",
+      "difficulty": "simple",
+      "pred_prefix": "m m div pow pow pow pow pow pow INT_2 mul mul m m m div pow pow pow m m div pow pow m m m pow pow pow pow m m m div pow m m m div div INT_3 pow m m m div",
+      "gt_prefix": "mul F mul d cos theta"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "gravitational_pe",
+      "family": "energy",
+      "difficulty": "medium",
+      "pred_prefix": "mul add div INT_1 pow pow pow mul INT_1 INT_2 INT_2 mul mul mul add div INT_1 pow pow mul div div INT_1 pow mul sub mul div INT_1 pow pow mul mul div div INT_2 sub sub add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "neg div mul G_const mul m1 m2 r"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.7872340425531915,
+      "complexity_penalty": 1.0,
+      "composite_score": 2.127659574468085,
+      "template_name": "work_energy_theorem",
+      "family": "energy",
+      "difficulty": "medium",
+      "pred_prefix": "mul add div INT_1 pow pow pow mul INT_1 INT_2 INT_2 mul mul mul add div INT_1 pow pow mul div div INT_1 pow mul sub mul div INT_1 pow pow mul mul div div INT_2 sub sub add div div INT_1 INT_2 mul mul add div",
+      "gt_prefix": "sub mul div INT_1 INT_2 mul m pow v INT_2 mul div INT_1 INT_2 mul m pow v0 INT_2"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "template_name": "elastic_pe",
+      "family": "energy",
+      "difficulty": "simple",
+      "pred_prefix": "P_pressure add add pow pow pow m mul add pow mul mul m P_pressure add add pow pow m P_pressure add add pow pow m P_pressure P_pressure add pow pow pow m P_pressure add add pow m P_pressure P_pressure add pow pow pow m m P_pressure add",
+      "gt_prefix": "mul div INT_1 INT_2 mul k_spring pow x INT_2"
+    }
+  ],
+  "literature_context": {
+    "QDSR (Bruneton 2025)": {
+      "exact_recovery_pct": 91.6,
+      "dataset": "AI Feynman noiseless"
+    },
+    "AI Feynman 2.0 (Udrescu 2020)": {
+      "exact_recovery_pct": 72.0,
+      "dataset": "AI Feynman noiseless"
+    },
+    "TPSR (Shojaee 2023)": {
+      "exact_recovery_pct": 45.0,
+      "dataset": "AI Feynman noiseless"
+    },
+    "E2E Transformer (Kamienny 2022)": {
+      "exact_recovery_pct": 38.0,
+      "dataset": "AI Feynman noiseless"
+    },
+    "NeSymReS (Biggio 2021)": {
+      "exact_recovery_pct": 30.0,
+      "dataset": "AI Feynman noiseless"
+    },
+    "DiffuSR (2025)": {
+      "exact_recovery_pct": 32.0,
+      "dataset": "AI Feynman noiseless"
+    },
+    "PySR (Cranmer 2023)": {
+      "exact_recovery_pct": 35.0,
+      "dataset": "AI Feynman noiseless"
+    }
+  },
+  "baselines": {
+    "ar_baseline": {
+      "exact_match": 0.215,
+      "symbolic_equivalence": 0.235,
+      "numerical_r2": 0.22244524904711482,
+      "tree_edit_distance": 0.5698966962689873,
+      "complexity_penalty": 0.33724999999999994,
+      "composite_score": 26.675914263487996
+    },
+    "sr_baseline": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.8394160583941606,
+      "numerical_r2": 0.846667658213041,
+      "tree_edit_distance": 0.75,
+      "complexity_penalty": 0.25,
+      "composite_score": 52.59917320715084
+    }
+  }
+}
