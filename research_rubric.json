@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T00:00:00Z",
-  "updated_at": "2026-02-14T07:33:04.540715+00:00",
+  "updated_at": "2026-02-14T07:38:41.089045+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -141,8 +141,8 @@
           "id": "item_012",
           "description": "Implement the PhysMDT (Physics Masked Diffusion Transformer) architecture with dual-axis RoPE and physics-informed masked diffusion training",
           "acceptance_criteria": "Module src/phys_mdt.py implementing: (1) 8-layer transformer with 8 attention heads, d_model>=256, (2) masked diffusion training objective (randomly mask tokens at rate t, predict masked tokens conditioned on unmasked), (3) dual-axis Rotary Position Embeddings encoding both sequence position and expression tree depth, (4) input encoder for numerical (x,y) observation pairs via cross-attention, (5) LoRA support at rank-32 and rank-512 for parameter-efficient finetuning, (6) passes >=8 unit tests in tests/test_phys_mdt.py validating forward pass shape, masking logic, RoPE integration, and gradient flow.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "PhysMDT implemented with dual-axis RoPE, masked diffusion, cross-attention, LoRA. 14/14 tests pass.",
           "error": null
         },
         {
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 11,
+    "completed": 12,
     "in_progress": 0,
     "failed": 0,
-    "pending": 17
+    "pending": 16
   }
 }
