@@ -1,0 +1,247 @@
+{
+  "model": "PhysMDT",
+  "test_metrics": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.0,
+    "numerical_r2": 0.008173904891631594,
+    "tree_edit_distance": 0.9306382978723405,
+    "complexity_penalty": 0.8748333333333332,
+    "composite_score": 1.523797976900719
+  },
+  "n_test_evaluated": 100,
+  "per_difficulty": {
+    "simple": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.017391287003471475,
+      "tree_edit_distance": 0.9601629696695337,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.8331524783914496
+    },
+    "medium": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.928433268858801,
+      "complexity_penalty": 0.8055555555555556,
+      "composite_score": 1.6878895336342143
+    },
+    "complex": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8648936170212764,
+      "complexity_penalty": 0.6950000000000001,
+      "composite_score": 2.876063829787234
+    }
+  },
+  "config": {
+    "d_model": 64,
+    "n_layers": 4,
+    "n_epochs": 15,
+    "total_params": 420434,
+    "seed": 42
+  },
+  "per_sample_results": [
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "difficulty": "complex",
+      "family": "fluid_statics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "difficulty": "simple",
+      "family": "dynamics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.4255319148936165,
+      "difficulty": "medium",
+      "family": "gravitation"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8936170212765957,
+      "complexity_penalty": 1.0,
+      "composite_score": 1.063829787234043,
+      "difficulty": "simple",
+      "family": "rotational"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "difficulty": "simple",
+      "family": "kinematics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "difficulty": "simple",
+      "family": "dynamics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "difficulty": "simple",
+      "family": "rotational"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "difficulty": "simple",
+      "family": "kinematics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.4255319148936165,
+      "difficulty": "medium",
+      "family": "gravitation"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "difficulty": "simple",
+      "family": "kinematics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8936170212765957,
+      "complexity_penalty": 1.0,
+      "composite_score": 1.063829787234043,
+      "difficulty": "medium",
+      "family": "dynamics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8723404255319149,
+      "complexity_penalty": 1.0,
+      "composite_score": 1.276595744680851,
+      "difficulty": "medium",
+      "family": "oscillations"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9148936170212766,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.8510638297872343,
+      "difficulty": "complex",
+      "family": "oscillations"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 0.3333333333333333,
+      "composite_score": 3.7588652482269502,
+      "difficulty": "medium",
+      "family": "oscillations"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9574468085106383,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.4255319148936165,
+      "difficulty": "simple",
+      "family": "dynamics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "difficulty": "simple",
+      "family": "dynamics"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9787234042553191,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.21276595744680882,
+      "difficulty": "simple",
+      "family": "rotational"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.851063829787234,
+      "complexity_penalty": 0.2,
+      "composite_score": 5.489361702127661,
+      "difficulty": "complex",
+      "family": "gravitation"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.9361702127659575,
+      "complexity_penalty": 1.0,
+      "composite_score": 0.6382978723404255,
+      "difficulty": "medium",
+      "family": "energy"
+    },
+    {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.0,
+      "numerical_r2": 0.0,
+      "tree_edit_distance": 0.8936170212765957,
+      "complexity_penalty": 1.0,
+      "composite_score": 1.063829787234043,
+      "difficulty": "complex",
+      "family": "fluid_statics"
+    }
+  ]
+}
