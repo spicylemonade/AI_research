@@ -1,0 +1,276 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-14T12:00:00Z",
+  "updated_at": "2026-02-14T09:58:34.583409+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-14T12:00:00Z",
+      "completed_at": "2026-02-14T09:58:34.583371+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Analyze the ARC2025 ARChitects solution architecture in depth \u2014 specifically the LLaDA masked-diffusion backbone, 2D Golden Gate RoPE positional encoding, recursive soft-masking sampling, token algebra in continuous embedding space, and most-visited-candidate selection. Document which techniques transfer to physics equation derivation.",
+          "acceptance_criteria": "Written analysis document (analysis/arc_architecture.md) covering all 5 ARC techniques listed, with explicit mapping of each to potential physics-derivation analogues. Must include architecture diagrams described in text and a feasibility assessment for CPU-only training.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Conduct comprehensive literature review on transformer-based symbolic regression and physics equation discovery. Search the web for papers including: NeSymReS (Biggio et al. 2021), TPSR (Shojaee et al. 2023), MDLformer/SR4MDL (ICLR 2025), LLM-SR (ICLR 2025 Oral), AI Feynman (Udrescu & Tegmark 2020), QDSR (Bruneton 2025), LLaDA (Nie et al. 2025), Chain-of-Thought expressiveness theory (Feng et al. ICLR 2024), and ODEFormer.",
+          "acceptance_criteria": "sources.bib created in repo root with valid BibTeX entries for at least 15 relevant papers. Each entry must include title, authors, year, and venue/arxiv ID. Literature review summary (analysis/literature_review.md) with per-paper 3-sentence synopsis and relevance rating (high/medium/low).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Analyze the Feynman Symbolic Regression Database (FSReD) \u2014 the 100 base equations plus 20 bonus equations from the Feynman Lectures. Categorize equations by physics domain (classical mechanics, electromagnetism, quantum mechanics, thermodynamics), complexity tier (polynomial, trigonometric, nested transcendental, multi-variable composite), and number of variables.",
+          "acceptance_criteria": "Dataset analysis document (analysis/feynman_dataset_analysis.md) with: (a) table of all 120 equations grouped by domain and complexity, (b) histogram of variable counts, (c) identification of a 'core-30' subset of increasing difficulty for CPU-tractable experiments, (d) identification of 10 'complex Newtonian' equations (F=ma variants, gravitational, orbital, oscillatory) as the primary evaluation target.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Define the novel 'Chain-of-Derivation' (CoD) intermediate representation \u2014 a structured sequence of algebraic manipulation steps that a transformer can generate to show its work when deriving a physics equation from numerical observations. Specify the formal grammar, token vocabulary, and derivation step types (dimensional analysis, symmetry identification, Taylor expansion, variable separation, algebraic simplification).",
+          "acceptance_criteria": "Formal specification document (analysis/chain_of_derivation_spec.md) with: (a) BNF grammar for CoD sequences, (b) token vocabulary of <=200 symbols covering operators, variables, constants, and derivation-step markers, (c) 5 worked examples showing CoD sequences for known Feynman equations of increasing complexity, (d) comparison to prior work (cite at least 3 papers from sources.bib).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Specify the full model architecture: PhysFormer \u2014 a small masked-diffusion transformer combining (1) Set Transformer encoder for numerical observation embedding, (2) masked-diffusion decoder with iterative soft-masking refinement inspired by ARC2025, and (3) Chain-of-Derivation generation head. Target model size: 5-15M parameters for CPU feasibility.",
+          "acceptance_criteria": "Architecture specification (analysis/physformer_architecture.md) with: (a) complete layer-by-layer description with parameter counts, (b) total parameter budget <=15M, (c) estimated single-sample inference time on CPU <5 seconds, (d) diagram of data flow from numerical input through encoder, diffusion decoder, and CoD head, (e) description of how ARC2025 soft-masking refinement is adapted for equation token generation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_006",
+          "description": "Implement synthetic dataset generation pipeline. Generate training data by: (a) sampling random symbolic expression trees from the defined grammar, (b) evaluating them on random input points to produce (X, y) observation pairs, (c) generating ground-truth CoD derivation sequences, (d) applying the Feynman-style data augmentation (noise injection, variable permutation). Target: 100K training equations, 5K validation, 5K test.",
+          "acceptance_criteria": "Python module (src/data/generator.py) that produces datasets in a standardized format. Unit tests (tests/test_generator.py) passing with >=95% coverage of generator logic. Generated dataset statistics logged: expression depth distribution, variable count distribution, operator frequency. Verification that dataset generation completes in <30 minutes on CPU.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_007",
+          "description": "Implement the Set Transformer encoder module for encoding numerical observation pairs (X, y) into fixed-dimensional latent representations. Use Induced Set Attention Blocks (ISABs) with m=16 inducing points for O(nm) complexity, followed by Pooling by Multihead Attention (PMA).",
+          "acceptance_criteria": "PyTorch module (src/model/encoder.py) with: (a) configurable ISAB layers (default 4), attention heads (default 4), hidden dim (default 256), (b) parameter count logged and <=4M, (c) unit test verifying permutation-equivariance of encoder output, (d) unit test verifying correct output shape for variable-length input sequences, (e) forward pass on 256 observation points completes in <0.5s on CPU.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement the masked-diffusion decoder module adapted from LLaDA/ARC2025 architecture. The decoder uses random masking ratios during training (not fixed BERT-style), cross-attends to the encoder output, and is trained to predict masked equation tokens. Include the recursive soft-masking sampling procedure for inference.",
+          "acceptance_criteria": "PyTorch module (src/model/decoder.py) with: (a) standard transformer decoder layers with cross-attention to encoder, (b) variable masking ratio sampling (uniform [0,1]) during training, (c) soft-masking inference loop with configurable refinement steps (default 32), (d) most-visited-candidate selection over refinement trajectory, (e) parameter count <=8M, (f) unit tests for masking logic and soft-masking inference, (g) single equation inference in <3s on CPU with 32 refinement steps.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Implement the Chain-of-Derivation (CoD) generation head as an auxiliary decoder that produces step-by-step derivation traces. This head shares the encoder representation but generates derivation tokens autoregressively, conditioned on both the encoder output and the diffusion decoder's current equation estimate.",
+          "acceptance_criteria": "PyTorch module (src/model/cod_head.py) with: (a) lightweight autoregressive decoder (<=3M parameters), (b) cross-attention to both encoder output and diffusion decoder hidden states, (c) teacher forcing during training with ground-truth CoD sequences, (d) unit tests verifying generation of valid CoD token sequences, (e) integration test showing end-to-end forward pass through full PhysFormer model.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Implement evaluation metrics suite covering both equation accuracy and derivation quality. Metrics must include: (a) Exact symbolic recovery rate (using SymPy simplification + equivalence checking), (b) R\u00b2 numerical fit score, (c) Normalized tree edit distance between predicted and ground-truth expression trees, (d) CoD validity rate (% of generated derivations that follow the grammar), (e) CoD faithfulness score (does the derivation logically lead to the predicted equation?).",
+          "acceptance_criteria": "Python module (src/evaluation/metrics.py) with all 5 metrics implemented. Unit tests (tests/test_metrics.py) with known-answer test cases for each metric. Benchmark: metric computation for 1000 equation pairs completes in <60s on CPU. Documentation of each metric's range and interpretation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_011",
+          "description": "Implement the training loop with masked-diffusion loss (cross-entropy on masked positions only), auxiliary CoD loss, and combined multi-task objective. Include learning rate warmup, cosine annealing, gradient clipping, mixed-precision disabled (CPU mode), checkpointing, and early stopping on validation exact-recovery rate.",
+          "acceptance_criteria": "Training script (src/training/train.py) and config system (src/config.py) with: (a) configurable hyperparameters via YAML, (b) loss logging to CSV and optional TensorBoard, (c) checkpoint saving every N epochs, (d) early stopping with patience, (e) successful overfitting test: model achieves >90% exact recovery on a 50-equation toy dataset within 100 epochs on CPU, (f) training 100 epochs on toy dataset completes in <20 minutes on CPU.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_012",
+          "description": "Implement and evaluate the novel 'Dimensional-Analysis-Guided Masking' (DAGM) strategy. Instead of uniform random masking, bias the masking schedule to first unmask tokens that establish dimensional consistency (units, powers), then unmask structural tokens (operators), then unmask constants. This physics-informed inductive bias should accelerate convergence and improve accuracy on dimensionally-consistent equations.",
+          "acceptance_criteria": "Implementation in src/model/dagm.py with: (a) 3-phase masking schedule (dimensional -> structural -> constant tokens), (b) ablation experiment comparing DAGM vs uniform masking on the core-30 Feynman subset, (c) results showing statistically significant improvement (p<0.05 paired t-test) in exact recovery rate OR convergence speed (epochs to 50% recovery), (d) results logged in results/dagm_ablation.json.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement and evaluate 'Recursive Soft-Masking with Physics Constraints' (RSMPC). Extend the ARC2025 soft-masking refinement loop by injecting physics constraints at each refinement step: (a) dimensional consistency check \u2014 reject candidates that violate dimensional analysis, (b) symmetry preservation \u2014 if the encoder detects a symmetry, constrain refinement to respect it, (c) boundary condition satisfaction \u2014 check that the predicted equation satisfies known boundary conditions from the data.",
+          "acceptance_criteria": "Implementation in src/model/rsmpc.py with: (a) constraint checking functions for dimensional consistency, symmetry, and boundary conditions, (b) modified soft-masking loop that re-weights candidates based on constraint satisfaction, (c) ablation comparing RSMPC vs unconstrained soft-masking on core-30 subset, (d) results showing improvement in exact recovery rate, (e) analysis of which constraint contributes most (results/rsmpc_ablation.json).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement and evaluate 'Test-Time Equation Refinement' (TTER) \u2014 a test-time fine-tuning strategy inspired by ARC2025's per-task LoRA adaptation. For each test equation, perform N gradient steps on the masked-diffusion objective using the test observation data (X, y) as self-supervised signal, with a low-rank adapter (rank-4) to avoid overfitting. This allows the model to specialize to each test equation's specific numerical patterns.",
+          "acceptance_criteria": "Implementation in src/model/tter.py with: (a) rank-4 LoRA adapter applied to decoder attention layers, (b) configurable test-time steps (default 32), (c) evaluation on core-30 showing improvement over zero-shot inference, (d) sweep over test-time steps {8, 16, 32, 64} with results in results/tter_sweep.json, (e) wall-clock time per equation <30s on CPU with 32 steps.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement the 'Curriculum Derivation Training' (CDT) strategy. Train the model in 3 curriculum stages: Stage 1 \u2014 polynomial equations only (degree <=3), Stage 2 \u2014 add trigonometric and exponential equations, Stage 3 \u2014 full complexity including nested transcendental and multi-variable composites. Each stage uses progressively longer CoD sequences.",
+          "acceptance_criteria": "Implementation in src/training/curriculum.py with: (a) 3-stage curriculum with automatic promotion based on validation performance threshold (>=60% exact recovery), (b) comparison against single-stage training on the full dataset, (c) curriculum training achieves higher final exact recovery rate on core-30, (d) learning curves for both approaches plotted and saved to figures/curriculum_comparison.png, (e) results in results/curriculum_ablation.json.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Combine all novel components (DAGM + RSMPC + TTER + CDT) into the full PhysFormer system. Evaluate additive contribution of each component through systematic ablation study on the core-30 Feynman subset.",
+          "acceptance_criteria": "Ablation study with 2^4 = 16 configurations (each component on/off) evaluated on core-30 subset. Results table in results/full_ablation.json showing exact recovery rate, R\u00b2 score, and CoD validity for each configuration. Identification of the best configuration. Statistical significance testing between top-3 configurations. Training of the full best model completes in <8 hours on CPU.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_017",
+          "description": "Run the full PhysFormer (best configuration from Phase 3 ablation) on the complete Feynman-100 benchmark. Compare exact recovery rate against published results from prior work: AI Feynman (~71-100/100 with brute-force), NeSymReS, TPSR, MDLformer (~50/133), and QDSR (91.6% on 117 equations). Report R\u00b2 scores, exact recovery, and tree edit distance.",
+          "acceptance_criteria": "Results on Feynman-100 in results/feynman100_results.json with: (a) per-equation results (predicted expression, ground truth, R\u00b2, exact match, tree edit distance), (b) aggregate metrics with confidence intervals (bootstrap, n=1000), (c) comparison table against at least 4 baselines from sources.bib, (d) honest analysis of where PhysFormer excels and where it falls short relative to baselines.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Evaluate PhysFormer specifically on the 10 'complex Newtonian' equations identified in Phase 1. These are the primary target demonstrating that transformers can derive physics on their own. For each equation, report the full CoD derivation trace and assess its physical plausibility.",
+          "acceptance_criteria": "Detailed report (results/newtonian_deep_dive.json) with: (a) for each of 10 equations: predicted expression, CoD trace, R\u00b2 score, exact match, (b) at least 6/10 equations recovered with R\u00b2 > 0.99, (c) at least 4/10 exact symbolic recovery, (d) human-readable CoD traces for all 10 equations saved to results/newtonian_derivations.txt, (e) qualitative assessment of derivation plausibility for each equation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Conduct a generalization experiment: train PhysFormer on equations from classical mechanics and electromagnetism domains only, then test on held-out thermodynamics and quantum mechanics equations. This tests whether the model learns transferable physics reasoning rather than memorizing equation forms.",
+          "acceptance_criteria": "Cross-domain generalization results in results/generalization_experiment.json with: (a) training domain performance (in-distribution), (b) held-out domain performance (out-of-distribution), (c) per-domain breakdown of exact recovery and R\u00b2, (d) analysis of which equation types transfer well and which don't, (e) comparison of OOD performance with and without CoD (does derivation reasoning help generalization?).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Conduct noise robustness experiment: evaluate PhysFormer on the core-30 subset with observation data corrupted by Gaussian noise at levels sigma = {0.01, 0.05, 0.1, 0.2}. Compare degradation profile against reported noise robustness of QDSR and AI Feynman.",
+          "acceptance_criteria": "Noise robustness results in results/noise_robustness.json with: (a) exact recovery rate at each noise level, (b) R\u00b2 scores at each noise level, (c) degradation curves plotted in figures/noise_robustness.png, (d) comparison against at least 2 baseline methods' reported noise performance, (e) analysis of which equation types are most/least robust to noise.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Perform computational efficiency analysis. Profile the full PhysFormer pipeline (encoding, diffusion decoding with soft-masking refinement, CoD generation, test-time refinement) on CPU. Compare inference time against reported times for baseline methods.",
+          "acceptance_criteria": "Efficiency report in results/efficiency_analysis.json with: (a) per-stage timing breakdown (encoder, decoder, CoD, TTER), (b) total inference time per equation (mean and std over core-30), (c) memory usage profiling (peak RAM), (d) comparison against baseline method reported times, (e) Pareto frontier plot of accuracy vs inference time saved to figures/pareto_frontier.png.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_022",
+          "description": "Perform interpretability analysis on PhysFormer's learned representations. Visualize: (a) encoder attention patterns to understand how the model attends to observation data, (b) diffusion decoder's soft-masking refinement trajectory for selected equations, (c) t-SNE/UMAP of encoder latent space colored by equation type/domain, (d) analysis of which refinement steps are most impactful.",
+          "acceptance_criteria": "Interpretability figures saved to figures/ directory: (a) attention_heatmaps.png for 3 example equations, (b) refinement_trajectory.png showing token probabilities across soft-masking steps for 3 equations, (c) latent_space.png showing encoder embedding clusters, (d) written analysis (analysis/interpretability.md) with key findings about what the model learned.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Perform error analysis on PhysFormer's failures. Categorize all incorrect predictions on Feynman-100 into failure modes: (a) wrong structure/right constants, (b) right structure/wrong constants, (c) partially correct subexpression, (d) completely wrong, (e) numerically close but symbolically different. Identify systematic weaknesses.",
+          "acceptance_criteria": "Error analysis report (analysis/error_analysis.md) with: (a) failure mode distribution (pie chart in figures/failure_modes.png), (b) 5 detailed case studies of interesting failures, (c) identification of top-3 systematic weaknesses with proposed mitigations, (d) analysis of whether CoD traces provide diagnostic signal for failures (do failed derivations show identifiable breakdown points?).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Write the complete research paper (paper.md or paper.tex) with sections: Abstract, Introduction (motivation + contributions), Related Work (citing all papers in sources.bib), Method (PhysFormer architecture + all novel components), Experiments (all Phase 4 results), Analysis (interpretability + error analysis), Discussion (limitations + future work), Conclusion.",
+          "acceptance_criteria": "Complete paper document with: (a) all sections listed above written, (b) all figures and tables referenced and present, (c) all claims supported by experimental results from Phase 4, (d) related work section cites at least 12 papers from sources.bib, (e) honest discussion of limitations including CPU-only constraint, model size limitations, and comparison to GPU-trained baselines, (f) clear statement of novel contributions (DAGM, RSMPC, CoD, TTER).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Create a comprehensive results summary and reproducibility package. Compile all experimental results into a single summary, ensure all code is documented and runnable, and create a README with full reproduction instructions.",
+          "acceptance_criteria": "Deliverables: (a) results/summary.json aggregating all key metrics across all experiments, (b) updated README.md with project description, installation instructions, and reproduction commands, (c) requirements.txt with all Python dependencies pinned, (d) single command (e.g., make reproduce) that runs the core-30 evaluation end-to-end, (e) all results files referenced in the paper are present and consistent with reported numbers.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 25,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 25
+  }
+}
