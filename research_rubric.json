@@ -86,8 +86,8 @@
           "id": "item_006",
           "description": "Implement the data generation pipeline: create a system that generates training pairs of (numerical_observations, symbolic_equation) for Newtonian physics, including the Feynman/SRSD benchmark equations plus procedurally generated equations from a physics-informed grammar.",
           "acceptance_criteria": "A Python module data/ with: (1) data_generator.py that procedurally generates at least 500,000 unique (observation_table, equation_tree) pairs using a context-free grammar over Newtonian physics operators (+, -, *, /, sqrt, sin, cos, exp, log, pow) with physically meaningful variable ranges, (2) feynman_loader.py that loads and preprocesses all Feynman/SRSD Newtonian equations, (3) tokenizer.py implementing prefix-notation tokenization with a vocabulary of \u2264128 tokens, (4) augmentation.py implementing at least 4 augmentation types (variable permutation, noise injection at 1%/5%/10% levels, unit rescaling, observation subsampling), (5) unit tests confirming round-trip tokenization fidelity and data loader correctness. Pipeline must generate a full training set in under 2 hours on single A100.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Data pipeline complete: tokenizer.py (73 tokens vocab), data_generator.py (physics-informed grammar), feynman_loader.py (32 benchmark + 8 OOD equations), augmentation.py (4 types), all 9 unit tests pass.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 5,
+    "completed": 6,
     "in_progress": 0,
     "failed": 0,
-    "pending": 20
+    "pending": 19
   }
 }
