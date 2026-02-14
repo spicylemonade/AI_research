@@ -1,0 +1,3762 @@
+{
+  "full_system": {
+    "config": {
+      "T": 64,
+      "R": 2,
+      "n_samples": 128,
+      "use_mcts": false,
+      "use_augmentation": true,
+      "use_postprocess": true,
+      "description": "Full PhysDiffuse (T=64, R=2, aug, postprocess)"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8630378248098038,
+        "mean_r2": -0.8555430672294225,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.0
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8277549291822263,
+        "mean_r2": -0.9608557168453509,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.1
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.7526833387817369,
+        "mean_r2": -1.0,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.125
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8693514088250932,
+        "mean_r2": -0.8333344980397422,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.0
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8256070954220359,
+        "mean_r2": -0.9204033967039794,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.0625
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8695652173913043,
+        "r2": -0.9373236541522332,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 4.333333333333333,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -0.42052902734579667,
+        "complexity_ratio": 2.4285714285714284,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -0.48649185633735015,
+        "complexity_ratio": 1.4,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9047619047619048,
+        "r2": -1.0,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9516129032258065,
+        "r2": -1.0,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": 2.7142857142857144,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": 2.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9491525423728814,
+        "r2": -1.0,
+        "complexity_ratio": 3.25,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": 1.875,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -0.6085571684535072,
+        "complexity_ratio": 1.7,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 3.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 0.875,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 2.4,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.6666666666666666,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 2.8333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7083333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 1.4615384615384615,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.631578947368421,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 0.6666666666666666,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7619047619047619,
+        "r2": -1.0,
+        "complexity_ratio": 1.75,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.6956521739130435,
+        "r2": -1.0,
+        "complexity_ratio": 2.142857142857143,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 1.5454545454545454,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 1.5833333333333333,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 1.0,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9090909090909091,
+        "r2": -6.988238453908835e-06,
+        "complexity_ratio": 0.875,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 1.4,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8947368421052632,
+        "r2": -1.0,
+        "complexity_ratio": 0.7222222222222222,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      }
+    ],
+    "time_seconds": 161.13365960121155
+  },
+  "no_refinement": {
+    "config": {
+      "T": 1,
+      "R": 1,
+      "n_samples": 128,
+      "use_mcts": false,
+      "use_augmentation": false,
+      "use_postprocess": true,
+      "description": "No refinement (T=1, single pass)"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8472222222222223,
+        "mean_r2": -0.8471068998622031,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.375
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8579710144927535,
+        "mean_r2": -0.9238369036302831,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.2
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.7845655806182121,
+        "mean_r2": -1.0,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.125
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8664021164021163,
+        "mean_r2": -0.8333351566352406,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.3333333333333333
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.838513289564491,
+        "mean_r2": -0.906726099219122,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.25
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -0.5392601279978106,
+        "complexity_ratio": 0.7142857142857143,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -0.508033058976963,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -0.7295620119228519,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 2.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9130434782608695,
+        "r2": -0.669890101333914,
+        "complexity_ratio": 1.25,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9444444444444444,
+        "r2": -1.0,
+        "complexity_ratio": 0.625,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 2.375,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -0.5684789349689183,
+        "complexity_ratio": 0.7142857142857143,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.6666666666666666,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7619047619047619,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7368421052631579,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 1.5454545454545454,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 1.4615384615384615,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9444444444444444,
+        "r2": -1.093981144340006e-05,
+        "complexity_ratio": 0.3125,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9444444444444444,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      }
+    ],
+    "time_seconds": 3.319593906402588
+  },
+  "T8": {
+    "config": {
+      "T": 8,
+      "R": 1,
+      "n_samples": 128,
+      "use_mcts": false,
+      "use_augmentation": false,
+      "use_postprocess": true,
+      "description": "Refinement T=8"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8457952667406329,
+        "mean_r2": -0.8485499116103447,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.125
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8377375421425765,
+        "mean_r2": -0.8344109644384862,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.3
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8098383909218412,
+        "mean_r2": -0.7600545727639159,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.0
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8817340067340066,
+        "mean_r2": -0.6897346190940906,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.0
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8410265225978,
+        "mean_r2": -0.7922297885607341,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.125
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8695652173913043,
+        "r2": -1.0,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": 0.21160070711724277,
+        "complexity_ratio": 2.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 7.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 3.4,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": 2.7142857142857144,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": 1.4444444444444444,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9130434782608695,
+        "r2": -7.304050512946247e-05,
+        "complexity_ratio": 0.75,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9444444444444444,
+        "r2": -1.0,
+        "complexity_ratio": 0.875,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -0.6623433901410827,
+        "complexity_ratio": 0.7,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 1.2857142857142858,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -1.0,
+        "complexity_ratio": 2.625,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -0.6816932137386502,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7142857142857143,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 1.1666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": 1.4615384615384615,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 3.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8225806451612904,
+        "r2": -1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -0.07974945666155886,
+        "complexity_ratio": 0.6363636363636364,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -0.0006871254497677892,
+        "complexity_ratio": 1.1666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": 0.7692307692307693,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -1.0941266305852793e-05,
+        "complexity_ratio": 1.3125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -0.1383967732982374,
+        "complexity_ratio": 3.6666666666666665,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 1.3333333333333333,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 1.0,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      }
+    ],
+    "time_seconds": 21.981534719467163
+  },
+  "T16": {
+    "config": {
+      "T": 16,
+      "R": 1,
+      "n_samples": 128,
+      "use_mcts": false,
+      "use_augmentation": false,
+      "use_postprocess": true,
+      "description": "Refinement T=16"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8677861794638111,
+        "mean_r2": -0.8965414934071877,
+        "mean_complexity_ratio": 3.863095238095238,
+        "dim_consistency_rate": 0.125
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.835248488480754,
+        "mean_r2": -0.651080884679893,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.2
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.7788434153565732,
+        "mean_r2": -0.8750638909889981,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.25
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8456126041938399,
+        "mean_r2": -0.6887209830387592,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.3333333333333333
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8312249146416767,
+        "mean_r2": -0.7754993068812803,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.21875
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8947368421052632,
+        "r2": -1.0,
+        "complexity_ratio": 6.333333333333333,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9090909090909091,
+        "r2": -1.0,
+        "complexity_ratio": 4.333333333333333,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 7.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 1.8571428571428572,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -0.8278767498119666,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9047619047619048,
+        "r2": -0.3444551974455352,
+        "complexity_ratio": 2.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 1.7142857142857142,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -0.09247577821748165,
+        "complexity_ratio": 2.25,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9130434782608695,
+        "r2": -1.0,
+        "complexity_ratio": 0.875,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -0.6902019076592052,
+        "complexity_ratio": 1.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -6.431239927162657e-05,
+        "complexity_ratio": 2.142857142857143,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7222222222222222,
+        "r2": -1.0,
+        "complexity_ratio": 1.125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 1.8571428571428572,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -0.16752187646698857,
+        "complexity_ratio": 0.6363636363636364,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -0.5605449720559839,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": 1.4615384615384615,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.6666666666666666,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 3.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8947368421052632,
+        "r2": -1.0,
+        "complexity_ratio": 1.5,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7222222222222222,
+        "r2": -1.0,
+        "complexity_ratio": 1.2857142857142858,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 0.8947368421052632,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -0.000511127911984044,
+        "complexity_ratio": 0.8181818181818182,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -1.0,
+        "complexity_ratio": 1.75,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": 1.3076923076923077,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0939826158296029e-05,
+        "complexity_ratio": 0.9375,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -0.1323149584063963,
+        "complexity_ratio": 1.5,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8260869565217391,
+        "r2": -1.0,
+        "complexity_ratio": 1.0555555555555556,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 1.4285714285714286,
+        "dim_consistent": true
+      }
+    ],
+    "time_seconds": 42.10113978385925
+  },
+  "T32": {
+    "config": {
+      "T": 32,
+      "R": 1,
+      "n_samples": 128,
+      "use_mcts": false,
+      "use_augmentation": false,
+      "use_postprocess": true,
+      "description": "Refinement T=32"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.839778805132066,
+        "mean_r2": -0.6602728226207184,
+        "mean_complexity_ratio": 3.225,
+        "dim_consistency_rate": 0.25
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8407799802536646,
+        "mean_r2": -0.7105312913060139,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.1
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.7957168014733804,
+        "mean_r2": -0.8765576689709371,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.375
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8614400413922447,
+        "mean_r2": -0.666672344167259,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.6666666666666666
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8331376532416777,
+        "mean_r2": -0.7312497159624043,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.3125
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8695652173913043,
+        "r2": -0.9449733102271269,
+        "complexity_ratio": 3.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": 0.8204991817968058,
+        "complexity_ratio": 2.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -0.4797654134500995,
+        "complexity_ratio": 3.6666666666666665,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -0.677943039085326,
+        "complexity_ratio": 0.8571428571428571,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 3.8,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 4.333333333333333,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": 2.142857142857143,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": 0.6666666666666666,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -0.669890101333914,
+        "complexity_ratio": 2.25,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 0.875,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 2.3,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -5.8330744844514726e-05,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -1.0,
+        "complexity_ratio": 0.75,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 2.7142857142857144,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 1.2,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": 0.5646355190186193,
+        "complexity_ratio": 0.9090909090909091,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.6818181818181818,
+        "r2": -1.0,
+        "complexity_ratio": 0.38461538461538464,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -1.0,
+        "complexity_ratio": 2.2222222222222223,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": 3.1666666666666665,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 2.625,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 2.7142857142857144,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7142857142857143,
+        "r2": -1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -0.01246135176749652,
+        "complexity_ratio": 0.6363636363636364,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9032258064516129,
+        "r2": -2.3124956552988962e-05,
+        "complexity_ratio": 0.23076923076923078,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9583333333333334,
+        "r2": -1.0940047001195552e-05,
+        "complexity_ratio": 0.5625,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 2.8333333333333335,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": 0.2777777777777778,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8260869565217391,
+        "r2": -1.0,
+        "complexity_ratio": 1.3571428571428572,
+        "dim_consistent": true
+      }
+    ],
+    "time_seconds": 81.3661744594574
+  },
+  "T64_no_cold_restart": {
+    "config": {
+      "T": 64,
+      "R": 1,
+      "n_samples": 128,
+      "use_mcts": false,
+      "use_augmentation": false,
+      "use_postprocess": true,
+      "description": "T=64 without cold restart (R=1)"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8474631180223285,
+        "mean_r2": -0.9329657605804675,
+        "mean_complexity_ratio": 3.294047619047619,
+        "dim_consistency_rate": 0.375
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8366790974763111,
+        "mean_r2": -0.7585748443491225,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.3
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8070123279922852,
+        "mean_r2": -0.8202191775930199,
+        "mean_complexity_ratio": 1.4591478514175882,
+        "dim_consistency_rate": 0.25
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8401116427432217,
+        "mean_r2": -0.6897378992731641,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.6666666666666666
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8326020124793547,
+        "mean_r2": -0.804676729516191,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.375
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -0.9699182707502865,
+        "complexity_ratio": 3.6666666666666665,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 1.2857142857142858,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 1.4,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8947368421052632,
+        "r2": -1.0,
+        "complexity_ratio": 5.333333333333333,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -0.49538987332224504,
+        "complexity_ratio": 2.3333333333333335,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -0.998417940571209,
+        "complexity_ratio": 1.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": 1.5555555555555556,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9090909090909091,
+        "r2": -0.7085527164773637,
+        "complexity_ratio": 1.75,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 1.625,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -0.6607925509971766,
+        "complexity_ratio": 0.6,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -6.353096780276069e-05,
+        "complexity_ratio": 1.8571428571428572,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 2.125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -0.7151651736793456,
+        "complexity_ratio": 0.8571428571428571,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8235294117647058,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7272727272727273,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -0.5011744713695359,
+        "complexity_ratio": 2.8333333333333335,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.813953488372093,
+        "r2": -1.0,
+        "complexity_ratio": 0.5384615384615384,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 1.4444444444444444,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 3.5,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 2.125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -1.0,
+        "complexity_ratio": 1.8571428571428572,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7083333333333334,
+        "r2": -0.5432283961262829,
+        "complexity_ratio": 0.5263157894736842,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7368421052631579,
+        "r2": -0.018525024617875863,
+        "complexity_ratio": 1.1818181818181819,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 0.5,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -2.465678080398881e-05,
+        "complexity_ratio": 1.5384615384615385,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -0.13840273885818033,
+        "complexity_ratio": 0.8333333333333334,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9090909090909091,
+        "r2": -1.0,
+        "complexity_ratio": 0.7222222222222222,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 0.9285714285714286,
+        "dim_consistent": true
+      }
+    ],
+    "time_seconds": 157.54243063926697
+  },
+  "with_mcts": {
+    "config": {
+      "T": 64,
+      "R": 2,
+      "n_samples": 128,
+      "use_mcts": true,
+      "use_augmentation": true,
+      "use_postprocess": true,
+      "description": "Full + MCTS-guided selection"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8596950937125423,
+        "mean_r2": -0.9542993131755613,
+        "mean_complexity_ratio": 3.680952380952381,
+        "dim_consistency_rate": 0.125
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8493977037455298,
+        "mean_r2": -0.9575525383835594,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.7
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.783310177617958,
+        "mean_r2": -1.0,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.375
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8797560023246521,
+        "mean_r2": -0.833335156645051,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.3333333333333333
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8411423506889755,
+        "mean_r2": -0.9440603384096997,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.40625
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 3.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 5.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8260869565217391,
+        "r2": -1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8260869565217391,
+        "r2": -1.0,
+        "complexity_ratio": 3.4,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9047619047619048,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9130434782608695,
+        "r2": -0.6343945054044899,
+        "complexity_ratio": 3.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 2.7142857142857144,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 2.25,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9090909090909091,
+        "r2": -1.0,
+        "complexity_ratio": 1.125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -0.6325222156570232,
+        "complexity_ratio": 2.1,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 1.8571428571428572,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": 0.875,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8695652173913043,
+        "r2": -1.0,
+        "complexity_ratio": 1.2857142857142858,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 4.2,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7391304347826086,
+        "r2": -0.9430031681785709,
+        "complexity_ratio": 1.7272727272727273,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 1.1666666666666667,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7619047619047619,
+        "r2": -1.0,
+        "complexity_ratio": 1.6153846153846154,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7368421052631579,
+        "r2": -1.0,
+        "complexity_ratio": 0.7777777777777778,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.9047619047619048,
+        "r2": -1.0,
+        "complexity_ratio": 2.125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7619047619047619,
+        "r2": -1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.6956521739130435,
+        "r2": -1.0,
+        "complexity_ratio": 0.8947368421052632,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -1.0,
+        "complexity_ratio": 0.8181818181818182,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 1.0,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9047619047619048,
+        "r2": -1.093987030520438e-05,
+        "complexity_ratio": 0.5625,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8947368421052632,
+        "r2": -1.0,
+        "complexity_ratio": 1.1666666666666667,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 0.8666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9047619047619048,
+        "r2": -1.0,
+        "complexity_ratio": 0.9444444444444444,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -1.0,
+        "complexity_ratio": 1.3571428571428572,
+        "dim_consistent": false
+      }
+    ],
+    "time_seconds": 1190.5244376659393
+  },
+  "no_augmentation": {
+    "config": {
+      "T": 64,
+      "R": 2,
+      "n_samples": 128,
+      "use_mcts": false,
+      "use_augmentation": false,
+      "use_postprocess": true,
+      "description": "Full - augmentation"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8789388449714537,
+        "mean_r2": -0.9052324147303515,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.125
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8527942468159859,
+        "mean_r2": -0.7535642090020379,
+        "mean_complexity_ratio": 1.9688672438672437,
+        "dim_consistency_rate": 0.3
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.7809129832156148,
+        "mean_r2": -1.0,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.125
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8438798090150788,
+        "mean_r2": -0.6858165210720403,
+        "mean_complexity_ratio": 1.1525412087912088,
+        "dim_consistency_rate": 0.3333333333333333
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.83968862336709,
+        "mean_r2": -0.8403875166967323,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.21875
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -0.24185931784281234,
+        "complexity_ratio": 3.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8695652173913043,
+        "r2": -1.0,
+        "complexity_ratio": 4.333333333333333,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 1.0,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 6.333333333333333,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8260869565217391,
+        "r2": -1.0,
+        "complexity_ratio": 2.7142857142857144,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": 1.8888888888888888,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -0.10051665652884867,
+        "complexity_ratio": 0.25,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9130434782608695,
+        "r2": -1.0,
+        "complexity_ratio": 1.875,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 1.7,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -6.427380934614924e-05,
+        "complexity_ratio": 3.142857142857143,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": 2.125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -0.6645841368431351,
+        "complexity_ratio": 2.2857142857142856,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 3.8,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -0.7704770228390485,
+        "complexity_ratio": 0.45454545454545453,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 2.1666666666666665,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7272727272727273,
+        "r2": -1.0,
+        "complexity_ratio": 1.6153846153846154,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7368421052631579,
+        "r2": -1.0,
+        "complexity_ratio": 0.7777777777777778,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 2.125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 3.142857142857143,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 1.3636363636363635,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 1.5833333333333333,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9032258064516129,
+        "r2": -1.0,
+        "complexity_ratio": 0.5384615384615384,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8947368421052632,
+        "r2": -1.093987030520438e-05,
+        "complexity_ratio": 0.5625,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9130434782608695,
+        "r2": -1.0,
+        "complexity_ratio": 3.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7272727272727273,
+        "r2": -1.0,
+        "complexity_ratio": 1.2666666666666666,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 0.5,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -0.11488818656193645,
+        "complexity_ratio": 0.7142857142857143,
+        "dim_consistent": true
+      }
+    ],
+    "time_seconds": 160.93758702278137
+  },
+  "no_postprocess": {
+    "config": {
+      "T": 64,
+      "R": 2,
+      "n_samples": 128,
+      "use_mcts": false,
+      "use_augmentation": true,
+      "use_postprocess": false,
+      "description": "Full - post-processing"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8280892448512586,
+        "mean_r2": -0.9016436634050357,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.125
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8281504898610162,
+        "mean_r2": -0.9499818689442507,
+        "mean_complexity_ratio": 1.7504581529581533,
+        "dim_consistency_rate": 0.3
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8014069264069263,
+        "mean_r2": -0.7325723959711385,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.25
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8195002905815262,
+        "mean_r2": -0.833335157462876,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.0
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8198273753801499,
+        "mean_r2": -0.8616736909134112,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.1875
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 2.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 3.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -0.36819385014970485,
+        "complexity_ratio": 1.2857142857142858,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -0.84495545709058,
+        "complexity_ratio": 2.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 2.3333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -1.0,
+        "complexity_ratio": 2.4285714285714284,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7619047619047619,
+        "r2": -1.0,
+        "complexity_ratio": 1.8888888888888888,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 3.25,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": 1.375,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.85,
+        "r2": -0.5954314904166478,
+        "complexity_ratio": 0.5,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 1.5714285714285714,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 0.75,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -1.0,
+        "complexity_ratio": 1.8571428571428572,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": 4.6,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7619047619047619,
+        "r2": -1.0,
+        "complexity_ratio": 0.5454545454545454,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -0.9043871990258598,
+        "complexity_ratio": 1.1666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 0.3076923076923077,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -0.2149420833559197,
+        "complexity_ratio": 1.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8636363636363636,
+        "r2": -0.6455576925013826,
+        "complexity_ratio": 1.625,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7272727272727273,
+        "r2": -1.0,
+        "complexity_ratio": 1.0526315789473684,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 1.1818181818181819,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7142857142857143,
+        "r2": -7.939191180628136e-05,
+        "complexity_ratio": 1.5833333333333333,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -1.0,
+        "complexity_ratio": 1.3076923076923077,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0944777256272076e-05,
+        "complexity_ratio": 0.5625,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 3.1666666666666665,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7916666666666666,
+        "r2": -1.0,
+        "complexity_ratio": 1.2666666666666666,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8260869565217391,
+        "r2": -1.0,
+        "complexity_ratio": 0.9444444444444444,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.85,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      }
+    ],
+    "time_seconds": 161.0568494796753
+  },
+  "minimal": {
+    "config": {
+      "T": 16,
+      "R": 1,
+      "n_samples": 32,
+      "use_mcts": false,
+      "use_augmentation": false,
+      "use_postprocess": false,
+      "description": "Minimal: T=16, R=1, 32 samples, no postprocess"
+    },
+    "report": {
+      "tier_1": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8561626604389762,
+        "mean_r2": -0.871912461094249,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.25
+      },
+      "tier_2": {
+        "count": 10,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8280526745057637,
+        "mean_r2": -0.9571492531963071,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.1
+      },
+      "tier_3": {
+        "count": 8,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.7721718038508656,
+        "mean_r2": -0.8753667179600191,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.25
+      },
+      "tier_4": {
+        "count": 6,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.8255842174606478,
+        "mean_r2": -0.6666723441574338,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.16666666666666666
+      },
+      "overall": {
+        "count": 32,
+        "exact_match_rate": 0.0,
+        "mean_ned": 0.820647117629383,
+        "mean_r2": -0.8609300009169318,
+        "mean_complexity_ratio": Infinity,
+        "dim_consistency_rate": 0.1875
+      }
+    },
+    "per_equation": [
+      {
+        "id": "T1.1",
+        "name": "Distance (uniform velocity)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -0.44767634093738295,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.2",
+        "name": "Newton's 2nd Law",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.9166666666666666,
+        "r2": -0.975441998548926,
+        "complexity_ratio": 7.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.3",
+        "name": "Momentum",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.4",
+        "name": "Kinetic Energy",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 1.8571428571428572,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.5",
+        "name": "Gravitational PE (near surface)",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -0.552181349267683,
+        "complexity_ratio": 2.6,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.6",
+        "name": "Weight",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 5.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "T1.7",
+        "name": "Impulse",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8947368421052632,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T1.8",
+        "name": "Free-fall distance",
+        "tier": 1,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.1",
+        "name": "Universal Gravitation",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": 2.111111111111111,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.2",
+        "name": "Hooke's Law",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9130434782608695,
+        "r2": -1.0,
+        "complexity_ratio": 2.25,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.3",
+        "name": "Pendulum Period",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.9090909090909091,
+        "r2": -1.0,
+        "complexity_ratio": 1.125,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.4",
+        "name": "Projectile Range",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -1.0,
+        "complexity_ratio": 1.9,
+        "dim_consistent": true
+      },
+      {
+        "id": "T2.5",
+        "name": "Centripetal Force",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 2.4285714285714284,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.6",
+        "name": "Gravitational PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.7777777777777778,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.7",
+        "name": "Spring PE",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8095238095238095,
+        "r2": -0.5714925319630701,
+        "complexity_ratio": 1.0,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.8",
+        "name": "Velocity under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8571428571428571,
+        "r2": -1.0,
+        "complexity_ratio": 3.4,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.9",
+        "name": "Position under uniform accel",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.6956521739130435,
+        "r2": -1.0,
+        "complexity_ratio": 1.9090909090909092,
+        "dim_consistent": false
+      },
+      {
+        "id": "T2.10",
+        "name": "Torque",
+        "tier": 2,
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 2.8333333333333335,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.1",
+        "name": "Total Mechanical Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -1.0,
+        "complexity_ratio": 1.4615384615384615,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.2",
+        "name": "Elastic Collision v1 final",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.3",
+        "name": "Orbital Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.4",
+        "name": "Escape Velocity",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": 2.125,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.5",
+        "name": "Reduced Mass",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.6",
+        "name": "Relativistic KE approx",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.6363636363636364,
+        "r2": -1.0,
+        "complexity_ratio": 0.8947368421052632,
+        "dim_consistent": false
+      },
+      {
+        "id": "T3.7",
+        "name": "Work-Energy Theorem",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.7391304347826086,
+        "r2": -0.002933743680152867,
+        "complexity_ratio": 1.3636363636363635,
+        "dim_consistent": true
+      },
+      {
+        "id": "T3.8",
+        "name": "Gravitational Binding Energy",
+        "tier": 3,
+        "exact_match": false,
+        "ned": 0.75,
+        "r2": -1.0,
+        "complexity_ratio": 1.25,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.1",
+        "name": "Kepler's 3rd Law",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -2.3124956552766918e-05,
+        "complexity_ratio": 1.1538461538461537,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.2",
+        "name": "Damped Oscillator",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.9565217391304348,
+        "r2": -1.0939988049907257e-05,
+        "complexity_ratio": 1.0625,
+        "dim_consistent": true
+      },
+      {
+        "id": "T4.3",
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 1.1666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.4",
+        "name": "Two-body Energy",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.7894736842105263,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.5",
+        "name": "Forced Oscillator Amplitude",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.8695652173913043,
+        "r2": -1.0,
+        "complexity_ratio": 1.1666666666666667,
+        "dim_consistent": false
+      },
+      {
+        "id": "T4.6",
+        "name": "Orbit Equation (conic)",
+        "tier": 4,
+        "exact_match": false,
+        "ned": 0.782608695652174,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      }
+    ],
+    "time_seconds": 16.34049916267395
+  }
+}

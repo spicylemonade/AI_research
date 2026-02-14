@@ -1,0 +1,2629 @@
+{
+  "n_systems": 5,
+  "n_exact_match": 0,
+  "n_high_r2": 1,
+  "results": [
+    {
+      "system": "newton_2nd_law",
+      "description": "Newton's 2nd Law: F = m * a",
+      "formula": "F = m * a",
+      "predicted": "mul sub mul mul mul mul mul mul mul mul div mul mul mul div mul mul x_1 add div x_1 x_1",
+      "ground_truth": "mul x_0 x_1",
+      "optimized_constants": {},
+      "time_seconds": 15.824443817138672,
+      "exact_match": false,
+      "ned": 0.9090909090909091,
+      "r2": -1.0,
+      "complexity_ratio": Infinity,
+      "dim_consistent": false
+    },
+    {
+      "system": "universal_gravitation",
+      "description": "Universal Gravitation: F = G * m1 * m2 / r^2",
+      "formula": "F = c_0 * m1 * m2 / r^2",
+      "predicted": "mul x_2 int_2 c_0 x_2 x_2 sqrt x_2 x_2 x_2 x_2 x_2 x_2 x_2 x_2 x_2 sqrt x_2 x_2 x_2 x_2",
+      "ground_truth": "mul c_0 div mul x_0 x_1 pow x_2 int_2",
+      "optimized_constants": {},
+      "time_seconds": 14.54120945930481,
+      "exact_match": false,
+      "ned": 0.8571428571428571,
+      "r2": -0.0006799488393913755,
+      "complexity_ratio": 0.3333333333333333,
+      "dim_consistent": true
+    },
+    {
+      "system": "kinetic_energy",
+      "description": "Kinetic Energy: E = 0.5 * m * v^2",
+      "formula": "E = 0.5 * m * v^2",
+      "predicted": "x_1 mul x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1",
+      "ground_truth": "mul half mul x_0 pow x_1 int_2",
+      "optimized_constants": {},
+      "time_seconds": 14.564699172973633,
+      "exact_match": false,
+      "ned": 0.9047619047619048,
+      "r2": -0.5433651968177204,
+      "complexity_ratio": 0.14285714285714285,
+      "dim_consistent": true
+    },
+    {
+      "system": "conservation_momentum",
+      "description": "Conservation of Momentum: p = m * v",
+      "formula": "p = m * v",
+      "predicted": "x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1",
+      "ground_truth": "mul x_0 x_1",
+      "optimized_constants": {},
+      "time_seconds": 14.532447338104248,
+      "exact_match": false,
+      "ned": 0.9523809523809523,
+      "r2": 0.027197800903263403,
+      "complexity_ratio": 0.3333333333333333,
+      "dim_consistent": true
+    },
+    {
+      "system": "hooke_law",
+      "description": "Hooke's Law: F = -k * x",
+      "formula": "F = c_0 * x",
+      "predicted": "x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0",
+      "ground_truth": "mul c_0 x_0",
+      "optimized_constants": {},
+      "time_seconds": 13.358650922775269,
+      "exact_match": false,
+      "ned": 0.9523809523809523,
+      "r2": 1.0,
+      "complexity_ratio": 0.3333333333333333,
+      "dim_consistent": true
+    }
+  ],
+  "refinement_traces": {
+    "newton_2nd_law": [
+      {
+        "step": 1,
+        "tokens": [
+          "x_1"
+        ],
+        "n_masked": 61,
+        "n_unmasked": 3
+      },
+      {
+        "step": 2,
+        "tokens": [
+          "pow",
+          "add",
+          "x_1"
+        ],
+        "n_masked": 58,
+        "n_unmasked": 6
+      },
+      {
+        "step": 3,
+        "tokens": [
+          "mul",
+          "c_2",
+          "int_2",
+          "c_2",
+          "pi"
+        ],
+        "n_masked": 56,
+        "n_unmasked": 8
+      },
+      {
+        "step": 4,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "div",
+          "sub",
+          "int_2",
+          "c_2",
+          "x_1"
+        ],
+        "n_masked": 52,
+        "n_unmasked": 12
+      },
+      {
+        "step": 5,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "div",
+          "sub",
+          "int_1",
+          "quarter",
+          "int_2",
+          "c_2",
+          "x_1"
+        ],
+        "n_masked": 45,
+        "n_unmasked": 19
+      },
+      {
+        "step": 6,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "div",
+          "sub",
+          "int_1",
+          "x_1",
+          "int_2",
+          "c_2",
+          "sqrt"
+        ],
+        "n_masked": 39,
+        "n_unmasked": 25
+      },
+      {
+        "step": 7,
+        "tokens": [
+          "mul",
+          "div",
+          "mul",
+          "div",
+          "sub",
+          "int_1",
+          "x_1",
+          "c_0",
+          "c_0",
+          "x_0"
+        ],
+        "n_masked": 37,
+        "n_unmasked": 27
+      },
+      {
+        "step": 8,
+        "tokens": [
+          "sub",
+          "div",
+          "mul",
+          "div",
+          "sub",
+          "int_1",
+          "x_0",
+          "x_1",
+          "c_2",
+          "c_0"
+        ],
+        "n_masked": 34,
+        "n_unmasked": 30
+      },
+      {
+        "step": 9,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "div",
+          "x_1",
+          "sub",
+          "int_1",
+          "x_1",
+          "x_1",
+          "int_1"
+        ],
+        "n_masked": 32,
+        "n_unmasked": 32
+      },
+      {
+        "step": 10,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "div",
+          "x_0",
+          "sub",
+          "x_0",
+          "int_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 27,
+        "n_unmasked": 37
+      },
+      {
+        "step": 11,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "div",
+          "add",
+          "sub",
+          "mul",
+          "int_1",
+          "int_3",
+          "x_1"
+        ],
+        "n_masked": 25,
+        "n_unmasked": 39
+      },
+      {
+        "step": 12,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "c_2",
+          "add",
+          "sub",
+          "mul",
+          "int_1",
+          "x_0",
+          "x_1"
+        ],
+        "n_masked": 16,
+        "n_unmasked": 48
+      },
+      {
+        "step": 13,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "x_0",
+          "add",
+          "sub",
+          "mul",
+          "int_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 14,
+        "n_unmasked": 50
+      },
+      {
+        "step": 14,
+        "tokens": [
+          "mul",
+          "div",
+          "mul",
+          "x_1",
+          "add",
+          "sub",
+          "x_0",
+          "mul",
+          "int_2",
+          "x_1"
+        ],
+        "n_masked": 12,
+        "n_unmasked": 52
+      },
+      {
+        "step": 15,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "x_1",
+          "add",
+          "sub",
+          "x_0",
+          "mul",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 11,
+        "n_unmasked": 53
+      },
+      {
+        "step": 16,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "x_1",
+          "add",
+          "x_1",
+          "sub",
+          "x_1",
+          "mul",
+          "x_1"
+        ],
+        "n_masked": 9,
+        "n_unmasked": 55
+      },
+      {
+        "step": 17,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "x_1",
+          "add",
+          "x_1",
+          "sub",
+          "sub",
+          "x_1",
+          "int_4"
+        ],
+        "n_masked": 7,
+        "n_unmasked": 57
+      },
+      {
+        "step": 18,
+        "tokens": [
+          "add",
+          "div",
+          "mul",
+          "x_1",
+          "add",
+          "x_1",
+          "x_1",
+          "x_1",
+          "sub",
+          "add"
+        ],
+        "n_masked": 6,
+        "n_unmasked": 58
+      },
+      {
+        "step": 19,
+        "tokens": [
+          "mul",
+          "mul",
+          "add",
+          "int_2",
+          "add",
+          "x_0",
+          "sub",
+          "x_1",
+          "x_0",
+          "sub"
+        ],
+        "n_masked": 4,
+        "n_unmasked": 60
+      },
+      {
+        "step": 20,
+        "tokens": [
+          "mul",
+          "add",
+          "add",
+          "x_1",
+          "add",
+          "x_1",
+          "x_1",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 2,
+        "n_unmasked": 62
+      },
+      {
+        "step": 21,
+        "tokens": [
+          "mul",
+          "add",
+          "x_1",
+          "x_1",
+          "add",
+          "x_0",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_0"
+        ],
+        "n_masked": 2,
+        "n_unmasked": 62
+      },
+      {
+        "step": 22,
+        "tokens": [
+          "mul",
+          "add",
+          "x_1",
+          "x_1",
+          "mul",
+          "mul",
+          "x_1",
+          "add",
+          "x_1",
+          "add"
+        ],
+        "n_masked": 2,
+        "n_unmasked": 62
+      },
+      {
+        "step": 23,
+        "tokens": [
+          "mul",
+          "add",
+          "c_2",
+          "x_1",
+          "mul",
+          "mul",
+          "x_1",
+          "x_1",
+          "x_0",
+          "x_1"
+        ],
+        "n_masked": 2,
+        "n_unmasked": 62
+      },
+      {
+        "step": 24,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "x_1",
+          "mul",
+          "mul",
+          "x_1",
+          "mul",
+          "x_0",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 25,
+        "tokens": [
+          "mul",
+          "add",
+          "c_2",
+          "x_1",
+          "mul",
+          "mul",
+          "x_1",
+          "mul",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 26,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "x_1",
+          "mul",
+          "mul",
+          "x_1",
+          "mul",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 27,
+        "tokens": [
+          "mul",
+          "add",
+          "c_2",
+          "x_1",
+          "mul",
+          "mul",
+          "x_1",
+          "mul",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 28,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "x_1",
+          "mul",
+          "add",
+          "x_1",
+          "add",
+          "x_1",
+          "x_0"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 29,
+        "tokens": [
+          "mul",
+          "add",
+          "add",
+          "x_1",
+          "mul",
+          "mul",
+          "x_1",
+          "mul",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 30,
+        "tokens": [
+          "add",
+          "add",
+          "x_1",
+          "x_1",
+          "x_1",
+          "mul",
+          "x_1",
+          "x_1",
+          "x_0",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 31,
+        "tokens": [
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 32,
+        "tokens": [
+          "mul",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      }
+    ],
+    "universal_gravitation": [
+      {
+        "step": 1,
+        "tokens": [],
+        "n_masked": 61,
+        "n_unmasked": 3
+      },
+      {
+        "step": 2,
+        "tokens": [
+          "add",
+          "div"
+        ],
+        "n_masked": 59,
+        "n_unmasked": 5
+      },
+      {
+        "step": 3,
+        "tokens": [
+          "mul",
+          "mul",
+          "x_0"
+        ],
+        "n_masked": 57,
+        "n_unmasked": 7
+      },
+      {
+        "step": 4,
+        "tokens": [
+          "div",
+          "pow",
+          "sqrt",
+          "div",
+          "x_0"
+        ],
+        "n_masked": 53,
+        "n_unmasked": 11
+      },
+      {
+        "step": 5,
+        "tokens": [
+          "mul",
+          "quarter",
+          "sqrt",
+          "int_5",
+          "div",
+          "int_1",
+          "x_0",
+          "x_0"
+        ],
+        "n_masked": 48,
+        "n_unmasked": 16
+      },
+      {
+        "step": 6,
+        "tokens": [
+          "pow",
+          "mul",
+          "pow",
+          "sqrt",
+          "x_1",
+          "sqrt",
+          "int_1",
+          "x_0",
+          "x_0"
+        ],
+        "n_masked": 43,
+        "n_unmasked": 21
+      },
+      {
+        "step": 7,
+        "tokens": [
+          "pow",
+          "mul",
+          "pow",
+          "x_3",
+          "x_1",
+          "sqrt",
+          "x_0"
+        ],
+        "n_masked": 39,
+        "n_unmasked": 25
+      },
+      {
+        "step": 8,
+        "tokens": [
+          "add",
+          "x_2",
+          "mul",
+          "x_2",
+          "mul",
+          "int_2",
+          "sqrt",
+          "x_0"
+        ],
+        "n_masked": 36,
+        "n_unmasked": 28
+      },
+      {
+        "step": 9,
+        "tokens": [
+          "mul",
+          "div",
+          "div",
+          "div",
+          "quarter",
+          "pow",
+          "sub",
+          "div",
+          "div",
+          "div"
+        ],
+        "n_masked": 32,
+        "n_unmasked": 32
+      },
+      {
+        "step": 10,
+        "tokens": [
+          "mul",
+          "div",
+          "div",
+          "c_1",
+          "quarter",
+          "pow",
+          "sub",
+          "c_0",
+          "div",
+          "div"
+        ],
+        "n_masked": 29,
+        "n_unmasked": 35
+      },
+      {
+        "step": 11,
+        "tokens": [
+          "add",
+          "mul",
+          "div",
+          "mul",
+          "quarter",
+          "pow",
+          "sub",
+          "int_5",
+          "div",
+          "div"
+        ],
+        "n_masked": 29,
+        "n_unmasked": 35
+      },
+      {
+        "step": 12,
+        "tokens": [
+          "add",
+          "mul",
+          "div",
+          "cos",
+          "quarter",
+          "pow",
+          "sub",
+          "x_0",
+          "div",
+          "div"
+        ],
+        "n_masked": 24,
+        "n_unmasked": 40
+      },
+      {
+        "step": 13,
+        "tokens": [
+          "pow",
+          "mul",
+          "div",
+          "pi",
+          "quarter",
+          "x_2",
+          "sub",
+          "x_0",
+          "div",
+          "div"
+        ],
+        "n_masked": 20,
+        "n_unmasked": 44
+      },
+      {
+        "step": 14,
+        "tokens": [
+          "div",
+          "mul",
+          "mul",
+          "div",
+          "quarter",
+          "x_2",
+          "sub",
+          "x_0",
+          "pow",
+          "div"
+        ],
+        "n_masked": 19,
+        "n_unmasked": 45
+      },
+      {
+        "step": 15,
+        "tokens": [
+          "div",
+          "sqrt",
+          "mul",
+          "x_2",
+          "x_2",
+          "quarter",
+          "x_2",
+          "sub",
+          "x_0",
+          "pow"
+        ],
+        "n_masked": 16,
+        "n_unmasked": 48
+      },
+      {
+        "step": 16,
+        "tokens": [
+          "div",
+          "mul",
+          "mul",
+          "mul",
+          "x_2",
+          "div",
+          "mul",
+          "quarter",
+          "c_1",
+          "sub"
+        ],
+        "n_masked": 13,
+        "n_unmasked": 51
+      },
+      {
+        "step": 17,
+        "tokens": [
+          "div",
+          "mul",
+          "mul",
+          "mul",
+          "x_2",
+          "x_2",
+          "mul",
+          "quarter",
+          "x_2",
+          "x_2"
+        ],
+        "n_masked": 8,
+        "n_unmasked": 56
+      },
+      {
+        "step": 18,
+        "tokens": [
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "x_0",
+          "x_2",
+          "mul",
+          "quarter",
+          "div",
+          "x_2"
+        ],
+        "n_masked": 7,
+        "n_unmasked": 57
+      },
+      {
+        "step": 19,
+        "tokens": [
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "int_4",
+          "x_0",
+          "x_0",
+          "quarter",
+          "x_0",
+          "int_5"
+        ],
+        "n_masked": 5,
+        "n_unmasked": 59
+      },
+      {
+        "step": 20,
+        "tokens": [
+          "mul",
+          "pow",
+          "mul",
+          "mul",
+          "int_4",
+          "mul",
+          "x_2",
+          "mul",
+          "mul",
+          "int_0"
+        ],
+        "n_masked": 4,
+        "n_unmasked": 60
+      },
+      {
+        "step": 21,
+        "tokens": [
+          "mul",
+          "pow",
+          "mul",
+          "mul",
+          "c_0",
+          "x_2",
+          "x_0",
+          "x_2",
+          "mul",
+          "int_0"
+        ],
+        "n_masked": 1,
+        "n_unmasked": 63
+      },
+      {
+        "step": 22,
+        "tokens": [
+          "mul",
+          "pow",
+          "mul",
+          "mul",
+          "mul",
+          "x_2",
+          "sqrt",
+          "x_2",
+          "x_2",
+          "x_0"
+        ],
+        "n_masked": 1,
+        "n_unmasked": 63
+      },
+      {
+        "step": 23,
+        "tokens": [
+          "mul",
+          "pow",
+          "mul",
+          "x_2",
+          "x_2",
+          "x_2",
+          "sqrt",
+          "x_2",
+          "x_2",
+          "x_2"
+        ],
+        "n_masked": 1,
+        "n_unmasked": 63
+      },
+      {
+        "step": 24,
+        "tokens": [
+          "mul",
+          "div",
+          "mul",
+          "mul",
+          "x_2",
+          "mul",
+          "div",
+          "mul",
+          "x_2",
+          "x_2"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 25,
+        "tokens": [
+          "mul",
+          "sqrt",
+          "sqrt",
+          "x_2",
+          "x_2",
+          "x_2",
+          "div",
+          "mul",
+          "x_2",
+          "c_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 26,
+        "tokens": [
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "x_2",
+          "x_2",
+          "div",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 27,
+        "tokens": [
+          "mul",
+          "mul",
+          "div",
+          "mul",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_0",
+          "x_2"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 28,
+        "tokens": [
+          "mul",
+          "sqrt",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "div"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 29,
+        "tokens": [
+          "mul",
+          "sqrt",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_2"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 30,
+        "tokens": [
+          "mul",
+          "mul",
+          "div",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 31,
+        "tokens": [
+          "sqrt",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_0",
+          "x_2",
+          "x_2",
+          "x_2",
+          "x_2"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 32,
+        "tokens": [
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "div",
+          "mul",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      }
+    ],
+    "kinetic_energy": [
+      {
+        "step": 1,
+        "tokens": [],
+        "n_masked": 61,
+        "n_unmasked": 3
+      },
+      {
+        "step": 2,
+        "tokens": [
+          "div",
+          "mul"
+        ],
+        "n_masked": 59,
+        "n_unmasked": 5
+      },
+      {
+        "step": 3,
+        "tokens": [
+          "abs",
+          "mul",
+          "c_0"
+        ],
+        "n_masked": 57,
+        "n_unmasked": 7
+      },
+      {
+        "step": 4,
+        "tokens": [
+          "add",
+          "div",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 55,
+        "n_unmasked": 9
+      },
+      {
+        "step": 5,
+        "tokens": [
+          "abs",
+          "add",
+          "x_1",
+          "div",
+          "x_0",
+          "x_1"
+        ],
+        "n_masked": 51,
+        "n_unmasked": 13
+      },
+      {
+        "step": 6,
+        "tokens": [
+          "mul",
+          "add",
+          "int_2",
+          "x_1",
+          "x_0",
+          "x_1"
+        ],
+        "n_masked": 47,
+        "n_unmasked": 17
+      },
+      {
+        "step": 7,
+        "tokens": [
+          "mul",
+          "c_1",
+          "int_2",
+          "div",
+          "mul",
+          "x_1"
+        ],
+        "n_masked": 44,
+        "n_unmasked": 20
+      },
+      {
+        "step": 8,
+        "tokens": [
+          "add",
+          "sub",
+          "div",
+          "div",
+          "x_0",
+          "div",
+          "mul",
+          "x_1"
+        ],
+        "n_masked": 39,
+        "n_unmasked": 25
+      },
+      {
+        "step": 9,
+        "tokens": [
+          "add",
+          "sub",
+          "div",
+          "mul",
+          "div",
+          "x_2",
+          "div"
+        ],
+        "n_masked": 34,
+        "n_unmasked": 30
+      },
+      {
+        "step": 10,
+        "tokens": [
+          "add",
+          "sub",
+          "div",
+          "mul",
+          "div",
+          "x_1",
+          "pi",
+          "x_0",
+          "x_0"
+        ],
+        "n_masked": 28,
+        "n_unmasked": 36
+      },
+      {
+        "step": 11,
+        "tokens": [
+          "sub",
+          "sub",
+          "div",
+          "mul",
+          "x_1",
+          "div",
+          "x_0",
+          "pi",
+          "sqrt",
+          "x_0"
+        ],
+        "n_masked": 25,
+        "n_unmasked": 39
+      },
+      {
+        "step": 12,
+        "tokens": [
+          "add",
+          "sub",
+          "div",
+          "mul",
+          "x_0",
+          "div",
+          "x_1",
+          "pi",
+          "x_1",
+          "x_0"
+        ],
+        "n_masked": 21,
+        "n_unmasked": 43
+      },
+      {
+        "step": 13,
+        "tokens": [
+          "add",
+          "sub",
+          "div",
+          "mul",
+          "x_0",
+          "int_3",
+          "div",
+          "c_0",
+          "pi",
+          "x_0"
+        ],
+        "n_masked": 19,
+        "n_unmasked": 45
+      },
+      {
+        "step": 14,
+        "tokens": [
+          "mul",
+          "sub",
+          "x_0",
+          "mul",
+          "x_1",
+          "x_0",
+          "div",
+          "c_0",
+          "sub",
+          "x_0"
+        ],
+        "n_masked": 19,
+        "n_unmasked": 45
+      },
+      {
+        "step": 15,
+        "tokens": [
+          "div",
+          "mul",
+          "x_1",
+          "mul",
+          "add",
+          "x_0",
+          "div",
+          "add",
+          "c_0",
+          "add"
+        ],
+        "n_masked": 18,
+        "n_unmasked": 46
+      },
+      {
+        "step": 16,
+        "tokens": [
+          "add",
+          "mul",
+          "x_1",
+          "mul",
+          "add",
+          "x_0",
+          "div",
+          "add",
+          "x_0",
+          "add"
+        ],
+        "n_masked": 16,
+        "n_unmasked": 48
+      },
+      {
+        "step": 17,
+        "tokens": [
+          "mul",
+          "mul",
+          "x_1",
+          "mul",
+          "add",
+          "x_0",
+          "x_1",
+          "add",
+          "x_1",
+          "mul"
+        ],
+        "n_masked": 14,
+        "n_unmasked": 50
+      },
+      {
+        "step": 18,
+        "tokens": [
+          "mul",
+          "mul",
+          "x_1",
+          "mul",
+          "x_1",
+          "x_0",
+          "x_1",
+          "x_0",
+          "add",
+          "x_1"
+        ],
+        "n_masked": 10,
+        "n_unmasked": 54
+      },
+      {
+        "step": 19,
+        "tokens": [
+          "mul",
+          "mul",
+          "third",
+          "add",
+          "x_1",
+          "mul",
+          "x_0",
+          "x_1",
+          "x_0",
+          "div"
+        ],
+        "n_masked": 8,
+        "n_unmasked": 56
+      },
+      {
+        "step": 20,
+        "tokens": [
+          "mul",
+          "mul",
+          "add",
+          "add",
+          "x_1",
+          "x_1",
+          "mul",
+          "x_0",
+          "x_1",
+          "x_0"
+        ],
+        "n_masked": 5,
+        "n_unmasked": 59
+      },
+      {
+        "step": 21,
+        "tokens": [
+          "add",
+          "mul",
+          "add",
+          "x_1",
+          "x_0",
+          "x_1",
+          "x_0",
+          "x_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 1,
+        "n_unmasked": 63
+      },
+      {
+        "step": 22,
+        "tokens": [
+          "mul",
+          "add",
+          "mul",
+          "add",
+          "mul",
+          "x_1",
+          "x_0",
+          "mul",
+          "add",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 23,
+        "tokens": [
+          "mul",
+          "x_1",
+          "mul",
+          "x_0",
+          "mul",
+          "x_1",
+          "x_0",
+          "x_1",
+          "x_0",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 24,
+        "tokens": [
+          "add",
+          "x_1",
+          "add",
+          "add",
+          "mul",
+          "add",
+          "mul",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 25,
+        "tokens": [
+          "mul",
+          "mul",
+          "x_1",
+          "x_1",
+          "x_0",
+          "int_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 26,
+        "tokens": [
+          "mul",
+          "mul",
+          "div",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 27,
+        "tokens": [
+          "mul",
+          "x_1",
+          "x_0",
+          "x_1",
+          "x_0",
+          "x_1",
+          "x_1",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 28,
+        "tokens": [
+          "mul",
+          "x_1",
+          "sqrt",
+          "mul",
+          "mul",
+          "add",
+          "x_1",
+          "mul",
+          "add",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 29,
+        "tokens": [
+          "mul",
+          "mul",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_0"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 30,
+        "tokens": [
+          "add",
+          "mul",
+          "add",
+          "add",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "add"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 31,
+        "tokens": [
+          "mul",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_0",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 32,
+        "tokens": [
+          "mul",
+          "add",
+          "mul",
+          "add",
+          "mul",
+          "mul",
+          "add",
+          "add",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      }
+    ],
+    "conservation_momentum": [
+      {
+        "step": 1,
+        "tokens": [
+          "sub"
+        ],
+        "n_masked": 61,
+        "n_unmasked": 3
+      },
+      {
+        "step": 2,
+        "tokens": [
+          "div",
+          "add"
+        ],
+        "n_masked": 59,
+        "n_unmasked": 5
+      },
+      {
+        "step": 3,
+        "tokens": [
+          "mul",
+          "add",
+          "third",
+          "pi",
+          "int_0"
+        ],
+        "n_masked": 56,
+        "n_unmasked": 8
+      },
+      {
+        "step": 4,
+        "tokens": [
+          "pow",
+          "div",
+          "int_4",
+          "third",
+          "pi",
+          "c_1"
+        ],
+        "n_masked": 52,
+        "n_unmasked": 12
+      },
+      {
+        "step": 5,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "int_4",
+          "third",
+          "pi",
+          "int_1",
+          "int_0"
+        ],
+        "n_masked": 48,
+        "n_unmasked": 16
+      },
+      {
+        "step": 6,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "pi",
+          "mul",
+          "third",
+          "pi",
+          "int_3",
+          "int_0"
+        ],
+        "n_masked": 44,
+        "n_unmasked": 20
+      },
+      {
+        "step": 7,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "x_0",
+          "mul",
+          "third",
+          "pi",
+          "int_3",
+          "e_const"
+        ],
+        "n_masked": 37,
+        "n_unmasked": 27
+      },
+      {
+        "step": 8,
+        "tokens": [
+          "add",
+          "add",
+          "c_2",
+          "c_2",
+          "c_1",
+          "c_1",
+          "mul",
+          "third",
+          "pi",
+          "int_3"
+        ],
+        "n_masked": 35,
+        "n_unmasked": 29
+      },
+      {
+        "step": 9,
+        "tokens": [
+          "sub",
+          "pow",
+          "c_2",
+          "mul",
+          "c_1",
+          "c_1",
+          "pow",
+          "inv",
+          "pi",
+          "int_3"
+        ],
+        "n_masked": 34,
+        "n_unmasked": 30
+      },
+      {
+        "step": 10,
+        "tokens": [
+          "add",
+          "mul",
+          "c_2",
+          "mul",
+          "c_1",
+          "c_1",
+          "pow",
+          "sub",
+          "pi",
+          "int_3"
+        ],
+        "n_masked": 32,
+        "n_unmasked": 32
+      },
+      {
+        "step": 11,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "add",
+          "mul",
+          "c_1",
+          "c_1",
+          "pow",
+          "sub",
+          "pi"
+        ],
+        "n_masked": 30,
+        "n_unmasked": 34
+      },
+      {
+        "step": 12,
+        "tokens": [
+          "add",
+          "mul",
+          "c_2",
+          "int_4",
+          "add",
+          "div",
+          "c_1",
+          "c_1",
+          "pow",
+          "sub"
+        ],
+        "n_masked": 24,
+        "n_unmasked": 40
+      },
+      {
+        "step": 13,
+        "tokens": [
+          "add",
+          "mul",
+          "c_2",
+          "c_1",
+          "half",
+          "add",
+          "add",
+          "c_1",
+          "c_1",
+          "pow"
+        ],
+        "n_masked": 19,
+        "n_unmasked": 45
+      },
+      {
+        "step": 14,
+        "tokens": [
+          "mul",
+          "add",
+          "c_2",
+          "x_1",
+          "x_0",
+          "add",
+          "mul",
+          "c_1",
+          "c_1",
+          "pow"
+        ],
+        "n_masked": 16,
+        "n_unmasked": 48
+      },
+      {
+        "step": 15,
+        "tokens": [
+          "mul",
+          "div",
+          "c_2",
+          "x_1",
+          "x_0",
+          "x_1",
+          "add",
+          "sub",
+          "c_1",
+          "c_1"
+        ],
+        "n_masked": 12,
+        "n_unmasked": 52
+      },
+      {
+        "step": 16,
+        "tokens": [
+          "add",
+          "sub",
+          "c_2",
+          "x_1",
+          "c_0",
+          "int_5",
+          "add",
+          "add",
+          "mul",
+          "c_1"
+        ],
+        "n_masked": 12,
+        "n_unmasked": 52
+      },
+      {
+        "step": 17,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "c_0",
+          "x_1",
+          "int_4",
+          "x_1",
+          "mul",
+          "sub",
+          "c_1"
+        ],
+        "n_masked": 12,
+        "n_unmasked": 52
+      },
+      {
+        "step": 18,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "x_0",
+          "x_1",
+          "int_4",
+          "x_1",
+          "mul",
+          "sub",
+          "c_1"
+        ],
+        "n_masked": 12,
+        "n_unmasked": 52
+      },
+      {
+        "step": 19,
+        "tokens": [
+          "mul",
+          "mul",
+          "c_2",
+          "x_1",
+          "x_0",
+          "x_1",
+          "int_4",
+          "x_1",
+          "mul",
+          "sub"
+        ],
+        "n_masked": 10,
+        "n_unmasked": 54
+      },
+      {
+        "step": 20,
+        "tokens": [
+          "mul",
+          "mul",
+          "int_4",
+          "x_1",
+          "x_1",
+          "sub",
+          "mul",
+          "x_1",
+          "int_4",
+          "x_1"
+        ],
+        "n_masked": 8,
+        "n_unmasked": 56
+      },
+      {
+        "step": 21,
+        "tokens": [
+          "div",
+          "add",
+          "div",
+          "div",
+          "x_1",
+          "c_2",
+          "mul",
+          "sub",
+          "mul",
+          "sub"
+        ],
+        "n_masked": 4,
+        "n_unmasked": 60
+      },
+      {
+        "step": 22,
+        "tokens": [
+          "div",
+          "x_1",
+          "div",
+          "x_0",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 1,
+        "n_unmasked": 63
+      },
+      {
+        "step": 23,
+        "tokens": [
+          "mul",
+          "mul",
+          "div",
+          "add",
+          "x_1",
+          "div",
+          "div",
+          "div",
+          "div",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 24,
+        "tokens": [
+          "mul",
+          "x_1",
+          "div",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_0"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 25,
+        "tokens": [
+          "add",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "div",
+          "mul",
+          "mul",
+          "div"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 26,
+        "tokens": [
+          "add",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 27,
+        "tokens": [
+          "mul",
+          "mul",
+          "x_1",
+          "div",
+          "add",
+          "add",
+          "add",
+          "mul",
+          "div",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 28,
+        "tokens": [
+          "div",
+          "mul",
+          "x_1",
+          "sqrt",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 29,
+        "tokens": [
+          "mul",
+          "mul",
+          "x_1",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 30,
+        "tokens": [
+          "mul",
+          "mul",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 31,
+        "tokens": [
+          "mul",
+          "mul",
+          "div",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 32,
+        "tokens": [
+          "mul",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1",
+          "x_1"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      }
+    ],
+    "hooke_law": [
+      {
+        "step": 1,
+        "tokens": [],
+        "n_masked": 61,
+        "n_unmasked": 3
+      },
+      {
+        "step": 2,
+        "tokens": [
+          "sub"
+        ],
+        "n_masked": 59,
+        "n_unmasked": 5
+      },
+      {
+        "step": 3,
+        "tokens": [
+          "sub",
+          "pow",
+          "int_3",
+          "quarter"
+        ],
+        "n_masked": 56,
+        "n_unmasked": 8
+      },
+      {
+        "step": 4,
+        "tokens": [
+          "add",
+          "pow",
+          "pi",
+          "sqrt",
+          "quarter"
+        ],
+        "n_masked": 52,
+        "n_unmasked": 12
+      },
+      {
+        "step": 5,
+        "tokens": [
+          "sub",
+          "pow",
+          "pi",
+          "c_2",
+          "sqrt",
+          "quarter",
+          "int_4",
+          "neg",
+          "inv",
+          "add"
+        ],
+        "n_masked": 48,
+        "n_unmasked": 16
+      },
+      {
+        "step": 6,
+        "tokens": [
+          "mul",
+          "pow",
+          "pi",
+          "int_3",
+          "x_0",
+          "sqrt",
+          "quarter",
+          "pow",
+          "neg"
+        ],
+        "n_masked": 41,
+        "n_unmasked": 23
+      },
+      {
+        "step": 7,
+        "tokens": [
+          "add",
+          "pow",
+          "pi",
+          "mul"
+        ],
+        "n_masked": 37,
+        "n_unmasked": 27
+      },
+      {
+        "step": 8,
+        "tokens": [
+          "sub",
+          "pow",
+          "mul",
+          "x_0",
+          "mul",
+          "inv",
+          "x_0",
+          "sqrt",
+          "quarter",
+          "x_0"
+        ],
+        "n_masked": 33,
+        "n_unmasked": 31
+      },
+      {
+        "step": 9,
+        "tokens": [
+          "add",
+          "pow",
+          "mul",
+          "mul",
+          "x_0",
+          "mul",
+          "x_0",
+          "x_0",
+          "sqrt",
+          "quarter"
+        ],
+        "n_masked": 26,
+        "n_unmasked": 38
+      },
+      {
+        "step": 10,
+        "tokens": [
+          "mul",
+          "pow",
+          "x_0",
+          "half",
+          "mul",
+          "x_0",
+          "mul",
+          "x_0",
+          "third",
+          "sqrt"
+        ],
+        "n_masked": 17,
+        "n_unmasked": 47
+      },
+      {
+        "step": 11,
+        "tokens": [
+          "add",
+          "pow",
+          "x_0",
+          "quarter",
+          "x_0",
+          "int_4",
+          "mul",
+          "x_0",
+          "third",
+          "sqrt"
+        ],
+        "n_masked": 16,
+        "n_unmasked": 48
+      },
+      {
+        "step": 12,
+        "tokens": [
+          "sub",
+          "pow",
+          "sub",
+          "pi",
+          "x_0",
+          "quarter",
+          "c_0",
+          "x_0",
+          "mul",
+          "x_0"
+        ],
+        "n_masked": 13,
+        "n_unmasked": 51
+      },
+      {
+        "step": 13,
+        "tokens": [
+          "add",
+          "pow",
+          "sub",
+          "int_1",
+          "x_0",
+          "x_0",
+          "quarter",
+          "int_3",
+          "x_0",
+          "mul"
+        ],
+        "n_masked": 10,
+        "n_unmasked": 54
+      },
+      {
+        "step": 14,
+        "tokens": [
+          "mul",
+          "pow",
+          "sub",
+          "c_1",
+          "x_0",
+          "x_0",
+          "quarter",
+          "x_0",
+          "int_5",
+          "mul"
+        ],
+        "n_masked": 9,
+        "n_unmasked": 55
+      },
+      {
+        "step": 15,
+        "tokens": [
+          "mul",
+          "pow",
+          "x_0",
+          "int_1",
+          "c_2",
+          "x_0",
+          "x_0",
+          "x_0",
+          "quarter",
+          "c_2"
+        ],
+        "n_masked": 6,
+        "n_unmasked": 58
+      },
+      {
+        "step": 16,
+        "tokens": [
+          "sub",
+          "add",
+          "sub",
+          "int_1",
+          "c_2",
+          "x_0",
+          "int_0",
+          "x_0",
+          "quarter",
+          "int_2"
+        ],
+        "n_masked": 6,
+        "n_unmasked": 58
+      },
+      {
+        "step": 17,
+        "tokens": [
+          "mul",
+          "add",
+          "sub",
+          "x_0",
+          "x_0",
+          "add",
+          "x_0",
+          "x_0",
+          "pow",
+          "x_0"
+        ],
+        "n_masked": 6,
+        "n_unmasked": 58
+      },
+      {
+        "step": 18,
+        "tokens": [
+          "sub",
+          "add",
+          "sub",
+          "int_2",
+          "mul",
+          "x_0",
+          "int_1",
+          "x_0",
+          "x_0",
+          "add"
+        ],
+        "n_masked": 2,
+        "n_unmasked": 62
+      },
+      {
+        "step": 19,
+        "tokens": [
+          "add",
+          "add",
+          "sub",
+          "x_0",
+          "mul",
+          "x_0",
+          "int_1",
+          "x_0",
+          "x_0",
+          "c_2"
+        ],
+        "n_masked": 2,
+        "n_unmasked": 62
+      },
+      {
+        "step": 20,
+        "tokens": [
+          "sub",
+          "add",
+          "sub",
+          "add",
+          "mul",
+          "x_0",
+          "int_1",
+          "x_0",
+          "x_0",
+          "x_0"
+        ],
+        "n_masked": 2,
+        "n_unmasked": 62
+      },
+      {
+        "step": 21,
+        "tokens": [
+          "add",
+          "add",
+          "x_0",
+          "x_0",
+          "x_0",
+          "mul",
+          "x_0",
+          "int_1",
+          "x_0",
+          "mul"
+        ],
+        "n_masked": 1,
+        "n_unmasked": 63
+      },
+      {
+        "step": 22,
+        "tokens": [
+          "add",
+          "mul",
+          "x_0",
+          "mul",
+          "x_0",
+          "mul",
+          "x_0",
+          "int_1",
+          "x_0",
+          "mul"
+        ],
+        "n_masked": 1,
+        "n_unmasked": 63
+      },
+      {
+        "step": 23,
+        "tokens": [
+          "add",
+          "sub",
+          "x_0",
+          "mul",
+          "x_0",
+          "mul",
+          "x_0",
+          "x_0",
+          "x_0",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 24,
+        "tokens": [
+          "add",
+          "mul",
+          "x_0",
+          "mul",
+          "x_0",
+          "mul",
+          "x_0",
+          "x_0",
+          "x_0",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 25,
+        "tokens": [
+          "add",
+          "mul",
+          "x_0",
+          "div",
+          "x_0",
+          "mul",
+          "x_0",
+          "x_0",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 26,
+        "tokens": [
+          "add",
+          "sub",
+          "x_0",
+          "add",
+          "x_0",
+          "mul",
+          "x_0",
+          "x_0",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 27,
+        "tokens": [
+          "add",
+          "add",
+          "x_0",
+          "mul",
+          "x_0",
+          "mul",
+          "x_0",
+          "x_0",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 28,
+        "tokens": [
+          "sub",
+          "sqrt",
+          "x_0",
+          "add",
+          "x_0",
+          "add",
+          "x_0",
+          "x_0",
+          "mul",
+          "mul"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 29,
+        "tokens": [
+          "sub",
+          "add",
+          "x_0",
+          "add",
+          "x_0",
+          "div",
+          "x_0",
+          "x_0",
+          "x_0",
+          "add"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 30,
+        "tokens": [
+          "add",
+          "add",
+          "x_0",
+          "add",
+          "x_0",
+          "add",
+          "x_0",
+          "x_0",
+          "x_0",
+          "x_0"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 31,
+        "tokens": [
+          "add",
+          "add",
+          "add",
+          "add",
+          "x_0",
+          "add",
+          "mul",
+          "mul",
+          "x_0",
+          "x_0"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      },
+      {
+        "step": 32,
+        "tokens": [
+          "add",
+          "x_0",
+          "mul",
+          "x_0",
+          "x_0",
+          "x_0",
+          "x_0",
+          "x_0",
+          "x_0",
+          "x_0"
+        ],
+        "n_masked": 0,
+        "n_unmasked": 64
+      }
+    ]
+  }
+}

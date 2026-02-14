@@ -1,0 +1,38 @@
+{
+  "description": "Reproducibility check comparing original and re-run TTT evaluation results",
+  "timestamp": "2026-02-14",
+  "seed": 42,
+  "hardware": "NVIDIA A100-SXM4-40GB",
+  "original_run": {
+    "overall_em": 0.0,
+    "overall_ned": 0.893,
+    "overall_r2": -0.884,
+    "overall_dimok": 0.344,
+    "total_time_seconds": 277,
+    "tier_1_ned": 0.925,
+    "tier_2_ned": 0.867,
+    "tier_3_ned": 0.879,
+    "tier_4_ned": 0.910
+  },
+  "rerun": {
+    "overall_em": 0.0,
+    "overall_ned": 0.893,
+    "overall_r2": -0.884,
+    "overall_dimok": 0.344,
+    "total_time_seconds": 279,
+    "tier_1_ned": 0.925,
+    "tier_2_ned": 0.867,
+    "tier_3_ned": 0.879,
+    "tier_4_ned": 0.910
+  },
+  "differences": {
+    "em_diff": 0.0,
+    "ned_diff": 0.0,
+    "r2_diff": 0.0,
+    "dimok_diff": 0.0,
+    "time_diff_seconds": 2
+  },
+  "within_tolerance": true,
+  "tolerance": "2%",
+  "notes": "All metrics match exactly between runs. Fixed seeds ensure deterministic results. Time variation of 2s is within expected range for GPU scheduling."
+}

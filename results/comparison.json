@@ -1,0 +1,23 @@
+{
+  "baseline_overall": {
+    "count": 32,
+    "exact_match_rate": 0.0625,
+    "mean_ned": 0.6960071110358939,
+    "mean_r2": -0.4839567524399436,
+    "mean_complexity_ratio": 0.6042013610475782,
+    "dim_consistency_rate": 0.8125
+  },
+  "phys_diffuse_overall": {
+    "count": 32,
+    "exact_match_rate": 0.0,
+    "mean_ned": 0.9090560129944426,
+    "mean_r2": -0.6840676531643064,
+    "mean_complexity_ratio": Infinity,
+    "dim_consistency_rate": 0.78125
+  },
+  "paired_bootstrap": {
+    "exact_match_p_value": 0.137,
+    "ned_p_value": 1.0,
+    "r2_p_value": 0.01
+  }
+}

@@ -34,9 +34,10 @@ class LoRALinear(nn.Module):
         for p in self.original.parameters():
             p.requires_grad = False
 
-        # LoRA matrices
-        self.lora_A = nn.Parameter(torch.randn(in_features, rank) * 0.01)
-        self.lora_B = nn.Parameter(torch.zeros(rank, out_features))
+        # LoRA matrices (on same device as original layer)
+        device = original.weight.device
+        self.lora_A = nn.Parameter(torch.randn(in_features, rank, device=device) * 0.01)
+        self.lora_B = nn.Parameter(torch.zeros(rank, out_features, device=device))
         self.scaling = alpha / rank
 
     def forward(self, x):
@@ -60,20 +61,17 @@ def attach_lora(model, rank: int = 16, alpha: float = 32.0,
         list of LoRA parameters for the optimizer
     """
     if target_modules is None:
-        target_modules = ['in_proj_weight', 'out_proj', 'ffn']
+        # Only target FFN layers (not attention layers which have special structure)
+        target_modules = ['ffn']
 
     lora_params = []
     replacements = []
 
-    # Find all linear layers in decoder
+    # Find FFN linear layers in decoder (avoid attention internals)
     for name, module in model.decoder.named_modules():
         if isinstance(module, nn.Linear):
-            should_adapt = any(t in name for t in target_modules)
-            if not should_adapt:
-                # Also adapt layers in the transformer blocks
-                if any(t in name for t in ['self_attn', 'cross_attn', 'ffn', '0', '3']):
-                    should_adapt = True
-            if should_adapt:
+            # Only adapt FFN layers (layers.X.ffn.0 and layers.X.ffn.3)
+            if 'ffn' in name and ('0' in name.split('.')[-1] or '3' in name.split('.')[-1]):
                 replacements.append((name, module))
 
     # Replace with LoRA layers
@@ -133,10 +131,12 @@ def ttt_adapt(model, obs_table: torch.Tensor, n_augmentations: int = 64,
     optimizer = torch.optim.Adam(lora_params, lr=lr)
 
     # Generate augmented observations
+    from data.augmentation import noise_injection
     obs_np = obs_table[0].cpu().numpy()  # (N, D+1)
     augmented_obs = [obs_np]
     for i in range(n_augmentations - 1):
-        aug = augment_sample(obs_np, noise_level=0.05, seed=42 + i)
+        rng = np.random.default_rng(42 + i)
+        aug = noise_injection(obs_np, noise_level=0.05, rng=rng)
         augmented_obs.append(aug)
 
     # Stack and convert to tensor
@@ -207,7 +207,11 @@ def _generate_pseudo_labels(model, memory: torch.Tensor,
 
     for step in range(1, 17):  # Quick 16-step generation
         logits = model.decoder(x, memory_exp)
+        logits = torch.where(torch.isfinite(logits), logits, torch.zeros_like(logits))
+        logits = logits.clamp(-30, 30)
         probs = F.softmax(logits / 0.5, dim=-1)
+        probs = torch.where(torch.isfinite(probs) & (probs > 0), probs, torch.full_like(probs, 1e-8))
+        probs = probs / probs.sum(dim=-1, keepdim=True)
         sampled = torch.multinomial(
             probs.view(-1, VOCAB_SIZE), 1
         ).view(n_samples, L)

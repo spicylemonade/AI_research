@@ -245,10 +245,11 @@ class PhysDiffuse(nn.Module):
         for round_idx in range(R):
             # Optional: re-encode with augmented input for diversity
             if use_augmentation and round_idx > 0:
-                from data.augmentation import augment_sample
-                aug_obs = augment_sample(
+                from data.augmentation import noise_injection
+                rng = np.random.default_rng(42 + round_idx)
+                aug_obs = noise_injection(
                     obs_table[0].cpu().numpy(),
-                    noise_level=0.02, seed=42 + round_idx
+                    noise_level=0.02, rng=rng
                 )
                 aug_tensor = torch.tensor(
                     aug_obs[np.newaxis], dtype=torch.float32, device=device
@@ -268,30 +269,53 @@ class PhysDiffuse(nn.Module):
                 norm = logits.norm(dim=-1, keepdim=True) / (self.d_model ** 0.5) + 1e-6
                 logits = logits / norm
 
+                # Replace any nan/inf in logits with zeros
+                logits = torch.where(
+                    torch.isfinite(logits), logits,
+                    torch.zeros_like(logits))
+
                 # Temperature annealing (geometric schedule)
                 tau = tau_start * (tau_end / tau_start) ** (step / steps_per_round)
-                probs = F.softmax(logits / tau, dim=-1)  # (n_samples, L, V)
+                logits_scaled = logits / max(tau, 0.01)
+                logits_scaled = logits_scaled.clamp(-30, 30)
+                probs = F.softmax(logits_scaled, dim=-1)  # (n_samples, L, V)
+
+                # Ensure valid probability distribution (no nan/inf/neg)
+                probs = torch.where(
+                    torch.isfinite(probs) & (probs > 0), probs,
+                    torch.full_like(probs, 1e-8))
+                probs = probs / probs.sum(dim=-1, keepdim=True)
 
                 if use_mcts and step <= steps_per_round // 2:
-                    # MCTS-guided selection for early steps
                     sampled = self._mcts_select(
                         x, memory, probs, mcts_rollouts, tau)
                 else:
-                    # Standard multinomial sampling
                     sampled = torch.multinomial(
                         probs.view(-1, self.vocab_size), 1
                     ).view(n_samples, L)
 
-                # Confidence-based unmasking schedule
+                # Confidence-based unmasking: only unmask CURRENTLY MASKED positions
                 conf = probs.max(dim=-1).values  # (n_samples, L)
-                n_unmask = max(1, int(L * step / steps_per_round))
 
-                # Unmask positions with highest confidence
                 for b in range(n_samples):
-                    # Don't modify SOS position
-                    conf_masked = conf[b].clone()
-                    conf_masked[0] = -1  # SOS already set
-                    _, top_idx = conf_masked.topk(n_unmask)
+                    # Only consider still-masked positions
+                    is_masked = (x[b] == MASK_ID)
+                    n_masked = is_masked.sum().item()
+                    if n_masked == 0:
+                        continue
+
+                    # Cosine schedule: fraction to unmask this step
+                    frac = 1.0 - math.cos(math.pi * step / (2 * steps_per_round))
+                    n_to_reveal = max(1, int(frac * L) - (L - n_masked))
+                    n_to_reveal = min(n_to_reveal, n_masked)
+
+                    if n_to_reveal <= 0:
+                        continue
+
+                    # Get confidence only at masked positions
+                    conf_b = conf[b].clone()
+                    conf_b[~is_masked] = -float('inf')  # Ignore revealed
+                    _, top_idx = conf_b.topk(n_to_reveal)
                     x[b, top_idx] = sampled[b, top_idx]
 
             # Collect candidates (trim after EOS)

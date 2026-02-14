@@ -1,0 +1,75 @@
+# Ablation Study Configurations
+# Each configuration overrides the base PhysDiffuse settings
+
+ablations:
+  full_system:
+    T: 64
+    R: 2
+    n_samples: 128
+    use_augmentation: true
+    use_postprocess: true
+
+  no_refinement:
+    T: 1
+    R: 1
+    n_samples: 128
+    use_augmentation: false
+    use_postprocess: true
+
+  refinement_T8:
+    T: 8
+    R: 2
+    n_samples: 128
+    use_augmentation: true
+    use_postprocess: true
+
+  refinement_T16:
+    T: 16
+    R: 2
+    n_samples: 128
+    use_augmentation: true
+    use_postprocess: true
+
+  refinement_T32:
+    T: 32
+    R: 2
+    n_samples: 128
+    use_augmentation: true
+    use_postprocess: true
+
+  no_cold_restart:
+    T: 64
+    R: 1
+    n_samples: 128
+    use_augmentation: true
+    use_postprocess: true
+
+  with_mcts:
+    T: 64
+    R: 2
+    n_samples: 128
+    use_augmentation: true
+    use_postprocess: true
+    use_mcts: true
+    mcts_rollouts: 16
+
+  no_augmentation:
+    T: 64
+    R: 2
+    n_samples: 128
+    use_augmentation: false
+    use_postprocess: true
+
+  no_postprocess:
+    T: 64
+    R: 2
+    n_samples: 128
+    use_augmentation: true
+    use_postprocess: false
+
+  minimal:
+    T: 16
+    R: 1
+    n_samples: 32
+    use_augmentation: false
+    use_postprocess: false

@@ -1,0 +1,569 @@
+{
+  "n_equations": 32,
+  "report": {
+    "tier_1": {
+      "count": 8,
+      "exact_match_rate": 0.0,
+      "mean_ned": 0.872279203443391,
+      "mean_r2": -0.9362306160370706,
+      "mean_complexity_ratio": Infinity,
+      "dim_consistency_rate": 0.375
+    },
+    "tier_2": {
+      "count": 10,
+      "exact_match_rate": 0.0,
+      "mean_ned": 0.8436015183523857,
+      "mean_r2": -0.8173941027275161,
+      "mean_complexity_ratio": Infinity,
+      "dim_consistency_rate": 0.3
+    },
+    "tier_3": {
+      "count": 8,
+      "exact_match_rate": 0.0,
+      "mean_ned": 0.8299242730482119,
+      "mean_r2": -0.8179134736083251,
+      "mean_complexity_ratio": Infinity,
+      "dim_consistency_rate": 0.125
+    },
+    "tier_4": {
+      "count": 6,
+      "exact_match_rate": 0.0,
+      "mean_ned": 0.843020897654765,
+      "mean_r2": -0.44741661681817185,
+      "mean_complexity_ratio": Infinity,
+      "dim_consistency_rate": 0.6666666666666666
+    },
+    "overall": {
+      "count": 32,
+      "exact_match_rate": 0.0,
+      "mean_ned": 0.8472427619182897,
+      "mean_r2": -0.7778622951671049,
+      "mean_complexity_ratio": Infinity,
+      "dim_consistency_rate": 0.34375
+    }
+  },
+  "qualitative_examples": {
+    "1": [
+      {
+        "name": "Distance (uniform velocity)",
+        "formula": "s = v * t",
+        "predicted": "mul add add x_1 mul x_1 x_1 mul x_1 x_0 mul x_1 sub mul mul x_1 x_1 x_0 x_1 c_2",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": false,
+        "r2": -1.0
+      },
+      {
+        "name": "Newton's 2nd Law",
+        "formula": "F = m * a",
+        "predicted": "mul mul mul add x_1 x_1 x_1 mul x_1 x_1 mul x_1 x_1 mul x_1 x_0 x_0 x_1 x_1",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": false,
+        "r2": -1.0
+      },
+      {
+        "name": "Momentum",
+        "formula": "p = m * v",
+        "predicted": "",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": false,
+        "r2": -1.0
+      }
+    ],
+    "2": [
+      {
+        "name": "Universal Gravitation",
+        "formula": "F = G * m1 * m2 / r^2",
+        "predicted": "div abs sub mul x_0 x_0 mul mul x_0 x_0 sub x_0 mul div mul x_1 c_1 x_0 c_1 x_1 int_4 x_0 x_0",
+        "ground_truth": "div mul mul c_0 x_0 x_1 pow x_2 int_2",
+        "exact_match": false,
+        "r2": -1.0
+      },
+      {
+        "name": "Hooke's Law",
+        "formula": "F = -k * x",
+        "predicted": "sub mul mul x_1 x_1 x_1 mul mul x_1 x_1 mul x_1 mul mul mul x_1 c_1 x_1 x_1 x_1 c_0 int_1 int_0 x_1",
+        "ground_truth": "neg mul x_0 x_1",
+        "exact_match": false,
+        "r2": -1.0
+      },
+      {
+        "name": "Pendulum Period",
+        "formula": "T = 2*pi*sqrt(L/g)",
+        "predicted": "div add add x_0 x_0 x_0 add x_0 x_0 add x_0 add add add x_0 x_0 int_0 x_0 x_0 quarter e_const",
+        "ground_truth": "mul mul int_2 pi sqrt div x_0 x_1",
+        "exact_match": false,
+        "r2": -1.0
+      }
+    ],
+    "3": [
+      {
+        "name": "Total Mechanical Energy",
+        "formula": "E = 0.5*m*v^2 + m*g*h",
+        "predicted": "sub mul mul x_0 x_0 mul mul x_0 c_2 x_3 c_0 x_0 mul mul x_1 mul mul c_0 c_1",
+        "ground_truth": "add mul half mul x_0 pow x_1 int_2 mul mul x_0 x_2 x_3",
+        "exact_match": false,
+        "r2": -1.0
+      },
+      {
+        "name": "Elastic Collision v1 final",
+        "formula": "v1' = (m1-m2)/(m1+m2) * v1",
+        "predicted": "sub sin sub x_0 x_0 mul mul x_0 x_0 div x_0 mul mul mul x_0 x_0 sub c_1 x_1 add x_2 int_3 x_0 c_1 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 int_4 x_0 x_0 x_0 c_1 x_0 x_0 x_0 x_2 x_0 x_0 x_0 x_1 x_0 add div x_1 x_0 x_0 x_0 x_0 x_0 sub x_0 x_0 x_0 x_0 x_0 x_0 x_0",
+        "ground_truth": "mul div sub x_0 x_1 add x_0 x_1 x_2",
+        "exact_match": false,
+        "r2": -1.0
+      },
+      {
+        "name": "Orbital Velocity",
+        "formula": "v = sqrt(G*M/r)",
+        "predicted": "cos div mul x_0 div x_0 div div x_0 x_0 mul x_0 div div div x_0 c_2 int_1 x_0",
+        "ground_truth": "sqrt div mul c_0 x_0 x_1",
+        "exact_match": false,
+        "r2": -1.0
+      }
+    ],
+    "4": [
+      {
+        "name": "Kepler's 3rd Law",
+        "formula": "T^2 = 4*pi^2*a^3/(G*M)",
+        "predicted": "neg div c_2 x_0 mul mul x_0 mul x_0 add x_0 mul mul mul x_0 x_0 x_0 x_0 x_0 c_2 exp",
+        "ground_truth": "div mul int_4 mul pow pi int_2 pow x_0 int_3 mul c_0 x_1",
+        "exact_match": false,
+        "r2": -2.3124956552988962e-05
+      },
+      {
+        "name": "Damped Oscillator",
+        "formula": "x = A*exp(-b*t/(2*m))*cos(w_d*t)",
+        "predicted": "add mul add add x_0 add x_0 x_0 x_0 x_0 add add x_0 x_0 int_1 x_0 c_0 x_0 c_2",
+        "ground_truth": "mul mul x_0 exp neg div mul x_1 x_2 mul int_2 x_3 cos mul x_4 x_2",
+        "exact_match": false,
+        "r2": -1.0944799376577663e-05
+      },
+      {
+        "name": "Rocket Equation (Tsiolkovsky)",
+        "formula": "dv = v_e * ln(m0/mf)",
+        "predicted": "mul sin mul x_2 div x_2 mul x_2 x_2 mul x_2 mul div x_2 x_2 x_2 mul x_2",
+        "ground_truth": "mul x_0 log div x_1 x_2",
+        "exact_match": false,
+        "r2": -1.0
+      }
+    ]
+  },
+  "per_equation": [
+    {
+      "id": "T1.1",
+      "name": "Distance (uniform velocity)",
+      "tier": 1,
+      "formula": "s = v * t",
+      "predicted": "mul add add x_1 mul x_1 x_1 mul x_1 x_0 mul x_1 sub mul mul x_1 x_1 x_0 x_1 c_2",
+      "ground_truth": "mul x_0 x_1",
+      "exact_match": false,
+      "ned": 0.85,
+      "r2": -1.0,
+      "complexity_ratio": 6.333333333333333,
+      "dim_consistent": false
+    },
+    {
+      "id": "T1.2",
+      "name": "Newton's 2nd Law",
+      "tier": 1,
+      "formula": "F = m * a",
+      "predicted": "mul mul mul add x_1 x_1 x_1 mul x_1 x_1 mul x_1 x_1 mul x_1 x_0 x_0 x_1 x_1",
+      "ground_truth": "mul x_0 x_1",
+      "exact_match": false,
+      "ned": 0.8421052631578947,
+      "r2": -1.0,
+      "complexity_ratio": 4.333333333333333,
+      "dim_consistent": true
+    },
+    {
+      "id": "T1.3",
+      "name": "Momentum",
+      "tier": 1,
+      "formula": "p = m * v",
+      "predicted": "",
+      "ground_truth": "mul x_0 x_1",
+      "exact_match": false,
+      "ned": 1.0,
+      "r2": -1.0,
+      "complexity_ratio": Infinity,
+      "dim_consistent": false
+    },
+    {
+      "id": "T1.4",
+      "name": "Kinetic Energy",
+      "tier": 1,
+      "formula": "E_k = 0.5 * m * v^2",
+      "predicted": "mul e_const div mul x_1 x_1 mul x_1 x_1 mul x_0 mul add mul x_0 x_1 x_1 add x_1 inv x_1 x_0 x_1",
+      "ground_truth": "mul half mul x_0 pow x_1 int_2",
+      "exact_match": false,
+      "ned": 0.8260869565217391,
+      "r2": -0.6332072335715195,
+      "complexity_ratio": 1.2857142857142858,
+      "dim_consistent": true
+    },
+    {
+      "id": "T1.5",
+      "name": "Gravitational PE (near surface)",
+      "tier": 1,
+      "formula": "U = m * g * h",
+      "predicted": "mul mul add c_1 mul x_2 x_2 add x_2 neg x_2 mul mul x_0 x_0 c_2 quarter x_2 mul x_0",
+      "ground_truth": "mul mul x_0 x_1 x_2",
+      "exact_match": false,
+      "ned": 0.8,
+      "r2": -0.8840705310930645,
+      "complexity_ratio": 3.2,
+      "dim_consistent": false
+    },
+    {
+      "id": "T1.6",
+      "name": "Weight",
+      "tier": 1,
+      "formula": "W = m * g",
+      "predicted": "add add add x_0 x_0 x_0 mul x_0 x_0 add add mul mul x_0 x_0 x_0 mul x_0 x_0 x_1 x_1 quarter x_0",
+      "ground_truth": "mul x_0 x_1",
+      "exact_match": false,
+      "ned": 0.8695652173913043,
+      "r2": -1.0,
+      "complexity_ratio": 3.0,
+      "dim_consistent": false
+    },
+    {
+      "id": "T1.7",
+      "name": "Impulse",
+      "tier": 1,
+      "formula": "J = F * t",
+      "predicted": "mul sqrt mul x_1 x_1 mul mul x_1 x_1 mul x_1 mul mul mul x_1 x_1 x_1 x_1 x_1 x_1 x_1",
+      "ground_truth": "mul x_0 x_1",
+      "exact_match": false,
+      "ned": 0.9047619047619048,
+      "r2": -1.0,
+      "complexity_ratio": 6.0,
+      "dim_consistent": true
+    },
+    {
+      "id": "T1.8",
+      "name": "Free-fall distance",
+      "tier": 1,
+      "formula": "s = 0.5 * g * t^2",
+      "predicted": "sub add add x_1 x_1 mul x_0 mul x_0 x_1 add x_1 mul x_1 mul x_0 x_0 x_0 x_0 div int_3 x_0 c_0 x_1 x_0 x_0 x_1 x_0 x_1 x_1 x_0 x_1 x_1 x_0 x_0",
+      "ground_truth": "mul half mul x_0 pow x_1 int_2",
+      "exact_match": false,
+      "ned": 0.8857142857142857,
+      "r2": -0.9725671636319801,
+      "complexity_ratio": 2.4285714285714284,
+      "dim_consistent": false
+    },
+    {
+      "id": "T2.1",
+      "name": "Universal Gravitation",
+      "tier": 2,
+      "formula": "F = G * m1 * m2 / r^2",
+      "predicted": "div abs sub mul x_0 x_0 mul mul x_0 x_0 sub x_0 mul div mul x_1 c_1 x_0 c_1 x_1 int_4 x_0 x_0",
+      "ground_truth": "div mul mul c_0 x_0 x_1 pow x_2 int_2",
+      "exact_match": false,
+      "ned": 0.782608695652174,
+      "r2": -1.0,
+      "complexity_ratio": 2.2222222222222223,
+      "dim_consistent": false
+    },
+    {
+      "id": "T2.2",
+      "name": "Hooke's Law",
+      "tier": 2,
+      "formula": "F = -k * x",
+      "predicted": "sub mul mul x_1 x_1 x_1 mul mul x_1 x_1 mul x_1 mul mul mul x_1 c_1 x_1 x_1 x_1 c_0 int_1 int_0 x_1",
+      "ground_truth": "neg mul x_0 x_1",
+      "exact_match": false,
+      "ned": 0.9166666666666666,
+      "r2": -1.0,
+      "complexity_ratio": 4.75,
+      "dim_consistent": false
+    },
+    {
+      "id": "T2.3",
+      "name": "Pendulum Period",
+      "tier": 2,
+      "formula": "T = 2*pi*sqrt(L/g)",
+      "predicted": "div add add x_0 x_0 x_0 add x_0 x_0 add x_0 add add add x_0 x_0 int_0 x_0 x_0 quarter e_const",
+      "ground_truth": "mul mul int_2 pi sqrt div x_0 x_1",
+      "exact_match": false,
+      "ned": 0.9523809523809523,
+      "r2": -1.0,
+      "complexity_ratio": 1.125,
+      "dim_consistent": true
+    },
+    {
+      "id": "T2.4",
+      "name": "Projectile Range",
+      "tier": 2,
+      "formula": "R = v^2 * sin(2*theta) / g",
+      "predicted": "add add mul x_1 x_1 mul x_1 x_1 mul x_1 mul x_1 mul mul x_1 x_1 e_const x_1 x_1 x_1 c_2",
+      "ground_truth": "div mul pow x_0 int_2 sin mul int_2 x_1 x_2",
+      "exact_match": false,
+      "ned": 0.8571428571428571,
+      "r2": -0.604165580629412,
+      "complexity_ratio": 1.7,
+      "dim_consistent": true
+    },
+    {
+      "id": "T2.5",
+      "name": "Centripetal Force",
+      "tier": 2,
+      "formula": "F = m * v^2 / r",
+      "predicted": "add add mul x_1 mul x_1 x_1 mul x_1 x_1 mul x_1 mul mul x_1 x_1 x_1 c_2 x_1",
+      "ground_truth": "div mul x_0 pow x_1 int_2 x_2",
+      "exact_match": false,
+      "ned": 0.8947368421052632,
+      "r2": -1.0,
+      "complexity_ratio": 2.4285714285714284,
+      "dim_consistent": false
+    },
+    {
+      "id": "T2.6",
+      "name": "Gravitational PE",
+      "tier": 2,
+      "formula": "U = -G * m1 * m2 / r",
+      "predicted": "pow add add x_0 x_1 x_1 div x_1 x_1 mul mul mul div mul x_1 x_1 x_0 x_1 inv third c_0 c_1 x_0 int_1 x_1 x_1 div x_1 x_1 x_1 x_1 x_1 x_0 x_1 x_1 int_4 x_0 x_1 x_1 x_1 x_1 x_1 x_2 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_0 x_1 x_1 x_0 x_0 c_0 x_1 c_0 x_1 x_1 x_1 x_1",
+      "ground_truth": "neg div mul mul c_0 x_0 x_1 x_2",
+      "exact_match": false,
+      "ned": 0.8870967741935484,
+      "r2": -1.0,
+      "complexity_ratio": 1.125,
+      "dim_consistent": false
+    },
+    {
+      "id": "T2.7",
+      "name": "Spring PE",
+      "tier": 2,
+      "formula": "U = 0.5 * k * x^2",
+      "predicted": "mul mul mul x_1 x_1 x_1 x_1 mul x_1 x_1 mul x_1 mul mul x_1 c_2 x_0 x_1 mul x_1 third",
+      "ground_truth": "mul half mul x_0 pow x_1 int_2",
+      "exact_match": false,
+      "ned": 0.8095238095238095,
+      "r2": 0.43022455335425114,
+      "complexity_ratio": 1.0,
+      "dim_consistent": true
+    },
+    {
+      "id": "T2.8",
+      "name": "Velocity under uniform accel",
+      "tier": 2,
+      "formula": "v = v0 + a * t",
+      "predicted": "add sqrt x_1 c_0 add add int_1 sub x_0 add mul add mul add x_0 x_1 x_0 add x_2 x_2",
+      "ground_truth": "add x_0 mul x_1 x_2",
+      "exact_match": false,
+      "ned": 0.75,
+      "r2": -1.0,
+      "complexity_ratio": 0.8,
+      "dim_consistent": false
+    },
+    {
+      "id": "T2.9",
+      "name": "Position under uniform accel",
+      "tier": 2,
+      "formula": "s = v0*t + 0.5*a*t^2",
+      "predicted": "sub pow mul x_2 mul mul x_2 x_2 sub mul int_3 x_2 mul mul x_2 x_2 int_1 x_2",
+      "ground_truth": "add mul x_0 x_2 mul half mul x_1 pow x_2 int_2",
+      "exact_match": false,
+      "ned": 0.7222222222222222,
+      "r2": -1.0,
+      "complexity_ratio": Infinity,
+      "dim_consistent": false
+    },
+    {
+      "id": "T2.10",
+      "name": "Torque",
+      "tier": 2,
+      "formula": "tau = r * F * sin(theta)",
+      "predicted": "sub abs c_0 div x_0 mul x_0 mul x_0 x_0 mul x_0 mul add mul x_0 x_0 mul x_0 x_0 mul x_0",
+      "ground_truth": "mul mul x_0 x_1 sin x_2",
+      "exact_match": false,
+      "ned": 0.8636363636363636,
+      "r2": -1.0,
+      "complexity_ratio": 1.6666666666666667,
+      "dim_consistent": false
+    },
+    {
+      "id": "T3.1",
+      "name": "Total Mechanical Energy",
+      "tier": 3,
+      "formula": "E = 0.5*m*v^2 + m*g*h",
+      "predicted": "sub mul mul x_0 x_0 mul mul x_0 c_2 x_3 c_0 x_0 mul mul x_1 mul mul c_0 c_1",
+      "ground_truth": "add mul half mul x_0 pow x_1 int_2 mul mul x_0 x_2 x_3",
+      "exact_match": false,
+      "ned": 0.7368421052631579,
+      "r2": -1.0,
+      "complexity_ratio": 0.8461538461538461,
+      "dim_consistent": false
+    },
+    {
+      "id": "T3.2",
+      "name": "Elastic Collision v1 final",
+      "tier": 3,
+      "formula": "v1' = (m1-m2)/(m1+m2) * v1",
+      "predicted": "sub sin sub x_0 x_0 mul mul x_0 x_0 div x_0 mul mul mul x_0 x_0 sub c_1 x_1 add x_2 int_3 x_0 c_1 x_0 x_0 x_0 x_0 x_0 x_0 x_0 x_0 int_4 x_0 x_0 x_0 c_1 x_0 x_0 x_0 x_2 x_0 x_0 x_0 x_1 x_0 add div x_1 x_0 x_0 x_0 x_0 x_0 sub x_0 x_0 x_0 x_0 x_0 x_0 x_0",
+      "ground_truth": "mul div sub x_0 x_1 add x_0 x_1 x_2",
+      "exact_match": false,
+      "ned": 0.8870967741935484,
+      "r2": -1.0,
+      "complexity_ratio": 2.4444444444444446,
+      "dim_consistent": false
+    },
+    {
+      "id": "T3.3",
+      "name": "Orbital Velocity",
+      "tier": 3,
+      "formula": "v = sqrt(G*M/r)",
+      "predicted": "cos div mul x_0 div x_0 div div x_0 x_0 mul x_0 div div div x_0 c_2 int_1 x_0",
+      "ground_truth": "sqrt div mul c_0 x_0 x_1",
+      "exact_match": false,
+      "ned": 0.8421052631578947,
+      "r2": -1.0,
+      "complexity_ratio": Infinity,
+      "dim_consistent": false
+    },
+    {
+      "id": "T3.4",
+      "name": "Escape Velocity",
+      "tier": 3,
+      "formula": "v_esc = sqrt(2*G*M/r)",
+      "predicted": "mul inv div add x_0 div x_0 x_0 div x_0 x_0 mul div x_0 int_4 div x_0 x_0 sub half int_1 half x_0 half c_0 div x_0 x_0 x_0 div x_0 x_0 quarter x_0 x_0 c_1",
+      "ground_truth": "sqrt div mul int_2 mul c_0 x_0 x_1",
+      "exact_match": false,
+      "ned": 0.8888888888888888,
+      "r2": -1.0,
+      "complexity_ratio": 2.25,
+      "dim_consistent": false
+    },
+    {
+      "id": "T3.5",
+      "name": "Reduced Mass",
+      "tier": 3,
+      "formula": "mu = m1*m2/(m1+m2)",
+      "predicted": "",
+      "ground_truth": "div mul x_0 x_1 add x_0 x_1",
+      "exact_match": false,
+      "ned": 1.0,
+      "r2": -1.0,
+      "complexity_ratio": Infinity,
+      "dim_consistent": false
+    },
+    {
+      "id": "T3.6",
+      "name": "Relativistic KE approx",
+      "tier": 3,
+      "formula": "E = 0.5*m*v^2 + (3/8)*m*v^4/c^2",
+      "predicted": "mul mul int_0 x_0 x_0 mul mul x_0 e_const x_1 x_0 add mul mul x_0 x_0 x_0 x_0 div x_0 x_0",
+      "ground_truth": "add mul half mul x_0 pow x_1 int_2 div mul mul c_0 x_0 pow x_1 int_4 pow x_2 int_2",
+      "exact_match": false,
+      "ned": 0.7142857142857143,
+      "r2": -0.543228396417831,
+      "complexity_ratio": 0.2631578947368421,
+      "dim_consistent": true
+    },
+    {
+      "id": "T3.7",
+      "name": "Work-Energy Theorem",
+      "tier": 3,
+      "formula": "W = 0.5*m*(v2^2 - v1^2)",
+      "predicted": "sub add mul x_0 x_2 x_2 sub mul x_2 x_2 mul x_1 mul mul x_2 x_2 x_2 x_2 c_2",
+      "ground_truth": "mul half mul x_0 sub pow x_1 int_2 pow x_2 int_2",
+      "exact_match": false,
+      "ned": 0.7368421052631579,
+      "r2": -1.0,
+      "complexity_ratio": 1.5454545454545454,
+      "dim_consistent": false
+    },
+    {
+      "id": "T3.8",
+      "name": "Gravitational Binding Energy",
+      "tier": 3,
+      "formula": "U = -3*G*M^2/(5*r)",
+      "predicted": "div sub sqrt x_0 x_0 mul mul x_0 mul div int_5 x_0 mul mul mul x_0 add quarter x_0 inv int_1 exp c_1 int_1",
+      "ground_truth": "neg div mul int_3 mul c_0 pow x_0 int_2 mul int_5 x_1",
+      "exact_match": false,
+      "ned": 0.8333333333333334,
+      "r2": -7.939244876942197e-05,
+      "complexity_ratio": 2.0,
+      "dim_consistent": false
+    },
+    {
+      "id": "T4.1",
+      "name": "Kepler's 3rd Law",
+      "tier": 4,
+      "formula": "T^2 = 4*pi^2*a^3/(G*M)",
+      "predicted": "neg div c_2 x_0 mul mul x_0 mul x_0 add x_0 mul mul mul x_0 x_0 x_0 x_0 x_0 c_2 exp",
+      "ground_truth": "div mul int_4 mul pow pi int_2 pow x_0 int_3 mul c_0 x_1",
+      "exact_match": false,
+      "ned": 0.8095238095238095,
+      "r2": -2.3124956552988962e-05,
+      "complexity_ratio": 0.3076923076923077,
+      "dim_consistent": true
+    },
+    {
+      "id": "T4.2",
+      "name": "Damped Oscillator",
+      "tier": 4,
+      "formula": "x = A*exp(-b*t/(2*m))*cos(w_d*t)",
+      "predicted": "add mul add add x_0 add x_0 x_0 x_0 x_0 add add x_0 x_0 int_1 x_0 c_0 x_0 c_2",
+      "ground_truth": "mul mul x_0 exp neg div mul x_1 x_2 mul int_2 x_3 cos mul x_4 x_2",
+      "exact_match": false,
+      "ned": 0.8947368421052632,
+      "r2": -1.0944799376577663e-05,
+      "complexity_ratio": 0.9375,
+      "dim_consistent": false
+    },
+    {
+      "id": "T4.3",
+      "name": "Rocket Equation (Tsiolkovsky)",
+      "tier": 4,
+      "formula": "dv = v_e * ln(m0/mf)",
+      "predicted": "mul sin mul x_2 div x_2 mul x_2 x_2 mul x_2 mul div x_2 x_2 x_2 mul x_2",
+      "ground_truth": "mul x_0 log div x_1 x_2",
+      "exact_match": false,
+      "ned": 0.8333333333333334,
+      "r2": -1.0,
+      "complexity_ratio": 2.6666666666666665,
+      "dim_consistent": true
+    },
+    {
+      "id": "T4.4",
+      "name": "Two-body Energy",
+      "tier": 4,
+      "formula": "E = 0.5*mu*v^2 - G*m1*m2/r",
+      "predicted": "mul mul cos x_1 mul mul x_1 x_1 mul x_1 add x_1 mul add mul x_1 pow x_1 x_1 c_2",
+      "ground_truth": "sub mul half mul x_0 pow x_1 int_2 div mul mul c_0 x_2 x_3 x_4",
+      "exact_match": false,
+      "ned": 0.75,
+      "r2": -1.0,
+      "complexity_ratio": Infinity,
+      "dim_consistent": false
+    },
+    {
+      "id": "T4.5",
+      "name": "Forced Oscillator Amplitude",
+      "tier": 4,
+      "formula": "A = F0/sqrt((k-m*w^2)^2 + (b*w)^2)",
+      "predicted": "div mul mul x_0 div x_0 x_0 add x_0 x_0 mul x_0 x_0 x_0 x_0 x_0 x_0",
+      "ground_truth": "div x_0 sqrt add pow sub x_1 mul x_2 pow x_3 int_2 int_2 pow mul x_4 x_3 int_2",
+      "exact_match": false,
+      "ned": 0.9444444444444444,
+      "r2": -0.5695879765871674,
+      "complexity_ratio": 0.7222222222222222,
+      "dim_consistent": true
+    },
+    {
+      "id": "T4.6",
+      "name": "Orbit Equation (conic)",
+      "tier": 4,
+      "formula": "r = a*(1-e^2)/(1+e*cos(theta))",
+      "predicted": "add mul c_1 x_2 mul x_2 x_2 div mul div c_0 x_2 mul mul x_2 x_2 x_2 x_1 x_2 mul x_2 c_0 x_2",
+      "ground_truth": "div mul x_0 sub int_1 pow x_1 int_2 add int_1 mul x_1 cos x_2",
+      "exact_match": false,
+      "ned": 0.8260869565217391,
+      "r2": -0.11487765456593424,
+      "complexity_ratio": 0.5,
+      "dim_consistent": true
+    }
+  ]
+}

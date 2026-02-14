@@ -1,0 +1,350 @@
+{
+  "model": "phys_diffuse",
+  "total": 32,
+  "n_success": 0,
+  "n_failure": 32,
+  "failure_modes": {
+    "excessive_nesting": {
+      "count": 8,
+      "percentage": 25.0,
+      "mean_r2": -0.8750099240560962,
+      "mean_ned": 0.857334737615427,
+      "examples": [
+        {
+          "name": "Distance (uniform velocity)",
+          "formula": "s = v * t",
+          "predicted": "mul add add x_1 mul x_1 x_1 mul x_1 x_0 mul x_1 sub mul mul x_1 x_1 x_0 x_1 c_2",
+          "ground_truth": "mul x_0 x_1",
+          "r2": -1.0,
+          "ned": 0.85,
+          "dim_consistent": false
+        },
+        {
+          "name": "Newton's 2nd Law",
+          "formula": "F = m * a",
+          "predicted": "mul mul mul add x_1 x_1 x_1 mul x_1 x_1 mul x_1 x_1 mul x_1 x_0 x_0 x_1 x_1",
+          "ground_truth": "mul x_0 x_1",
+          "r2": -1.0,
+          "ned": 0.8421052631578947,
+          "dim_consistent": true
+        },
+        {
+          "name": "Impulse",
+          "formula": "J = F * t",
+          "predicted": "mul sqrt mul x_1 x_1 mul mul x_1 x_1 mul x_1 mul mul mul x_1 x_1 x_1 x_1 x_1 x_1 x_1",
+          "ground_truth": "mul x_0 x_1",
+          "r2": -1.0,
+          "ned": 0.9047619047619048,
+          "dim_consistent": true
+        }
+      ]
+    },
+    "empty_prediction": {
+      "count": 2,
+      "percentage": 6.25,
+      "mean_r2": -1.0,
+      "mean_ned": 1.0,
+      "examples": [
+        {
+          "name": "Momentum",
+          "formula": "p = m * v",
+          "predicted": "",
+          "ground_truth": "mul x_0 x_1",
+          "r2": -1.0,
+          "ned": 1.0,
+          "dim_consistent": false
+        },
+        {
+          "name": "Reduced Mass",
+          "formula": "mu = m1*m2/(m1+m2)",
+          "predicted": "",
+          "ground_truth": "div mul x_0 x_1 add x_0 x_1",
+          "r2": -1.0,
+          "ned": 1.0,
+          "dim_consistent": false
+        }
+      ]
+    },
+    "structural_mismatch": {
+      "count": 15,
+      "percentage": 46.875,
+      "mean_r2": -0.630947675025846,
+      "mean_ned": 0.8695265555618402,
+      "examples": [
+        {
+          "name": "Kinetic Energy",
+          "formula": "E_k = 0.5 * m * v^2",
+          "predicted": "mul e_const div mul x_1 x_1 mul x_1 x_1 mul x_0 mul add mul x_0 x_1 x_1 add x_1 inv x_1 x_0 x_1",
+          "ground_truth": "mul half mul x_0 pow x_1 int_2",
+          "r2": -0.6332072335715195,
+          "ned": 0.8260869565217391,
+          "dim_consistent": true
+        },
+        {
+          "name": "Weight",
+          "formula": "W = m * g",
+          "predicted": "add add add x_0 x_0 x_0 mul x_0 x_0 add add mul mul x_0 x_0 x_0 mul x_0 x_0 x_1 x_1 quarter x_0",
+          "ground_truth": "mul x_0 x_1",
+          "r2": -1.0,
+          "ned": 0.8695652173913043,
+          "dim_consistent": false
+        },
+        {
+          "name": "Free-fall distance",
+          "formula": "s = 0.5 * g * t^2",
+          "predicted": "sub add add x_1 x_1 mul x_0 mul x_0 x_1 add x_1 mul x_1 mul x_0 x_0 x_0 x_0 div int_3 x_0 c_0 x_1 x_0 x_0 x_1 x_0 x_1 x_1 x_0 x_1 x_1 x_0 x_0",
+          "ground_truth": "mul half mul x_0 pow x_1 int_2",
+          "r2": -0.9725671636319801,
+          "ned": 0.8857142857142857,
+          "dim_consistent": false
+        }
+      ]
+    },
+    "numerical_instability": {
+      "count": 6,
+      "percentage": 18.75,
+      "mean_r2": -0.980678421848844,
+      "mean_ned": 0.749317738791423,
+      "examples": [
+        {
+          "name": "Gravitational PE (near surface)",
+          "formula": "U = m * g * h",
+          "predicted": "mul mul add c_1 mul x_2 x_2 add x_2 neg x_2 mul mul x_0 x_0 c_2 quarter x_2 mul x_0",
+          "ground_truth": "mul mul x_0 x_1 x_2",
+          "r2": -0.8840705310930645,
+          "ned": 0.8,
+          "dim_consistent": false
+        },
+        {
+          "name": "Velocity under uniform accel",
+          "formula": "v = v0 + a * t",
+          "predicted": "add sqrt x_1 c_0 add add int_1 sub x_0 add mul add mul add x_0 x_1 x_0 add x_2 x_2",
+          "ground_truth": "add x_0 mul x_1 x_2",
+          "r2": -1.0,
+          "ned": 0.75,
+          "dim_consistent": false
+        },
+        {
+          "name": "Position under uniform accel",
+          "formula": "s = v0*t + 0.5*a*t^2",
+          "predicted": "sub pow mul x_2 mul mul x_2 x_2 sub mul int_3 x_2 mul mul x_2 x_2 int_1 x_2",
+          "ground_truth": "add mul x_0 x_2 mul half mul x_1 pow x_2 int_2",
+          "r2": -1.0,
+          "ned": 0.7222222222222222,
+          "dim_consistent": false
+        }
+      ]
+    },
+    "wrong_operator": {
+      "count": 1,
+      "percentage": 3.125,
+      "mean_r2": -0.543228396417831,
+      "mean_ned": 0.7142857142857143,
+      "examples": [
+        {
+          "name": "Relativistic KE approx",
+          "formula": "E = 0.5*m*v^2 + (3/8)*m*v^4/c^2",
+          "predicted": "mul mul int_0 x_0 x_0 mul mul x_0 e_const x_1 x_0 add mul mul x_0 x_0 x_0 x_0 div x_0 x_0",
+          "ground_truth": "add mul half mul x_0 pow x_1 int_2 div mul mul c_0 x_0 pow x_1 int_4 pow x_2 int_2",
+          "r2": -0.543228396417831,
+          "ned": 0.7142857142857143,
+          "dim_consistent": true
+        }
+      ]
+    }
+  },
+  "complexity_correlation": [
+    {
+      "n_tokens": 3,
+      "tier": 1,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 3,
+      "tier": 1,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 3,
+      "tier": 1,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 7,
+      "tier": 1,
+      "success": false,
+      "r2": -0.6332072335715195
+    },
+    {
+      "n_tokens": 5,
+      "tier": 1,
+      "success": false,
+      "r2": -0.8840705310930645
+    },
+    {
+      "n_tokens": 3,
+      "tier": 1,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 3,
+      "tier": 1,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 7,
+      "tier": 1,
+      "success": false,
+      "r2": -0.9725671636319801
+    },
+    {
+      "n_tokens": 9,
+      "tier": 2,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 4,
+      "tier": 2,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 8,
+      "tier": 2,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 10,
+      "tier": 2,
+      "success": false,
+      "r2": -0.604165580629412
+    },
+    {
+      "n_tokens": 7,
+      "tier": 2,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 8,
+      "tier": 2,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 7,
+      "tier": 2,
+      "success": false,
+      "r2": 0.43022455335425114
+    },
+    {
+      "n_tokens": 5,
+      "tier": 2,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 11,
+      "tier": 2,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 6,
+      "tier": 2,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 13,
+      "tier": 3,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 9,
+      "tier": 3,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 6,
+      "tier": 3,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 8,
+      "tier": 3,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 7,
+      "tier": 3,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 19,
+      "tier": 3,
+      "success": false,
+      "r2": -0.543228396417831
+    },
+    {
+      "n_tokens": 11,
+      "tier": 3,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 12,
+      "tier": 3,
+      "success": false,
+      "r2": -7.939244876942197e-05
+    },
+    {
+      "n_tokens": 13,
+      "tier": 4,
+      "success": false,
+      "r2": -2.3124956552988962e-05
+    },
+    {
+      "n_tokens": 16,
+      "tier": 4,
+      "success": false,
+      "r2": -1.0944799376577663e-05
+    },
+    {
+      "n_tokens": 6,
+      "tier": 4,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 15,
+      "tier": 4,
+      "success": false,
+      "r2": -1.0
+    },
+    {
+      "n_tokens": 18,
+      "tier": 4,
+      "success": false,
+      "r2": -0.5695879765871674
+    },
+    {
+      "n_tokens": 14,
+      "tier": 4,
+      "success": false,
+      "r2": -0.11487765456593424
+    }
+  ]
+}

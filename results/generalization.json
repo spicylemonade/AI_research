@@ -1,0 +1,414 @@
+{
+  "n_ood_equations": 8,
+  "phys_diffuse": {
+    "summary": {
+      "n_exact_match": 0,
+      "mean_ned": 0.830109126984127,
+      "mean_r2": -0.7515559815284085,
+      "n_high_r2": 0,
+      "dim_consistency_rate": 0.875
+    },
+    "per_equation": [
+      {
+        "id": "OOD.1",
+        "name": "Rotational KE",
+        "domain": "unknown",
+        "formula": "E = 0.5 * I * omega^2",
+        "predicted": "pow c_2 mul mul x_1 mul x_1 add x_1 x_1 mul x_1 mul div x_0 mul x_0 x_0",
+        "ground_truth": "mul half mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "OOD.2",
+        "name": "Angular Momentum",
+        "domain": "unknown",
+        "formula": "L = I * omega",
+        "predicted": "div x_1 pow mul x_1 x_1 div int_3 mul pow x_0 mul x_0 x_1 x_0 c_1 mul x_1",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 5.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.3",
+        "name": "Fluid Pressure",
+        "domain": "unknown",
+        "formula": "P = rho * g * h",
+        "predicted": "mul div x_2 mul x_2 int_4 mul c_0 x_2 x_1 div x_0 int_1 mul mul x_1 x_2 add mul c_0 mul c_2",
+        "ground_truth": "mul mul x_0 x_1 x_2",
+        "exact_match": false,
+        "ned": 0.7727272727272727,
+        "r2": -1.0,
+        "complexity_ratio": 1.8,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.4",
+        "name": "Wave Speed",
+        "domain": "unknown",
+        "formula": "v = f * lambda",
+        "predicted": "sub div add x_1 mul x_1 add x_1 x_1 add x_1 x_1 add mul x_1 x_1 int_5 x_1 x_1 x_1 pow",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": false,
+        "ned": 0.9047619047619048,
+        "r2": -1.0,
+        "complexity_ratio": 5.666666666666667,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.5",
+        "name": "Wave Equation",
+        "domain": "unknown",
+        "formula": "y = A * sin(k*x - omega*t)",
+        "predicted": "sub add x_0 x_0 add x_0 x_0 mul x_0 add x_0 add sub x_0 int_2 mul x_0 div",
+        "ground_truth": "mul x_0 sin sub mul x_1 x_2 mul x_3 x_4",
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -2.169190172374158e-06,
+        "complexity_ratio": 0.7,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.6",
+        "name": "Drag Force",
+        "domain": "unknown",
+        "formula": "F_d = 0.5 * C_d * rho * A * v^2",
+        "predicted": "div pow mul x_1 x_0 c_2 add add x_2 x_1 add x_1 mul mul mul x_0 c_2 x_2 c_2 x_0 int_4 int_5",
+        "ground_truth": "mul half mul mul mul x_0 x_1 x_2 pow x_3 int_2",
+        "exact_match": false,
+        "ned": 0.7272727272727273,
+        "r2": -0.2824612071775612,
+        "complexity_ratio": 1.7272727272727273,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.7",
+        "name": "Moment of Inertia (rod)",
+        "domain": "unknown",
+        "formula": "I = (1/12) * m * L^2",
+        "predicted": "pow mul div x_1 add x_0 x_1 mul x_1 int_2 mul x_1 x_1 mul mul x_1 x_1 int_2 x_0 sub int_5 int_5 c_0 x_0 int_0 x_1 x_1 x_1 div x_1 x_1 x_1 x_1 int_2 x_1 x_1",
+        "ground_truth": "mul c_0 mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.8611111111111112,
+        "r2": -1.0,
+        "complexity_ratio": 1.8571428571428572,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.8",
+        "name": "Bernoulli simplified (dynamic pressure)",
+        "domain": "unknown",
+        "formula": "P_dyn = 0.5 * rho * v^2",
+        "predicted": "mul x_0 mul mul x_0 mul x_0 mul x_0 x_0 mul x_0 add mul x_0 c_2 mul x_0 x_0 x_0 int_3 x_0 int_0 x_0",
+        "ground_truth": "mul half mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -0.7299844758595344,
+        "complexity_ratio": 2.7142857142857144,
+        "dim_consistent": true
+      }
+    ]
+  },
+  "phys_diffuse_ttt": {
+    "summary": {
+      "n_exact_match": 0,
+      "mean_ned": 0.8441475374041163,
+      "mean_r2": -0.9357308281546015,
+      "n_high_r2": 0,
+      "dim_consistency_rate": 0.25
+    },
+    "per_equation": [
+      {
+        "id": "OOD.1",
+        "name": "Rotational KE",
+        "domain": "unknown",
+        "formula": "E = 0.5 * I * omega^2",
+        "predicted": "add div add x_1 mul x_1 x_1 mul x_1 x_0 div x_1 mul mul x_1 x_1 x_1 x_1 mul mul int_3 x_1 x_0 x_1",
+        "ground_truth": "mul half mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.8333333333333334,
+        "r2": -1.0,
+        "complexity_ratio": 2.4285714285714284,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.2",
+        "name": "Angular Momentum",
+        "domain": "unknown",
+        "formula": "L = I * omega",
+        "predicted": "add mul mul add x_1 add x_1 x_1 add mul mul int_2 mul x_1 x_1 x_1 int_4 add",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": false,
+        "ned": 0.8888888888888888,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "OOD.3",
+        "name": "Fluid Pressure",
+        "domain": "unknown",
+        "formula": "P = rho * g * h",
+        "predicted": "mul mul div mul mul mul mul mul mul mul mul mul mul mul mul mul x_2 mul mul pow mul x_2 x_2 c_0",
+        "ground_truth": "mul mul x_0 x_1 x_2",
+        "exact_match": false,
+        "ned": 0.875,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "OOD.4",
+        "name": "Wave Speed",
+        "domain": "unknown",
+        "formula": "v = f * lambda",
+        "predicted": "mul x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": false,
+        "ned": 0.9047619047619048,
+        "r2": -0.48584662523681255,
+        "complexity_ratio": 1.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.5",
+        "name": "Wave Equation",
+        "domain": "unknown",
+        "formula": "y = A * sin(k*x - omega*t)",
+        "predicted": "add add sqrt add x_0 mul add mul add add add add div add add add x_0 add x_0 add x_0 x_0",
+        "ground_truth": "mul x_0 sin sub mul x_1 x_2 mul x_3 x_4",
+        "exact_match": false,
+        "ned": 0.9090909090909091,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "OOD.6",
+        "name": "Drag Force",
+        "domain": "unknown",
+        "formula": "F_d = 0.5 * C_d * rho * A * v^2",
+        "predicted": "mul add mul mul mul add x_0 add sub add sub c_2 add add add int_5 x_1 x_0 add x_3 x_0 x_1",
+        "ground_truth": "mul half mul mul mul x_0 x_1 x_2 pow x_3 int_2",
+        "exact_match": false,
+        "ned": 0.6818181818181818,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "OOD.7",
+        "name": "Moment of Inertia (rod)",
+        "domain": "unknown",
+        "formula": "I = (1/12) * m * L^2",
+        "predicted": "add add mul mul x_1 mul mul mul mul mul mul add x_0 mul mul div add x_1 x_0 inv x_1 x_0",
+        "ground_truth": "mul c_0 mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.8181818181818182,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      },
+      {
+        "id": "OOD.8",
+        "name": "Bernoulli simplified (dynamic pressure)",
+        "domain": "unknown",
+        "formula": "P_dyn = 0.5 * rho * v^2",
+        "predicted": "add add mul x_0 mul x_0 add add x_0 x_0 mul add mul add mul x_0 add x_0 add",
+        "ground_truth": "mul half mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.8421052631578947,
+        "r2": -1.0,
+        "complexity_ratio": Infinity,
+        "dim_consistent": false
+      }
+    ]
+  },
+  "baseline": {
+    "summary": {
+      "n_exact_match": 2,
+      "mean_ned": 0.6034090909090909,
+      "mean_r2": -0.19916795935395168,
+      "n_high_r2": 2,
+      "dim_consistency_rate": 1.0
+    },
+    "per_equation": [
+      {
+        "id": "OOD.1",
+        "name": "Rotational KE",
+        "formula": "E = 0.5 * I * omega^2",
+        "predicted": "mul x_1 x_1",
+        "ground_truth": "mul half mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.7142857142857143,
+        "r2": -0.4152495324315739,
+        "complexity_ratio": 0.42857142857142855,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.2",
+        "name": "Angular Momentum",
+        "formula": "L = I * omega",
+        "predicted": "mul x_0 x_1",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": true,
+        "ned": 0.0,
+        "r2": 1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.3",
+        "name": "Fluid Pressure",
+        "formula": "P = rho * g * h",
+        "predicted": "mul x_2 mul x_1 x_0",
+        "ground_truth": "mul mul x_0 x_1 x_2",
+        "exact_match": true,
+        "ned": 0.6,
+        "r2": 1.0,
+        "complexity_ratio": 1.0,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.4",
+        "name": "Wave Speed",
+        "formula": "v = f * lambda",
+        "predicted": "mul x_1 mul x_1 x_0",
+        "ground_truth": "mul x_0 x_1",
+        "exact_match": false,
+        "ned": 0.6,
+        "r2": -1.0,
+        "complexity_ratio": 1.6666666666666667,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.5",
+        "name": "Wave Equation",
+        "formula": "y = A * sin(k*x - omega*t)",
+        "predicted": "add x_1 x_0",
+        "ground_truth": "mul x_0 sin sub mul x_1 x_2 mul x_3 x_4",
+        "exact_match": false,
+        "ned": 0.9,
+        "r2": -1.0,
+        "complexity_ratio": 0.3,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.6",
+        "name": "Drag Force",
+        "formula": "F_d = 0.5 * C_d * rho * A * v^2",
+        "predicted": "mul x_0 x_2",
+        "ground_truth": "mul half mul mul mul x_0 x_1 x_2 pow x_3 int_2",
+        "exact_match": false,
+        "ned": 0.7272727272727273,
+        "r2": -0.2804625580807807,
+        "complexity_ratio": 0.2727272727272727,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.7",
+        "name": "Moment of Inertia (rod)",
+        "formula": "I = (1/12) * m * L^2",
+        "predicted": "mul int_4 x_1",
+        "ground_truth": "mul c_0 mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.7142857142857143,
+        "r2": -0.15752210510624232,
+        "complexity_ratio": 0.42857142857142855,
+        "dim_consistent": true
+      },
+      {
+        "id": "OOD.8",
+        "name": "Bernoulli simplified (dynamic pressure)",
+        "formula": "P_dyn = 0.5 * rho * v^2",
+        "predicted": "mul x_0 x_1",
+        "ground_truth": "mul half mul x_0 pow x_1 int_2",
+        "exact_match": false,
+        "ned": 0.5714285714285714,
+        "r2": -0.7401094792130165,
+        "complexity_ratio": 0.42857142857142855,
+        "dim_consistent": true
+      }
+    ]
+  },
+  "failure_analysis": [
+    {
+      "name": "Rotational KE",
+      "formula": "E = 0.5 * I * omega^2",
+      "predicted": "add div add x_1 mul x_1 x_1 mul x_1 x_0 div x_1 mul mul x_1 x_1 x_1 x_1 mul mul int_3 x_1 x_0 x_1",
+      "ground_truth": "mul half mul x_0 pow x_1 int_2",
+      "r2": -1.0,
+      "ned": 0.8333333333333334,
+      "failure_mode": "excessive_complexity"
+    },
+    {
+      "name": "Angular Momentum",
+      "formula": "L = I * omega",
+      "predicted": "add mul mul add x_1 add x_1 x_1 add mul mul int_2 mul x_1 x_1 x_1 int_4 add",
+      "ground_truth": "mul x_0 x_1",
+      "r2": -1.0,
+      "ned": 0.8888888888888888,
+      "failure_mode": "excessive_complexity"
+    },
+    {
+      "name": "Fluid Pressure",
+      "formula": "P = rho * g * h",
+      "predicted": "mul mul div mul mul mul mul mul mul mul mul mul mul mul mul mul x_2 mul mul pow mul x_2 x_2 c_0",
+      "ground_truth": "mul mul x_0 x_1 x_2",
+      "r2": -1.0,
+      "ned": 0.875,
+      "failure_mode": "excessive_complexity"
+    },
+    {
+      "name": "Wave Speed",
+      "formula": "v = f * lambda",
+      "predicted": "mul x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1 x_1",
+      "ground_truth": "mul x_0 x_1",
+      "r2": -0.48584662523681255,
+      "ned": 0.9047619047619048,
+      "failure_mode": "excessive_complexity"
+    },
+    {
+      "name": "Wave Equation",
+      "formula": "y = A * sin(k*x - omega*t)",
+      "predicted": "add add sqrt add x_0 mul add mul add add add add div add add add x_0 add x_0 add x_0 x_0",
+      "ground_truth": "mul x_0 sin sub mul x_1 x_2 mul x_3 x_4",
+      "r2": -1.0,
+      "ned": 0.9090909090909091,
+      "failure_mode": "excessive_complexity"
+    },
+    {
+      "name": "Drag Force",
+      "formula": "F_d = 0.5 * C_d * rho * A * v^2",
+      "predicted": "mul add mul mul mul add x_0 add sub add sub c_2 add add add int_5 x_1 x_0 add x_3 x_0 x_1",
+      "ground_truth": "mul half mul mul mul x_0 x_1 x_2 pow x_3 int_2",
+      "r2": -1.0,
+      "ned": 0.6818181818181818,
+      "failure_mode": "structural_mismatch"
+    },
+    {
+      "name": "Moment of Inertia (rod)",
+      "formula": "I = (1/12) * m * L^2",
+      "predicted": "add add mul mul x_1 mul mul mul mul mul mul add x_0 mul mul div add x_1 x_0 inv x_1 x_0",
+      "ground_truth": "mul c_0 mul x_0 pow x_1 int_2",
+      "r2": -1.0,
+      "ned": 0.8181818181818182,
+      "failure_mode": "excessive_complexity"
+    },
+    {
+      "name": "Bernoulli simplified (dynamic pressure)",
+      "formula": "P_dyn = 0.5 * rho * v^2",
+      "predicted": "add add mul x_0 mul x_0 add add x_0 x_0 mul add mul add mul x_0 add x_0 add",
+      "ground_truth": "mul half mul x_0 pow x_1 int_2",
+      "r2": -1.0,
+      "ned": 0.8421052631578947,
+      "failure_mode": "excessive_complexity"
+    }
+  ]
+}

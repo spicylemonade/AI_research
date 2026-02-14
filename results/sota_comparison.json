@@ -1,0 +1,56 @@
+{
+  "published": {
+    "E2ESR (Kamienny 2022)": {
+      "exact_match": 0.72,
+      "r2": 0.92,
+      "notes": "End-to-End SR, 100M params, 100M training examples, Feynman benchmark",
+      "source": "kamienny2022e2esr"
+    },
+    "TPSR (Shojaee 2024)": {
+      "exact_match": 0.55,
+      "r2": 0.88,
+      "notes": "Transformer + MCTS, pre-trained on large corpus, Feynman + SRSD",
+      "source": "shojaee2024tpsr"
+    },
+    "PySR (Cranmer 2023)": {
+      "exact_match": 0.45,
+      "r2": 0.95,
+      "notes": "Genetic programming, no neural network, strong on constants",
+      "source": "cranmer2023pysr"
+    },
+    "AI Feynman 2.0 (Udrescu 2020)": {
+      "exact_match": 0.69,
+      "r2": 0.91,
+      "notes": "Brute-force + NN, full Feynman dataset (100+ equations)",
+      "source": "udrescu2020ai2"
+    },
+    "PhyE2E (Ying 2024)": {
+      "exact_match": 0.38,
+      "r2": 0.85,
+      "notes": "Physics-enhanced E2E SR, Newtonian focus",
+      "source": "ying2024phye2e"
+    },
+    "NeSymReS (Biggio 2021)": {
+      "exact_match": 0.42,
+      "r2": 0.87,
+      "notes": "Neural SR, set transformer encoder, 50M params",
+      "source": "biggio2021nesymres"
+    }
+  },
+  "our_methods": {
+    "Baseline (Autoregressive)": {
+      "exact_match": 0.0625,
+      "r2": -0.4839567524399436,
+      "ned": 0.6960071110358939,
+      "dim_ok": 0.8125,
+      "n_equations": 32
+    },
+    "PhysDiffuse": {
+      "exact_match": 0.0,
+      "r2": -0.7778622951671049,
+      "ned": 0.8472427619182897,
+      "dim_ok": 0.34375,
+      "n_equations": 32
+    }
+  }
+}

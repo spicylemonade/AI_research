@@ -1,0 +1,31 @@
+# PhysDiffuse Training Configuration
+model:
+  d_model: 512
+  n_heads: 8
+  n_enc_layers: 4
+  n_dec_layers: 8
+  d_ff: 2048
+  dropout: 0.1
+  use_dim_analysis: false
+
+training:
+  n_samples: 20000
+  n_epochs: 20
+  batch_size: 32
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  scheduler: cosine_annealing
+  mask_rate_min: 0.1
+  mask_rate_max: 0.9
+  seed: 42
+
+data:
+  max_n_points: 50
+  max_vars: 10
+
+generation:
+  T: 64
+  R: 2
+  n_samples: 128
+  tau_start: 1.0
+  tau_end: 0.1
