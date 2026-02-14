@@ -1,0 +1,207 @@
+{
+  "model": "best_classical_baseline (gbr)",
+  "method_r2s": {
+    "poly_deg2": 0.819145273901893,
+    "poly_deg3": 0.8423721709674332,
+    "gbr": 0.846667658213041
+  },
+  "note": "gplearn incompatible with sklearn 1.7+; used polynomial/GBR baselines instead",
+  "config": {
+    "methods": [
+      "poly_deg2",
+      "poly_deg3",
+      "gbr"
+    ],
+    "n_test": 137
+  },
+  "test_metrics": {
+    "exact_match": 0.0,
+    "symbolic_equivalence": 0.8394160583941606,
+    "numerical_r2": 0.846667658213041,
+    "tree_edit_distance": 0.75,
+    "complexity_penalty": 0.25,
+    "composite_score": 52.59917320715084
+  },
+  "per_sample_results": [
+    {
+      "template_name": "torricelli",
+      "family": "fluid_statics",
+      "difficulty": "complex",
+      "gt_prefix": "sqrt mul INT_2 mul g_accel h",
+      "r2_poly_deg2": 0.9953402916383802,
+      "r2_poly_deg3": 0.9995170274487452,
+      "r2_gbr": 0.9999727661902351
+    },
+    {
+      "template_name": "impulse",
+      "family": "dynamics",
+      "difficulty": "simple",
+      "gt_prefix": "mul F t",
+      "r2_poly_deg2": 0.9999882524192178,
+      "r2_poly_deg3": 0.9998876016046229,
+      "r2_gbr": 0.9999729869966291
+    },
+    {
+      "template_name": "grav_potential",
+      "family": "gravitation",
+      "difficulty": "medium",
+      "gt_prefix": "neg div mul G_const m r",
+      "r2_poly_deg2": 0.0,
+      "r2_poly_deg3": 0.0,
+      "r2_gbr": 0.0
+    },
+    {
+      "template_name": "uniform_velocity",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "gt_prefix": "mul v t",
+      "r2_poly_deg2": 0.999989544631663,
+      "r2_poly_deg3": 0.9998971333858896,
+      "r2_gbr": 0.9999730891181322
+    },
+    {
+      "template_name": "spring_force",
+      "family": "dynamics",
+      "difficulty": "simple",
+      "gt_prefix": "mul neg k_spring x",
+      "r2_poly_deg2": 0.9999880413564447,
+      "r2_poly_deg3": 0.9999177356071465,
+      "r2_gbr": 0.9999730883153755
+    },
+    {
+      "template_name": "angular_velocity_const",
+      "family": "rotational",
+      "difficulty": "simple",
+      "gt_prefix": "add omega mul alpha t",
+      "r2_poly_deg2": 0.9999632524746369,
+      "r2_poly_deg3": 0.9998843563070902,
+      "r2_gbr": 0.9999726377483455
+    },
+    {
+      "template_name": "uniform_velocity",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "gt_prefix": "mul v t",
+      "r2_poly_deg2": 0.9999819674875806,
+      "r2_poly_deg3": 0.9998434161317125,
+      "r2_gbr": 0.9999730875878544
+    },
+    {
+      "template_name": "grav_potential",
+      "family": "gravitation",
+      "difficulty": "medium",
+      "gt_prefix": "neg div mul G_const m r",
+      "r2_poly_deg2": 0.0,
+      "r2_poly_deg3": 0.0,
+      "r2_gbr": 0.0
+    },
+    {
+      "template_name": "free_fall_dist",
+      "family": "kinematics",
+      "difficulty": "simple",
+      "gt_prefix": "mul mul div INT_1 INT_2 g_accel pow t INT_2",
+      "r2_poly_deg2": 0.9999999988585031,
+      "r2_poly_deg3": 0.9999999677248073,
+      "r2_gbr": 0.9999732494116006
+    },
+    {
+      "template_name": "centripetal_force",
+      "family": "dynamics",
+      "difficulty": "medium",
+      "gt_prefix": "div mul m pow v INT_2 r",
+      "r2_poly_deg2": 0.7115017040579568,
+      "r2_poly_deg3": 0.9988279481043117,
+      "r2_gbr": 0.9999731646279969
+    },
+    {
+      "template_name": "shm_position",
+      "family": "oscillations",
+      "difficulty": "medium",
+      "gt_prefix": "mul A_area sin mul omega t",
+      "r2_poly_deg2": 0.7181096939764221,
+      "r2_poly_deg3": 0.872316064729944,
+      "r2_gbr": 0.9995603541412308
+    },
+    {
+      "template_name": "impulse",
+      "family": "dynamics",
+      "difficulty": "simple",
+      "gt_prefix": "mul F t",
+      "r2_poly_deg2": 0.9999917410675819,
+      "r2_poly_deg3": 0.999909862083649,
+      "r2_gbr": 0.9999728227983378
+    },
+    {
+      "template_name": "gravitational_pe",
+      "family": "energy",
+      "difficulty": "medium",
+      "gt_prefix": "neg div mul G_const mul m1 m2 r",
+      "r2_poly_deg2": 0.0,
+      "r2_poly_deg3": 0.0,
+      "r2_gbr": 0.0
+    },
+    {
+      "template_name": "bernoulli_simple",
+      "family": "fluid_statics",
+      "difficulty": "complex",
+      "gt_prefix": "add P_pressure add mul div INT_1 INT_2 mul rho pow v INT_2 mul rho mul g_accel h",
+      "r2_poly_deg2": 0.9999973822053947,
+      "r2_poly_deg3": 0.8768199005454392,
+      "r2_gbr": 0.9999731113170327
+    },
+    {
+      "template_name": "absolute_pressure",
+      "family": "fluid_statics",
+      "difficulty": "medium",
+      "gt_prefix": "add P_pressure mul rho mul g_accel h",
+      "r2_poly_deg2": 0.9999980931612688,
+      "r2_poly_deg3": 0.9999510730510623,
+      "r2_gbr": 0.9999729691520095
+    },
+    {
+      "template_name": "moment_inertia_rod",
+      "family": "rotational",
+      "difficulty": "medium",
+      "gt_prefix": "mul div INT_1 INT_3 mul m pow l_length INT_2",
+      "r2_poly_deg2": 0.999999895309115,
+      "r2_poly_deg3": 0.9999957814042013,
+      "r2_gbr": 0.9999731128589976
+    },
+    {
+      "template_name": "elastic_pe",
+      "family": "energy",
+      "difficulty": "simple",
+      "gt_prefix": "mul div INT_1 INT_2 mul k_spring pow x INT_2",
+      "r2_poly_deg2": 0.9999999994962321,
+      "r2_poly_deg3": 0.9999999665209206,
+      "r2_gbr": 0.9999729888457495
+    },
+    {
+      "template_name": "gravitational_pe",
+      "family": "energy",
+      "difficulty": "medium",
+      "gt_prefix": "neg div mul G_const mul m1 m2 r",
+      "r2_poly_deg2": 0.0,
+      "r2_poly_deg3": 0.0,
+      "r2_gbr": 0.0
+    },
+    {
+      "template_name": "torricelli",
+      "family": "fluid_statics",
+      "difficulty": "complex",
+      "gt_prefix": "sqrt mul INT_2 mul g_accel h",
+      "r2_poly_deg2": 0.9993562214155923,
+      "r2_poly_deg3": 0.9999140206940422,
+      "r2_gbr": 0.9999731673909157
+    },
+    {
+      "template_name": "orbital_velocity",
+      "family": "gravitation",
+      "difficulty": "complex",
+      "gt_prefix": "sqrt div mul G_const m r",
+      "r2_poly_deg2": 0.8938951180767954,
+      "r2_poly_deg3": 0.9864163484078325,
+      "r2_gbr": 0.9999723105207533
+    }
+  ]
+}

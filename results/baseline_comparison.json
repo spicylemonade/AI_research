@@ -1,0 +1,32 @@
+{
+  "methods": {
+    "baseline_ar": {
+      "exact_match": 0.215,
+      "symbolic_equivalence": 0.235,
+      "numerical_r2": 0.22244524904711482,
+      "tree_edit_distance": 0.5698966962689873,
+      "complexity_penalty": 0.33724999999999994,
+      "composite_score": 26.675914263487996
+    },
+    "best_classical_sr": {
+      "exact_match": 0.0,
+      "symbolic_equivalence": 0.8394160583941606,
+      "numerical_r2": 0.846667658213041,
+      "tree_edit_distance": 0.75,
+      "complexity_penalty": 0.25,
+      "composite_score": 52.59917320715084
+    },
+    "method_details": {
+      "poly_deg2": 0.819145273901893,
+      "poly_deg3": 0.8423721709674332,
+      "gbr": 0.846667658213041
+    }
+  },
+  "literature_context": {
+    "QDSR_ai_feynman_noiseless": "91.6% exact recovery (Bruneton 2025)",
+    "TPSR_ai_feynman": "~45% exact match (Shojaee et al. 2023)",
+    "E2E_transformer": "~38% exact match (Kamienny et al. 2022)",
+    "NeSymReS": "~30% exact match (Biggio et al. 2021)",
+    "PySR": "~35% exact match (Cranmer 2023)"
+  }
+}
