@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T00:00:00Z",
-  "updated_at": "2026-02-14T08:14:37.483888+00:00",
+  "updated_at": "2026-02-14T08:16:26.773355+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -181,8 +181,8 @@
           "id": "item_017",
           "description": "Implement dual-model structure predictor that predicts equation skeleton before leaf-value generation",
           "acceptance_criteria": "Module src/structure_predictor.py implementing: (1) lightweight 4-layer transformer (~5M params) that predicts operator-tree skeleton from observations, (2) structure vocabulary of ~24 tokens for operators and placeholders, (3) integration with PhysMDT where skeleton constrains the masked diffusion generation. Must demonstrate that structure-guided generation improves exact match rate by >=3 percentage points on medium/complex equations vs. unconstrained generation.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Structure predictor with 24-token skeleton vocab, lightweight 4-layer transformer, skeleton-to-mask constraints. 13/13 tests pass.",
           "error": null
         }
       ]
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 16,
+    "completed": 17,
     "in_progress": 0,
     "failed": 0,
-    "pending": 12
+    "pending": 11
   }
 }
