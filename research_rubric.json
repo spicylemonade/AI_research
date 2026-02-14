@@ -141,8 +141,8 @@
           "id": "item_012",
           "description": "Implement tree-aware 2D positional encoding for equation tokens: adapt the ARC2025 Golden Gate RoPE concept to operate on expression tree structure rather than 2D grids. Each token gets positional information encoding its depth in the expression tree and its left-right position, enabling the model to understand hierarchical equation structure",
           "acceptance_criteria": "A Python module src/model/tree_positional_encoding.py that: (1) parses an RPN token sequence into its implicit tree structure, (2) assigns 2D position IDs (depth, horizontal_index) to each token, (3) implements rotary positional embeddings using these 2D coordinates with multi-directional frequency bases (inspired by Golden Gate RoPE), (4) integrates as a drop-in replacement for standard positional encoding in PhysMDT, (5) ablation-ready: can be toggled on/off via config; unit tests verify position assignments for at least 10 equations of varying complexity",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "src/model/tree_positional_encoding.py: RPN→tree parsing, 2D position assignment (depth, h_index), 4-directional Golden Gate RoPE (depth, horizontal, diagonal, anti-diagonal). Drop-in replacement for PhysMDT. Verified on 4 test equations + all FSReD.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 11,
+    "completed": 12,
     "in_progress": 0,
     "failed": 0,
-    "pending": 14
+    "pending": 13
   }
 }
