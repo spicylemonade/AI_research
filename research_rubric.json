@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T12:00:00Z",
-  "updated_at": "2026-02-14T09:58:24.832916+00:00",
-  "current_agent": "orchestrator",
+  "updated_at": "2026-02-14T09:58:25.885808+00:00",
+  "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
       "status": "completed",
@@ -11,8 +11,8 @@
       "error": null
     },
     "researcher": {
-      "status": "pending",
-      "started_at": null,
+      "status": "in_progress",
+      "started_at": "2026-02-14T09:58:25.885788+00:00",
       "completed_at": null,
       "error": null
     },
@@ -39,24 +39,24 @@
           "id": "item_001",
           "description": "Analyze the ARChitects ARC 2025 solution architecture (LLaDA-8B masked diffusion, 2D RoPE, token algebra, recursive soft-masking sampling) and document which techniques transfer to physics equation derivation",
           "acceptance_criteria": "Written document (architecture_analysis.md) covering: (1) LLaDA masked diffusion mechanism, (2) 2D RoPE adaptation rationale, (3) token algebra / soft-masking iterative refinement, (4) test-time finetuning with LoRA, (5) most-visited-candidate selection. Explicit mapping of each technique to physics equation derivation feasibility. Minimum 1500 words.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "architecture_analysis.md written with 3194 words covering all 5 techniques with transfer mapping and summary table",
           "error": null
         },
         {
           "id": "item_002",
           "description": "Conduct comprehensive literature review on transformer-based symbolic regression via web search, covering NeSymReS, ODEFormer, TPSR, SymFormer, E2E-Transformer, AI Feynman, PySR, and masked diffusion language models",
           "acceptance_criteria": "At least 15 relevant papers identified and summarized in literature_review.md. Each entry includes: paper title, authors, year, venue, core method, key results, and relevance to our approach. Papers must span: (a) transformer SR (>=5 papers), (b) physics-informed ML (>=3 papers), (c) masked diffusion / discrete diffusion models (>=3 papers), (d) ARC/reasoning architectures (>=2 papers), (e) benchmarks (>=2 papers).",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "literature_review.md with 17 papers across all 5 categories (5 transformer SR, 3 physics-informed ML, 4 masked diffusion, 2 ARC/reasoning, 3 benchmarks). 5744 words.",
           "error": null
         },
         {
           "id": "item_003",
           "description": "Create and populate sources.bib with BibTeX entries for all consulted literature",
           "acceptance_criteria": "sources.bib exists in repo root with valid BibTeX entries for at least 15 papers. Must include entries for: Udrescu & Tegmark 2020 (AI Feynman), Biggio et al. 2021 (NeSymReS), d'Ascoli et al. 2024 (ODEFormer), Shojaee et al. 2023 (TPSR), Kamienny et al. 2022 (E2E-Transformer), Vaswani et al. 2017 (Attention is All You Need), the ARChitects ARC 2025 solution, Nie et al. 2024 (LLaDA), Shi et al. 2024 (MD4), and Svete et al. 2025 (MDM reasoning). All entries parseable by standard BibTeX tools.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "sources.bib populated with 18 valid BibTeX entries covering all required papers plus additional references",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 0,
+    "completed": 3,
     "in_progress": 0,
     "failed": 0,
-    "pending": 25
+    "pending": 22
   }
 }
