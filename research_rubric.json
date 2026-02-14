@@ -1,0 +1,276 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-14T12:00:00Z",
+  "updated_at": "2026-02-14T06:18:30.426832+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-14T12:00:00Z",
+      "completed_at": "2026-02-14T06:18:30.426791+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Repository scaffold and codebase analysis: establish project directory structure (src/, data/, configs/, scripts/, results/, figures/, tests/) and document the architecture of the reference ARC2025 ARChitects solution \u2014 specifically the LLaDA-8B masked diffusion backbone, soft-masking recursion, 2D Golden Gate RoPE, and test-time finetuning pipeline",
+          "acceptance_criteria": "A README.md with project overview; a directory tree with src/model/, src/data/, src/training/, src/evaluation/, configs/, scripts/, tests/; and a written document (docs/arc2025_analysis.md) summarizing the ARChitects' masked diffusion architecture, soft-masking recursion mechanism, 2D positional encoding, and test-time finetuning strategy with at least 500 words of technical detail",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Conduct comprehensive literature review via web search on transformer-based symbolic regression and physics equation discovery: cover SymbolicGPT, AI Feynman (1 & 2), PhyE2E, ODEFormer, TPSR, E2E-Transformer, NeSymReS, Sym-Q, LLM-SRBench, and masked diffusion models (LLaDA, MaskDiT, MDLM). Search for papers on test-time compute scaling, iterative refinement at inference, and physics-informed neural symbolic methods",
+          "acceptance_criteria": "A file sources.bib in the repo root containing at least 15 BibTeX entries for consulted papers; entries must include SymbolicGPT (Valipour et al. 2021), AI Feynman (Udrescu & Tegmark 2020), AI Feynman 2.0, PhyE2E (2025), ODEFormer (d'Ascoli et al. 2024), TPSR (Shojaee et al. 2024), LLaDA (Nie et al. 2025), the ARChitects ARC2025 solution report, and at least 7 additional relevant works; each entry must have title, authors, year, and venue/URL",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Survey and document physics equation discovery benchmarks: Feynman Symbolic Regression Database (FSReD \u2014 100+20 equations), SRSD benchmark (120 datasets: easy/medium/hard), SRBench, and LLM-SRBench. Document evaluation metrics used across the field: solution rate, R\u00b2, RMSE, Normalized Edit Distance (NED), symbolic accuracy, and computational cost",
+          "acceptance_criteria": "A document (docs/benchmarks.md) listing all four benchmarks with their equation counts, difficulty levels, variable ranges, and data sizes; a table comparing at least 6 SOTA methods (SymbolicGPT, AI Feynman, PhyE2E, ODEFormer, TPSR, Eureqa) on FSReD with their published solution rates; definition and rationale for each of the 6 evaluation metrics; all claims backed by citations in sources.bib",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Formalize the research problem statement and hypotheses: define the task of deriving Newtonian physics equations (F=ma, gravitational law, projectile motion, harmonic oscillators, conservation laws, Kepler's laws, coupled oscillations, rigid body dynamics) from numerical data using a masked diffusion transformer with iterative self-refinement. State novel contributions relative to prior art",
+          "acceptance_criteria": "A document (docs/problem_statement.md) containing: (1) formal mathematical definition of the symbolic regression task as sequence-to-sequence masked prediction, (2) enumeration of at least 15 target Newtonian equations spanning mechanics, gravitation, oscillations, and conservation laws with complexity annotations, (3) at least 3 falsifiable hypotheses (e.g., 'soft-masking recursion improves symbolic accuracy by \u226510% over single-pass autoregressive decoding on FSReD'), (4) explicit novelty claims with references to gaps in prior work cited in sources.bib",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Design the PhysMDT (Physics Masked Diffusion Transformer) architecture on paper: specify the encoder-decoder structure, tokenization scheme for symbolic expressions (reverse Polish notation with physics-aware tokens), tree-structured positional encoding inspired by ARC2025's 2D Golden Gate RoPE, soft-masking recursion mechanism adapted for equation tokens, and test-time finetuning protocol for per-equation specialization",
+          "acceptance_criteria": "A detailed architecture document (docs/architecture.md) with: (1) block diagram of the full PhysMDT pipeline (data \u2192 tokenizer \u2192 encoder \u2192 masked diffusion decoder \u2192 symbolic output), (2) specification of model dimensions (embedding dim, num layers, num heads, FFN dim) for a base model (\u226450M params) and a scaled model (\u2264200M params), (3) mathematical formulation of the tree-aware 2D positional encoding, (4) pseudocode for the soft-masking recursion inference loop with at least 10 refinement steps, (5) test-time finetuning protocol (LoRA rank, learning rate, steps per equation)",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_006",
+          "description": "Implement the symbolic equation tokenizer: build a tokenizer that converts mathematical expressions to/from token sequences in reverse Polish notation (RPN), supporting operators (+, -, *, /, ^, sqrt, sin, cos, tan, log, exp), numeric constants (integers, floats, pi, e), and variable symbols (x1..x9). Include augmentation via symbolic equivalences (commutativity, associativity)",
+          "acceptance_criteria": "A Python module src/data/tokenizer.py that: (1) encodes any valid expression string into an integer token sequence and decodes back losslessly for at least 50 test expressions, (2) vocabulary size \u2264200 tokens, (3) handles all 120 FSReD equations without error, (4) includes at least 4 augmentation transforms (commutative swap, constant folding, identity elimination, associative regrouping), (5) unit tests in tests/test_tokenizer.py with \u226595% line coverage passing",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_007",
+          "description": "Build the dataset generation and loading pipeline: create a data generator that produces (input_data_matrix, target_equation_tokens) pairs from the FSReD benchmark and from procedurally generated Newtonian physics equations. Implement data loading with configurable noise levels (0%, 1%, 5%, 10% Gaussian), variable count filtering, and train/val/test splits",
+          "acceptance_criteria": "A Python module src/data/dataset.py that: (1) loads all 120 FSReD equations and generates 100K data points each, (2) procedurally generates at least 50,000 additional Newtonian physics equations with random coefficients, (3) adds configurable Gaussian noise, (4) creates 80/10/10 train/val/test splits, (5) returns PyTorch DataLoader objects with batch collation handling variable-length sequences; verified by tests/test_dataset.py with at least 10 test cases passing",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement an autoregressive transformer baseline (AR-Baseline) following the SymbolicGPT architecture: standard causal transformer decoder that takes data point embeddings as prefix and autoregressively generates equation tokens. This serves as the primary comparison point",
+          "acceptance_criteria": "A Python module src/model/ar_baseline.py implementing: (1) a configurable transformer decoder (layers, heads, dim), (2) data point encoder (set transformer or DeepSets-style) that produces a fixed-size context vector from variable-length input rows, (3) causal masked self-attention for autoregressive token generation, (4) beam search decoding with beam width \u22655; model must train on a small synthetic dataset (1000 equations) and achieve >0.5 R\u00b2 on held-out data within 100 epochs as a smoke test; training script in scripts/train_baseline.py",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Implement the full evaluation metrics suite: solution rate (exact symbolic match after simplification), R\u00b2 on test data points, RMSE, Normalized Edit Distance (NED) between predicted and ground-truth expression trees, symbolic accuracy (fraction of correct tokens), and inference wall-clock time",
+          "acceptance_criteria": "A Python module src/evaluation/metrics.py that: (1) computes all 6 metrics given predicted and ground-truth equation strings, (2) uses SymPy for symbolic simplification and equivalence checking in solution rate, (3) NED computed on expression trees not strings, (4) returns a dictionary of all metrics; verified by tests/test_metrics.py with at least 12 test cases covering edge cases (equivalent expressions, constant folding, partial matches); results reproducible with fixed random seed",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Evaluate the AR-Baseline on the full FSReD benchmark and establish baseline numbers for all 6 metrics across easy/medium/hard equation categories. Compare against published SymbolicGPT results from the literature review",
+          "acceptance_criteria": "A results file results/baseline_results.json containing: (1) per-equation and aggregate metrics for all 120 FSReD equations, (2) breakdown by difficulty (easy/medium/hard) showing solution rate, mean R\u00b2, mean NED, (3) comparison table against published SymbolicGPT numbers from sources.bib, (4) AR-Baseline should achieve \u226560% solution rate on easy equations as a sanity check; training logs saved in results/baseline_training.log",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_011",
+          "description": "Implement the PhysMDT masked diffusion backbone: build the core masked diffusion transformer that operates on equation token sequences. Implement the forward masking process (randomly mask output tokens with configurable probability), the denoising network (bidirectional transformer that predicts masked tokens given unmasked context and data embeddings), and the training loss (cross-entropy on masked positions only)",
+          "acceptance_criteria": "A Python module src/model/physmdt.py that: (1) implements a bidirectional transformer with configurable depth/width, (2) accepts data embeddings + partially masked equation tokens as input, (3) predicts distributions over vocabulary for masked positions, (4) training loss applied only to masked positions, (5) supports variable masking rates (10%-90%), (6) smoke test: overfits on 10 equations within 50 epochs with <0.1 loss",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_012",
+          "description": "Implement tree-aware 2D positional encoding for equation tokens: adapt the ARC2025 Golden Gate RoPE concept to operate on expression tree structure rather than 2D grids. Each token gets positional information encoding its depth in the expression tree and its left-right position, enabling the model to understand hierarchical equation structure",
+          "acceptance_criteria": "A Python module src/model/tree_positional_encoding.py that: (1) parses an RPN token sequence into its implicit tree structure, (2) assigns 2D position IDs (depth, horizontal_index) to each token, (3) implements rotary positional embeddings using these 2D coordinates with multi-directional frequency bases (inspired by Golden Gate RoPE), (4) integrates as a drop-in replacement for standard positional encoding in PhysMDT, (5) ablation-ready: can be toggled on/off via config; unit tests verify position assignments for at least 10 equations of varying complexity",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement the soft-masking recursion inference mechanism: adapt the ARChitects' core innovation where model output logits are fed back as continuous input (without hard discretization) combined with mask embeddings to trigger iterative refinement. Each recursion step allows the model to correct and improve its equation prediction",
+          "acceptance_criteria": "A Python module src/model/soft_masking.py that: (1) implements the soft-masking recursion loop: initialize with fully masked logits \u2192 forward pass \u2192 normalize logits \u2192 add mask embeddings \u2192 repeat for N steps, (2) supports configurable number of refinement steps (default 50), (3) operates in continuous token embedding space (no argmax discretization between steps), (4) includes optional noise injection for diversity, (5) implements most-visited-candidate selection across refinement trajectory for final output; verified by running on 5 test equations and showing monotonically improving NED over refinement steps",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement per-equation test-time finetuning (TTF): following the ARChitects' approach, finetune PhysMDT on each test equation's data at inference time using low-rank adaptation. This allows the model to specialize to the specific numerical patterns of each target equation",
+          "acceptance_criteria": "A Python module src/training/test_time_finetune.py that: (1) applies LoRA (rank 16-64, configurable) to PhysMDT attention layers, (2) finetunes on the test equation's data matrix for a configurable number of steps (default 128), (3) uses distinct random augmentation per step (noise perturbation, variable scaling), (4) preserves original model weights and only updates LoRA parameters, (5) integrates with soft-masking inference: TTF \u2192 then soft-masking recursion; demonstrated to improve R\u00b2 by \u22650.05 on at least 3 test equations compared to without TTF",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement physics-informed training augmentations: dimensional analysis consistency checking (reject predictions with inconsistent units), symbolic equivalence augmentation during training (present the same equation in multiple equivalent forms), and conservation law priors (inject known symmetries as soft constraints in the loss)",
+          "acceptance_criteria": "A Python module src/data/physics_augmentations.py that: (1) implements dimensional analysis checker that validates unit consistency of predicted equations given variable unit annotations from FSReD, (2) generates at least 8 symbolically equivalent forms per equation during training via SymPy, (3) adds a physics prior loss term that penalizes violation of conservation law structure (energy, momentum) when applicable, (4) documented with examples; integrated into the training pipeline with a configurable weight \u03bb_physics for the prior loss",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Full PhysMDT training pipeline: pre-train on the combined dataset (FSReD training split + 50K procedural Newtonian equations) with masked diffusion objective, tree-aware positional encoding, and physics augmentations. Train both base (\u226450M params) and scaled (\u2264200M params) model variants",
+          "acceptance_criteria": "Training scripts in scripts/train_physmdt.py with config files in configs/; (1) base model trains to convergence (val loss plateaus) within 100K steps on a single GPU, (2) scaled model trains within 500K steps, (3) training curves (loss, val metrics) saved to results/training_curves/; (4) checkpoints saved every 10K steps; (5) both models achieve <1.0 cross-entropy loss on validation set masked token prediction",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_017",
+          "description": "Main experiment: evaluate PhysMDT (base + scaled) on full FSReD benchmark with all 6 metrics, comparing against AR-Baseline and published SOTA numbers (SymbolicGPT, PhyE2E, AI Feynman, ODEFormer). Run with and without test-time finetuning and with/without soft-masking recursion",
+          "acceptance_criteria": "Results file results/main_experiment.json containing: (1) full metric table for all 4 model configurations (PhysMDT-base, PhysMDT-scaled, both \u00b1 TTF, \u00b1 soft-masking), (2) comparison against at least 4 published baselines from sources.bib, (3) PhysMDT-scaled with TTF + soft-masking must achieve solution rate \u226575% on easy equations and \u226545% on hard equations (exceeding PhyE2E's reported numbers), (4) statistical significance tests (paired t-test or Wilcoxon) for key comparisons with p<0.05",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Ablation study: systematically ablate each novel component \u2014 tree-aware positional encoding, soft-masking recursion, test-time finetuning, and physics augmentations \u2014 to quantify individual contributions. Also ablate number of refinement steps (1, 10, 25, 50, 100) and LoRA rank (8, 16, 32, 64)",
+          "acceptance_criteria": "Results file results/ablation_study.json containing: (1) metrics for PhysMDT-base with each of 4 components removed individually, (2) refinement step sweep showing solution rate vs. steps (expecting monotonic improvement up to a plateau), (3) LoRA rank sweep showing TTF improvement vs. rank, (4) each ablation reduces performance (all components contribute), (5) tree-aware PE and soft-masking show the largest individual contributions (\u22655% solution rate each)",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Newtonian physics derivation showcase: demonstrate PhysMDT deriving complex Newtonian equations from raw numerical data without any symbolic hints. Test on at least 15 physics equations including: F=ma, gravitational force, projectile trajectories, simple/damped/driven harmonic oscillators, Kepler's third law, moment of inertia, angular momentum conservation, coupled oscillations, and Euler-Lagrange derived equations",
+          "acceptance_criteria": "Results file results/newtonian_showcase.json containing: (1) for each of 15+ equations: input data description, true equation, predicted equation, all 6 metrics, (2) at least 12/15 equations recovered with R\u00b2 > 0.99, (3) at least 8/15 equations recovered with exact symbolic match, (4) qualitative analysis of failure cases explaining why certain equations are harder, (5) demonstration that the model discovers non-trivial equations (not just linear fits) including at least 3 equations with nested functions (sin, cos, sqrt compositions)",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Robustness evaluation: test PhysMDT under challenging conditions \u2014 noisy data (1%, 5%, 10% Gaussian noise), sparse data (100, 500, 1000 data points instead of 100K), extrapolation beyond training variable ranges, and out-of-distribution equations not seen during training",
+          "acceptance_criteria": "Results file results/robustness.json containing: (1) solution rate vs. noise level curves for all methods, (2) solution rate vs. data sparsity curves, (3) extrapolation accuracy (R\u00b2 on out-of-range inputs) for at least 20 equations, (4) OOD equation recovery rate on at least 10 novel equations not in FSReD, (5) PhysMDT must degrade more gracefully than AR-Baseline (\u226415% solution rate drop at 5% noise vs. \u226525% drop for AR-Baseline)",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Computational efficiency analysis: measure and compare inference time, training compute (GPU-hours), parameter count, and FLOPs for PhysMDT vs. baselines. Analyze the cost-accuracy tradeoff of soft-masking refinement steps and test-time finetuning",
+          "acceptance_criteria": "Results file results/efficiency.json containing: (1) wall-clock inference time per equation for all methods, (2) training GPU-hours for all methods, (3) Pareto frontier plot data showing accuracy vs. compute for PhysMDT at different refinement step counts, (4) PhysMDT total inference time (including TTF) must be \u22645 minutes per equation on a single GPU, (5) comparison showing PhysMDT achieves higher accuracy than baselines at comparable or lower total compute",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_022",
+          "description": "Generate publication-quality figures: training curves, main comparison bar charts, ablation heatmaps, refinement step progression visualizations (showing equation evolving over soft-masking steps), robustness degradation curves, and Pareto efficiency frontiers",
+          "acceptance_criteria": "At least 8 figures saved in figures/ as both PDF and PNG: (1) training loss curves for all models, (2) main results bar chart comparing solution rate across methods, (3) ablation contribution bar chart, (4) refinement progression visualization for 3 example equations showing token predictions at steps 1, 10, 25, 50, (5) noise robustness curves, (6) data efficiency curves, (7) computational Pareto frontier, (8) Newtonian showcase summary figure; all figures have proper labels, legends, and consistent color scheme",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Write the research paper: produce a complete paper (\u22658 pages) in LaTeX or Markdown with standard ML conference structure \u2014 Abstract, Introduction (motivation + contributions), Related Work, Method (PhysMDT architecture, soft-masking recursion, tree-aware PE, TTF), Experiments (main results, ablations, showcase, robustness), Discussion, Conclusion",
+          "acceptance_criteria": "A paper file paper.tex or paper.md containing: (1) all 8 standard sections, (2) abstract \u2264250 words stating the problem, method, and key result, (3) related work section citing at least 12 papers from sources.bib, (4) method section with architecture figure reference, mathematical formulations, and pseudocode, (5) experiments section referencing all results files from Phase 4, (6) discussion of limitations and future work, (7) total length \u22658 pages equivalent",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Interpret results and explain why transformers can derive physics: provide mechanistic analysis of what PhysMDT learns \u2014 attention pattern analysis showing the model attends to dimensionally consistent subexpressions, embedding space visualization showing physics equations cluster by structural similarity, and analysis of the soft-masking refinement trajectory showing progressive equation assembly",
+          "acceptance_criteria": "A document (docs/interpretability_analysis.md) containing: (1) attention heatmaps for at least 5 equations showing physically meaningful attention patterns, (2) t-SNE or UMAP embedding visualization of equation representations colored by equation family, (3) step-by-step refinement trace for 3 complex equations showing how the model builds the equation iteratively, (4) quantitative evidence that the model captures dimensional analysis (e.g., unit-consistent predictions are more confident), (5) at least 1000 words of analysis with figure references",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Reproducibility package and documentation: ensure all code is documented, all experiments are reproducible from a single entry point, and all results can be regenerated. Create a comprehensive README with setup instructions, experiment commands, and expected results",
+          "acceptance_criteria": "A complete README.md with: (1) installation instructions (requirements.txt or environment.yml with pinned versions), (2) single-command experiment reproduction (e.g., 'bash scripts/run_all.sh'), (3) expected results table matching results/ files, (4) hardware requirements documented, (5) all random seeds fixed and documented, (6) code passes flake8/pylint with \u226410 warnings, (7) all source files have module-level docstrings",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 25,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 25
+  }
+}
