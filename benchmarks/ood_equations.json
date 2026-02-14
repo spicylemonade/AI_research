@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "name": "Out-of-Distribution Physics Equation Benchmark",
+    "version": "1.0",
+    "description": "20 hand-curated physics equations NOT in the Feynman Symbolic Regression Database, spanning Navier-Stokes, Schrodinger, Maxwell, thermodynamics, quantum mechanics, fluid dynamics, and electrostatics",
+    "purpose": "Test generalization to genuinely unseen equation structures",
+    "num_equations": 20,
+    "domains": [
+      "Navier-Stokes / Fluid Dynamics",
+      "Quantum Mechanics / Schrodinger",
+      "Electrodynamics / Maxwell",
+      "Thermodynamic Identities",
+      "Statistical Mechanics",
+      "Electrostatics",
+      "Relativistic Mechanics"
+    ]
+  },
+  "equations": [
+    {
+      "id": "ood_001",
+      "name": "Stokes Drag Force",
+      "formula_symbolic": "mul(mul(mul(3, pi), x1), mul(x2, x3))",
+      "formula_latex": "F_d = 3\\pi \\mu d v",
+      "formula_python": "3 * 3.14159265 * x1 * x2 * x3",
+      "variables": [
+        {"name": "x1", "physical_meaning": "dynamic viscosity (mu)", "unit": "Pa*s"},
+        {"name": "x2", "physical_meaning": "sphere diameter (d)", "unit": "m"},
+        {"name": "x3", "physical_meaning": "flow velocity (v)", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Stokes, G.G. (1851). On the effect of the internal friction of fluids on the motion of pendulums. Trans. Cambridge Phil. Soc. 9:8."
+    },
+    {
+      "id": "ood_002",
+      "name": "1D Time-Independent Schrodinger (Free Particle Energy)",
+      "formula_symbolic": "div(mul(pow(x1, 2), pow(x2, 2)), mul(2, x3))",
+      "formula_latex": "E = \\frac{\\hbar^2 k^2}{2m}",
+      "formula_python": "x1**2 * x2**2 / (2 * x3)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "reduced Planck constant (hbar)", "unit": "J*s"},
+        {"name": "x2", "physical_meaning": "wave number (k)", "unit": "1/m"},
+        {"name": "x3", "physical_meaning": "particle mass (m)", "unit": "kg"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Griffiths, D.J. (2018). Introduction to Quantum Mechanics, 3rd ed. Cambridge University Press, Eq. 2.27."
+    },
+    {
+      "id": "ood_003",
+      "name": "Maxwell Displacement Current Density",
+      "formula_symbolic": "mul(x1, div(x2, x3))",
+      "formula_latex": "J_d = \\epsilon_0 \\frac{\\partial E}{\\partial t}",
+      "formula_python": "x1 * x2 / x3",
+      "variables": [
+        {"name": "x1", "physical_meaning": "permittivity of free space (epsilon_0)", "unit": "F/m"},
+        {"name": "x2", "physical_meaning": "change in electric field (dE)", "unit": "V/m"},
+        {"name": "x3", "physical_meaning": "time interval (dt)", "unit": "s"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Maxwell, J.C. (1865). A Dynamical Theory of the Electromagnetic Field. Phil. Trans. Royal Soc. 155:459-512."
+    },
+    {
+      "id": "ood_004",
+      "name": "Clausius-Clapeyron Equation (Simplified)",
+      "formula_symbolic": "mul(div(x1, x2), div(1, sub(div(1, x3), div(1, x4))))",
+      "formula_latex": "\\frac{dP}{dT} = \\frac{L}{T} \\cdot \\frac{1}{\\frac{1}{\\rho_l} - \\frac{1}{\\rho_v}}",
+      "formula_python": "(x1 / x2) * (1.0 / (1.0/x3 - 1.0/x4))",
+      "variables": [
+        {"name": "x1", "physical_meaning": "specific latent heat (L)", "unit": "J/kg"},
+        {"name": "x2", "physical_meaning": "temperature (T)", "unit": "K"},
+        {"name": "x3", "physical_meaning": "liquid density (rho_l)", "unit": "kg/m^3"},
+        {"name": "x4", "physical_meaning": "vapor density (rho_v)", "unit": "kg/m^3"}
+      ],
+      "num_variables": 4,
+      "source_citation": "Clausius, R. (1850). Ueber die bewegende Kraft der Warme. Annalen der Physik 79:368-397."
+    },
+    {
+      "id": "ood_005",
+      "name": "Bernoulli Equation (Pressure Form)",
+      "formula_symbolic": "add(x1, add(mul(div(1, 2), mul(x2, pow(x3, 2))), mul(x2, mul(x4, x5))))",
+      "formula_latex": "P_{total} = P + \\frac{1}{2}\\rho v^2 + \\rho g h",
+      "formula_python": "x1 + 0.5 * x2 * x3**2 + x2 * x4 * x5",
+      "variables": [
+        {"name": "x1", "physical_meaning": "static pressure (P)", "unit": "Pa"},
+        {"name": "x2", "physical_meaning": "fluid density (rho)", "unit": "kg/m^3"},
+        {"name": "x3", "physical_meaning": "flow velocity (v)", "unit": "m/s"},
+        {"name": "x4", "physical_meaning": "gravitational acceleration (g)", "unit": "m/s^2"},
+        {"name": "x5", "physical_meaning": "height (h)", "unit": "m"}
+      ],
+      "num_variables": 5,
+      "source_citation": "Bernoulli, D. (1738). Hydrodynamica. Strasbourg."
+    },
+    {
+      "id": "ood_006",
+      "name": "Helmholtz Free Energy",
+      "formula_symbolic": "sub(x1, mul(x2, x3))",
+      "formula_latex": "F = U - TS",
+      "formula_python": "x1 - x2 * x3",
+      "variables": [
+        {"name": "x1", "physical_meaning": "internal energy (U)", "unit": "J"},
+        {"name": "x2", "physical_meaning": "temperature (T)", "unit": "K"},
+        {"name": "x3", "physical_meaning": "entropy (S)", "unit": "J/K"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Helmholtz, H. von (1882). Die Thermodynamik chemischer Vorgange. Sitzungsberichte der Berliner Akademie."
+    },
+    {
+      "id": "ood_007",
+      "name": "Quantum Harmonic Oscillator Energy Levels",
+      "formula_symbolic": "mul(x1, mul(x2, add(x3, div(1, 2))))",
+      "formula_latex": "E_n = \\hbar \\omega (n + \\frac{1}{2})",
+      "formula_python": "x1 * x2 * (x3 + 0.5)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "reduced Planck constant (hbar)", "unit": "J*s"},
+        {"name": "x2", "physical_meaning": "angular frequency (omega)", "unit": "rad/s"},
+        {"name": "x3", "physical_meaning": "quantum number (n)", "unit": "dimensionless"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Griffiths, D.J. (2018). Introduction to Quantum Mechanics, 3rd ed. Cambridge University Press, Eq. 2.62."
+    },
+    {
+      "id": "ood_008",
+      "name": "Poiseuille Flow (Volume Flow Rate)",
+      "formula_symbolic": "div(mul(pi, mul(pow(x1, 4), x2)), mul(mul(4, 2), mul(x3, x4)))",
+      "formula_latex": "Q = \\frac{\\pi r^4 \\Delta P}{8 \\mu L}",
+      "formula_python": "3.14159265 * x1**4 * x2 / (8 * x3 * x4)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "pipe radius (r)", "unit": "m"},
+        {"name": "x2", "physical_meaning": "pressure difference (dP)", "unit": "Pa"},
+        {"name": "x3", "physical_meaning": "dynamic viscosity (mu)", "unit": "Pa*s"},
+        {"name": "x4", "physical_meaning": "pipe length (L)", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "source_citation": "Poiseuille, J.L.M. (1846). Recherches experimentales sur le mouvement des liquides dans les tubes de tres-petits diametres. Comptes Rendus 11:961-967."
+    },
+    {
+      "id": "ood_009",
+      "name": "Electric Dipole Potential",
+      "formula_symbolic": "div(mul(x1, cos(x2)), mul(mul(4, mul(pi, x3)), pow(x4, 2)))",
+      "formula_latex": "V = \\frac{p \\cos\\theta}{4\\pi\\epsilon_0 r^2}",
+      "formula_python": "x1 * cos(x2) / (4 * 3.14159265 * x3 * x4**2)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "electric dipole moment (p)", "unit": "C*m"},
+        {"name": "x2", "physical_meaning": "polar angle (theta)", "unit": "rad"},
+        {"name": "x3", "physical_meaning": "permittivity (epsilon_0)", "unit": "F/m"},
+        {"name": "x4", "physical_meaning": "distance from dipole (r)", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "source_citation": "Griffiths, D.J. (2017). Introduction to Electrodynamics, 4th ed. Cambridge University Press, Eq. 3.102."
+    },
+    {
+      "id": "ood_010",
+      "name": "Gibbs Free Energy",
+      "formula_symbolic": "sub(x1, mul(x2, x3))",
+      "formula_latex": "G = H - TS",
+      "formula_python": "x1 - x2 * x3",
+      "variables": [
+        {"name": "x1", "physical_meaning": "enthalpy (H)", "unit": "J"},
+        {"name": "x2", "physical_meaning": "temperature (T)", "unit": "K"},
+        {"name": "x3", "physical_meaning": "entropy (S)", "unit": "J/K"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Gibbs, J.W. (1876). On the Equilibrium of Heterogeneous Substances. Trans. Connecticut Acad. Arts Sci. 3:108-248."
+    },
+    {
+      "id": "ood_011",
+      "name": "de Broglie Wavelength",
+      "formula_symbolic": "div(x1, mul(x2, x3))",
+      "formula_latex": "\\lambda = \\frac{h}{mv}",
+      "formula_python": "x1 / (x2 * x3)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "Planck constant (h)", "unit": "J*s"},
+        {"name": "x2", "physical_meaning": "particle mass (m)", "unit": "kg"},
+        {"name": "x3", "physical_meaning": "particle velocity (v)", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "source_citation": "de Broglie, L. (1924). Recherches sur la theorie des Quanta. PhD Thesis, Univ. Paris."
+    },
+    {
+      "id": "ood_012",
+      "name": "Navier-Stokes Viscous Stress (1D Simplified)",
+      "formula_symbolic": "mul(x1, div(x2, x3))",
+      "formula_latex": "\\tau = \\mu \\frac{du}{dy}",
+      "formula_python": "x1 * x2 / x3",
+      "variables": [
+        {"name": "x1", "physical_meaning": "dynamic viscosity (mu)", "unit": "Pa*s"},
+        {"name": "x2", "physical_meaning": "velocity change (du)", "unit": "m/s"},
+        {"name": "x3", "physical_meaning": "distance (dy)", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Navier, C.L. (1822). Memoire sur les lois du mouvement des fluides. Mem. Acad. Sci. Inst. France 6:389-440."
+    },
+    {
+      "id": "ood_013",
+      "name": "Heisenberg Uncertainty Principle (Minimum Product)",
+      "formula_symbolic": "div(x1, mul(2, x2))",
+      "formula_latex": "\\sigma_x \\sigma_p \\geq \\frac{\\hbar}{2} \\quad\\Rightarrow\\quad \\sigma_p = \\frac{\\hbar}{2\\sigma_x}",
+      "formula_python": "x1 / (2 * x2)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "reduced Planck constant (hbar)", "unit": "J*s"},
+        {"name": "x2", "physical_meaning": "position uncertainty (sigma_x)", "unit": "m"}
+      ],
+      "num_variables": 2,
+      "source_citation": "Heisenberg, W. (1927). Ueber den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik. Z. Phys. 43:172-198."
+    },
+    {
+      "id": "ood_014",
+      "name": "Reynolds Number",
+      "formula_symbolic": "div(mul(x1, mul(x2, x3)), x4)",
+      "formula_latex": "Re = \\frac{\\rho v L}{\\mu}",
+      "formula_python": "x1 * x2 * x3 / x4",
+      "variables": [
+        {"name": "x1", "physical_meaning": "fluid density (rho)", "unit": "kg/m^3"},
+        {"name": "x2", "physical_meaning": "flow velocity (v)", "unit": "m/s"},
+        {"name": "x3", "physical_meaning": "characteristic length (L)", "unit": "m"},
+        {"name": "x4", "physical_meaning": "dynamic viscosity (mu)", "unit": "Pa*s"}
+      ],
+      "num_variables": 4,
+      "source_citation": "Reynolds, O. (1883). An experimental investigation of the circumstances which determine whether the motion of water shall be direct or sinuous. Phil. Trans. Royal Soc. 174:935-982."
+    },
+    {
+      "id": "ood_015",
+      "name": "Magnetic Force on Moving Charge",
+      "formula_symbolic": "mul(x1, mul(x2, mul(x3, sin(x4))))",
+      "formula_latex": "F = qvB\\sin\\theta",
+      "formula_python": "x1 * x2 * x3 * sin(x4)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "electric charge (q)", "unit": "C"},
+        {"name": "x2", "physical_meaning": "velocity (v)", "unit": "m/s"},
+        {"name": "x3", "physical_meaning": "magnetic field (B)", "unit": "T"},
+        {"name": "x4", "physical_meaning": "angle between v and B (theta)", "unit": "rad"}
+      ],
+      "num_variables": 4,
+      "source_citation": "Lorentz, H.A. (1895). Versuch einer Theorie der electrischen und optischen Erscheinungen in bewegten Korpern. Leiden: E.J. Brill."
+    },
+    {
+      "id": "ood_016",
+      "name": "Stefan-Boltzmann Radiation Power",
+      "formula_symbolic": "mul(x1, mul(x2, pow(x3, 4)))",
+      "formula_latex": "P = \\sigma A T^4",
+      "formula_python": "x1 * x2 * x3**4",
+      "variables": [
+        {"name": "x1", "physical_meaning": "Stefan-Boltzmann constant (sigma)", "unit": "W/(m^2*K^4)"},
+        {"name": "x2", "physical_meaning": "surface area (A)", "unit": "m^2"},
+        {"name": "x3", "physical_meaning": "temperature (T)", "unit": "K"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Stefan, J. (1879). Uber die Beziehung zwischen der Warmestrahlung und der Temperatur. Sitzungsberichte der Wiener Akademie 79:391-428."
+    },
+    {
+      "id": "ood_017",
+      "name": "Relativistic Kinetic Energy",
+      "formula_symbolic": "mul(x1, mul(pow(x2, 2), sub(div(1, sqrt(sub(1, div(pow(x3, 2), pow(x2, 2))))), 1)))",
+      "formula_latex": "K = mc^2\\left(\\frac{1}{\\sqrt{1 - v^2/c^2}} - 1\\right)",
+      "formula_python": "x1 * x2**2 * (1.0 / (1.0 - x3**2 / x2**2)**0.5 - 1)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "rest mass (m)", "unit": "kg"},
+        {"name": "x2", "physical_meaning": "speed of light (c)", "unit": "m/s"},
+        {"name": "x3", "physical_meaning": "velocity (v, where v < c)", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "source_citation": "Einstein, A. (1905). Zur Elektrodynamik bewegter Korper. Annalen der Physik 17:891-921."
+    },
+    {
+      "id": "ood_018",
+      "name": "Debye Model Specific Heat (High-T Limit)",
+      "formula_symbolic": "mul(3, mul(x1, x2))",
+      "formula_latex": "C_v = 3Nk_B \\quad\\text{(Dulong-Petit limit)}",
+      "formula_python": "3 * x1 * x2",
+      "variables": [
+        {"name": "x1", "physical_meaning": "number of atoms (N)", "unit": "dimensionless"},
+        {"name": "x2", "physical_meaning": "Boltzmann constant (k_B)", "unit": "J/K"}
+      ],
+      "num_variables": 2,
+      "source_citation": "Debye, P. (1912). Zur Theorie der spezifischen Warmen. Annalen der Physik 39:789-839."
+    },
+    {
+      "id": "ood_019",
+      "name": "Poisson Equation (1D Electrostatics)",
+      "formula_symbolic": "neg(div(x1, x2))",
+      "formula_latex": "\\nabla^2 \\phi = -\\frac{\\rho}{\\epsilon_0}",
+      "formula_python": "-(x1 / x2)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "charge density (rho)", "unit": "C/m^3"},
+        {"name": "x2", "physical_meaning": "permittivity of free space (epsilon_0)", "unit": "F/m"}
+      ],
+      "num_variables": 2,
+      "source_citation": "Poisson, S.D. (1813). Remarques sur une equation qui se presente dans la theorie des attractions des spheroides. Nouveau Bull. Soc. Philomathique 3:388-392."
+    },
+    {
+      "id": "ood_020",
+      "name": "Sackur-Tetrode Entropy (Simplified Partition)",
+      "formula_symbolic": "mul(x1, log(div(mul(x2, pow(div(mul(mul(2, pi), mul(x3, x4)), pow(x5, 2)), div(3, 2))), x1)))",
+      "formula_latex": "S = Nk_B \\ln\\left(\\frac{V}{N}\\left(\\frac{2\\pi m k_B T}{h^2}\\right)^{3/2}\\right)",
+      "formula_python": "x1 * log(x2 / x1 * (2 * 3.14159265 * x3 * x4 / x5**2)**1.5)",
+      "variables": [
+        {"name": "x1", "physical_meaning": "number of particles times k_B (Nk_B)", "unit": "J/K"},
+        {"name": "x2", "physical_meaning": "volume (V)", "unit": "m^3"},
+        {"name": "x3", "physical_meaning": "particle mass (m)", "unit": "kg"},
+        {"name": "x4", "physical_meaning": "thermal energy (k_B * T)", "unit": "J"},
+        {"name": "x5", "physical_meaning": "Planck constant (h)", "unit": "J*s"}
+      ],
+      "num_variables": 5,
+      "source_citation": "Sackur, O. (1911). Die Anwendung der kinetischen Theorie der Gase auf chemische Probleme. Annalen der Physik 36:958-980."
+    }
+  ]
+}

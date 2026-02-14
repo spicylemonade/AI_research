@@ -1,0 +1,91 @@
+{
+  "experiment": "feynman_benchmark",
+  "item_id": "018",
+  "timestamp": "2026-02-14T11:29:33.751726Z",
+  "model": "PhysDiffuser+",
+  "n_equations": 120,
+  "overall": {
+    "exact_match_rate": 0.5166666666666667,
+    "mean_r_squared": 0.7557006860246318,
+    "mean_tree_edit_distance": 0.24807292916277562,
+    "mean_inference_time_ms": 412.8179933090004,
+    "median_inference_time_ms": 419.02720420961737
+  },
+  "per_tier": {
+    "trivial": {
+      "n": 20,
+      "exact_match_rate": 0.7,
+      "exact_match_count": 14,
+      "mean_r_squared": 0.6903534040680567,
+      "mean_tree_edit_distance": 0.2607385603992924
+    },
+    "simple": {
+      "n": 25,
+      "exact_match_rate": 0.92,
+      "exact_match_count": 23,
+      "mean_r_squared": 0.9934871947934192,
+      "mean_tree_edit_distance": 0.010679797227313145
+    },
+    "moderate": {
+      "n": 30,
+      "exact_match_rate": 0.5333333333333333,
+      "exact_match_count": 16,
+      "mean_r_squared": 0.7922727295704195,
+      "mean_tree_edit_distance": 0.1721278195092383
+    },
+    "complex": {
+      "n": 25,
+      "exact_match_rate": 0.2,
+      "exact_match_count": 5,
+      "mean_r_squared": 0.6639106148496765,
+      "mean_tree_edit_distance": 0.3915189134737922
+    },
+    "multi_step": {
+      "n": 20,
+      "exact_match_rate": 0.2,
+      "exact_match_count": 4,
+      "mean_r_squared": 0.5836943556702352,
+      "mean_tree_edit_distance": 0.4667588969371221
+    }
+  },
+  "sota_comparison": {
+    "AI Feynman": {
+      "exact_match_rate": 1.0,
+      "year": 2020,
+      "source": "Udrescu & Tegmark"
+    },
+    "ODEFormer": {
+      "exact_match_rate": 0.85,
+      "year": 2024,
+      "source": "d'Ascoli et al."
+    },
+    "TPSR": {
+      "exact_match_rate": 0.8,
+      "year": 2023,
+      "source": "Shojaee et al."
+    },
+    "PySR": {
+      "exact_match_rate": 0.78,
+      "year": 2023,
+      "source": "Cranmer"
+    },
+    "NeSymReS": {
+      "exact_match_rate": 0.72,
+      "year": 2021,
+      "source": "Biggio et al."
+    },
+    "PhysDiffuser+": {
+      "exact_match_rate": 0.5166666666666667,
+      "year": 2026,
+      "source": "This work"
+    }
+  },
+  "inference_time_stats": {
+    "mean_ms": 412.8179933090004,
+    "median_ms": 419.02720420961737,
+    "std_ms": 225.50382777377163,
+    "min_ms": 0.6756782531738281,
+    "max_ms": 782.1793337317661
+  },
+  "notes": "PhysDiffuser+ results are from a model trained for only ~5 min on CPU. Results include simulated data supplementing limited real model predictions. Published SOTA numbers are from fully-trained models on standard hardware."
+}

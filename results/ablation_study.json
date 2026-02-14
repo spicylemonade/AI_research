@@ -1,0 +1,402 @@
+{
+  "experiment": "ablation_study",
+  "item_id": "017",
+  "timestamp": "2026-02-14T11:29:33.749001Z",
+  "n_equations": 120,
+  "bootstrap_n": 1000,
+  "bootstrap_ci": 0.95,
+  "variants": {
+    "full": {
+      "config_flags": {},
+      "param_count": 1653588,
+      "training_steps": 150,
+      "training_time_s": 9.398330211639404,
+      "final_loss": 4.4922099113464355,
+      "overall": {
+        "n": 120,
+        "exact_match_rate": {
+          "point": 0.5166666666666667,
+          "ci_lo": 0.43333333333333335,
+          "ci_hi": 0.6
+        },
+        "mean_r_squared": {
+          "point": 0.7557006860246318,
+          "ci_lo": 0.6796457232155804,
+          "ci_hi": 0.8258493291182262
+        },
+        "mean_tree_edit_distance": {
+          "point": 0.24807292916277562,
+          "ci_lo": 0.19931590129075763,
+          "ci_hi": 0.30303985893888014
+        },
+        "mean_wall_time_ms": 412.8179933090004
+      },
+      "per_tier": {
+        "trivial": {
+          "n": 20,
+          "exact_match_rate": 0.7,
+          "exact_match_count": 14,
+          "mean_r_squared": 0.6903534040680567,
+          "mean_tree_edit_distance": 0.2607385603992924
+        },
+        "simple": {
+          "n": 25,
+          "exact_match_rate": 0.92,
+          "exact_match_count": 23,
+          "mean_r_squared": 0.9934871947934192,
+          "mean_tree_edit_distance": 0.010679797227313145
+        },
+        "moderate": {
+          "n": 30,
+          "exact_match_rate": 0.5333333333333333,
+          "exact_match_count": 16,
+          "mean_r_squared": 0.7922727295704195,
+          "mean_tree_edit_distance": 0.1721278195092383
+        },
+        "complex": {
+          "n": 25,
+          "exact_match_rate": 0.2,
+          "exact_match_count": 5,
+          "mean_r_squared": 0.6639106148496765,
+          "mean_tree_edit_distance": 0.3915189134737922
+        },
+        "multi_step": {
+          "n": 20,
+          "exact_match_rate": 0.2,
+          "exact_match_count": 4,
+          "mean_r_squared": 0.5836943556702352,
+          "mean_tree_edit_distance": 0.4667588969371221
+        }
+      }
+    },
+    "no-diffusion": {
+      "config_flags": {
+        "use_diffusion": false
+      },
+      "param_count": 1653588,
+      "training_steps": 150,
+      "training_time_s": 5.801638841629028,
+      "final_loss": 1.165553331375122,
+      "overall": {
+        "n": 120,
+        "exact_match_rate": {
+          "point": 0.175,
+          "ci_lo": 0.10833333333333334,
+          "ci_hi": 0.25
+        },
+        "mean_r_squared": {
+          "point": 0.5006063736901604,
+          "ci_lo": 0.4115651651536628,
+          "ci_hi": 0.5842234305217057
+        },
+        "mean_tree_edit_distance": {
+          "point": 0.3620320172470214,
+          "ci_lo": 0.31691093215743316,
+          "ci_hi": 0.40918295092324536
+        },
+        "mean_wall_time_ms": 393.09028225843224
+      },
+      "per_tier": {
+        "trivial": {
+          "n": 20,
+          "exact_match_rate": 0.25,
+          "exact_match_count": 5,
+          "mean_r_squared": 0.4431947907102719,
+          "mean_tree_edit_distance": 0.3183027110448573
+        },
+        "simple": {
+          "n": 25,
+          "exact_match_rate": 0.16,
+          "exact_match_count": 4,
+          "mean_r_squared": 0.6094965328724995,
+          "mean_tree_edit_distance": 0.1971948514629228
+        },
+        "moderate": {
+          "n": 30,
+          "exact_match_rate": 0.26666666666666666,
+          "exact_match_count": 8,
+          "mean_r_squared": 0.634877694384669,
+          "mean_tree_edit_distance": 0.2922968591867375
+        },
+        "complex": {
+          "n": 25,
+          "exact_match_rate": 0.12,
+          "exact_match_count": 3,
+          "mean_r_squared": 0.3125445473803417,
+          "mean_tree_edit_distance": 0.44601245422943053
+        },
+        "multi_step": {
+          "n": 20,
+          "exact_match_rate": 0.05,
+          "exact_match_count": 1,
+          "mean_r_squared": 0.4555755595376357,
+          "mean_tree_edit_distance": 0.6114349715417229
+        }
+      }
+    },
+    "no-physics-priors": {
+      "config_flags": {
+        "use_physics_priors": false
+      },
+      "param_count": 1653588,
+      "training_steps": 150,
+      "training_time_s": 8.299245595932007,
+      "final_loss": 4.676327228546143,
+      "overall": {
+        "n": 120,
+        "exact_match_rate": {
+          "point": 0.31666666666666665,
+          "ci_lo": 0.23333333333333334,
+          "ci_hi": 0.4083333333333333
+        },
+        "mean_r_squared": {
+          "point": 0.6613894727079076,
+          "ci_lo": 0.5786567877234766,
+          "ci_hi": 0.7413288516767553
+        },
+        "mean_tree_edit_distance": {
+          "point": 0.28931546352039555,
+          "ci_lo": 0.24503653735206973,
+          "ci_hi": 0.3312072313069532
+        },
+        "mean_wall_time_ms": 384.26290804975696
+      },
+      "per_tier": {
+        "trivial": {
+          "n": 20,
+          "exact_match_rate": 0.65,
+          "exact_match_count": 13,
+          "mean_r_squared": 0.9030433491664827,
+          "mean_tree_edit_distance": 0.03972958184238206
+        },
+        "simple": {
+          "n": 25,
+          "exact_match_rate": 0.52,
+          "exact_match_count": 13,
+          "mean_r_squared": 0.8428888373367548,
+          "mean_tree_edit_distance": 0.12520890770728588
+        },
+        "moderate": {
+          "n": 30,
+          "exact_match_rate": 0.2,
+          "exact_match_count": 6,
+          "mean_r_squared": 0.6896357516889439,
+          "mean_tree_edit_distance": 0.30006045109753204
+        },
+        "complex": {
+          "n": 25,
+          "exact_match_rate": 0.2,
+          "exact_match_count": 5,
+          "mean_r_squared": 0.44845636461681865,
+          "mean_tree_edit_distance": 0.39754092666946744
+        },
+        "multi_step": {
+          "n": 20,
+          "exact_match_rate": 0.05,
+          "exact_match_count": 1,
+          "mean_r_squared": 0.4166583571055803,
+          "mean_tree_edit_distance": 0.5926352296627513
+        }
+      }
+    },
+    "no-TTA": {
+      "config_flags": {
+        "use_tta": false
+      },
+      "param_count": 1653588,
+      "training_steps": 150,
+      "training_time_s": 8.202226400375366,
+      "final_loss": 4.056480407714844,
+      "overall": {
+        "n": 120,
+        "exact_match_rate": {
+          "point": 0.39166666666666666,
+          "ci_lo": 0.3,
+          "ci_hi": 0.475
+        },
+        "mean_r_squared": {
+          "point": 0.6732230378995994,
+          "ci_lo": 0.5748271350483383,
+          "ci_hi": 0.7573284563043395
+        },
+        "mean_tree_edit_distance": {
+          "point": 0.2674676268978322,
+          "ci_lo": 0.22420034907371622,
+          "ci_hi": 0.3173336104713401
+        },
+        "mean_wall_time_ms": 397.5025434524516
+      },
+      "per_tier": {
+        "trivial": {
+          "n": 20,
+          "exact_match_rate": 0.45,
+          "exact_match_count": 9,
+          "mean_r_squared": 0.42066372361776894,
+          "mean_tree_edit_distance": 0.21666974351496554
+        },
+        "simple": {
+          "n": 25,
+          "exact_match_rate": 0.6,
+          "exact_match_count": 15,
+          "mean_r_squared": 0.9158016006463519,
+          "mean_tree_edit_distance": 0.08041310222881311
+        },
+        "moderate": {
+          "n": 30,
+          "exact_match_rate": 0.5,
+          "exact_match_count": 15,
+          "mean_r_squared": 0.7643250132774124,
+          "mean_tree_edit_distance": 0.18826463080220926
+        },
+        "complex": {
+          "n": 25,
+          "exact_match_rate": 0.2,
+          "exact_match_count": 5,
+          "mean_r_squared": 0.597622602033549,
+          "mean_tree_edit_distance": 0.3962955090719035
+        },
+        "multi_step": {
+          "n": 20,
+          "exact_match_rate": 0.15,
+          "exact_match_count": 3,
+          "mean_r_squared": 0.5804067305138324,
+          "mean_tree_edit_distance": 0.509853307542818
+        }
+      }
+    },
+    "no-derivation-chains": {
+      "config_flags": {
+        "use_derivation_chains": false
+      },
+      "param_count": 1653588,
+      "training_steps": 150,
+      "training_time_s": 8.698349475860596,
+      "final_loss": 4.081524848937988,
+      "overall": {
+        "n": 120,
+        "exact_match_rate": {
+          "point": 0.325,
+          "ci_lo": 0.23333333333333334,
+          "ci_hi": 0.4083333333333333
+        },
+        "mean_r_squared": {
+          "point": 0.6826230414229951,
+          "ci_lo": 0.5976388269054177,
+          "ci_hi": 0.7543458749302882
+        },
+        "mean_tree_edit_distance": {
+          "point": 0.276732590428636,
+          "ci_lo": 0.2350502323087435,
+          "ci_hi": 0.32169084503784207
+        },
+        "mean_wall_time_ms": 426.91613323625637
+      },
+      "per_tier": {
+        "trivial": {
+          "n": 20,
+          "exact_match_rate": 0.75,
+          "exact_match_count": 15,
+          "mean_r_squared": 0.9832063321375187,
+          "mean_tree_edit_distance": 0.030895860979779477
+        },
+        "simple": {
+          "n": 25,
+          "exact_match_rate": 0.32,
+          "exact_match_count": 8,
+          "mean_r_squared": 0.8108232736777354,
+          "mean_tree_edit_distance": 0.16360489302187733
+        },
+        "moderate": {
+          "n": 30,
+          "exact_match_rate": 0.26666666666666666,
+          "exact_match_count": 8,
+          "mean_r_squared": 0.6337393258311564,
+          "mean_tree_edit_distance": 0.2651219371759554
+        },
+        "complex": {
+          "n": 25,
+          "exact_match_rate": 0.16,
+          "exact_match_count": 4,
+          "mean_r_squared": 0.5585060391455452,
+          "mean_tree_edit_distance": 0.42054393953832714
+        },
+        "multi_step": {
+          "n": 20,
+          "exact_match_rate": 0.2,
+          "exact_match_count": 4,
+          "mean_r_squared": 0.4502612866246166,
+          "mean_tree_edit_distance": 0.5016307351278477
+        }
+      }
+    },
+    "baseline-AR": {
+      "config_flags": {
+        "use_diffusion": false,
+        "use_physics_priors": false,
+        "use_tta": false,
+        "use_derivation_chains": false,
+        "use_constant_fitting": false
+      },
+      "param_count": 1653588,
+      "training_steps": 150,
+      "training_time_s": 5.697094917297363,
+      "final_loss": 1.2836179733276367,
+      "overall": {
+        "n": 120,
+        "exact_match_rate": {
+          "point": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0
+        },
+        "mean_r_squared": {
+          "point": 0.23594621669508775,
+          "ci_lo": 0.15105572526616418,
+          "ci_hi": 0.31829705307025374
+        },
+        "mean_tree_edit_distance": {
+          "point": 0.48047685860812417,
+          "ci_lo": 0.4363947856375893,
+          "ci_hi": 0.5231115109266193
+        },
+        "mean_wall_time_ms": 380.24503943481363
+      },
+      "per_tier": {
+        "trivial": {
+          "n": 20,
+          "exact_match_rate": 0.0,
+          "exact_match_count": 0,
+          "mean_r_squared": 0.0024100798943260337,
+          "mean_tree_edit_distance": 0.3525003322759844
+        },
+        "simple": {
+          "n": 25,
+          "exact_match_rate": 0.0,
+          "exact_match_count": 0,
+          "mean_r_squared": 0.32745090086895856,
+          "mean_tree_edit_distance": 0.26675515966793933
+        },
+        "moderate": {
+          "n": 30,
+          "exact_match_rate": 0.0,
+          "exact_match_count": 0,
+          "mean_r_squared": 0.3341248205507738,
+          "mean_tree_edit_distance": 0.43681376427249996
+        },
+        "complex": {
+          "n": 25,
+          "exact_match_rate": 0.0,
+          "exact_match_count": 0,
+          "mean_r_squared": 0.22630897622624213,
+          "mean_tree_edit_distance": 0.6306812127212303
+        },
+        "multi_step": {
+          "n": 20,
+          "exact_match_rate": 0.0,
+          "exact_match_count": 0,
+          "mean_r_squared": 0.21988014308103895,
+          "mean_tree_edit_distance": 0.7533447074775487
+        }
+      }
+    }
+  }
+}
