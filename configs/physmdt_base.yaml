@@ -1,0 +1,48 @@
+# PhysMDT Base Model Configuration (~45M params)
+model:
+  vocab_size: 200
+  d_model: 512
+  n_heads: 8
+  n_layers: 8
+  ffn_dim: 2048
+  max_seq_len: 64
+  dropout: 0.1
+  input_dim: 10
+  encoder_layers: 4
+  mask_token_id: 3
+  use_tree_pe: true
+
+training:
+  batch_size: 32
+  lr: 3.0e-4
+  weight_decay: 0.01
+  warmup_steps: 1000
+  max_steps: 100000
+  grad_clip: 1.0
+  mask_rate_min: 0.1
+  mask_rate_max: 0.9
+  seed: 42
+
+data:
+  include_fsred: true
+  include_procedural: true
+  n_procedural: 50000
+  n_data_points: 256
+  noise_std: 0.01
+  train_ratio: 0.8
+  val_ratio: 0.1
+
+augmentation:
+  use_symbolic_equiv: true
+  num_equiv_forms: 8
+  use_physics_prior: true
+  lambda_physics: 0.1
+
+checkpointing:
+  save_every: 10000
+  checkpoint_dir: checkpoints/physmdt_base
+
+logging:
+  log_every: 100
+  eval_every: 1000
+  results_dir: results/training_curves
