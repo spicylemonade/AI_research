@@ -110,8 +110,8 @@
           "id": "item_009",
           "description": "Implement the full evaluation metrics suite: solution rate (exact symbolic match after simplification), R\u00b2 on test data points, RMSE, Normalized Edit Distance (NED) between predicted and ground-truth expression trees, symbolic accuracy (fraction of correct tokens), and inference wall-clock time",
           "acceptance_criteria": "A Python module src/evaluation/metrics.py that: (1) computes all 6 metrics given predicted and ground-truth equation strings, (2) uses SymPy for symbolic simplification and equivalence checking in solution rate, (3) NED computed on expression trees not strings, (4) returns a dictionary of all metrics; verified by tests/test_metrics.py with at least 12 test cases covering edge cases (equivalent expressions, constant folding, partial matches); results reproducible with fixed random seed",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "src/evaluation/metrics.py with all 6 metrics. 27/27 tests pass including edge cases.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 8,
+    "completed": 9,
     "in_progress": 0,
     "failed": 0,
-    "pending": 17
+    "pending": 16
   }
 }
