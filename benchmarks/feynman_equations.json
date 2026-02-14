@@ -1,0 +1,1945 @@
+{
+  "metadata": {
+    "name": "Feynman Physics Equation Benchmark",
+    "version": "1.0",
+    "description": "120 equations from Feynman Lectures on Physics for symbolic regression evaluation",
+    "source": "Feynman Symbolic Regression Database (Udrescu & Tegmark, 2020)",
+    "tier_distribution": {
+      "trivial": 20,
+      "simple": 25,
+      "moderate": 30,
+      "complex": 25,
+      "multi_step": 20
+    }
+  },
+  "equations": [
+    {
+      "id": "feynman_001",
+      "name": "Einstein Mass-Energy Equivalence",
+      "formula_symbolic": "mul(m, pow(c, 2))",
+      "formula_latex": "E = mc^2",
+      "formula_python": "m * c**2",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 2,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 2 operators, simple multiplication and power"
+    },
+    {
+      "id": "feynman_002",
+      "name": "Newton's Second Law",
+      "formula_symbolic": "mul(m, a)",
+      "formula_latex": "F = ma",
+      "formula_python": "m * a",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "a", "unit": "m/s^2"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_003",
+      "name": "Velocity Definition",
+      "formula_symbolic": "div(d, t)",
+      "formula_latex": "v = \\frac{d}{t}",
+      "formula_python": "d / t",
+      "variables": [
+        {"name": "d", "unit": "m"},
+        {"name": "t", "unit": "s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single division"
+    },
+    {
+      "id": "feynman_004",
+      "name": "Power from Force and Velocity",
+      "formula_symbolic": "mul(F, v)",
+      "formula_latex": "P = Fv",
+      "formula_python": "F * v",
+      "variables": [
+        {"name": "F", "unit": "N"},
+        {"name": "v", "unit": "m/s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_005",
+      "name": "Work Done by Constant Force",
+      "formula_symbolic": "mul(F, d)",
+      "formula_latex": "W = Fd",
+      "formula_python": "F * d",
+      "variables": [
+        {"name": "F", "unit": "N"},
+        {"name": "d", "unit": "m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_006",
+      "name": "Linear Momentum",
+      "formula_symbolic": "mul(m, v)",
+      "formula_latex": "p = mv",
+      "formula_python": "m * v",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "v", "unit": "m/s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_007",
+      "name": "Kinetic Energy",
+      "formula_symbolic": "mul(0.5, mul(m, pow(v, 2)))",
+      "formula_latex": "KE = \\frac{1}{2}mv^2",
+      "formula_python": "0.5 * m * v**2",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "v", "unit": "m/s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 3,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 3 operators, multiplication and power with constant"
+    },
+    {
+      "id": "feynman_008",
+      "name": "Gravitational Potential Energy",
+      "formula_symbolic": "mul(m, mul(g, h))",
+      "formula_latex": "PE = mgh",
+      "formula_python": "m * g * h",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "g", "unit": "m/s^2"},
+        {"name": "h", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "3 variables but only 2 operators, simple chain of multiplications"
+    },
+    {
+      "id": "feynman_009",
+      "name": "Electrical Power",
+      "formula_symbolic": "mul(I, V)",
+      "formula_latex": "P = IV",
+      "formula_python": "I * V",
+      "variables": [
+        {"name": "I", "unit": "A"},
+        {"name": "V", "unit": "V"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_010",
+      "name": "Ohm's Law",
+      "formula_symbolic": "mul(I, R)",
+      "formula_latex": "V = IR",
+      "formula_python": "I * R",
+      "variables": [
+        {"name": "I", "unit": "A"},
+        {"name": "R", "unit": "ohm"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_011",
+      "name": "Hooke's Law",
+      "formula_symbolic": "mul(k, x)",
+      "formula_latex": "F = kx",
+      "formula_python": "k * x",
+      "variables": [
+        {"name": "k", "unit": "N/m"},
+        {"name": "x", "unit": "m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_012",
+      "name": "Centripetal Acceleration",
+      "formula_symbolic": "div(pow(v, 2), r)",
+      "formula_latex": "a = \\frac{v^2}{r}",
+      "formula_python": "v**2 / r",
+      "variables": [
+        {"name": "v", "unit": "m/s"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 2,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 2 operators, power and division"
+    },
+    {
+      "id": "feynman_013",
+      "name": "Torque (Simple)",
+      "formula_symbolic": "mul(r, F)",
+      "formula_latex": "\\tau = rF",
+      "formula_python": "r * F",
+      "variables": [
+        {"name": "r", "unit": "m"},
+        {"name": "F", "unit": "N"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_014",
+      "name": "Density",
+      "formula_symbolic": "div(m, V)",
+      "formula_latex": "\\rho = \\frac{m}{V}",
+      "formula_python": "m / V",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "V", "unit": "m^3"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single division"
+    },
+    {
+      "id": "feynman_015",
+      "name": "Frequency from Period",
+      "formula_symbolic": "div(1, T)",
+      "formula_latex": "f = \\frac{1}{T}",
+      "formula_python": "1 / T",
+      "variables": [
+        {"name": "T", "unit": "s"}
+      ],
+      "num_variables": 1,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "1 variable, 1 operator, simple reciprocal"
+    },
+    {
+      "id": "feynman_016",
+      "name": "Wavelength",
+      "formula_symbolic": "div(v, f)",
+      "formula_latex": "\\lambda = \\frac{v}{f}",
+      "formula_python": "v / f",
+      "variables": [
+        {"name": "v", "unit": "m/s"},
+        {"name": "f", "unit": "Hz"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single division"
+    },
+    {
+      "id": "feynman_017",
+      "name": "Heat Transfer",
+      "formula_symbolic": "mul(m, mul(c, dT))",
+      "formula_latex": "Q = mc\\Delta T",
+      "formula_python": "m * c * dT",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "c", "unit": "J/(kg*K)"},
+        {"name": "dT", "unit": "K"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "3 variables but only 2 operators, chain of multiplications"
+    },
+    {
+      "id": "feynman_018",
+      "name": "Electric Current",
+      "formula_symbolic": "div(Q, t)",
+      "formula_latex": "I = \\frac{Q}{t}",
+      "formula_python": "Q / t",
+      "variables": [
+        {"name": "Q", "unit": "C"},
+        {"name": "t", "unit": "s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single division"
+    },
+    {
+      "id": "feynman_019",
+      "name": "Capacitance Definition",
+      "formula_symbolic": "div(Q, V)",
+      "formula_latex": "C = \\frac{Q}{V}",
+      "formula_python": "Q / V",
+      "variables": [
+        {"name": "Q", "unit": "C"},
+        {"name": "V", "unit": "V"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single division"
+    },
+    {
+      "id": "feynman_020",
+      "name": "Angular Momentum (Simple)",
+      "formula_symbolic": "mul(r, p)",
+      "formula_latex": "L = rp",
+      "formula_python": "r * p",
+      "variables": [
+        {"name": "r", "unit": "m"},
+        {"name": "p", "unit": "kg*m/s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "trivial",
+      "tier_rationale": "2 variables, 1 operator, single multiplication"
+    },
+    {
+      "id": "feynman_021",
+      "name": "Kinematic Displacement",
+      "formula_symbolic": "add(mul(v0, t), mul(0.5, mul(a, pow(t, 2))))",
+      "formula_latex": "s = v_0 t + \\frac{1}{2}at^2",
+      "formula_python": "v0 * t + 0.5 * a * t**2",
+      "variables": [
+        {"name": "v0", "unit": "m/s"},
+        {"name": "a", "unit": "m/s^2"},
+        {"name": "t", "unit": "s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 5,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 5 operators, addition of two terms with power"
+    },
+    {
+      "id": "feynman_022",
+      "name": "Simple Pendulum Period",
+      "formula_symbolic": "mul(mul(2, C1), sqrt(div(L, g)))",
+      "formula_latex": "T = 2\\pi\\sqrt{\\frac{L}{g}}",
+      "formula_python": "2 * pi * (L / g)**0.5",
+      "variables": [
+        {"name": "L", "unit": "m"},
+        {"name": "g", "unit": "m/s^2"}
+      ],
+      "num_variables": 2,
+      "num_operators": 4,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 4 operators including sqrt and constant pi"
+    },
+    {
+      "id": "feynman_023",
+      "name": "Spring Potential Energy",
+      "formula_symbolic": "mul(0.5, mul(k, pow(x, 2)))",
+      "formula_latex": "E = \\frac{1}{2}kx^2",
+      "formula_python": "0.5 * k * x**2",
+      "variables": [
+        {"name": "k", "unit": "N/m"},
+        {"name": "x", "unit": "m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 3 operators, multiplication with power and constant"
+    },
+    {
+      "id": "feynman_024",
+      "name": "Newton's Law of Universal Gravitation",
+      "formula_symbolic": "div(mul(G, mul(m1, m2)), pow(r, 2))",
+      "formula_latex": "F = \\frac{Gm_1 m_2}{r^2}",
+      "formula_python": "G * m1 * m2 / r**2",
+      "variables": [
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "m1", "unit": "kg"},
+        {"name": "m2", "unit": "kg"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 4,
+      "difficulty_tier": "simple",
+      "tier_rationale": "4 variables, 4 operators, division with chain of multiplications"
+    },
+    {
+      "id": "feynman_025",
+      "name": "Escape Velocity",
+      "formula_symbolic": "sqrt(div(mul(2, mul(G, M)), r))",
+      "formula_latex": "v = \\sqrt{\\frac{2GM}{r}}",
+      "formula_python": "(2 * G * M / r)**0.5",
+      "variables": [
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "M", "unit": "kg"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 4,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 4 operators, sqrt of division and multiplications"
+    },
+    {
+      "id": "feynman_026",
+      "name": "Capacitor Energy",
+      "formula_symbolic": "mul(0.5, mul(C, pow(V, 2)))",
+      "formula_latex": "E = \\frac{1}{2}CV^2",
+      "formula_python": "0.5 * C * V**2",
+      "variables": [
+        {"name": "C", "unit": "F"},
+        {"name": "V", "unit": "V"}
+      ],
+      "num_variables": 2,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 3 operators, same form as kinetic energy"
+    },
+    {
+      "id": "feynman_027",
+      "name": "Magnetic Force on Moving Charge",
+      "formula_symbolic": "mul(q, mul(v, B))",
+      "formula_latex": "F = qvB",
+      "formula_python": "q * v * B",
+      "variables": [
+        {"name": "q", "unit": "C"},
+        {"name": "v", "unit": "m/s"},
+        {"name": "B", "unit": "T"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 2 operators, chain of multiplications"
+    },
+    {
+      "id": "feynman_028",
+      "name": "Doppler Effect (Source Moving Away)",
+      "formula_symbolic": "div(f0, add(1, div(v_s, v)))",
+      "formula_latex": "f = \\frac{f_0}{1 + \\frac{v_s}{v}}",
+      "formula_python": "f0 / (1 + v_s / v)",
+      "variables": [
+        {"name": "f0", "unit": "Hz"},
+        {"name": "v_s", "unit": "m/s"},
+        {"name": "v", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 3 operators, nested division and addition"
+    },
+    {
+      "id": "feynman_029",
+      "name": "Ideal Gas Law (simplified)",
+      "formula_symbolic": "div(mul(n, mul(R, T)), V)",
+      "formula_latex": "P = \\frac{nRT}{V}",
+      "formula_python": "n * R * T / V",
+      "variables": [
+        {"name": "n", "unit": "mol"},
+        {"name": "R", "unit": "J/(mol*K)"},
+        {"name": "T", "unit": "K"},
+        {"name": "V", "unit": "m^3"}
+      ],
+      "num_variables": 4,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "4 variables, 3 operators, multiplications and one division"
+    },
+    {
+      "id": "feynman_030",
+      "name": "Kinematic Velocity",
+      "formula_symbolic": "add(v0, mul(a, t))",
+      "formula_latex": "v = v_0 + at",
+      "formula_python": "v0 + a * t",
+      "variables": [
+        {"name": "v0", "unit": "m/s"},
+        {"name": "a", "unit": "m/s^2"},
+        {"name": "t", "unit": "s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 2 operators, addition and multiplication"
+    },
+    {
+      "id": "feynman_031",
+      "name": "Velocity Squared Kinematic",
+      "formula_symbolic": "add(pow(v0, 2), mul(2, mul(a, s)))",
+      "formula_latex": "v^2 = v_0^2 + 2as",
+      "formula_python": "v0**2 + 2 * a * s",
+      "variables": [
+        {"name": "v0", "unit": "m/s"},
+        {"name": "a", "unit": "m/s^2"},
+        {"name": "s", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 4,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 4 operators, power, addition, and multiplications"
+    },
+    {
+      "id": "feynman_032",
+      "name": "Inductor Energy",
+      "formula_symbolic": "mul(0.5, mul(L, pow(I, 2)))",
+      "formula_latex": "E = \\frac{1}{2}LI^2",
+      "formula_python": "0.5 * L * I**2",
+      "variables": [
+        {"name": "L", "unit": "H"},
+        {"name": "I", "unit": "A"}
+      ],
+      "num_variables": 2,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 3 operators, same form as kinetic/spring energy"
+    },
+    {
+      "id": "feynman_033",
+      "name": "Pressure at Depth",
+      "formula_symbolic": "add(P0, mul(rho, mul(g, h)))",
+      "formula_latex": "P = P_0 + \\rho g h",
+      "formula_python": "P0 + rho * g * h",
+      "variables": [
+        {"name": "P0", "unit": "Pa"},
+        {"name": "rho", "unit": "kg/m^3"},
+        {"name": "g", "unit": "m/s^2"},
+        {"name": "h", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "4 variables, 3 operators, addition and multiplications"
+    },
+    {
+      "id": "feynman_034",
+      "name": "Rotational Kinetic Energy",
+      "formula_symbolic": "mul(0.5, mul(I_rot, pow(omega, 2)))",
+      "formula_latex": "KE_{rot} = \\frac{1}{2}I\\omega^2",
+      "formula_python": "0.5 * I_rot * omega**2",
+      "variables": [
+        {"name": "I_rot", "unit": "kg*m^2"},
+        {"name": "omega", "unit": "rad/s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 3 operators, same quadratic energy form"
+    },
+    {
+      "id": "feynman_035",
+      "name": "Resistors in Series Power Dissipation",
+      "formula_symbolic": "div(pow(V, 2), R)",
+      "formula_latex": "P = \\frac{V^2}{R}",
+      "formula_python": "V**2 / R",
+      "variables": [
+        {"name": "V", "unit": "V"},
+        {"name": "R", "unit": "ohm"}
+      ],
+      "num_variables": 2,
+      "num_operators": 2,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 2 operators, power and division"
+    },
+    {
+      "id": "feynman_036",
+      "name": "Gravitational Acceleration",
+      "formula_symbolic": "div(mul(G, M), pow(r, 2))",
+      "formula_latex": "g = \\frac{GM}{r^2}",
+      "formula_python": "G * M / r**2",
+      "variables": [
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "M", "unit": "kg"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 3 operators, multiplication, power, division"
+    },
+    {
+      "id": "feynman_037",
+      "name": "Photon Energy",
+      "formula_symbolic": "mul(h, f)",
+      "formula_latex": "E = hf",
+      "formula_python": "h * f",
+      "variables": [
+        {"name": "h", "unit": "J*s"},
+        {"name": "f", "unit": "Hz"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 1 operator, but fundamental quantum formula"
+    },
+    {
+      "id": "feynman_038",
+      "name": "Centripetal Force",
+      "formula_symbolic": "div(mul(m, pow(v, 2)), r)",
+      "formula_latex": "F = \\frac{mv^2}{r}",
+      "formula_python": "m * v**2 / r",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "v", "unit": "m/s"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 3 operators, multiplication, power, division"
+    },
+    {
+      "id": "feynman_039",
+      "name": "Mass-Spring Oscillation Period",
+      "formula_symbolic": "mul(mul(2, C1), sqrt(div(m, k)))",
+      "formula_latex": "T = 2\\pi\\sqrt{\\frac{m}{k}}",
+      "formula_python": "2 * pi * (m / k)**0.5",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "k", "unit": "N/m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 4,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 4 operators, sqrt and constant pi"
+    },
+    {
+      "id": "feynman_040",
+      "name": "Buoyancy Force",
+      "formula_symbolic": "mul(rho, mul(g, V))",
+      "formula_latex": "F_b = \\rho g V",
+      "formula_python": "rho * g * V",
+      "variables": [
+        {"name": "rho", "unit": "kg/m^3"},
+        {"name": "g", "unit": "m/s^2"},
+        {"name": "V", "unit": "m^3"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 2 operators, chain of multiplications"
+    },
+    {
+      "id": "feynman_041",
+      "name": "Wave Speed on String",
+      "formula_symbolic": "sqrt(div(T, mu))",
+      "formula_latex": "v = \\sqrt{\\frac{T}{\\mu}}",
+      "formula_python": "(T / mu)**0.5",
+      "variables": [
+        {"name": "T", "unit": "N"},
+        {"name": "mu", "unit": "kg/m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 2,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 2 operators, sqrt and division"
+    },
+    {
+      "id": "feynman_042",
+      "name": "Moment of Inertia (Point Mass)",
+      "formula_symbolic": "mul(m, pow(r, 2))",
+      "formula_latex": "I = mr^2",
+      "formula_python": "m * r**2",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 2,
+      "difficulty_tier": "simple",
+      "tier_rationale": "2 variables, 2 operators, multiplication and power"
+    },
+    {
+      "id": "feynman_043",
+      "name": "Electric Field Strength (Point Charge simplified)",
+      "formula_symbolic": "div(mul(k_e, q), pow(r, 2))",
+      "formula_latex": "E = \\frac{k_e q}{r^2}",
+      "formula_python": "k_e * q / r**2",
+      "variables": [
+        {"name": "k_e", "unit": "N*m^2/C^2"},
+        {"name": "q", "unit": "C"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 3 operators, multiplication, power, division"
+    },
+    {
+      "id": "feynman_044",
+      "name": "Snell's Law (ratio form)",
+      "formula_symbolic": "div(mul(n1, sin(theta1)), n2)",
+      "formula_latex": "\\sin\\theta_2 = \\frac{n_1 \\sin\\theta_1}{n_2}",
+      "formula_python": "n1 * sin(theta1) / n2",
+      "variables": [
+        {"name": "n1", "unit": "dimensionless"},
+        {"name": "theta1", "unit": "rad"},
+        {"name": "n2", "unit": "dimensionless"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 3 operators, includes sin function"
+    },
+    {
+      "id": "feynman_045",
+      "name": "Thermal Expansion",
+      "formula_symbolic": "mul(L0, mul(alpha, dT))",
+      "formula_latex": "\\Delta L = L_0 \\alpha \\Delta T",
+      "formula_python": "L0 * alpha * dT",
+      "variables": [
+        {"name": "L0", "unit": "m"},
+        {"name": "alpha", "unit": "1/K"},
+        {"name": "dT", "unit": "K"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "simple",
+      "tier_rationale": "3 variables, 2 operators, chain of multiplications"
+    },
+    {
+      "id": "feynman_046",
+      "name": "Coulomb's Law (Full Form)",
+      "formula_symbolic": "div(mul(q1, q2), mul(4, mul(C1, mul(epsilon, pow(r, 2)))))",
+      "formula_latex": "F = \\frac{q_1 q_2}{4\\pi\\epsilon_0 r^2}",
+      "formula_python": "q1 * q2 / (4 * pi * epsilon_0 * r**2)",
+      "variables": [
+        {"name": "q1", "unit": "C"},
+        {"name": "q2", "unit": "C"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 6,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "4 variables, 6 operators, involves division, power, and constant pi"
+    },
+    {
+      "id": "feynman_047",
+      "name": "Lorentz Force",
+      "formula_symbolic": "mul(q, add(E, mul(v, B)))",
+      "formula_latex": "F = q(E + vB)",
+      "formula_python": "q * (E + v * B)",
+      "variables": [
+        {"name": "q", "unit": "C"},
+        {"name": "E", "unit": "V/m"},
+        {"name": "v", "unit": "m/s"},
+        {"name": "B", "unit": "T"}
+      ],
+      "num_variables": 4,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "4 variables, 3 operators, combined electric and magnetic forces"
+    },
+    {
+      "id": "feynman_048",
+      "name": "Gravitational Potential",
+      "formula_symbolic": "neg(div(mul(G, M), r))",
+      "formula_latex": "U = -\\frac{GM}{r}",
+      "formula_python": "-G * M / r",
+      "variables": [
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "M", "unit": "kg"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 3 operators, negation, multiplication, division"
+    },
+    {
+      "id": "feynman_049",
+      "name": "Orbital Velocity",
+      "formula_symbolic": "sqrt(div(mul(G, M), r))",
+      "formula_latex": "v = \\sqrt{\\frac{GM}{r}}",
+      "formula_python": "(G * M / r)**0.5",
+      "variables": [
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "M", "unit": "kg"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 3 operators, sqrt of ratio"
+    },
+    {
+      "id": "feynman_050",
+      "name": "LC Circuit Resonant Frequency",
+      "formula_symbolic": "div(1, mul(mul(2, C1), sqrt(mul(L, C))))",
+      "formula_latex": "f = \\frac{1}{2\\pi\\sqrt{LC}}",
+      "formula_python": "1 / (2 * pi * (L * C)**0.5)",
+      "variables": [
+        {"name": "L", "unit": "H"},
+        {"name": "C", "unit": "F"}
+      ],
+      "num_variables": 2,
+      "num_operators": 5,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "2 variables, 5 operators, nested division, sqrt, and constant pi"
+    },
+    {
+      "id": "feynman_051",
+      "name": "Parallel Plate Capacitor",
+      "formula_symbolic": "div(mul(epsilon, A), d)",
+      "formula_latex": "C = \\frac{\\epsilon_0 A}{d}",
+      "formula_python": "epsilon_0 * A / d",
+      "variables": [
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "A", "unit": "m^2"},
+        {"name": "d", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 2 operators, but fundamental capacitor formula"
+    },
+    {
+      "id": "feynman_052",
+      "name": "Electric Potential (Point Charge Full)",
+      "formula_symbolic": "div(q, mul(4, mul(C1, mul(epsilon, r))))",
+      "formula_latex": "V = \\frac{q}{4\\pi\\epsilon_0 r}",
+      "formula_python": "q / (4 * pi * epsilon_0 * r)",
+      "variables": [
+        {"name": "q", "unit": "C"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 5,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 5 operators, nested multiplication with constants"
+    },
+    {
+      "id": "feynman_053",
+      "name": "Magnetic Field of Solenoid",
+      "formula_symbolic": "mul(mu_0, mul(n, I))",
+      "formula_latex": "B = \\mu_0 n I",
+      "formula_python": "mu_0 * n * I",
+      "variables": [
+        {"name": "mu_0", "unit": "T*m/A"},
+        {"name": "n", "unit": "1/m"},
+        {"name": "I", "unit": "A"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 2 operators, but involves permeability constant"
+    },
+    {
+      "id": "feynman_054",
+      "name": "RLC Impedance",
+      "formula_symbolic": "sqrt(add(pow(R, 2), pow(sub(mul(omega, L), div(1, mul(omega, C))), 2)))",
+      "formula_latex": "Z = \\sqrt{R^2 + \\left(\\omega L - \\frac{1}{\\omega C}\\right)^2}",
+      "formula_python": "(R**2 + (omega * L - 1 / (omega * C))**2)**0.5",
+      "variables": [
+        {"name": "R", "unit": "ohm"},
+        {"name": "omega", "unit": "rad/s"},
+        {"name": "L", "unit": "H"},
+        {"name": "C", "unit": "F"}
+      ],
+      "num_variables": 4,
+      "num_operators": 8,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "4 variables, 8 operators, nested power, subtraction, sqrt"
+    },
+    {
+      "id": "feynman_055",
+      "name": "Torque on Current Loop",
+      "formula_symbolic": "mul(N, mul(I, mul(A, mul(B, sin(theta)))))",
+      "formula_latex": "\\tau = NIAB\\sin\\theta",
+      "formula_python": "N * I * A * B * sin(theta)",
+      "variables": [
+        {"name": "N", "unit": "dimensionless"},
+        {"name": "I", "unit": "A"},
+        {"name": "A", "unit": "m^2"},
+        {"name": "B", "unit": "T"},
+        {"name": "theta", "unit": "rad"}
+      ],
+      "num_variables": 5,
+      "num_operators": 5,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "5 variables, 5 operators, chain of multiplications with sin"
+    },
+    {
+      "id": "feynman_056",
+      "name": "Faraday's Law (EMF)",
+      "formula_symbolic": "neg(mul(N, div(dPhi, dt)))",
+      "formula_latex": "\\mathcal{E} = -N\\frac{d\\Phi}{dt}",
+      "formula_python": "-N * dPhi / dt",
+      "variables": [
+        {"name": "N", "unit": "dimensionless"},
+        {"name": "dPhi", "unit": "Wb"},
+        {"name": "dt", "unit": "s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 3 operators, negation and division"
+    },
+    {
+      "id": "feynman_057",
+      "name": "Magnetic Flux",
+      "formula_symbolic": "mul(B, mul(A, cos(theta)))",
+      "formula_latex": "\\Phi = BA\\cos\\theta",
+      "formula_python": "B * A * cos(theta)",
+      "variables": [
+        {"name": "B", "unit": "T"},
+        {"name": "A", "unit": "m^2"},
+        {"name": "theta", "unit": "rad"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 3 operators, multiplication with cos"
+    },
+    {
+      "id": "feynman_058",
+      "name": "Electric Flux (Point Charge)",
+      "formula_symbolic": "div(q, epsilon)",
+      "formula_latex": "\\Phi_E = \\frac{q}{\\epsilon_0}",
+      "formula_python": "q / epsilon_0",
+      "variables": [
+        {"name": "q", "unit": "C"},
+        {"name": "epsilon_0", "unit": "F/m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "2 variables, 1 operator, Gauss's law fundamental relation"
+    },
+    {
+      "id": "feynman_059",
+      "name": "Kepler's Third Law",
+      "formula_symbolic": "pow(div(mul(4, mul(pow(C1, 2), pow(a, 3))), mul(G, M)), 0.5)",
+      "formula_latex": "T = \\sqrt{\\frac{4\\pi^2 a^3}{GM}}",
+      "formula_python": "(4 * pi**2 * a**3 / (G * M))**0.5",
+      "variables": [
+        {"name": "a", "unit": "m"},
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "M", "unit": "kg"}
+      ],
+      "num_variables": 3,
+      "num_operators": 7,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 7 operators, nested powers and sqrt"
+    },
+    {
+      "id": "feynman_060",
+      "name": "RC Time Constant Discharge",
+      "formula_symbolic": "mul(V0, exp(neg(div(t, mul(R, C)))))",
+      "formula_latex": "V = V_0 e^{-t/(RC)}",
+      "formula_python": "V0 * exp(-t / (R * C))",
+      "variables": [
+        {"name": "V0", "unit": "V"},
+        {"name": "t", "unit": "s"},
+        {"name": "R", "unit": "ohm"},
+        {"name": "C", "unit": "F"}
+      ],
+      "num_variables": 4,
+      "num_operators": 5,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "4 variables, 5 operators, exponential decay with negation"
+    },
+    {
+      "id": "feynman_061",
+      "name": "Simple Harmonic Motion Position",
+      "formula_symbolic": "mul(A, cos(mul(omega, t)))",
+      "formula_latex": "x = A\\cos(\\omega t)",
+      "formula_python": "A * cos(omega * t)",
+      "variables": [
+        {"name": "A", "unit": "m"},
+        {"name": "omega", "unit": "rad/s"},
+        {"name": "t", "unit": "s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 3 operators, cosine of product"
+    },
+    {
+      "id": "feynman_062",
+      "name": "Damped Harmonic Motion Amplitude",
+      "formula_symbolic": "mul(A0, exp(neg(mul(gamma, t))))",
+      "formula_latex": "A = A_0 e^{-\\gamma t}",
+      "formula_python": "A0 * exp(-gamma * t)",
+      "variables": [
+        {"name": "A0", "unit": "m"},
+        {"name": "gamma", "unit": "1/s"},
+        {"name": "t", "unit": "s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 4,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 4 operators, exponential decay"
+    },
+    {
+      "id": "feynman_063",
+      "name": "Resistivity and Resistance",
+      "formula_symbolic": "div(mul(rho, L), A)",
+      "formula_latex": "R = \\frac{\\rho L}{A}",
+      "formula_python": "rho * L / A",
+      "variables": [
+        {"name": "rho", "unit": "ohm*m"},
+        {"name": "L", "unit": "m"},
+        {"name": "A", "unit": "m^2"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 2 operators, multiplication and division"
+    },
+    {
+      "id": "feynman_064",
+      "name": "Projectile Range",
+      "formula_symbolic": "div(mul(pow(v0, 2), sin(mul(2, theta))), g)",
+      "formula_latex": "R = \\frac{v_0^2 \\sin(2\\theta)}{g}",
+      "formula_python": "v0**2 * sin(2 * theta) / g",
+      "variables": [
+        {"name": "v0", "unit": "m/s"},
+        {"name": "theta", "unit": "rad"},
+        {"name": "g", "unit": "m/s^2"}
+      ],
+      "num_variables": 3,
+      "num_operators": 5,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 5 operators, power, sin, and division"
+    },
+    {
+      "id": "feynman_065",
+      "name": "Spherical Capacitor",
+      "formula_symbolic": "mul(4, mul(C1, mul(epsilon, div(mul(a, b), sub(b, a)))))",
+      "formula_latex": "C = 4\\pi\\epsilon_0 \\frac{ab}{b-a}",
+      "formula_python": "4 * pi * epsilon_0 * (a * b / (b - a))",
+      "variables": [
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "a", "unit": "m"},
+        {"name": "b", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 6,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 6 operators, multiplication, division, subtraction with pi"
+    },
+    {
+      "id": "feynman_066",
+      "name": "Lensmaker's Equation (Thin Lens)",
+      "formula_symbolic": "mul(sub(n, 1), sub(div(1, R1), div(1, R2)))",
+      "formula_latex": "\\frac{1}{f} = (n-1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right)",
+      "formula_python": "(n - 1) * (1 / R1 - 1 / R2)",
+      "variables": [
+        {"name": "n", "unit": "dimensionless"},
+        {"name": "R1", "unit": "m"},
+        {"name": "R2", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 5,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 5 operators, nested subtraction and division"
+    },
+    {
+      "id": "feynman_067",
+      "name": "Gravitational Potential Energy (Two Body)",
+      "formula_symbolic": "neg(div(mul(G, mul(m1, m2)), r))",
+      "formula_latex": "U = -\\frac{Gm_1 m_2}{r}",
+      "formula_python": "-G * m1 * m2 / r",
+      "variables": [
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "m1", "unit": "kg"},
+        {"name": "m2", "unit": "kg"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 4,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "4 variables, 4 operators, negation with division and multiplications"
+    },
+    {
+      "id": "feynman_068",
+      "name": "Magnetic Force Between Parallel Wires",
+      "formula_symbolic": "div(mul(mu_0, mul(I1, mul(I2, L))), mul(mul(2, C1), d))",
+      "formula_latex": "F = \\frac{\\mu_0 I_1 I_2 L}{2\\pi d}",
+      "formula_python": "mu_0 * I1 * I2 * L / (2 * pi * d)",
+      "variables": [
+        {"name": "mu_0", "unit": "T*m/A"},
+        {"name": "I1", "unit": "A"},
+        {"name": "I2", "unit": "A"},
+        {"name": "L", "unit": "m"},
+        {"name": "d", "unit": "m"}
+      ],
+      "num_variables": 5,
+      "num_operators": 7,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "5 variables, 7 operators, chain of multiplications and pi constant"
+    },
+    {
+      "id": "feynman_069",
+      "name": "Energy Stored in Electric Field",
+      "formula_symbolic": "mul(0.5, mul(epsilon, pow(E, 2)))",
+      "formula_latex": "u = \\frac{1}{2}\\epsilon_0 E^2",
+      "formula_python": "0.5 * epsilon_0 * E**2",
+      "variables": [
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "E", "unit": "V/m"}
+      ],
+      "num_variables": 2,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "2 variables, 3 operators, energy density with permittivity"
+    },
+    {
+      "id": "feynman_070",
+      "name": "Energy Stored in Magnetic Field",
+      "formula_symbolic": "div(pow(B, 2), mul(2, mu_0))",
+      "formula_latex": "u = \\frac{B^2}{2\\mu_0}",
+      "formula_python": "B**2 / (2 * mu_0)",
+      "variables": [
+        {"name": "B", "unit": "T"},
+        {"name": "mu_0", "unit": "T*m/A"}
+      ],
+      "num_variables": 2,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "2 variables, 3 operators, power and division with permeability"
+    },
+    {
+      "id": "feynman_071",
+      "name": "Work by Torque",
+      "formula_symbolic": "mul(tau, mul(omega, t))",
+      "formula_latex": "W = \\tau \\omega t",
+      "formula_python": "tau * omega * t",
+      "variables": [
+        {"name": "tau", "unit": "N*m"},
+        {"name": "omega", "unit": "rad/s"},
+        {"name": "t", "unit": "s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 2 operators, rotational work"
+    },
+    {
+      "id": "feynman_072",
+      "name": "Intensity of Electromagnetic Wave",
+      "formula_symbolic": "div(mul(pow(E0, 2), mul(c, epsilon)), 2)",
+      "formula_latex": "I = \\frac{E_0^2 c \\epsilon_0}{2}",
+      "formula_python": "E0**2 * c * epsilon_0 / 2",
+      "variables": [
+        {"name": "E0", "unit": "V/m"},
+        {"name": "c", "unit": "m/s"},
+        {"name": "epsilon_0", "unit": "F/m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 4,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 4 operators, EM wave energy relation"
+    },
+    {
+      "id": "feynman_073",
+      "name": "Poynting Vector Magnitude",
+      "formula_symbolic": "div(mul(E, B), mu_0)",
+      "formula_latex": "S = \\frac{EB}{\\mu_0}",
+      "formula_python": "E * B / mu_0",
+      "variables": [
+        {"name": "E", "unit": "V/m"},
+        {"name": "B", "unit": "T"},
+        {"name": "mu_0", "unit": "T*m/A"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 2 operators, energy flux relation"
+    },
+    {
+      "id": "feynman_074",
+      "name": "Voltage Divider",
+      "formula_symbolic": "mul(V_in, div(R2, add(R1, R2)))",
+      "formula_latex": "V_{out} = V_{in} \\frac{R_2}{R_1 + R_2}",
+      "formula_python": "V_in * R2 / (R1 + R2)",
+      "variables": [
+        {"name": "V_in", "unit": "V"},
+        {"name": "R1", "unit": "ohm"},
+        {"name": "R2", "unit": "ohm"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 3 operators, division with addition in denominator"
+    },
+    {
+      "id": "feynman_075",
+      "name": "Transformer Voltage Ratio",
+      "formula_symbolic": "mul(V1, div(N2, N1))",
+      "formula_latex": "V_2 = V_1 \\frac{N_2}{N_1}",
+      "formula_python": "V1 * N2 / N1",
+      "variables": [
+        {"name": "V1", "unit": "V"},
+        {"name": "N2", "unit": "dimensionless"},
+        {"name": "N1", "unit": "dimensionless"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "moderate",
+      "tier_rationale": "3 variables, 2 operators, transformer relation"
+    },
+    {
+      "id": "feynman_076",
+      "name": "Electric Field of Charged Sphere",
+      "formula_symbolic": "div(mul(Q, r), mul(4, mul(C1, mul(epsilon, pow(R, 3)))))",
+      "formula_latex": "E = \\frac{Qr}{4\\pi\\epsilon_0 R^3}",
+      "formula_python": "Q * r / (4 * pi * epsilon_0 * R**3)",
+      "variables": [
+        {"name": "Q", "unit": "C"},
+        {"name": "r", "unit": "m"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "R", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 7,
+      "difficulty_tier": "complex",
+      "tier_rationale": "4 variables, 7 operators, nested multiplications with pi and cube"
+    },
+    {
+      "id": "feynman_077",
+      "name": "Biot-Savart Law (Magnitude)",
+      "formula_symbolic": "div(mul(mu_0, mul(I, mul(dl, sin(theta)))), mul(4, mul(C1, pow(r, 2))))",
+      "formula_latex": "dB = \\frac{\\mu_0 I \\, dl \\sin\\theta}{4\\pi r^2}",
+      "formula_python": "mu_0 * I * dl * sin(theta) / (4 * pi * r**2)",
+      "variables": [
+        {"name": "mu_0", "unit": "T*m/A"},
+        {"name": "I", "unit": "A"},
+        {"name": "dl", "unit": "m"},
+        {"name": "theta", "unit": "rad"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 5,
+      "num_operators": 9,
+      "difficulty_tier": "complex",
+      "tier_rationale": "5 variables, 9 operators, Biot-Savart with sin and 4pi denominator"
+    },
+    {
+      "id": "feynman_078",
+      "name": "Magnetic Dipole Field (On Axis)",
+      "formula_symbolic": "div(mul(mu_0, mul(2, m_mag)), mul(4, mul(C1, pow(r, 3))))",
+      "formula_latex": "B = \\frac{\\mu_0 2m}{4\\pi r^3}",
+      "formula_python": "mu_0 * 2 * m_mag / (4 * pi * r**3)",
+      "variables": [
+        {"name": "mu_0", "unit": "T*m/A"},
+        {"name": "m_mag", "unit": "A*m^2"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 7,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 7 operators, inverse cube law with constants"
+    },
+    {
+      "id": "feynman_079",
+      "name": "Relativistic Kinetic Energy",
+      "formula_symbolic": "mul(m, mul(pow(c, 2), sub(div(1, sqrt(sub(1, div(pow(v, 2), pow(c, 2))))), 1)))",
+      "formula_latex": "KE = mc^2\\left(\\frac{1}{\\sqrt{1 - v^2/c^2}} - 1\\right)",
+      "formula_python": "m * c**2 * (1 / (1 - v**2 / c**2)**0.5 - 1)",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "c", "unit": "m/s"},
+        {"name": "v", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 10,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 10 operators, nested sqrt, powers, subtraction"
+    },
+    {
+      "id": "feynman_080",
+      "name": "de Broglie Wavelength",
+      "formula_symbolic": "div(h, mul(m, v))",
+      "formula_latex": "\\lambda = \\frac{h}{mv}",
+      "formula_python": "h / (m * v)",
+      "variables": [
+        {"name": "h", "unit": "J*s"},
+        {"name": "m", "unit": "kg"},
+        {"name": "v", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 2 operators, quantum-classical bridge equation"
+    },
+    {
+      "id": "feynman_081",
+      "name": "Compton Wavelength Shift",
+      "formula_symbolic": "mul(div(h, mul(m_e, c)), sub(1, cos(theta)))",
+      "formula_latex": "\\Delta\\lambda = \\frac{h}{m_e c}(1 - \\cos\\theta)",
+      "formula_python": "h / (m_e * c) * (1 - cos(theta))",
+      "variables": [
+        {"name": "h", "unit": "J*s"},
+        {"name": "m_e", "unit": "kg"},
+        {"name": "c", "unit": "m/s"},
+        {"name": "theta", "unit": "rad"}
+      ],
+      "num_variables": 4,
+      "num_operators": 6,
+      "difficulty_tier": "complex",
+      "tier_rationale": "4 variables, 6 operators, Compton scattering wavelength"
+    },
+    {
+      "id": "feynman_082",
+      "name": "Bohr Model Energy Levels",
+      "formula_symbolic": "neg(div(mul(m_e, pow(mul(q, q), 2)), mul(mul(8, pow(epsilon, 2)), mul(pow(h, 2), pow(n, 2)))))",
+      "formula_latex": "E_n = -\\frac{m_e q^4}{8\\epsilon_0^2 h^2 n^2}",
+      "formula_python": "-m_e * q**4 / (8 * epsilon_0**2 * h**2 * n**2)",
+      "variables": [
+        {"name": "m_e", "unit": "kg"},
+        {"name": "q", "unit": "C"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "h", "unit": "J*s"},
+        {"name": "n", "unit": "dimensionless"}
+      ],
+      "num_variables": 5,
+      "num_operators": 11,
+      "difficulty_tier": "complex",
+      "tier_rationale": "5 variables, 11 operators, deeply nested powers and multiplications"
+    },
+    {
+      "id": "feynman_083",
+      "name": "Stefan-Boltzmann Radiation Law",
+      "formula_symbolic": "mul(sigma, mul(A, pow(T, 4)))",
+      "formula_latex": "P = \\sigma A T^4",
+      "formula_python": "sigma * A * T**4",
+      "variables": [
+        {"name": "sigma", "unit": "W/(m^2*K^4)"},
+        {"name": "A", "unit": "m^2"},
+        {"name": "T", "unit": "K"}
+      ],
+      "num_variables": 3,
+      "num_operators": 3,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 3 operators, T^4 power law radiation"
+    },
+    {
+      "id": "feynman_084",
+      "name": "Wien's Displacement Law",
+      "formula_symbolic": "div(b, T)",
+      "formula_latex": "\\lambda_{max} = \\frac{b}{T}",
+      "formula_python": "b / T",
+      "variables": [
+        {"name": "b", "unit": "m*K"},
+        {"name": "T", "unit": "K"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "complex",
+      "tier_rationale": "2 variables, 1 operator, but foundational blackbody relation"
+    },
+    {
+      "id": "feynman_085",
+      "name": "Photoelectric Equation",
+      "formula_symbolic": "sub(mul(h, f), phi)",
+      "formula_latex": "KE_{max} = hf - \\phi",
+      "formula_python": "h * f - phi",
+      "variables": [
+        {"name": "h", "unit": "J*s"},
+        {"name": "f", "unit": "Hz"},
+        {"name": "phi", "unit": "J"}
+      ],
+      "num_variables": 3,
+      "num_operators": 2,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 2 operators, photoelectric effect with work function"
+    },
+    {
+      "id": "feynman_086",
+      "name": "Time Dilation",
+      "formula_symbolic": "div(t0, sqrt(sub(1, div(pow(v, 2), pow(c, 2)))))",
+      "formula_latex": "t = \\frac{t_0}{\\sqrt{1 - v^2/c^2}}",
+      "formula_python": "t0 / (1 - v**2 / c**2)**0.5",
+      "variables": [
+        {"name": "t0", "unit": "s"},
+        {"name": "v", "unit": "m/s"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 6,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 6 operators, Lorentz factor with nested operations"
+    },
+    {
+      "id": "feynman_087",
+      "name": "Length Contraction",
+      "formula_symbolic": "mul(L0, sqrt(sub(1, div(pow(v, 2), pow(c, 2)))))",
+      "formula_latex": "L = L_0\\sqrt{1 - v^2/c^2}",
+      "formula_python": "L0 * (1 - v**2 / c**2)**0.5",
+      "variables": [
+        {"name": "L0", "unit": "m"},
+        {"name": "v", "unit": "m/s"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 6,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 6 operators, Lorentz contraction"
+    },
+    {
+      "id": "feynman_088",
+      "name": "Electric Dipole Potential",
+      "formula_symbolic": "div(mul(p, cos(theta)), mul(4, mul(C1, mul(epsilon, pow(r, 2)))))",
+      "formula_latex": "V = \\frac{p\\cos\\theta}{4\\pi\\epsilon_0 r^2}",
+      "formula_python": "p * cos(theta) / (4 * pi * epsilon_0 * r**2)",
+      "variables": [
+        {"name": "p", "unit": "C*m"},
+        {"name": "theta", "unit": "rad"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 8,
+      "difficulty_tier": "complex",
+      "tier_rationale": "4 variables, 8 operators, cos with 4pi epsilon denominator"
+    },
+    {
+      "id": "feynman_089",
+      "name": "Heisenberg Uncertainty (Energy-Time)",
+      "formula_symbolic": "div(h_bar, mul(2, dE))",
+      "formula_latex": "\\Delta t \\geq \\frac{\\hbar}{2\\Delta E}",
+      "formula_python": "h_bar / (2 * dE)",
+      "variables": [
+        {"name": "h_bar", "unit": "J*s"},
+        {"name": "dE", "unit": "J"}
+      ],
+      "num_variables": 2,
+      "num_operators": 2,
+      "difficulty_tier": "complex",
+      "tier_rationale": "2 variables, 2 operators, fundamental quantum uncertainty"
+    },
+    {
+      "id": "feynman_090",
+      "name": "Cyclotron Frequency",
+      "formula_symbolic": "div(mul(q, B), mul(mul(2, C1), m))",
+      "formula_latex": "f = \\frac{qB}{2\\pi m}",
+      "formula_python": "q * B / (2 * pi * m)",
+      "variables": [
+        {"name": "q", "unit": "C"},
+        {"name": "B", "unit": "T"},
+        {"name": "m", "unit": "kg"}
+      ],
+      "num_variables": 3,
+      "num_operators": 5,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 5 operators, particle in magnetic field frequency"
+    },
+    {
+      "id": "feynman_091",
+      "name": "Hall Voltage",
+      "formula_symbolic": "div(mul(I, B), mul(n, mul(q, d)))",
+      "formula_latex": "V_H = \\frac{IB}{nqd}",
+      "formula_python": "I * B / (n * q * d)",
+      "variables": [
+        {"name": "I", "unit": "A"},
+        {"name": "B", "unit": "T"},
+        {"name": "n", "unit": "1/m^3"},
+        {"name": "q", "unit": "C"},
+        {"name": "d", "unit": "m"}
+      ],
+      "num_variables": 5,
+      "num_operators": 5,
+      "difficulty_tier": "complex",
+      "tier_rationale": "5 variables, 5 operators, Hall effect relation"
+    },
+    {
+      "id": "feynman_092",
+      "name": "Relativistic Momentum",
+      "formula_symbolic": "div(mul(m, v), sqrt(sub(1, div(pow(v, 2), pow(c, 2)))))",
+      "formula_latex": "p = \\frac{mv}{\\sqrt{1 - v^2/c^2}}",
+      "formula_python": "m * v / (1 - v**2 / c**2)**0.5",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "v", "unit": "m/s"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 7,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 7 operators, Lorentz factor in momentum"
+    },
+    {
+      "id": "feynman_093",
+      "name": "Relativistic Doppler Effect",
+      "formula_symbolic": "mul(f0, sqrt(div(sub(1, div(v, c)), add(1, div(v, c)))))",
+      "formula_latex": "f = f_0\\sqrt{\\frac{1 - v/c}{1 + v/c}}",
+      "formula_python": "f0 * ((1 - v / c) / (1 + v / c))**0.5",
+      "variables": [
+        {"name": "f0", "unit": "Hz"},
+        {"name": "v", "unit": "m/s"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 7,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 7 operators, relativistic frequency shift"
+    },
+    {
+      "id": "feynman_094",
+      "name": "Magnetic Field of Current Loop (On Axis)",
+      "formula_symbolic": "div(mul(mu_0, mul(I, pow(R, 2))), mul(2, pow(add(pow(R, 2), pow(x, 2)), 1.5)))",
+      "formula_latex": "B = \\frac{\\mu_0 I R^2}{2(R^2 + x^2)^{3/2}}",
+      "formula_python": "mu_0 * I * R**2 / (2 * (R**2 + x**2)**1.5)",
+      "variables": [
+        {"name": "mu_0", "unit": "T*m/A"},
+        {"name": "I", "unit": "A"},
+        {"name": "R", "unit": "m"},
+        {"name": "x", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 9,
+      "difficulty_tier": "complex",
+      "tier_rationale": "4 variables, 9 operators, 3/2 power with sum of squares"
+    },
+    {
+      "id": "feynman_095",
+      "name": "Rayleigh Scattering Intensity",
+      "formula_symbolic": "mul(I0, div(pow(add(1, pow(cos(theta), 2)), 1), mul(2, mul(pow(r, 2), pow(div(lambda, mul(2, C1)), 4)))))",
+      "formula_latex": "I = I_0 \\frac{1 + \\cos^2\\theta}{2r^2}\\left(\\frac{2\\pi}{\\lambda}\\right)^4",
+      "formula_python": "I0 * (1 + cos(theta)**2) / (2 * r**2) * (2 * pi / lambda_val)**4",
+      "variables": [
+        {"name": "I0", "unit": "W/m^2"},
+        {"name": "theta", "unit": "rad"},
+        {"name": "r", "unit": "m"},
+        {"name": "lambda_val", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 12,
+      "difficulty_tier": "complex",
+      "tier_rationale": "4 variables, 12 operators, deeply nested with cos^2 and lambda^4"
+    },
+    {
+      "id": "feynman_096",
+      "name": "Bohr Radius",
+      "formula_symbolic": "div(mul(4, mul(C1, mul(epsilon, pow(h_bar, 2)))), mul(m_e, pow(q, 2)))",
+      "formula_latex": "a_0 = \\frac{4\\pi\\epsilon_0\\hbar^2}{m_e q^2}",
+      "formula_python": "4 * pi * epsilon_0 * h_bar**2 / (m_e * q**2)",
+      "variables": [
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "h_bar", "unit": "J*s"},
+        {"name": "m_e", "unit": "kg"},
+        {"name": "q", "unit": "C"}
+      ],
+      "num_variables": 4,
+      "num_operators": 8,
+      "difficulty_tier": "complex",
+      "tier_rationale": "4 variables, 8 operators, fundamental atomic scale with powers"
+    },
+    {
+      "id": "feynman_097",
+      "name": "Rydberg Formula (Frequency)",
+      "formula_symbolic": "mul(R_inf, mul(c, sub(div(1, pow(n1, 2)), div(1, pow(n2, 2)))))",
+      "formula_latex": "f = R_\\infty c \\left(\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right)",
+      "formula_python": "R_inf * c * (1 / n1**2 - 1 / n2**2)",
+      "variables": [
+        {"name": "R_inf", "unit": "1/m"},
+        {"name": "c", "unit": "m/s"},
+        {"name": "n1", "unit": "dimensionless"},
+        {"name": "n2", "unit": "dimensionless"}
+      ],
+      "num_variables": 4,
+      "num_operators": 7,
+      "difficulty_tier": "complex",
+      "tier_rationale": "4 variables, 7 operators, spectral line frequencies"
+    },
+    {
+      "id": "feynman_098",
+      "name": "Electric Dipole Field (Axial)",
+      "formula_symbolic": "div(mul(2, mul(p, pow(r, neg(3)))), mul(4, mul(C1, epsilon)))",
+      "formula_latex": "E = \\frac{2p}{4\\pi\\epsilon_0 r^3}",
+      "formula_python": "2 * p / (4 * pi * epsilon_0 * r**3)",
+      "variables": [
+        {"name": "p", "unit": "C*m"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 7,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 7 operators, inverse cube dipole field"
+    },
+    {
+      "id": "feynman_099",
+      "name": "Magnetic Moment of Current Loop",
+      "formula_symbolic": "mul(N, mul(I, mul(C1, pow(r, 2))))",
+      "formula_latex": "\\mu = NI\\pi r^2",
+      "formula_python": "N * I * pi * r**2",
+      "variables": [
+        {"name": "N", "unit": "dimensionless"},
+        {"name": "I", "unit": "A"},
+        {"name": "r", "unit": "m"}
+      ],
+      "num_variables": 3,
+      "num_operators": 4,
+      "difficulty_tier": "complex",
+      "tier_rationale": "3 variables, 4 operators, magnetic moment with pi"
+    },
+    {
+      "id": "feynman_100",
+      "name": "Larmor Radiation Power",
+      "formula_symbolic": "div(mul(pow(q, 2), pow(a, 2)), mul(6, mul(C1, mul(epsilon, pow(c, 3)))))",
+      "formula_latex": "P = \\frac{q^2 a^2}{6\\pi\\epsilon_0 c^3}",
+      "formula_python": "q**2 * a**2 / (6 * pi * epsilon_0 * c**3)",
+      "variables": [
+        {"name": "q", "unit": "C"},
+        {"name": "a", "unit": "m/s^2"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 4,
+      "num_operators": 9,
+      "difficulty_tier": "complex",
+      "tier_rationale": "4 variables, 9 operators, accelerated charge radiation"
+    },
+    {
+      "id": "feynman_101",
+      "name": "Relativistic Energy-Momentum Relation",
+      "formula_symbolic": "sqrt(add(pow(mul(p, c), 2), pow(mul(m, pow(c, 2)), 2)))",
+      "formula_latex": "E = \\sqrt{(pc)^2 + (mc^2)^2}",
+      "formula_python": "((p * c)**2 + (m * c**2)**2)**0.5",
+      "variables": [
+        {"name": "p", "unit": "kg*m/s"},
+        {"name": "c", "unit": "m/s"},
+        {"name": "m", "unit": "kg"}
+      ],
+      "num_variables": 3,
+      "num_operators": 7,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "3 variables, 7 operators, compositional relativistic relation combining momentum and rest energy"
+    },
+    {
+      "id": "feynman_102",
+      "name": "Compton Scattering (Scattered Photon Energy)",
+      "formula_symbolic": "div(E_gamma, add(1, mul(div(E_gamma, mul(m_e, pow(c, 2))), sub(1, cos(theta)))))",
+      "formula_latex": "E' = \\frac{E_\\gamma}{1 + \\frac{E_\\gamma}{m_e c^2}(1 - \\cos\\theta)}",
+      "formula_python": "E_gamma / (1 + E_gamma / (m_e * c**2) * (1 - cos(theta)))",
+      "variables": [
+        {"name": "E_gamma", "unit": "J"},
+        {"name": "m_e", "unit": "kg"},
+        {"name": "c", "unit": "m/s"},
+        {"name": "theta", "unit": "rad"}
+      ],
+      "num_variables": 4,
+      "num_operators": 10,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "4 variables, 10 operators, compositional Compton formula"
+    },
+    {
+      "id": "feynman_103",
+      "name": "Rutherford Scattering Cross Section",
+      "formula_symbolic": "pow(div(mul(Z1, mul(Z2, pow(q, 2))), mul(4, mul(E_k, sin(div(theta, 2))))), 2)",
+      "formula_latex": "\\frac{d\\sigma}{d\\Omega} = \\left(\\frac{Z_1 Z_2 q^2}{4 E_k \\sin(\\theta/2)}\\right)^2",
+      "formula_python": "(Z1 * Z2 * q**2 / (4 * E_k * sin(theta / 2)))**2",
+      "variables": [
+        {"name": "Z1", "unit": "dimensionless"},
+        {"name": "Z2", "unit": "dimensionless"},
+        {"name": "q", "unit": "C"},
+        {"name": "E_k", "unit": "J"},
+        {"name": "theta", "unit": "rad"}
+      ],
+      "num_variables": 5,
+      "num_operators": 10,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "5 variables, 10 operators, squared ratio with sin(theta/2)"
+    },
+    {
+      "id": "feynman_104",
+      "name": "Hydrogen Energy Levels (Full)",
+      "formula_symbolic": "neg(div(mul(m_e, pow(q, 4)), mul(mul(8, pow(epsilon, 2)), mul(pow(h, 2), pow(n, 2)))))",
+      "formula_latex": "E_n = -\\frac{m_e e^4}{8\\epsilon_0^2 h^2 n^2}",
+      "formula_python": "-m_e * q**4 / (8 * epsilon_0**2 * h**2 * n**2)",
+      "variables": [
+        {"name": "m_e", "unit": "kg"},
+        {"name": "q", "unit": "C"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "h", "unit": "J*s"},
+        {"name": "n", "unit": "dimensionless"}
+      ],
+      "num_variables": 5,
+      "num_operators": 11,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "5 variables, 11 operators, full quantum energy level expression"
+    },
+    {
+      "id": "feynman_105",
+      "name": "Schwarzschild Radius",
+      "formula_symbolic": "div(mul(2, mul(G, M)), pow(c, 2))",
+      "formula_latex": "r_s = \\frac{2GM}{c^2}",
+      "formula_python": "2 * G * M / c**2",
+      "variables": [
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "M", "unit": "kg"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 4,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "3 variables, 4 operators, general relativity boundary condition"
+    },
+    {
+      "id": "feynman_106",
+      "name": "Gravitational Time Dilation",
+      "formula_symbolic": "mul(t0, sqrt(sub(1, div(mul(2, mul(G, M)), mul(r, pow(c, 2))))))",
+      "formula_latex": "t = t_0\\sqrt{1 - \\frac{2GM}{rc^2}}",
+      "formula_python": "t0 * (1 - 2 * G * M / (r * c**2))**0.5",
+      "variables": [
+        {"name": "t0", "unit": "s"},
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "M", "unit": "kg"},
+        {"name": "r", "unit": "m"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 5,
+      "num_operators": 8,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "5 variables, 8 operators, GR time dilation near massive body"
+    },
+    {
+      "id": "feynman_107",
+      "name": "Coupled Oscillator Normal Mode (Symmetric)",
+      "formula_symbolic": "sqrt(div(k, m))",
+      "formula_latex": "\\omega_1 = \\sqrt{\\frac{k}{m}}",
+      "formula_python": "(k / m)**0.5",
+      "variables": [
+        {"name": "k", "unit": "N/m"},
+        {"name": "m", "unit": "kg"}
+      ],
+      "num_variables": 2,
+      "num_operators": 2,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "2 variables, 2 operators, but represents normal mode decomposition of coupled system"
+    },
+    {
+      "id": "feynman_108",
+      "name": "Coupled Oscillator Normal Mode (Antisymmetric)",
+      "formula_symbolic": "sqrt(div(add(k, mul(2, k_c)), m))",
+      "formula_latex": "\\omega_2 = \\sqrt{\\frac{k + 2k_c}{m}}",
+      "formula_python": "((k + 2 * k_c) / m)**0.5",
+      "variables": [
+        {"name": "k", "unit": "N/m"},
+        {"name": "k_c", "unit": "N/m"},
+        {"name": "m", "unit": "kg"}
+      ],
+      "num_variables": 3,
+      "num_operators": 4,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "3 variables, 4 operators, antisymmetric normal mode with coupling"
+    },
+    {
+      "id": "feynman_109",
+      "name": "Electromagnetic Wave E-field Component",
+      "formula_symbolic": "mul(E0, sin(sub(mul(k_wave, x), mul(omega, t))))",
+      "formula_latex": "E = E_0 \\sin(kx - \\omega t)",
+      "formula_python": "E0 * sin(k_wave * x - omega * t)",
+      "variables": [
+        {"name": "E0", "unit": "V/m"},
+        {"name": "k_wave", "unit": "1/m"},
+        {"name": "x", "unit": "m"},
+        {"name": "omega", "unit": "rad/s"},
+        {"name": "t", "unit": "s"}
+      ],
+      "num_variables": 5,
+      "num_operators": 4,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "5 variables, 4 operators, traveling wave solution to Maxwell's equations"
+    },
+    {
+      "id": "feynman_110",
+      "name": "Planck Radiation Law (Simplified)",
+      "formula_symbolic": "div(mul(mul(8, C1), mul(h, div(pow(f, 3), pow(c, 3)))), sub(exp(div(mul(h, f), mul(k_B, T))), 1))",
+      "formula_latex": "u(f) = \\frac{8\\pi h f^3}{c^3}\\frac{1}{e^{hf/(k_B T)} - 1}",
+      "formula_python": "8 * pi * h * f**3 / c**3 / (exp(h * f / (k_B * T)) - 1)",
+      "variables": [
+        {"name": "h", "unit": "J*s"},
+        {"name": "f", "unit": "Hz"},
+        {"name": "c", "unit": "m/s"},
+        {"name": "k_B", "unit": "J/K"},
+        {"name": "T", "unit": "K"}
+      ],
+      "num_variables": 5,
+      "num_operators": 13,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "5 variables, 13 operators, Planck distribution with exponential"
+    },
+    {
+      "id": "feynman_111",
+      "name": "Relativistic Velocity Addition",
+      "formula_symbolic": "div(add(u, v), add(1, div(mul(u, v), pow(c, 2))))",
+      "formula_latex": "w = \\frac{u + v}{1 + \\frac{uv}{c^2}}",
+      "formula_python": "(u + v) / (1 + u * v / c**2)",
+      "variables": [
+        {"name": "u", "unit": "m/s"},
+        {"name": "v", "unit": "m/s"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 6,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "3 variables, 6 operators, special relativity composition of velocities"
+    },
+    {
+      "id": "feynman_112",
+      "name": "Relativistic Mass-Energy (Total Energy)",
+      "formula_symbolic": "div(mul(m, pow(c, 2)), sqrt(sub(1, div(pow(v, 2), pow(c, 2)))))",
+      "formula_latex": "E = \\frac{mc^2}{\\sqrt{1 - v^2/c^2}}",
+      "formula_python": "m * c**2 / (1 - v**2 / c**2)**0.5",
+      "variables": [
+        {"name": "m", "unit": "kg"},
+        {"name": "c", "unit": "m/s"},
+        {"name": "v", "unit": "m/s"}
+      ],
+      "num_variables": 3,
+      "num_operators": 8,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "3 variables, 8 operators, total relativistic energy"
+    },
+    {
+      "id": "feynman_113",
+      "name": "Bremsstrahlung Power (Classical)",
+      "formula_symbolic": "div(mul(pow(q, 2), pow(a, 2)), mul(6, mul(C1, mul(epsilon, pow(c, 3)))))",
+      "formula_latex": "P = \\frac{q^2 a^2}{6\\pi\\epsilon_0 c^3}",
+      "formula_python": "q**2 * a**2 / (6 * pi * epsilon_0 * c**3)",
+      "variables": [
+        {"name": "q", "unit": "C"},
+        {"name": "a", "unit": "m/s^2"},
+        {"name": "epsilon_0", "unit": "F/m"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 4,
+      "num_operators": 9,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "4 variables, 9 operators, classical braking radiation"
+    },
+    {
+      "id": "feynman_114",
+      "name": "Lorentz Force (Full 3D Component)",
+      "formula_symbolic": "mul(q, add(E_x, sub(mul(v_y, B_z), mul(v_z, B_y))))",
+      "formula_latex": "F_x = q(E_x + v_y B_z - v_z B_y)",
+      "formula_python": "q * (E_x + v_y * B_z - v_z * B_y)",
+      "variables": [
+        {"name": "q", "unit": "C"},
+        {"name": "E_x", "unit": "V/m"},
+        {"name": "v_y", "unit": "m/s"},
+        {"name": "B_z", "unit": "T"},
+        {"name": "v_z", "unit": "m/s"},
+        {"name": "B_y", "unit": "T"}
+      ],
+      "num_variables": 6,
+      "num_operators": 5,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "6 variables, 5 operators, full vector cross product component"
+    },
+    {
+      "id": "feynman_115",
+      "name": "Gravitational Redshift (Wavelength)",
+      "formula_symbolic": "mul(lambda_0, div(1, sqrt(sub(1, div(mul(2, mul(G, M)), mul(r, pow(c, 2)))))))",
+      "formula_latex": "\\lambda = \\frac{\\lambda_0}{\\sqrt{1 - \\frac{2GM}{rc^2}}}",
+      "formula_python": "lambda_0 / (1 - 2 * G * M / (r * c**2))**0.5",
+      "variables": [
+        {"name": "lambda_0", "unit": "m"},
+        {"name": "G", "unit": "m^3/(kg*s^2)"},
+        {"name": "M", "unit": "kg"},
+        {"name": "r", "unit": "m"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 5,
+      "num_operators": 9,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "5 variables, 9 operators, GR photon frequency shift"
+    },
+    {
+      "id": "feynman_116",
+      "name": "Maxwell-Boltzmann Speed Distribution (Most Probable)",
+      "formula_symbolic": "sqrt(div(mul(2, mul(k_B, T)), m))",
+      "formula_latex": "v_p = \\sqrt{\\frac{2k_B T}{m}}",
+      "formula_python": "(2 * k_B * T / m)**0.5",
+      "variables": [
+        {"name": "k_B", "unit": "J/K"},
+        {"name": "T", "unit": "K"},
+        {"name": "m", "unit": "kg"}
+      ],
+      "num_variables": 3,
+      "num_operators": 4,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "3 variables, 4 operators, statistical mechanics speed distribution"
+    },
+    {
+      "id": "feynman_117",
+      "name": "Two-Slit Interference Intensity",
+      "formula_symbolic": "mul(4, mul(I0, pow(cos(div(mul(C1, mul(d, sin(theta))), lambda_val)), 2)))",
+      "formula_latex": "I = 4I_0 \\cos^2\\left(\\frac{\\pi d \\sin\\theta}{\\lambda}\\right)",
+      "formula_python": "4 * I0 * cos(pi * d * sin(theta) / lambda_val)**2",
+      "variables": [
+        {"name": "I0", "unit": "W/m^2"},
+        {"name": "d", "unit": "m"},
+        {"name": "theta", "unit": "rad"},
+        {"name": "lambda_val", "unit": "m"}
+      ],
+      "num_variables": 4,
+      "num_operators": 9,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "4 variables, 9 operators, nested trig with interference pattern"
+    },
+    {
+      "id": "feynman_118",
+      "name": "Radiation Pressure (Perfect Absorption)",
+      "formula_symbolic": "div(S, c)",
+      "formula_latex": "P = \\frac{S}{c}",
+      "formula_python": "S / c",
+      "variables": [
+        {"name": "S", "unit": "W/m^2"},
+        {"name": "c", "unit": "m/s"}
+      ],
+      "num_variables": 2,
+      "num_operators": 1,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "2 variables, 1 operator, connects EM energy flux to mechanical pressure"
+    },
+    {
+      "id": "feynman_119",
+      "name": "Electron Drift Velocity",
+      "formula_symbolic": "div(I, mul(n, mul(q, A)))",
+      "formula_latex": "v_d = \\frac{I}{nqA}",
+      "formula_python": "I / (n * q * A)",
+      "variables": [
+        {"name": "I", "unit": "A"},
+        {"name": "n", "unit": "1/m^3"},
+        {"name": "q", "unit": "C"},
+        {"name": "A", "unit": "m^2"}
+      ],
+      "num_variables": 4,
+      "num_operators": 4,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "4 variables, 4 operators, microscopic current model"
+    },
+    {
+      "id": "feynman_120",
+      "name": "Fermi Energy (Free Electron Model)",
+      "formula_symbolic": "div(pow(h_bar, 2), mul(2, mul(m_e, pow(div(mul(mul(3, pow(C1, 2)), n), 1), 0.6667))))",
+      "formula_latex": "E_F = \\frac{\\hbar^2}{2m_e}\\left(3\\pi^2 n\\right)^{2/3}",
+      "formula_python": "h_bar**2 / (2 * m_e) * (3 * pi**2 * n)**(2/3)",
+      "variables": [
+        {"name": "h_bar", "unit": "J*s"},
+        {"name": "m_e", "unit": "kg"},
+        {"name": "n", "unit": "1/m^3"}
+      ],
+      "num_variables": 3,
+      "num_operators": 10,
+      "difficulty_tier": "multi_step",
+      "tier_rationale": "3 variables, 10 operators, condensed matter Fermi level with fractional power"
+    }
+  ]
+}

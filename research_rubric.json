@@ -63,24 +63,24 @@
           "id": "item_004",
           "description": "Define the Feynman-Physics equation benchmark suite: select 120 equations from the Feynman Symbolic Regression Database spanning 5 difficulty tiers (trivial, simple, moderate, complex, multi-step derivation)",
           "acceptance_criteria": "JSON file (benchmarks/feynman_equations.json) containing 120 equations partitioned into 5 tiers with: (1) symbolic expression in prefix notation, (2) LaTeX rendering, (3) variable names and physical units, (4) number of variables (1-9), (5) number of operators, (6) difficulty tier assignment with rationale. Tier distribution: ~20 trivial (1-2 vars, <=3 ops), ~25 simple (2-3 vars, <=5 ops), ~30 moderate (3-5 vars, <=8 ops), ~25 complex (4-7 vars, <=12 ops), ~20 multi-step (5-9 vars, >=10 ops or compositional).",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "120 equations in benchmarks/feynman_equations.json with exact distribution: 20 trivial, 25 simple, 30 moderate, 25 complex, 20 multi_step. Each has prefix notation, LaTeX, Python, variables, and tier rationale.",
           "error": null
         },
         {
           "id": "item_005",
           "description": "Formalize the problem: define what 'deriving physics equations' means for a transformer \u2014 input representation, output representation, tokenization scheme, and evaluation metrics",
           "acceptance_criteria": "Technical specification document (problem_formalization.md) defining: (1) input format \u2014 numerical observation pairs (x, y) with IEEE-754 half-precision multi-hot encoding (per NeSymReS) OR learned embedding, with justification; (2) output format \u2014 prefix-notation symbolic expression token sequence; (3) tokenizer vocabulary \u2014 all operators (+, -, *, /, sin, cos, exp, log, sqrt, pow, etc.), variables (x1..x9), constants (C placeholder + fitted values), parentheses; (4) primary metrics: exact symbolic match rate, R\u00b2 fit score, normalized tree-edit distance; (5) secondary metrics: equation complexity (node count), inference time, derivation depth for multi-step equations.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "problem_formalization.md with full specification: IEEE-754 multi-hot encoding, 43-token vocabulary, prefix notation output, primary metrics (exact match, R2, NTED), secondary metrics, and model architecture overview.",
           "error": null
         },
         {
           "id": "item_006",
           "description": "Analyze CPU-only constraints and design architecture decisions accordingly: quantization strategy, model size budget, inference optimization plan",
           "acceptance_criteria": "Document (cpu_constraints.md) with: (1) memory budget analysis (assume 16GB RAM), (2) target model size <=150M parameters with justification, (3) quantization plan (INT8 or mixed-precision), (4) inference time budget (<=30s per equation on single CPU core), (5) training feasibility analysis with estimated epoch times, (6) framework selection (PyTorch with torch.compile or ONNX Runtime) with benchmarks of alternatives.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "cpu_constraints.md with memory budget tables, 50M parameter architecture, INT8 quantization plan, 20s inference budget, 70h training estimate, PyTorch 2.x selection with benchmarks.",
           "error": null
         }
       ]
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 3,
+    "completed": 6,
     "in_progress": 0,
     "failed": 0,
-    "pending": 22
+    "pending": 19
   }
 }
