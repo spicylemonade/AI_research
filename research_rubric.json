@@ -1,0 +1,276 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-14T12:00:00Z",
+  "updated_at": "2026-02-14T18:05:22.998364+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-14T12:00:00Z",
+      "completed_at": "2026-02-14T18:05:22.998336+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Analyze the ARC2025 ARChitects solution architecture (LLaDA-8B masked diffusion model, token algebra, soft-masking, recursive latent sampling, 2D positional encodings) and document transferable techniques for physics equation derivation",
+          "acceptance_criteria": "Written analysis document (analysis/arc_architecture_review.md) covering: (1) LLaDA masked diffusion approach and its token algebra/soft-masking innovation, (2) recursive latent sampling and iterative refinement loops, (3) 2D positional encoding modifications, (4) test-time fine-tuning strategy, (5) explicit mapping of which ARC techniques transfer to physics derivation and which require adaptation. Minimum 1500 words.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Conduct comprehensive literature review on transformer-based symbolic regression and physics equation discovery using web search",
+          "acceptance_criteria": "At least 15 relevant papers cited in sources.bib with complete BibTeX entries. Must include: (1) End-to-end symbolic regression with transformers (Kamienny et al. 2022), (2) TPSR: Transformer-based Planning for Symbolic Regression (NeurIPS 2023), (3) SymbolicGPT (Valipour et al.), (4) ODEFormer (Lorenz et al. 2023), (5) AI-Newton (Fang et al. 2025), (6) Universal Reasoning Model (Gao et al. 2025), (7) LLaDA / ARChitects ARC2025 solution, (8) CompressARC (Liao 2025), (9) Graph Networks for discovering symbolic models (Cranmer et al.), (10) PhyE2E neural symbolic model for space physics. Each entry must have title, authors, year, venue/arxiv ID.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Define the precise problem scope: which Newtonian physics equations the model must derive, from what input representations, and success criteria",
+          "acceptance_criteria": "Written problem specification document (analysis/problem_scope.md) defining: (1) taxonomy of target equations organized by complexity tier \u2014 Tier 1: kinematic equations (s=ut+0.5at\u00b2, v=u+at), Tier 2: force laws (F=ma, F=-kx, Hooke's law), Tier 3: conservation laws (energy, momentum), Tier 4: coupled/composite systems (projectile motion with drag, N-body gravitational, spring-mass-damper chains, inclined plane dynamics), (2) input representation format (numerical observation pairs, time-series trajectories, or symbolic tokens), (3) output representation format (symbolic expression trees or token sequences), (4) quantitative success metrics per tier (exact symbolic match rate, R\u00b2 on held-out data, normalized tree edit distance to ground truth).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Survey and document the Universal Transformer / recurrent refinement paradigm and its relevance to iterative equation derivation",
+          "acceptance_criteria": "Analysis document (analysis/universal_transformer_survey.md) covering: (1) Universal Transformer weight-sharing and adaptive computation, (2) URM's ConvSwiGLU module and truncated backpropagation through loops, (3) how recurrent refinement achieves 53.8% on ARC-AGI-1 vs 23.75% for vanilla transformers at equivalent FLOPs, (4) CompressARC's MDL-based zero-pretraining approach, (5) concrete proposal for how iterative refinement can be applied to progressive equation derivation (refining symbolic expressions over multiple passes). At least 5 papers cited from sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Design the synthetic training data generation pipeline for physics equation-observation pairs",
+          "acceptance_criteria": "Data pipeline specification document (analysis/data_pipeline_spec.md) detailing: (1) procedural equation generation grammar covering all 4 complexity tiers with at least 50 distinct equation templates, (2) numerical observation sampling strategy (variable ranges, noise injection levels of 0%, 1%, 5%, 10% Gaussian noise), (3) data augmentation via variable permutation, unit scaling, and coordinate transformations, (4) train/val/test split strategy ensuring no equation template leakage, (5) estimated dataset sizes (target: 500K-2M training pairs) and storage requirements fitting single-A100 memory constraints, (6) comparison with data generation approaches from AI-Newton's 46-experiment setup and TPSR's synthetic data strategy.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_006",
+          "description": "Specify the complete model architecture incorporating ARC-inspired innovations for physics derivation",
+          "acceptance_criteria": "Architecture specification document (analysis/architecture_spec.md) with: (1) full model diagram showing encoder-decoder structure with specific layer counts, dimensions, and attention heads sized for single A100 (target: 150M-350M parameters), (2) novel 'Physics-Aware Recursive Refinement' (PARR) mechanism inspired by LLaDA's token algebra and URM's recurrent refinement \u2014 where the decoder iteratively refines a masked symbolic expression template over N passes, (3) positional encoding scheme adapted from ARChitects' 2D RoPE for encoding numerical data structure, (4) test-time adaptation strategy inspired by ARC solutions (per-problem fine-tuning with augmented observations), (5) comparison table against E2E Transformer, SymbolicGPT, TPSR, and ODEFormer architectures highlighting novel components.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_007",
+          "description": "Implement the synthetic data generation pipeline and generate the full training dataset",
+          "acceptance_criteria": "Working Python module (src/data/) that: (1) generates equation-observation pairs for all 4 complexity tiers, (2) produces at least 1M training pairs, 50K validation pairs, and 50K test pairs, (3) includes configurable noise injection (0-10%), (4) applies data augmentation (variable permutation, scaling), (5) serializes to efficient format (HDF5 or memory-mapped NumPy), (6) total dataset fits within 50GB, (7) generation completes in under 2 hours on single A100, (8) unit tests pass with >95% coverage for data module, (9) validates no equation template leakage between splits.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement the vanilla sequence-to-sequence transformer baseline for symbolic regression",
+          "acceptance_criteria": "Working baseline model (src/models/baseline_transformer.py) with: (1) standard encoder-decoder transformer (6 layers, 512 dim, 8 heads, ~50M params), (2) numerical encoder tokenizing observation pairs into learned embeddings, (3) symbolic expression decoder using BPE-style equation tokenizer, (4) training script that converges on Tier 1 equations (kinematic) achieving >60% exact symbolic match, (5) single A100 training completes within 8 hours for baseline, (6) model checkpointing and reproducible training with fixed seeds.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Establish comprehensive evaluation metrics suite and automated benchmarking pipeline",
+          "acceptance_criteria": "Evaluation module (src/evaluation/) implementing: (1) exact symbolic match rate (after canonical simplification via SymPy), (2) R\u00b2 score on held-out numerical predictions, (3) normalized tree edit distance between predicted and ground-truth expression trees, (4) complexity-adjusted accuracy (penalizing overly complex equivalent expressions), (5) per-tier breakdown of all metrics, (6) statistical significance testing (bootstrap confidence intervals, p-values), (7) automated benchmark script that evaluates any model checkpoint against all test tiers and produces a JSON results file and LaTeX-formatted table, (8) comparison hooks for prior work baselines from literature review.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Benchmark the vanilla transformer baseline across all equation complexity tiers and establish performance floors",
+          "acceptance_criteria": "Baseline results file (results/baseline_results.json) containing: (1) per-tier exact match rates (expected: Tier 1 >60%, Tier 2 >40%, Tier 3 >20%, Tier 4 >5%), (2) per-tier R\u00b2 scores, (3) per-tier tree edit distances, (4) training curves (loss, accuracy vs. epoch), (5) inference latency measurements, (6) comparison against reported results from SymbolicGPT and E2E transformer papers (from sources.bib), (7) analysis of failure modes on Tier 3-4 equations with concrete examples.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_011",
+          "description": "Implement the Physics-Aware Recursive Refinement (PARR) transformer with masked diffusion-inspired iterative decoding",
+          "acceptance_criteria": "Novel model implementation (src/models/parr_transformer.py) with: (1) Universal Transformer backbone with shared weights across L recurrent loops (L configurable, default 8), (2) ConvSwiGLU feed-forward blocks inspired by URM, (3) masked diffusion decoding mechanism adapted from LLaDA \u2014 starting from fully masked equation template, progressively unmasking tokens over K refinement steps with learned confidence scheduling, (4) token algebra layer enabling continuous soft-token mixtures during intermediate refinement (not just discrete token selection), (5) truncated backpropagation through loops (TBPTL) for memory-efficient training, (6) total parameter count 150M-350M fitting A100 40GB VRAM with batch size \u226516, (7) unit tests for each novel component, (8) architecture diagram generated as figure (figures/parr_architecture.png).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_012",
+          "description": "Implement physics-informed positional encodings and dimensional analysis attention constraints",
+          "acceptance_criteria": "Encoding module (src/models/physics_encodings.py) with: (1) multi-scale positional encoding for numerical inputs that captures both value magnitude and sequential position (adapted from ARChitects' 2D RoPE concept \u2014 using separate frequency bands for data index and value scale), (2) dimensional analysis attention mask that constrains the decoder to produce dimensionally consistent sub-expressions (e.g., preventing addition of quantities with incompatible units), (3) ablation-ready toggle to enable/disable each component independently, (4) empirical verification that dimensional attention mask reduces dimensionally invalid outputs by >50% compared to unconstrained baseline on Tier 2+ equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement test-time adaptation (TTA) module for per-problem fine-tuning with observation augmentation",
+          "acceptance_criteria": "TTA module (src/models/test_time_adapt.py) with: (1) per-problem LoRA fine-tuning (rank 16-32) on the test observation set for up to 64 gradient steps, (2) observation augmentation during TTA: adding noise perturbations, resampling input ranges, variable substitution, (3) multi-candidate generation with product-of-experts scoring (inspired by ARChitects' augmentation-based candidate selection), (4) most-visited-candidate selection tracking convergence of refinement iterations, (5) TTA completes within 30 seconds per equation on A100, (6) demonstrated improvement of \u22655% exact match rate over non-TTA inference on Tier 3-4 equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement curriculum learning strategy with progressive complexity scheduling",
+          "acceptance_criteria": "Training pipeline (src/training/curriculum.py) with: (1) multi-phase curriculum: Phase A trains on Tier 1 only until >80% match, Phase B mixes Tier 1-2, Phase C mixes Tier 1-3, Phase D trains on full Tier 1-4 distribution, (2) automated phase transition based on validation performance thresholds, (3) difficulty-aware sampling that upweights equations the model currently fails on (hard example mining), (4) comparison experiment showing curriculum training achieves \u226510% higher Tier 4 accuracy than flat-distribution training, (5) training curves for each curriculum phase saved as figures.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement equation tree consistency verification and self-validation mechanism",
+          "acceptance_criteria": "Verification module (src/models/self_verify.py) with: (1) symbolic consistency checker that validates generated equations against input observations (numerical forward-pass verification), (2) self-verification loop where the model generates N candidate equations, numerically evaluates each against held-out observations, and re-ranks by fit quality, (3) beam search with verification-guided pruning (discard candidates with R\u00b2 < 0.5 early), (4) integration with PARR refinement \u2014 verification scores feed back into the next refinement iteration as conditioning signal, (5) demonstrated reduction in numerically invalid outputs by >70% compared to unconstrained generation.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_016",
+          "description": "Full training run of PARR transformer with curriculum learning on complete dataset",
+          "acceptance_criteria": "Trained PARR model checkpoint (checkpoints/parr_final.pt) with: (1) complete curriculum training through all 4 phases on 1M+ equation pairs, (2) training completed on single A100 within 48 hours, (3) training logs showing loss convergence and curriculum phase transitions, (4) validation performance tracked every 1000 steps, (5) final validation exact match: Tier 1 \u226585%, Tier 2 \u226565%, Tier 3 \u226540%, Tier 4 \u226515%, (6) GPU memory usage logged showing \u226440GB peak.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_017",
+          "description": "Comprehensive ablation study isolating contribution of each novel component",
+          "acceptance_criteria": "Ablation results (results/ablation_study.json and figures/ablation_*.png) covering: (1) PARR full model vs. remove recursive refinement (use single-pass decoding), (2) PARR vs. remove token algebra (use discrete tokens only), (3) PARR vs. remove physics-informed positional encoding, (4) PARR vs. remove dimensional attention constraints, (5) PARR vs. remove TTA, (6) PARR vs. remove curriculum learning, (7) PARR vs. remove self-verification, (8) each ablation trained for equivalent compute budget, (9) statistical significance (p < 0.05) for each component's contribution assessed via bootstrap, (10) bar chart figure showing component-wise accuracy delta.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Head-to-head comparison against prior work baselines on standardized benchmarks",
+          "acceptance_criteria": "Comparison results (results/comparison_results.json) with: (1) PARR vs. vanilla transformer baseline (from item_010), (2) PARR vs. reproduced SymbolicGPT results on equivalent data, (3) PARR vs. E2E transformer approach on equivalent data, (4) comparison against AI-Newton's reported results on Newtonian mechanics (46-experiment setup), (5) comparison against TPSR if reproducible within compute budget, (6) all comparisons on identical test sets, (7) PARR must achieve statistically significant improvement (p < 0.05) over vanilla baseline on Tiers 2-4, (8) results table formatted for paper inclusion citing all compared methods from sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Robustness evaluation: noise sensitivity, out-of-distribution generalization, and data efficiency",
+          "acceptance_criteria": "Robustness results (results/robustness_results.json and figures/robustness_*.png) with: (1) noise sensitivity curve: exact match rate vs. observation noise level (0%, 1%, 5%, 10%, 20%), (2) out-of-distribution test: evaluate on equation forms not seen in training (novel combinations of known operators), (3) data efficiency curve: performance vs. training set size (10K, 50K, 100K, 500K, 1M), (4) extrapolation test: train on narrow variable ranges, test on wider ranges, (5) PARR must degrade gracefully (\u226420% accuracy drop at 10% noise vs. clean data on Tier 1-2), (6) figures showing all curves with error bars from 3 random seeds.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Qualitative analysis: visualize the iterative refinement process and showcase flagship equation derivations",
+          "acceptance_criteria": "Visualization outputs (figures/refinement_*.png and results/qualitative_examples.json) with: (1) step-by-step visualization of PARR refinement for at least 5 representative equations (one per tier, plus one complex flagship), showing the masked template evolving over K refinement steps from random to correct equation, (2) attention map visualizations showing which input observations the model attends to when generating each equation token, (3) flagship demonstration: model derives F=ma, conservation of energy (KE+PE=const), and at least one coupled system equation from raw numerical observations alone, (4) failure case analysis with 5 representative failures showing where and why the model goes wrong, (5) all figures publication-quality (300 DPI, clear labels).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Compute efficiency analysis and scaling behavior characterization",
+          "acceptance_criteria": "Efficiency results (results/efficiency_analysis.json) with: (1) wall-clock training time breakdown by component and curriculum phase, (2) inference throughput (equations/second) with and without TTA, (3) FLOPs analysis: compute spent in encoder vs. decoder vs. refinement loops, (4) scaling analysis: performance vs. number of refinement loops (1, 2, 4, 8, 16, 32), showing diminishing returns curve, (5) memory profiling across batch sizes, (6) comparison of compute efficiency against AI-Newton (which uses symbolic regression) and TPSR (which uses MCTS), (7) demonstration that model fits and trains within single A100 40GB constraints.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_022",
+          "description": "Write complete technical paper documenting the PARR architecture, experiments, and results",
+          "acceptance_criteria": "Paper draft (paper/main.tex or paper/main.md) with: (1) Abstract summarizing key contribution and headline result, (2) Introduction motivating transformer-based physics derivation with citations to AI-Newton, ARC solutions, and symbolic regression literature from sources.bib, (3) Related Work section citing \u226510 papers from sources.bib with substantive comparison, (4) Method section with full PARR architecture description, training procedure, and TTA, (5) Experiments section with all quantitative results from Phase 4, (6) Analysis section discussing ablations, robustness, and qualitative findings, (7) Conclusion with limitations and future work, (8) all figures and tables referenced and included, (9) minimum 8 pages excluding references.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_023",
+          "description": "Compile and finalize sources.bib with all referenced literature",
+          "acceptance_criteria": "Complete BibTeX file (sources.bib) with: (1) at least 15 entries with complete metadata (authors, title, year, venue/journal, DOI or arXiv ID), (2) every paper cited in the technical paper has a corresponding sources.bib entry, (3) entries span at minimum: transformer symbolic regression, ARC/abstract reasoning, physics-informed ML, masked diffusion models, universal transformers, neuro-symbolic AI, (4) no duplicate entries, (5) consistent formatting throughout.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Create reproducibility package with all code, configs, and instructions",
+          "acceptance_criteria": "Reproducibility package containing: (1) requirements.txt or pyproject.toml with pinned dependency versions, (2) single-command training script (scripts/train.sh) that reproduces main results, (3) single-command evaluation script (scripts/evaluate.sh) that reproduces all reported metrics, (4) configuration files for all experiments (configs/ directory), (5) README.md with setup instructions, hardware requirements (single A100), expected training time, and result reproduction steps, (6) pre-trained model checkpoint downloadable or reproducible from scratch, (7) random seed documentation ensuring deterministic results.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Synthesize key findings and articulate the contribution to the field of AI-driven scientific discovery",
+          "acceptance_criteria": "Summary document (analysis/key_findings.md) with: (1) headline finding: transformers with recursive refinement and physics-informed constraints can autonomously derive Newtonian equations up to coupled multi-body systems, (2) quantified improvement over baselines (exact numbers from experiments), (3) identification of which ARC-inspired techniques transferred most effectively to physics (ranked by ablation delta), (4) honest assessment of limitations \u2014 which equation classes remain beyond reach and why, (5) concrete future directions: extension to Lagrangian/Hamiltonian mechanics, electrodynamics, fluid dynamics, (6) positioning relative to AI-Newton and other concurrent work, (7) statement on what this proves about transformer reasoning capabilities with supporting evidence.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 25,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 25
+  }
+}
