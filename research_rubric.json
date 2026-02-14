@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-02-14T00:00:00Z",
-  "updated_at": "2026-02-14T06:32:42.634728+00:00",
+  "updated_at": "2026-02-14T06:35:22.820524+00:00",
   "current_agent": "researcher",
   "agent_status": {
     "orchestrator": {
@@ -63,24 +63,24 @@
           "id": "item_004",
           "description": "Formalize the research problem statement with testable hypotheses grounded in literature gaps",
           "acceptance_criteria": "A document (docs/problem_statement.md) containing: (1) formal problem definition mapping numerical observations to symbolic equations, (2) at least 3 testable hypotheses (H1-H3) with quantitative success criteria referencing SOTA baselines from the literature review, (3) scope definition (Newtonian mechanics: kinematics, dynamics, energy, rotational, gravitation, oscillations, fluid statics), (4) explicit exclusions.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Problem statement with formal definition, 3 testable hypotheses (H1-H3), scope of 7 Newtonian mechanics families, and explicit exclusions.",
           "error": null
         },
         {
           "id": "item_005",
           "description": "Design the prefix-notation tokenization scheme with physics-aware vocabulary covering all target equation families",
           "acceptance_criteria": "A document (docs/tokenization_design.md) specifying: (1) complete token vocabulary (>=140 tokens) including operators, functions, physics symbols, constants, and structural tokens, (2) prefix notation encoding/decoding rules, (3) round-trip fidelity proof for at least 10 representative equations spanning all 7 equation families, (4) comparison with tokenization approaches in prior work (Lample & Charton, NeSymReS).",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Tokenization design with 147-token vocabulary, prefix notation rules, 10 round-trip proofs, and comparison with Lample&Charton and NeSymReS.",
           "error": null
         },
         {
           "id": "item_006",
           "description": "Analyze the ARC 2025 ARChitects solution and identify which architectural innovations to adapt for physics equation derivation",
           "acceptance_criteria": "A document (docs/arc_analysis.md) with analysis of: (1) masked diffusion training objective, (2) dual-axis RoPE, (3) recursive soft-mask refinement, (4) test-time finetuning, (5) token algebra. Each section must explain the technique, its relevance to physics SR, and proposed adaptations. Must cite the original ARC 2025 report.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "ARC 2025 analysis in docs/arc_analysis.md covering all 5 innovations with proposed adaptations for physics SR.",
           "error": null
         }
       ]
@@ -292,9 +292,9 @@
   ],
   "summary": {
     "total_items": 28,
-    "completed": 3,
+    "completed": 6,
     "in_progress": 0,
     "failed": 0,
-    "pending": 25
+    "pending": 22
   }
 }
