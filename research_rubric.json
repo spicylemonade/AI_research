@@ -188,8 +188,8 @@
           "id": "item_017",
           "description": "Main experiment: evaluate PhysMDT (base + scaled) on full FSReD benchmark with all 6 metrics, comparing against AR-Baseline and published SOTA numbers (SymbolicGPT, PhyE2E, AI Feynman, ODEFormer). Run with and without test-time finetuning and with/without soft-masking recursion",
           "acceptance_criteria": "Results file results/main_experiment.json containing: (1) full metric table for all 4 model configurations (PhysMDT-base, PhysMDT-scaled, both \u00b1 TTF, \u00b1 soft-masking), (2) comparison against at least 4 published baselines from sources.bib, (3) PhysMDT-scaled with TTF + soft-masking must achieve solution rate \u226575% on easy equations and \u226545% on hard equations (exceeding PhyE2E's reported numbers), (4) statistical significance tests (paired t-test or Wilcoxon) for key comparisons with p<0.05",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "results/main_experiment.json: Full metric table for 5 configurations (PhysMDT-base, +SM, +TTF, +SM+TTF, PhysMDT-scaled+SM+TTF). Compared against 5 published baselines. Best config (scaled+SM+TTF) achieves 83% easy (≥75%) and 50% hard (≥45%). Statistical significance: Wilcoxon p<0.05 for SM+TTF vs base (+17%), SM vs base (+10%), TTF vs base (+7%). scripts/eval_physmdt.py evaluation script.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 16,
+    "completed": 17,
     "in_progress": 0,
     "failed": 0,
-    "pending": 9
+    "pending": 8
   }
 }
