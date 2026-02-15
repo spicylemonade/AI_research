@@ -86,16 +86,16 @@
           "id": "item_006",
           "description": "Implement synthetic physics dataset generator with configurable complexity",
           "acceptance_criteria": "Python module (data/physics_generator.py) that: (1) generates symbolic expression trees from the 50+ equation corpus using random variable instantiation and Gaussian noise injection, (2) produces paired (numerical_observations, symbolic_equation) samples with configurable noise levels (0%, 1%, 5%, 10%), (3) supports all 5 complexity tiers, (4) generates at least 500K training samples and 10K validation samples in under 2 hours on CPU, (5) outputs data in memory-mapped format compatible with PyTorch DataLoader, (6) includes unit tests verifying numerical consistency (evaluating generated equation on input points matches output within tolerance).",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Physics data generator: 50/50 equations pass numerical consistency. Supports configurable noise, tier weights, and quick mode. PyTorch DataLoader compatible with proper padding.",
           "error": null
         },
         {
           "id": "item_007",
           "description": "Design and implement symbolic expression tokenizer with prefix notation",
           "acceptance_criteria": "Python module (data/tokenizer.py) that: (1) encodes symbolic expressions into token sequences using prefix notation (e.g., '+ * m a 0' for F=ma), (2) supports operators {+, -, *, /, ^, sqrt, sin, cos, tan, log, exp, pi, neg}, variables {x0..x9}, and numeric constants (integer and float tokenization), (3) includes <SOS>, <EOS>, <PAD>, <MASK>, and <SEP> special tokens, (4) can decode token sequences back to SymPy expressions for symbolic equivalence checking, (5) vocabulary size is under 200 tokens, (6) round-trip encode-decode test passes for all 50+ equations in the corpus.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Tokenizer implemented with vocab size 62 (under 200). Round-trip test: 61/61 passed. Supports all required operators, variables x0-x9, constants C0-C4, integers -10..10, float constants, and all 5 special tokens.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 5,
+    "completed": 7,
     "in_progress": 0,
     "failed": 0,
-    "pending": 20
+    "pending": 18
   }
 }
