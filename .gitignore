@@ -1,0 +1,64 @@
+# Archivara: prevent secrets from being committed
+.env
+.env.*
+.env.local
+*.key
+*.pem
+.claude/
+.codex/
+.archivara/
+TASK_*.md
+agent_*.log
+orchestration.log
+
+# Model checkpoints and large binaries
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+checkpoints/
+wandb/
+
+# Large data files
+*.hdf5
+*.h5
+*.npy
+*.npz
+*.mmap
+data/generated/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+checkpoints/
+*.pt
+*.pth
+*.npy
+*.npz
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz

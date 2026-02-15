@@ -1,0 +1,537 @@
+{
+  "model": "AR Baseline",
+  "total_params": 33200318,
+  "overall_symbolic_accuracy": 1.0,
+  "overall_mean_r2": 1.0,
+  "overall_mean_latency_ms": 68.87938737869263,
+  "peak_gpu_memory_gb": 0.540771328,
+  "tier_results": {
+    "1": {
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 40.6072735786438
+    },
+    "2": {
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 61.14612420399984
+    },
+    "3": {
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 93.03211967150371
+    },
+    "4": {
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 71.65089130401611
+    },
+    "5": {
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 97.50856161117554
+    }
+  },
+  "per_equation": [
+    {
+      "equation_id": "t1_01",
+      "equation_name": "Newton's second law (F=ma)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 58.40122699737549
+    },
+    {
+      "equation_id": "t1_02",
+      "equation_name": "Velocity with constant acceleration",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 44.055962562561035
+    },
+    {
+      "equation_id": "t1_03",
+      "equation_name": "Linear momentum",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 31.198716163635254
+    },
+    {
+      "equation_id": "t1_04",
+      "equation_name": "Work (W=Fd)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 32.424020767211914
+    },
+    {
+      "equation_id": "t1_05",
+      "equation_name": "Power (P=W/t)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 45.0627326965332
+    },
+    {
+      "equation_id": "t1_06",
+      "equation_name": "Impulse (I=Ft)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 31.911158561706543
+    },
+    {
+      "equation_id": "t1_07",
+      "equation_name": "Density (rho=m/V)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 44.90842819213867
+    },
+    {
+      "equation_id": "t1_08",
+      "equation_name": "Pressure (P=F/A)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 46.399641036987305
+    },
+    {
+      "equation_id": "t1_09",
+      "equation_name": "Speed (v=d/t)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 46.22774124145508
+    },
+    {
+      "equation_id": "t1_10",
+      "equation_name": "Acceleration (a=F/m)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 44.71077919006348
+    },
+    {
+      "equation_id": "t1_11",
+      "equation_name": "Torque (tau=Fr)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 30.637097358703613
+    },
+    {
+      "equation_id": "t1_12",
+      "equation_name": "Frequency (f=1/T)",
+      "tier": 1,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 31.349778175354004
+    },
+    {
+      "equation_id": "t2_01",
+      "equation_name": "Kinetic energy",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 58.55154991149902
+    },
+    {
+      "equation_id": "t2_02",
+      "equation_name": "Gravitational potential energy (surface)",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 43.607425689697266
+    },
+    {
+      "equation_id": "t2_03",
+      "equation_name": "Displacement (constant acceleration)",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 88.17224502563477
+    },
+    {
+      "equation_id": "t2_04",
+      "equation_name": "Final velocity squared",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 74.51455593109131
+    },
+    {
+      "equation_id": "t2_05",
+      "equation_name": "Total mechanical energy",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 102.17771530151367
+    },
+    {
+      "equation_id": "t2_06",
+      "equation_name": "Hooke's law (F=kx)",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 32.222747802734375
+    },
+    {
+      "equation_id": "t2_07",
+      "equation_name": "Spring potential energy",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 59.603285789489746
+    },
+    {
+      "equation_id": "t2_08",
+      "equation_name": "Heat transfer (Q=mcDT)",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 47.16181755065918
+    },
+    {
+      "equation_id": "t2_09",
+      "equation_name": "Angular momentum (L=Iw)",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 32.491350173950195
+    },
+    {
+      "equation_id": "t2_10",
+      "equation_name": "Rotational kinetic energy",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 59.172749519348145
+    },
+    {
+      "equation_id": "t2_11",
+      "equation_name": "Friction force (F=muN)",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 30.883336067199707
+    },
+    {
+      "equation_id": "t2_12",
+      "equation_name": "Center-of-mass velocity",
+      "tier": 2,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 105.19471168518066
+    },
+    {
+      "equation_id": "t3_01",
+      "equation_name": "Newton's law of gravitation",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 87.43531703948975
+    },
+    {
+      "equation_id": "t3_02",
+      "equation_name": "Coulomb's law",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 87.78226375579834
+    },
+    {
+      "equation_id": "t3_03",
+      "equation_name": "Gravitational field strength",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 72.22816944122314
+    },
+    {
+      "equation_id": "t3_04",
+      "equation_name": "Escape velocity",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 104.76160049438477
+    },
+    {
+      "equation_id": "t3_05",
+      "equation_name": "Gravitational potential energy",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 83.04591178894043
+    },
+    {
+      "equation_id": "t3_06",
+      "equation_name": "Centripetal acceleration",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 58.58275890350342
+    },
+    {
+      "equation_id": "t3_07",
+      "equation_name": "Centripetal force",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 73.3708381652832
+    },
+    {
+      "equation_id": "t3_08",
+      "equation_name": "Orbital velocity",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 80.93054294586182
+    },
+    {
+      "equation_id": "t3_09",
+      "equation_name": "Orbital period",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 129.75757122039795
+    },
+    {
+      "equation_id": "t3_10",
+      "equation_name": "Moment of inertia (solid sphere)",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 77.19831466674805
+    },
+    {
+      "equation_id": "t3_11",
+      "equation_name": "Drag force",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 87.87722587585449
+    },
+    {
+      "equation_id": "t3_12",
+      "equation_name": "Terminal velocity",
+      "tier": 3,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 173.41492176055908
+    },
+    {
+      "equation_id": "t4_01",
+      "equation_name": "Simple pendulum period",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 88.57142925262451
+    },
+    {
+      "equation_id": "t4_02",
+      "equation_name": "Projectile range",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 96.33622169494629
+    },
+    {
+      "equation_id": "t4_03",
+      "equation_name": "Projectile vertical position",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 124.30484294891357
+    },
+    {
+      "equation_id": "t4_04",
+      "equation_name": "Projectile horizontal position",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 52.38938331604004
+    },
+    {
+      "equation_id": "t4_05",
+      "equation_name": "Force along incline",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 54.01296615600586
+    },
+    {
+      "equation_id": "t4_06",
+      "equation_name": "Normal force on incline",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 52.164268493652344
+    },
+    {
+      "equation_id": "t4_07",
+      "equation_name": "Wave speed on string",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 64.39003944396973
+    },
+    {
+      "equation_id": "t4_08",
+      "equation_name": "Angular frequency (SHM)",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 58.76893997192383
+    },
+    {
+      "equation_id": "t4_09",
+      "equation_name": "SHM displacement",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 66.88315868377686
+    },
+    {
+      "equation_id": "t4_10",
+      "equation_name": "Total SHM energy",
+      "tier": 4,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 58.687663078308105
+    },
+    {
+      "equation_id": "t5_01",
+      "equation_name": "Kepler's third law",
+      "tier": 5,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 130.04145622253418
+    },
+    {
+      "equation_id": "t5_02",
+      "equation_name": "Tsiolkovsky rocket equation",
+      "tier": 5,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 66.03915691375732
+    },
+    {
+      "equation_id": "t5_03",
+      "equation_name": "Orbital energy",
+      "tier": 5,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 103.58388423919678
+    },
+    {
+      "equation_id": "t5_04",
+      "equation_name": "Schwarzschild radius",
+      "tier": 5,
+      "held_out": false,
+      "n_samples": 10,
+      "symbolic_accuracy": 1.0,
+      "mean_r2": 1.0,
+      "mean_latency_ms": 90.36974906921387
+    }
+  ]
+}

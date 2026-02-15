@@ -1,0 +1,1478 @@
+{
+  "model": "PhysMDT",
+  "checkpoint": "checkpoints/physmdt_best.pt",
+  "total_params": 71637002,
+  "device": "cuda",
+  "seed": 42,
+  "quick_mode": false,
+  "evaluation_config": {
+    "n_test_samples": 5,
+    "n_points": 100,
+    "noise_level": 0.01,
+    "n_candidates": 8,
+    "n_steps": 64,
+    "ttft_steps": 128,
+    "ttft_lr": 0.001,
+    "ttft_rank": 16
+  },
+  "summary": {
+    "n_held_out_equations": 11,
+    "zero_shot": {
+      "symbolic_accuracy": 0.09090909090909091,
+      "mean_r2": 0.5546782494131361,
+      "n_discovered": 1,
+      "discovery_rate": 0.09090909090909091
+    },
+    "ttft": {
+      "symbolic_accuracy": 0.09090909090909091,
+      "mean_r2": 0.5990166241949939,
+      "n_discovered": 1,
+      "discovery_rate": 0.09090909090909091
+    },
+    "either_method": {
+      "n_discovered": 1,
+      "discovery_rate": 0.09090909090909091
+    }
+  },
+  "per_equation": [
+    {
+      "equation_id": "ho_01",
+      "equation_name": "Lorentz force (magnetic)",
+      "tier": 3,
+      "held_out": true,
+      "description": "F = q*v*B (magnitude of magnetic Lorentz force)",
+      "true_expression": "x0*x1*x2",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 1.0,
+        "mean_r2": 1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.7963712700554806,
+        "mean_latency_ms": 7576.475524902344,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.8076923076923077,
+            "mean_confidence": 0.9140625,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.8148148148148148,
+            "mean_confidence": 0.9140625,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.7368421052631579,
+            "mean_confidence": 0.966796875,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.8076923076923077,
+            "mean_confidence": 0.91015625,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.8148148148148148,
+            "mean_confidence": 0.87109375,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 1.0,
+        "mean_r2": 1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.40363247863247864,
+        "mean_latency_ms": 16030.011796951294,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.4444444444444444,
+            "mean_confidence": 0.943359375,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.6153846153846154,
+            "mean_confidence": 0.958984375,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.0,
+            "mean_confidence": 0.984375,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.5833333333333334,
+            "mean_confidence": 0.94921875,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": true,
+            "r2": 1.0,
+            "edit_distance": 0.375,
+            "mean_confidence": 0.94140625,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2"
+          }
+        ]
+      },
+      "top3_candidates": [
+        {
+          "expression": "x0*x1*x2",
+          "r2": 1.0,
+          "confidence": 0.9140625,
+          "method": "zero_shot",
+          "symbolic_equivalent": true
+        }
+      ]
+    },
+    {
+      "equation_id": "ho_02",
+      "equation_name": "Wave power",
+      "tier": 4,
+      "held_out": true,
+      "description": "P = 0.5*rho*v*omega^2*A^2",
+      "true_expression": "x0*x1*x2**2*x3**2/2",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 1.0,
+        "mean_latency_ms": 7524.70006942749,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.99609375,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.990234375,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 1.0,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.998046875,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.974609375,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": 0.19803324838998781,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.476923076923077,
+        "mean_latency_ms": 16066.835975646973,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": 0.19803324838998781,
+            "edit_distance": 0.3076923076923077,
+            "mean_confidence": 0.98828125,
+            "predicted_str": "x0*x1**2*x2*x3/2",
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": 0.19803324838998781,
+            "edit_distance": 0.46153846153846156,
+            "mean_confidence": 1.0,
+            "predicted_str": "x0*x1**2*x2*x3/2",
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": 0.19803324838998781,
+            "edit_distance": 0.3076923076923077,
+            "mean_confidence": 0.97265625,
+            "predicted_str": "x0*x1**2*x2*x3/2",
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": 0.19803324838998781,
+            "edit_distance": 0.3076923076923077,
+            "mean_confidence": 0.98828125,
+            "predicted_str": "x0*x1**2*x2*x3/2",
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.984375,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**2*x3**2/2"
+          }
+        ]
+      },
+      "top3_candidates": [
+        {
+          "expression": "x0*x1**2*x2*x3/2",
+          "r2": 0.19803324838998781,
+          "confidence": 0.98828125,
+          "method": "ttft",
+          "symbolic_equivalent": false
+        }
+      ]
+    },
+    {
+      "equation_id": "ho_03",
+      "equation_name": "Doppler effect (approaching source)",
+      "tier": 4,
+      "held_out": true,
+      "description": "f_obs = v_s*f/(v_s - v_src)",
+      "true_expression": "x0*x1/(x0 - x2)",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 1.0,
+        "mean_latency_ms": 7535.175323486328,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.833984375,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.79296875,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.677734375,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.8359375,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.783203125,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 1.0,
+        "mean_latency_ms": 16294.069147109985,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.69921875,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.69140625,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.701171875,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.693359375,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.732421875,
+            "predicted_str": null,
+            "true_str": "x0*x1/(x0 - x2)"
+          }
+        ]
+      },
+      "top3_candidates": []
+    },
+    {
+      "equation_id": "ho_04",
+      "equation_name": "Gravitational lensing deflection",
+      "tier": 5,
+      "held_out": true,
+      "description": "theta = 4*G*M/(c^2*r)",
+      "true_expression": "4*x0*x1/(x2**2*x3)",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": 0.4532415139631524,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.8513821312279763,
+        "mean_latency_ms": 7639.999771118164,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -2.402550732762578,
+            "edit_distance": 0.8867924528301887,
+            "mean_confidence": 0.82421875,
+            "predicted_str": "x0**2*x1*x2/x3**2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -2.402550732762578,
+            "edit_distance": 0.8888888888888888,
+            "mean_confidence": 0.8828125,
+            "predicted_str": "x0**2*x1*x2/x3**2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": 0.4532415139631524,
+            "edit_distance": 0.72,
+            "mean_confidence": 0.6328125,
+            "predicted_str": "x0*x1**2/x3**2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -2.402550732762578,
+            "edit_distance": 0.8888888888888888,
+            "mean_confidence": 0.90234375,
+            "predicted_str": "x0**2*x1*x2/x3**2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -5.463598462747115,
+            "edit_distance": 0.8723404255319149,
+            "mean_confidence": 0.68359375,
+            "predicted_str": "x0**2*x1*x2/2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.8831394576373274,
+        "mean_latency_ms": 16233.725214004517,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -2.402550732762578,
+            "edit_distance": 0.8378378378378378,
+            "mean_confidence": 0.71484375,
+            "predicted_str": "x0**2*x1*x2/x3**2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -2.402550732762578,
+            "edit_distance": 0.8867924528301887,
+            "mean_confidence": 0.8203125,
+            "predicted_str": "x0**2*x1*x2/x3**2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.845703125,
+            "predicted_str": null,
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -2.402550732762578,
+            "edit_distance": 0.8064516129032258,
+            "mean_confidence": 0.6875,
+            "predicted_str": "x0**2*x1*x2/x3**2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -2.402550732762578,
+            "edit_distance": 0.8846153846153846,
+            "mean_confidence": 0.8984375,
+            "predicted_str": "x0**2*x1*x2/x3**2",
+            "true_str": "4*x0*x1/(x2**2*x3)"
+          }
+        ]
+      },
+      "top3_candidates": [
+        {
+          "expression": "x0*x1**2/x3**2",
+          "r2": 0.4532415139631524,
+          "confidence": 0.6328125,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "x0**2*x1*x2/x3**2",
+          "r2": -2.402550732762578,
+          "confidence": 0.82421875,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "x0**2*x1*x2/2",
+          "r2": -5.463598462747115,
+          "confidence": 0.68359375,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        }
+      ]
+    },
+    {
+      "equation_id": "ho_05",
+      "equation_name": "LC circuit resonant period",
+      "tier": 4,
+      "held_out": true,
+      "description": "T = 2*pi*sqrt(L*C)",
+      "true_expression": "2*pi*sqrt(x0)*sqrt(x1)",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.6666666666666666,
+        "mean_latency_ms": 7685.966539382935,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -0.8113000813824189,
+            "edit_distance": 0.6666666666666666,
+            "mean_confidence": 0.99609375,
+            "predicted_str": "x0*x1",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -0.8113000813824189,
+            "edit_distance": 0.6666666666666666,
+            "mean_confidence": 0.998046875,
+            "predicted_str": "x0*x1",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -0.8113000813824189,
+            "edit_distance": 0.6666666666666666,
+            "mean_confidence": 0.99609375,
+            "predicted_str": "x0*x1",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -0.8113000813824189,
+            "edit_distance": 0.6666666666666666,
+            "mean_confidence": 0.998046875,
+            "predicted_str": "x0*x1",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -0.8113000813824189,
+            "edit_distance": 0.6666666666666666,
+            "mean_confidence": 0.998046875,
+            "predicted_str": "x0*x1",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.7777777777777778,
+        "mean_latency_ms": 16343.768215179443,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -4.029177331310701,
+            "edit_distance": 0.7777777777777778,
+            "mean_confidence": 0.98828125,
+            "predicted_str": "x0",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -4.029177331310701,
+            "edit_distance": 0.7777777777777778,
+            "mean_confidence": 0.98828125,
+            "predicted_str": "x0",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -4.029177331310701,
+            "edit_distance": 0.7777777777777778,
+            "mean_confidence": 0.98828125,
+            "predicted_str": "x0",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -4.029177331310701,
+            "edit_distance": 0.7777777777777778,
+            "mean_confidence": 0.98828125,
+            "predicted_str": "x0",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -4.029177331310701,
+            "edit_distance": 0.7777777777777778,
+            "mean_confidence": 0.98828125,
+            "predicted_str": "x0",
+            "true_str": "2*pi*sqrt(x0)*sqrt(x1)"
+          }
+        ]
+      },
+      "top3_candidates": [
+        {
+          "expression": "x0*x1",
+          "r2": -0.8113000813824189,
+          "confidence": 0.99609375,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "x0",
+          "r2": -4.029177331310701,
+          "confidence": 0.98828125,
+          "method": "ttft",
+          "symbolic_equivalent": false
+        }
+      ]
+    },
+    {
+      "equation_id": "ho_06",
+      "equation_name": "Coriolis acceleration",
+      "tier": 4,
+      "held_out": true,
+      "description": "a_cor = 2*omega*v*sin(phi)",
+      "true_expression": "2*x0*x1*sin(x2)",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": 0.7461504448429235,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.725,
+        "mean_latency_ms": 7848.780202865601,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 1.0,
+            "predicted_str": null,
+            "true_str": "2*x0*x1*sin(x2)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": 0.7461504448429235,
+            "edit_distance": 0.25,
+            "mean_confidence": 0.9921875,
+            "predicted_str": "x0*x1*sin(x2)",
+            "true_str": "2*x0*x1*sin(x2)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": 0.7461504448429235,
+            "edit_distance": 0.375,
+            "mean_confidence": 0.98828125,
+            "predicted_str": "x0*x1*sin(x2)",
+            "true_str": "2*x0*x1*sin(x2)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.9921875,
+            "predicted_str": null,
+            "true_str": "2*x0*x1*sin(x2)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.970703125,
+            "predicted_str": null,
+            "true_str": "2*x0*x1*sin(x2)"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.6833333333333333,
+        "mean_latency_ms": 16750.03604888916,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.970703125,
+            "predicted_str": null,
+            "true_str": "2*x0*x1*sin(x2)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -5.6801816870821344,
+            "edit_distance": 0.375,
+            "mean_confidence": 0.994140625,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "2*x0*x1*sin(x2)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -7.02073441586036,
+            "edit_distance": 0.6666666666666666,
+            "mean_confidence": 0.96484375,
+            "predicted_str": "x0*x1**2",
+            "true_str": "2*x0*x1*sin(x2)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -5.6801816870821344,
+            "edit_distance": 0.375,
+            "mean_confidence": 0.939453125,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "2*x0*x1*sin(x2)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.966796875,
+            "predicted_str": null,
+            "true_str": "2*x0*x1*sin(x2)"
+          }
+        ]
+      },
+      "top3_candidates": [
+        {
+          "expression": "x0*x1*sin(x2)",
+          "r2": 0.7461504448429235,
+          "confidence": 0.9921875,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "x0*x1*x2",
+          "r2": -5.6801816870821344,
+          "confidence": 0.994140625,
+          "method": "ttft",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "x0*x1**2",
+          "r2": -7.02073441586036,
+          "confidence": 0.96484375,
+          "method": "ttft",
+          "symbolic_equivalent": false
+        }
+      ]
+    },
+    {
+      "equation_id": "ho_07",
+      "equation_name": "Tidal force",
+      "tier": 5,
+      "held_out": true,
+      "description": "F_tidal = 2*G*M*m*r/d^3",
+      "true_expression": "2*x0*x1*x2*x3/x4**3",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": 0.01932103884646874,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.7388505747126436,
+        "mean_latency_ms": 7490.983009338379,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.740234375,
+            "predicted_str": null,
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": 0.01932103884646874,
+            "edit_distance": 0.6666666666666666,
+            "mean_confidence": 0.91796875,
+            "predicted_str": "2*x1*x2**2/x3",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -0.013716311074014387,
+            "edit_distance": 0.8275862068965517,
+            "mean_confidence": 0.814453125,
+            "predicted_str": "2*x0**2",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -0.13030155141697852,
+            "edit_distance": 0.6666666666666666,
+            "mean_confidence": 0.76953125,
+            "predicted_str": "-2*x1*x3",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -0.016286782982820602,
+            "edit_distance": 0.5333333333333333,
+            "mean_confidence": 0.908203125,
+            "predicted_str": "2*x0*x1**2/x2",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.75,
+        "mean_latency_ms": 16351.942110061646,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -0.14910072680266317,
+            "edit_distance": 0.75,
+            "mean_confidence": 0.96484375,
+            "predicted_str": "x0*x2*sin(x1) - x2**2*x3/2",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -0.14910072680266317,
+            "edit_distance": 0.75,
+            "mean_confidence": 0.822265625,
+            "predicted_str": "x0*x2*sin(x1) - x2**2*x3/2",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -0.14910072680266317,
+            "edit_distance": 0.75,
+            "mean_confidence": 0.892578125,
+            "predicted_str": "x0*x2*sin(x1) - x2**2*x3/2",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -0.14910072680266317,
+            "edit_distance": 0.75,
+            "mean_confidence": 0.96484375,
+            "predicted_str": "x0*x2*sin(x1) - x2**2*x3/2",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -0.14910072680266317,
+            "edit_distance": 0.75,
+            "mean_confidence": 0.96875,
+            "predicted_str": "x0*x2*sin(x1) - x2**2*x3/2",
+            "true_str": "2*x0*x1*x2*x3/x4**3"
+          }
+        ]
+      },
+      "top3_candidates": [
+        {
+          "expression": "2*x1*x2**2/x3",
+          "r2": 0.01932103884646874,
+          "confidence": 0.91796875,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "2*x0**2",
+          "r2": -0.013716311074014387,
+          "confidence": 0.814453125,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "2*x0*x1**2/x2",
+          "r2": -0.016286782982820602,
+          "confidence": 0.908203125,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        }
+      ]
+    },
+    {
+      "equation_id": "ho_08",
+      "equation_name": "Time dilation (special relativity)",
+      "tier": 5,
+      "held_out": true,
+      "description": "t = t0 / sqrt(1 - v^2/c^2)  (x1 < x2 to stay subluminal)",
+      "true_expression": "x0/sqrt(-x1**2/x2**2 + 1)",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.8329545454545455,
+        "mean_latency_ms": 7682.602167129517,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -0.1574104825389535,
+            "edit_distance": 0.8125,
+            "mean_confidence": 0.998046875,
+            "predicted_str": "x0*x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -2.0347390610059692,
+            "edit_distance": 0.7272727272727273,
+            "mean_confidence": 0.7421875,
+            "predicted_str": "8/x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -0.1574104825389535,
+            "edit_distance": 0.8125,
+            "mean_confidence": 0.99609375,
+            "predicted_str": "x0*x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.880859375,
+            "predicted_str": null,
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -0.1574104825389535,
+            "edit_distance": 0.8125,
+            "mean_confidence": 1.0,
+            "predicted_str": "x0*x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.8375,
+        "mean_latency_ms": 16765.53249359131,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -0.1574104825389535,
+            "edit_distance": 0.8125,
+            "mean_confidence": 1.0,
+            "predicted_str": "x0*x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -0.2783068362349461,
+            "edit_distance": 0.9375,
+            "mean_confidence": 0.98046875,
+            "predicted_str": "x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -0.1574104825389535,
+            "edit_distance": 0.8125,
+            "mean_confidence": 0.998046875,
+            "predicted_str": "x0*x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -0.1574104825389535,
+            "edit_distance": 0.8125,
+            "mean_confidence": 0.998046875,
+            "predicted_str": "x0*x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -0.1574104825389535,
+            "edit_distance": 0.8125,
+            "mean_confidence": 1.0,
+            "predicted_str": "x0*x1",
+            "true_str": "x0/sqrt(-x1**2/x2**2 + 1)"
+          }
+        ]
+      },
+      "top3_candidates": [
+        {
+          "expression": "x0*x1",
+          "r2": -0.1574104825389535,
+          "confidence": 0.998046875,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "x1",
+          "r2": -0.2783068362349461,
+          "confidence": 0.98046875,
+          "method": "ttft",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "8/x1",
+          "r2": -2.0347390610059692,
+          "confidence": 0.7421875,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        }
+      ]
+    },
+    {
+      "equation_id": "ho_09",
+      "equation_name": "de Broglie wavelength",
+      "tier": 3,
+      "held_out": true,
+      "description": "lambda = h/(m*v)",
+      "true_expression": "x0/(x1*x2)",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 1.0,
+        "mean_latency_ms": 7724.9542236328125,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 1.0,
+        "mean_latency_ms": 16396.02427482605,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.978515625,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.978515625,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.978515625,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.978515625,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.978515625,
+            "predicted_str": null,
+            "true_str": "x0/(x1*x2)"
+          }
+        ]
+      },
+      "top3_candidates": []
+    },
+    {
+      "equation_id": "ho_10",
+      "equation_name": "Stefan-Boltzmann law",
+      "tier": 5,
+      "held_out": true,
+      "description": "P = sigma*A*T^4",
+      "true_expression": "x0*x1*x2**4",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.7519163763066201,
+        "mean_latency_ms": 7571.289014816284,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -0.3267365422810946,
+            "edit_distance": 0.5714285714285714,
+            "mean_confidence": 1.0,
+            "predicted_str": "x0*x1",
+            "true_str": "x0*x1*x2**4"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 1.0,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**4"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.888671875,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**4"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -0.30270947917234725,
+            "edit_distance": 0.2857142857142857,
+            "mean_confidence": 0.99609375,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2**4"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -0.3035019224792952,
+            "edit_distance": 0.9024390243902439,
+            "mean_confidence": 0.935546875,
+            "predicted_str": "x0*x1**2",
+            "true_str": "x0*x1*x2**4"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 0.7142857142857142,
+        "mean_latency_ms": 16050.522756576538,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.9921875,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**4"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.9765625,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**4"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -0.30270947917234725,
+            "edit_distance": 0.2857142857142857,
+            "mean_confidence": 0.994140625,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2**4"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 1.0,
+            "predicted_str": null,
+            "true_str": "x0*x1*x2**4"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -0.30270947917234725,
+            "edit_distance": 0.2857142857142857,
+            "mean_confidence": 0.99609375,
+            "predicted_str": "x0*x1*x2",
+            "true_str": "x0*x1*x2**4"
+          }
+        ]
+      },
+      "top3_candidates": [
+        {
+          "expression": "x0*x1*x2",
+          "r2": -0.30270947917234725,
+          "confidence": 0.99609375,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "x0*x1**2",
+          "r2": -0.3035019224792952,
+          "confidence": 0.935546875,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        },
+        {
+          "expression": "x0*x1",
+          "r2": -0.3267365422810946,
+          "confidence": 1.0,
+          "method": "zero_shot",
+          "symbolic_equivalent": false
+        }
+      ]
+    },
+    {
+      "equation_id": "ho_11",
+      "equation_name": "RMS speed of gas molecules",
+      "tier": 5,
+      "held_out": true,
+      "description": "v_rms = sqrt(3*k_B*T/m)",
+      "true_expression": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)",
+      "n_samples": 5,
+      "zero_shot": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 1.0,
+        "mean_latency_ms": 7554.235887527466,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.943359375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          }
+        ]
+      },
+      "ttft": {
+        "symbolic_accuracy": 0.0,
+        "mean_r2": -1.0,
+        "std_r2": 0.0,
+        "mean_edit_distance": 1.0,
+        "mean_latency_ms": 16124.844551086426,
+        "details": [
+          {
+            "sample_idx": 0,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.974609375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          },
+          {
+            "sample_idx": 1,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.974609375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          },
+          {
+            "sample_idx": 2,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.974609375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          },
+          {
+            "sample_idx": 3,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.974609375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          },
+          {
+            "sample_idx": 4,
+            "symbolic_equivalent": false,
+            "r2": -1.0,
+            "edit_distance": 1.0,
+            "mean_confidence": 0.974609375,
+            "predicted_str": null,
+            "true_str": "sqrt(3)*sqrt(x0)*sqrt(x1)/sqrt(x2)"
+          }
+        ]
+      },
+      "top3_candidates": []
+    }
+  ]
+}
