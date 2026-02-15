@@ -102,16 +102,16 @@
           "id": "item_008",
           "description": "Implement autoregressive transformer baseline for symbolic regression",
           "acceptance_criteria": "Python module (models/ar_baseline.py) implementing a standard encoder-decoder transformer: (1) encoder ingests numerical observation pairs as flattened sequences with learned positional embeddings, (2) decoder generates symbolic expression tokens autoregressively, (3) model size ~30M parameters (fits comfortably on single A100), (4) training script (train_baseline.py) with AdamW optimizer, cosine LR schedule, mixed-precision (bf16), gradient accumulation, (5) trains to convergence on Tier 1-2 equations within 4 hours on single A100, (6) checkpoint saving excludes git tracking per .gitignore rules.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "AR baseline: 33M params (d_model=384, 8+8 layers). Training script with AdamW, cosine LR, bf16, gradient accumulation. All unit tests pass. Checkpoints saved to gitignored directory.",
           "error": null
         },
         {
           "id": "item_009",
           "description": "Implement comprehensive evaluation metrics suite",
           "acceptance_criteria": "Python module (evaluation/metrics.py) implementing: (1) Symbolic Equivalence Accuracy \u2014 uses SymPy simplify() to check if predicted and ground-truth expressions are algebraically equivalent, (2) Numeric R\u00b2 Score \u2014 evaluates predicted expression on held-out points and computes R\u00b2 against ground truth, (3) Complexity-Weighted Score \u2014 accuracy broken down by equation tier (1-5), (4) Token Edit Distance \u2014 Levenshtein distance between predicted and ground-truth token sequences, (5) Novel Discovery Rate \u2014 fraction of held-out (never-trained) equations correctly recovered, (6) all metrics tested on synthetic examples with known ground truth. Results output as JSON for reproducibility.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Metrics suite: 31/31 tests passed. Implements symbolic equivalence (with timeout), R², token edit distance, per-tier accuracy, novel discovery rate. All tested on synthetic examples.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 7,
+    "completed": 9,
     "in_progress": 0,
     "failed": 0,
-    "pending": 18
+    "pending": 16
   }
 }
