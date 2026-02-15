@@ -46,3 +46,8 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+checkpoints/
+*.pt
+*.pth
+*.npy
+*.npz
