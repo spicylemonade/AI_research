@@ -589,7 +589,7 @@ def generate_embedding_space(
             n_components=2,
             perplexity=perplexity,
             random_state=seed,
-            n_iter=1000,
+            max_iter=1000,
         )
     coords_2d = reducer.fit_transform(embeddings)  # (N, 2)
 
