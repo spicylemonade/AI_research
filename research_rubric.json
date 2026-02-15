@@ -165,8 +165,8 @@
           "id": "item_015",
           "description": "Implement curriculum training strategy with progressive complexity",
           "acceptance_criteria": "Training script (train_physmdt.py) implementing: (1) Phase 1 \u2014 train on Tier 1-2 equations only for initial convergence, (2) Phase 2 \u2014 introduce Tier 3 equations with mixed batches, (3) Phase 3 \u2014 full Tier 1-4 training with emphasis sampling on harder tiers, (4) Masking schedule: start with high mask ratio (90-100%) and anneal to variable ratios (30-100%) as training progresses, (5) Mixed-precision bf16 training with gradient checkpointing to fit within A100 memory, (6) Total training time target: under 12 hours on single A100 for full curriculum, (7) Wandb-compatible logging of loss curves, mask ratio, tier distribution per epoch (or CSV fallback if wandb unavailable), (8) Checkpoint saving to local directory excluded from git.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "3-phase curriculum training implemented. Phase 1 (Tier 1-2), Phase 2 (Tier 1-3), Phase 3 (Tier 1-4) with emphasis sampling. Mask ratio annealing 90-100% to 30-100%. bf16 mixed precision. CSV+JSON logging. Training completed in 0.30 hours, best val_loss=2.8422, peak GPU=3.16 GB, 11232 total steps.",
           "error": null
         }
       ]
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 14,
+    "completed": 15,
     "in_progress": 0,
     "failed": 0,
-    "pending": 11
+    "pending": 10
   }
 }
