@@ -1,0 +1,292 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-15T12:00:00Z",
+  "updated_at": "2026-02-15T01:59:22.232559+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-15T12:00:00Z",
+      "completed_at": "2026-02-15T01:59:22.232534+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Conduct comprehensive literature review on transformer-based symbolic regression for physics equation discovery",
+          "acceptance_criteria": "Web search performed for at least the following topics: (1) transformer symbolic regression (SymbolicGPT, NeSymReS, E2E, TPSR, SymFormer), (2) AI Feynman benchmarks and physics-informed SR, (3) test-time training and OOD generalization for transformers, (4) masked diffusion models and recursive latent sampling (ARChitects/ARC2025), (5) KAN and neural-symbolic hybrid methods. Written summary document (literature_review.md) produced with at least 2 paragraphs per topic area covering key methods, results, and gaps.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Create and maintain sources.bib with BibTeX entries for all consulted papers and repositories",
+          "acceptance_criteria": "sources.bib file exists at repo root with valid BibTeX entries for at least 15 relevant papers including: Udrescu & Tegmark 2020 (AI Feynman), Valipour et al. 2021 (SymbolicGPT), Biggio et al. 2021 (NeSymReS), Kamienny et al. 2022 (E2E), Shojaee et al. 2023 (TPSR), Vaswani et al. 2017 (Attention Is All You Need), Sun et al. 2020 (TTT), the ARChitects ARC2025 solution report, Lample & Charton 2020 (Deep Learning for Symbolic Mathematics), Liu et al. 2022 (KAN), plus at least 5 additional relevant papers found during search. Each entry must have author, title, year, and venue/journal fields.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Analyze the ARChitects ARC2025 solution architecture and identify transferable techniques for physics equation discovery",
+          "acceptance_criteria": "Document (in literature_review.md or a dedicated section) covering: (1) LLaDA masked diffusion model architecture, (2) token algebra and soft-masking for recursive self-improvement, (3) 2D RoPE positional encoding adaptation, (4) test-time finetuning with per-task LoRA, (5) recursive latent sampling without discretization. For each technique, provide a concrete proposal for how it could be adapted to the symbolic regression / physics discovery setting.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Define the problem scope: target physics equations, input/output representation, and evaluation protocol",
+          "acceptance_criteria": "Written specification document (problem_spec.md) that defines: (1) the set of target Newtonian physics equations organized by complexity tier (Tier 1: F=ma, KE=0.5mv^2, etc.; Tier 2: gravitational force, Coulomb's law, projectile motion; Tier 3: Lagrangian mechanics, coupled oscillators, orbital mechanics), (2) input representation format (numerical data points as observation tables), (3) output representation format (prefix-notation symbolic expression trees), (4) train/test split strategy ensuring held-out equations are never seen during training, (5) evaluation metrics: symbolic equivalence accuracy, normalized tree-edit distance, R^2 fit on held-out data points, and complexity-penalized fitness (Pareto front).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Survey and select benchmark datasets for training data generation and evaluation",
+          "acceptance_criteria": "Document listing: (1) AI Feynman / FSReD benchmark equations selected for evaluation (at least 30 equations spanning easy/medium/hard), (2) SRSD benchmark subset selection rationale, (3) synthetic data generation strategy for training (procedural generation of random symbolic expressions with controlled complexity, variable count 1-5, operator set including +, -, *, /, sin, cos, exp, log, sqrt, pow), (4) data volume estimates that fit within single A100 memory and training time constraints (target: 500K-2M synthetic training expressions), (5) noise model for realistic observation data.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_006",
+          "description": "Design the novel model architecture combining insights from ARC2025 solution and transformer SR literature",
+          "acceptance_criteria": "Architecture design document (architecture.md) specifying: (1) encoder design for numerical observation data (set transformer or cross-attention over data points), (2) decoder design for symbolic expression generation (autoregressive or masked diffusion), (3) the novel contribution: a hybrid approach combining an autoregressive backbone with recursive latent refinement inspired by ARChitects' soft-masking technique \u2014 the model generates an initial symbolic expression then iteratively refines it by re-embedding the candidate expression alongside the data and predicting corrections, (4) test-time training protocol where the model fine-tunes on the specific data instance using a self-supervised reconstruction objective before final prediction, (5) dimensional analysis module as an inductive bias (unit-consistency scoring), (6) parameter budget and layer counts fitting within A100 40GB/80GB VRAM. Architecture should be named (e.g., 'PhysFormer' or 'Newton-GPT').",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_007",
+          "description": "Implement synthetic training data generation pipeline",
+          "acceptance_criteria": "Python module (data/generator.py or similar) that: (1) procedurally generates random symbolic expression trees with configurable depth (2-8), operator set, and variable count (1-5), (2) evaluates expressions on random input grids to produce (X, y) observation pairs, (3) converts expressions to prefix-notation token sequences, (4) handles edge cases (division by zero, overflow, NaN) with rejection sampling, (5) generates at least 100K expressions in under 30 minutes on CPU, (6) includes a held-out set of 50+ real physics equations (from AI Feynman) that are NEVER included in training data generation templates, (7) unit tests pass verifying expression evaluation correctness on at least 20 known equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement tokenizer and data loading infrastructure",
+          "acceptance_criteria": "Working tokenizer module that: (1) defines a vocabulary covering all operators (+, -, *, /, sin, cos, exp, log, sqrt, pow), variables (x1-x5), numeric constants (using digit-level or scientific notation tokenization), and special tokens (PAD, BOS, EOS, MASK), (2) encodes/decodes symbolic expressions to/from token sequences with round-trip fidelity on 100% of test cases, (3) PyTorch Dataset and DataLoader classes that batch observation data and target token sequences with proper padding, (4) data loading achieves at least 1000 samples/second throughput.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Implement baseline transformer model (NeSymReS-style encoder-decoder)",
+          "acceptance_criteria": "Baseline model implementation that: (1) uses a set-transformer encoder (or equivalent permutation-invariant architecture) to embed variable-length observation sets into a fixed-size latent, (2) uses a standard autoregressive transformer decoder to generate prefix-notation expressions, (3) total parameters between 20M-100M (must fit on single A100 with batch training), (4) model forward pass runs without errors on a batch of 32 samples, (5) training loop with AdamW optimizer, cosine learning rate schedule, and gradient clipping is functional, (6) loss decreases over 1000 training steps on synthetic data (verified numerically).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Implement evaluation metrics and benchmarking harness",
+          "acceptance_criteria": "Evaluation module that computes: (1) symbolic equivalence accuracy \u2014 checks if predicted and ground-truth expressions are mathematically equivalent using sympy.simplify (with timeout handling), (2) R^2 score of predicted expression fit on held-out data points, (3) normalized tree-edit distance between predicted and ground-truth expression trees, (4) complexity score (number of nodes in expression tree), (5) a Pareto-front analysis tool that identifies solutions on the accuracy-complexity frontier, (6) results saved to JSON/CSV in results/ directory, (7) all metrics tested on at least 10 hand-crafted examples with known expected outputs.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_011",
+          "description": "Train and evaluate the baseline model to establish performance floor",
+          "acceptance_criteria": "Baseline model trained on at least 500K synthetic expressions for at least 50 epochs (or until convergence, whichever comes first) on a single A100. Results reported: (1) symbolic equivalence accuracy on held-out AI Feynman equations (at least the easy tier), (2) R^2 distribution across test equations, (3) training loss curve saved as a figure in figures/, (4) baseline results saved in results/baseline_results.json, (5) comparison table in results/ showing baseline accuracy vs. reported NeSymReS/SymbolicGPT numbers from literature (cited in sources.bib). No model checkpoint files committed to git (use .gitignore).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_012",
+          "description": "Implement recursive latent refinement mechanism inspired by ARChitects' soft-masking",
+          "acceptance_criteria": "Novel module that: (1) takes an initial expression prediction from the decoder and re-encodes it as a continuous embedding (not discretized tokens), (2) concatenates or cross-attends this expression embedding with the original data embedding, (3) runs a refinement decoder pass to produce an improved expression, (4) supports K iterations of refinement (configurable, default K=5), (5) uses soft-masking: at each refinement step, low-confidence token positions are blended with mask embeddings proportional to their uncertainty (softmax entropy), (6) training uses a loss on ALL refinement steps (not just the final one) with optional step-weighting, (7) module integrates cleanly with the baseline model \u2014 toggling refinement on/off is a single config flag, (8) verified: refinement with K=1 reproduces baseline behavior exactly.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement test-time training (TTT) protocol for per-instance adaptation",
+          "acceptance_criteria": "TTT module that: (1) at inference time, performs N gradient steps (configurable, default N=32-128) on the model using only the test instance's observation data, (2) uses a self-supervised objective: mask random subsets of observation points and train the encoder to reconstruct them (denoising autoencoder on data space), (3) uses a small LoRA adapter (rank 4-16) to avoid catastrophic forgetting of pretrained weights, (4) includes proper weight snapshot/restore so TTT doesn't corrupt the base model for the next instance, (5) wall-clock overhead of TTT is measured and reported (target: under 60 seconds per instance on A100), (6) ablation: accuracy with vs. without TTT is measured and the delta is reported.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement dimensional analysis inductive bias module",
+          "acceptance_criteria": "Module that: (1) accepts optional unit/dimension annotations for input variables (e.g., mass=kg, distance=m, time=s), (2) propagates dimensional constraints through candidate expression trees to compute the implied output dimensions, (3) scores candidate expressions by dimensional consistency (1.0 if dimensionally consistent, 0.0 if not, with soft intermediate scores for partial consistency), (4) integrates as a re-ranking criterion during beam search decoding \u2014 dimensionally inconsistent candidates are penalized, (5) when dimension annotations are unavailable, the module is a no-op (graceful degradation), (6) tested on at least 10 known physics equations verifying correct dimensional analysis.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement beam search with complexity-aware scoring and MCTS-inspired lookahead",
+          "acceptance_criteria": "Decoding module that: (1) supports beam search with configurable beam width (default 16), (2) scores candidates using a weighted combination of log-likelihood, R^2 fit on input data, dimensional consistency, and expression complexity penalty, (3) implements a lightweight MCTS-inspired rollout: for the top-K partial beams, performs T random rollouts to completion and uses their average fitness as an additional scoring signal (inspired by TPSR), (4) beam search + MCTS achieves higher symbolic accuracy than greedy decoding on at least 80% of test equations, (5) wall-clock time for beam search with MCTS is under 120 seconds per equation on A100.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Integrate all novel components into the unified model and run integration tests",
+          "acceptance_criteria": "Unified model class that: (1) combines encoder, autoregressive decoder, recursive refinement, TTT, dimensional analysis, and MCTS beam search into a single configurable pipeline, (2) each component can be independently enabled/disabled via config, (3) full pipeline runs end-to-end on a single test instance without errors, (4) full pipeline runs on a batch of 10 test instances and produces valid symbolic expressions for all of them, (5) GPU memory usage during inference (with all components active, beam width 16, K=5 refinement steps, N=64 TTT steps) is under 40GB on A100, (6) integration test script exists and passes.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_017",
+          "description": "Train the full model with recursive refinement on synthetic data",
+          "acceptance_criteria": "Full model (with refinement, without TTT which is inference-only) trained on 1M+ synthetic expressions for sufficient epochs until validation loss plateaus. Training completed on single A100. (1) Training curve (loss vs. step) saved in figures/, (2) best validation loss is at least 15% lower than baseline model's best validation loss, (3) training config and hyperparameters logged in results/training_config.json, (4) no model checkpoint files committed to git \u2014 only metrics and configs.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Evaluate on AI Feynman benchmark equations (held-out from training)",
+          "acceptance_criteria": "Evaluation on at least 40 AI Feynman equations spanning easy/medium/hard tiers. Results include: (1) per-equation symbolic equivalence (exact match after simplification), (2) per-equation R^2 score, (3) aggregate accuracy by difficulty tier, (4) full model (refinement + TTT + beam search + dimensional analysis) achieves at least 60% symbolic equivalence on easy tier and at least 25% on hard tier, (5) results saved in results/feynman_results.json and a summary table in results/feynman_summary.csv, (6) all evaluated equations were verifiably absent from training data (provide proof/methodology).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Run comprehensive ablation study isolating each novel component's contribution",
+          "acceptance_criteria": "Ablation experiments covering at least these configurations: (1) Baseline only, (2) Baseline + refinement, (3) Baseline + TTT, (4) Baseline + dimensional analysis, (5) Baseline + MCTS beam search, (6) Baseline + refinement + TTT, (7) Full model (all components). For each configuration: symbolic accuracy, R^2, and inference time reported on the same test set of at least 30 equations. Results presented in a table in results/ablation_results.csv. Each component must show a measurable positive contribution (even if small) for at least one metric \u2014 if any component shows no benefit, document why and consider removing it.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Demonstrate novel equation discovery: model finds equations not in training data",
+          "acceptance_criteria": "Empirical demonstration that the model can discover physics equations it has never seen: (1) select at least 5 non-trivial physics equations that were explicitly excluded from all training data (e.g., Kepler's third law, rocket equation, damped harmonic oscillator, Snell's law, Stefan-Boltzmann law), (2) generate synthetic observation data for each, (3) run the full model pipeline on this observation data, (4) for at least 3 out of 5 equations, the model produces a symbolically equivalent or R^2 > 0.99 expression, (5) qualitative analysis of each discovered equation \u2014 show the predicted expression, simplify it, compare to ground truth, (6) results saved in results/novel_discovery.json with full details, (7) this is the flagship result demonstrating transformers CAN derive physics equations from data alone.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Compare results against prior work from literature review",
+          "acceptance_criteria": "Comparison table in results/comparison_with_prior_work.csv that: (1) lists at least 5 prior methods (NeSymReS, SymbolicGPT, E2E, TPSR, AI Feynman, PySR) with their reported accuracy on overlapping benchmark equations, (2) shows our model's accuracy on the same equations, (3) identifies equations where our model outperforms prior work and equations where it underperforms, (4) all prior work numbers are cited with references to sources.bib, (5) honest assessment \u2014 does not cherry-pick favorable comparisons.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_022",
+          "description": "Profile computational efficiency and A100 resource utilization",
+          "acceptance_criteria": "Profiling report in results/compute_profile.json covering: (1) peak GPU memory usage during training (must be under 80GB for A100-80GB or 40GB for A100-40GB), (2) training throughput (samples/second), (3) inference time per equation breakdown: base forward pass, refinement iterations, TTT adaptation, beam search, (4) total wall-clock time for full evaluation run on 40+ equations, (5) comparison of inference cost vs. prior methods (e.g., NeSymReS reports CPU-only inference times \u2014 provide a fair comparison), (6) recommendations for scaling to larger models or datasets if more compute were available.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_023",
+          "description": "Generate publication-quality figures for all key results",
+          "acceptance_criteria": "At least 6 figures saved in figures/ directory: (1) training loss curves (baseline vs. full model), (2) bar chart of symbolic accuracy by difficulty tier (easy/medium/hard) with error bars, (3) ablation study results as a grouped bar chart, (4) scatter plot of predicted vs. true R^2 across all test equations, (5) qualitative examples panel showing 3-4 discovered equations with input data plots and predicted expressions, (6) Pareto front plot of accuracy vs. complexity for beam search candidates on a representative equation. All figures must use matplotlib/seaborn with consistent styling, labeled axes, legends, and minimum 300 DPI resolution.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Write comprehensive research report documenting methodology, results, and analysis",
+          "acceptance_criteria": "Report file (report.md or report.pdf) containing: (1) Abstract (150-250 words), (2) Introduction with motivation and problem statement, (3) Related Work section citing at least 10 papers from sources.bib, (4) Method section describing architecture, training, and each novel component, (5) Experimental Setup section with datasets, metrics, and compute details, (6) Results section with all tables and figure references, (7) Discussion section analyzing why the model succeeds/fails on specific equation types and the significance of the novel equation discovery results, (8) Conclusion with summary of contributions and future work, (9) References section. Total length: at least 3000 words.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Update README.md with project overview, reproduction instructions, and key results",
+          "acceptance_criteria": "README.md updated to include: (1) project title and one-paragraph description, (2) key results summary (headline accuracy numbers and novel discovery highlight), (3) installation instructions (Python version, pip requirements), (4) data generation instructions, (5) training command with recommended hyperparameters, (6) evaluation command, (7) link to full report, (8) citation block (BibTeX for this work), (9) acknowledgments and references to ARChitects ARC2025 solution and other key inspirations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_026",
+          "description": "Ensure reproducibility: requirements.txt, config files, random seeds, and .gitignore for large files",
+          "acceptance_criteria": "(1) requirements.txt listing all Python dependencies with pinned versions, (2) config/ directory with YAML/JSON config files for all experiments (training, evaluation, ablation), (3) all experiments use fixed random seeds (documented in configs), (4) .gitignore updated to exclude model checkpoints (*.pt, *.pth, *.bin, *.ckpt, *.safetensors), large data files (*.npy, *.pkl over 100MB), and wandb/tensorboard logs, (5) a single-command reproduction script (run_all.sh or Makefile) that executes the full pipeline from data generation through evaluation, (6) verified that `git status` shows no large binary files staged for commit.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_027",
+          "description": "Conduct error analysis and document failure modes",
+          "acceptance_criteria": "Error analysis document (in report or standalone analysis.md) that: (1) categorizes failed equations by failure type (wrong structure, correct structure but wrong constants, timeout, degenerate output), (2) identifies systematic patterns (e.g., fails on equations with >3 variables, fails on trigonometric compositions), (3) provides at least 5 detailed failure case studies showing model input, predicted expression, ground truth, and analysis of what went wrong, (4) proposes concrete improvements for each failure category, (5) discusses limitations honestly including what types of physics the model cannot yet handle.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 27,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 27
+  }
+}
