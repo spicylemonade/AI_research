@@ -1,0 +1,17 @@
+{
+  "n_train": 1000000,
+  "n_val": 50000,
+  "n_test": 50000,
+  "n_templates": 52,
+  "vocab_size": 128,
+  "max_obs_points": 50,
+  "max_input_vars": 6,
+  "max_eq_length": 64,
+  "seed": 42,
+  "tier_distribution": {
+    "1": 300000,
+    "2": 300000,
+    "3": 250000,
+    "4": 150000
+  }
+}
