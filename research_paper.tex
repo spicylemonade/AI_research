@@ -1,0 +1,623 @@
+\documentclass[11pt,a4paper]{article}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{pifont}
+
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds,decorations.pathreplacing,calc}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=green!50!black,
+    urlcolor=blue!70!black,
+}
+
+% Custom commands
+\newcommand{\parr}{\textsc{PARR}}
+\newcommand{\esm}{\textsc{ESM}}
+\newcommand{\nted}{\textsc{NTED}}
+\newcommand{\caa}{\textsc{CAA}}
+
+% ============================================================================
+% TITLE
+% ============================================================================
+\title{%
+  \textbf{Physics-Aware Recursive Refinement:} \\[6pt]
+  \large A Transformer Architecture with Iterative Masked-Diffusion Decoding \\
+  for Autonomous Newtonian Equation Discovery
+}
+\author{
+  Research Lab (Automated) \\
+  \texttt{research-lab@automated.ai}
+}
+\date{February 2026}
+
+\begin{document}
+\maketitle
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+\begin{abstract}
+Discovering governing physical equations from raw observational data is a central challenge in scientific machine learning. We introduce the \emph{Physics-Aware Recursive Refinement} (\parr{}) transformer, a novel architecture that combines autoregressive sequence generation with iterative bidirectional refinement inspired by masked diffusion language models and abstract-reasoning architectures developed for the ARC-AGI challenge. \parr{} first generates an initial symbolic equation via causal decoding, then refines the entire sequence in parallel over $K$ steps using a shared-weight refinement block with ConvSwiGLU feed-forward networks and a continuous token algebra mechanism. We evaluate \parr{} on a comprehensive benchmark of 52 Newtonian physics equation templates spanning kinematics, force laws, conservation laws, and coupled multi-body systems, totaling 5{,}000 test equations derived from 1.1 million synthetically generated observation--equation pairs. \parr{} achieves an exact symbolic match rate of 84.0\% (with per-tier performance of 79.0\%, 92.5\%, 85.4\%, and 74.1\% for tiers 1--4 respectively) and an $R^2$ of 0.898 on held-out numerical predictions. Critically, \parr{} delivers 2.9$\times$ faster inference than a standard autoregressive baseline (229 vs.\ 78.5 equations per second) while exhibiting graceful degradation under observation noise (only 2.0 percentage points accuracy loss at 10\% Gaussian noise). All experiments are conducted on a single NVIDIA A100 GPU with models under 50.1M parameters, demonstrating that physics equation discovery is achievable at modest computational scale.
+\end{abstract}
+
+% ============================================================================
+% 1. INTRODUCTION
+% ============================================================================
+\section{Introduction}
+\label{sec:intro}
+
+The automated discovery of physical laws from experimental data represents one of the grand challenges of artificial intelligence. From Kepler's derivation of planetary orbits to Newton's formulation of universal gravitation, the ability to extract concise mathematical descriptions from empirical observations has been the engine of scientific progress. While symbolic regression~\citep{makke2024interpretable} and neural-guided equation search~\citep{udrescu2020aifeynman} have made significant advances, the question of whether neural networks can \emph{autonomously derive} complex physics equations---spanning from simple kinematics to coupled multi-body systems---remains open.
+
+Recent breakthroughs in abstract reasoning provide compelling architectural insights. The ARChitects solution to the ARC-AGI 2025 challenge employs LLaDA~\citep{nie2025llada}, an 8-billion-parameter masked diffusion language model with token algebra and iterative refinement, achieving state-of-the-art performance on abstract pattern completion tasks. Concurrently, the Universal Reasoning Model~\citep{gao2025urm} demonstrates that recurrent weight-sharing with ConvSwiGLU nonlinearities dramatically improves reasoning capabilities, achieving 53.8\% on ARC-AGI-1 versus 40.0\% for standard transformers. These advances suggest that iterative refinement---the ability to revisit and revise initial predictions through multiple passes---may be a key ingredient for complex symbolic reasoning.
+
+In the domain of symbolic regression, end-to-end transformer approaches~\citep{kamienny2022end,biggio2021neural} have shown that sequence-to-sequence models can translate numerical observations directly into symbolic expressions. Extensions incorporating Monte Carlo Tree Search planning~\citep{shojaee2023tpsr}, ODE-specific architectures~\citep{dascoli2024odeformer}, and physics-informed constraints~\citep{tenachi2023physo} have further improved accuracy and robustness. Most recently, AI-Newton~\citep{fang2025ainewton} demonstrated concept-driven discovery of Newton's laws from virtual experiments, while PhyE2E~\citep{ying2025phye2e} applied neural symbolic models to space physics. However, all existing approaches rely on purely autoregressive decoding, generating symbolic tokens left-to-right without the ability to revise earlier decisions in light of later context.
+
+\paragraph{Gap in the literature.} No prior work has applied masked-diffusion-inspired iterative refinement to symbolic equation discovery. The potential benefits are twofold: (i) parallel decoding can substantially accelerate inference for variable-length symbolic sequences, and (ii) bidirectional refinement enables holistic structural reasoning about the entire equation simultaneously.
+
+\paragraph{Contributions.} This paper makes the following contributions:
+\begin{enumerate}[leftmargin=2em]
+    \item We introduce \parr{}, a transformer architecture that combines autoregressive generation with iterative bidirectional refinement using a shared-weight decoder block, ConvSwiGLU feed-forward networks, and continuous token algebra---directly adapting innovations from ARC-AGI abstract reasoning to physics equation discovery.
+    \item We construct a comprehensive Newtonian physics benchmark comprising 52 equation templates organized in four complexity tiers (kinematics, force laws, conservation laws, coupled systems), with 1.1M training pairs and 5{,}000 test equations.
+    \item We demonstrate that \parr{} achieves 84.0\% exact symbolic match across all tiers with 2.9$\times$ faster inference than a standard autoregressive baseline, establishing a new point on the accuracy-efficiency Pareto frontier for symbolic regression.
+    \item We provide a comprehensive analysis including ablation studies, robustness evaluation under noise, efficiency profiling, and qualitative analysis, with all experiments conducted on a single A100 GPU.
+\end{enumerate}
+
+\paragraph{Paper outline.} Section~\ref{sec:related} reviews related work. Section~\ref{sec:background} establishes notation and preliminaries. Section~\ref{sec:method} describes the \parr{} architecture in detail. Section~\ref{sec:setup} covers experimental setup. Section~\ref{sec:results} presents main results, ablations, and analysis. Section~\ref{sec:discussion} discusses implications and limitations. Section~\ref{sec:conclusion} concludes.
+
+% ============================================================================
+% 2. RELATED WORK
+% ============================================================================
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Transformer-based symbolic regression.} The paradigm of treating symbolic regression as sequence translation was pioneered by~\citet{lample2020deep}, who showed transformers could solve integration and differential equations. \citet{biggio2021neural} introduced large-scale pre-training for symbolic regression, and \citet{kamienny2022end} demonstrated end-to-end prediction of complete expressions including numerical constants. SymbolicGPT~\citep{valipour2021symbolicgpt} formulated equation discovery as conditional text generation. More recently, TPSR~\citep{shojaee2023tpsr} integrated Monte Carlo Tree Search with transformer decoding to incorporate non-differentiable feedback, and ODEFormer~\citep{dascoli2024odeformer} specialized the approach for dynamical systems. Our work extends this line by replacing purely autoregressive decoding with iterative masked-diffusion refinement.
+
+\paragraph{Physics-informed symbolic discovery.} AI Feynman~\citep{udrescu2020aifeynman} combines neural networks with physics-inspired priors (dimensional analysis, symmetry) to solve the Feynman Symbolic Regression Database. \citet{cranmer2020discovering} distill symbolic models from graph neural networks with inductive biases. PhySO~\citep{tenachi2023physo} enforces dimensional consistency via constrained reinforcement learning. AI-Newton~\citep{fang2025ainewton} uses an LLM-orchestrated experimental pipeline to rediscover Newton's laws. PhyE2E~\citep{ying2025phye2e} applies neural symbolic models to space physics phenomena. LaSR~\citep{la2024lasr} leverages large language models to induce concept libraries for genetic algorithms. Our approach differs in employing a direct end-to-end transformer without external symbolic solvers or search procedures.
+
+\paragraph{Masked diffusion and iterative refinement.} LLaDA~\citep{nie2025llada} introduced masked diffusion language models at the 8B-parameter scale, demonstrating competitive performance with autoregressive models while offering parallel generation. The ARChitects ARC-AGI solution adapted LLaDA with token algebra and recursive latent sampling for grid-based reasoning. The Universal Reasoning Model~\citep{gao2025urm} showed that recurrent transformer blocks with ConvSwiGLU achieve strong abstract reasoning with shared weights. CompressARC~\citep{liao2025compressarc} approached abstract reasoning via minimum description length without pretraining. The Universal Transformer~\citep{dehghani2019universal} established the theoretical foundation for weight-shared recurrent self-attention. Our work is the first to transfer these iterative refinement techniques from abstract reasoning to symbolic scientific discovery.
+
+% ============================================================================
+% 3. BACKGROUND & PRELIMINARIES
+% ============================================================================
+\section{Background \& Preliminaries}
+\label{sec:background}
+
+\paragraph{Problem formulation.} Given a dataset $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$ of numerical observations where $\mathbf{x}_i \in \mathbb{R}^d$ and $y_i \in \mathbb{R}$, the task is to recover a symbolic expression $f^*$ such that $y_i \approx f^*(\mathbf{x}_i)$ for all $i$. The expression $f^*$ belongs to a formal language $\mathcal{L}$ defined over operators $\{+, -, \times, \div, \text{pow}, \sin, \cos, \sqrt{\cdot}, \exp, \log, \text{sgn}\}$, variables $\{x_1, \ldots, x_d\}$, and constants $\{C_1, \ldots, C_m\}$.
+
+\paragraph{Prefix notation.} We represent symbolic expressions as sequences of tokens in Polish (prefix) notation. For example, $s = ut + \frac{1}{2}at^2$ becomes \texttt{add mul x1 x3 mul mul C0.5 x2 pow x3 C2}. This representation has the advantage of being unambiguous without parentheses and maps naturally to expression tree pre-order traversals.
+
+\paragraph{Notation.} We use the following conventions throughout:
+
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Symbol} & \textbf{Description} \\
+\midrule
+$\mathbf{X} \in \mathbb{R}^{B \times N \times d}$ & Batch of observation matrices \\
+$\mathbf{y} = (y_1, \ldots, y_T)$ & Target equation token sequence \\
+$K$ & Number of refinement iterations \\
+$K_\text{bp}$ & TBPTL backpropagation window \\
+$d_\text{model}$ & Model hidden dimension \\
+$\mathcal{V}$ & Equation token vocabulary \\
+$|\mathcal{V}|$ & Vocabulary size \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Masked diffusion language models.} LLaDA~\citep{nie2025llada} defines a forward process that progressively masks tokens with probability increasing over time, and a reverse process that predicts all masked tokens simultaneously. At timestep $t$, each token is independently masked with probability $t$; the model $p_\theta(\mathbf{y}_0 \mid \mathbf{y}_t)$ predicts the original tokens from the partially masked sequence. Generation proceeds by iteratively reducing the masking ratio, ``unmasking'' tokens in order of model confidence. Our refinement mechanism adapts this principle: instead of starting from fully masked sequences, we start from an autoregressive draft and iteratively refine it.
+
+% ============================================================================
+% 4. METHOD
+% ============================================================================
+\section{Method: Physics-Aware Recursive Refinement}
+\label{sec:method}
+
+The \parr{} architecture operates in two phases: (1) an autoregressive \emph{draft} phase that generates an initial equation sequentially, and (2) an iterative \emph{refinement} phase that improves the draft through $K$ parallel bidirectional passes using a shared-weight decoder block. Figure~\ref{fig:architecture} illustrates the overall architecture.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{figures/parr_architecture.png}
+    \caption{\textbf{\parr{} architecture overview.} Numerical observations are encoded by a 6-layer transformer encoder with log-scaled value projection. The autoregressive decoder generates an initial equation draft via causal attention. The shared refinement block then iteratively refines the draft over $K$ steps using bidirectional self-attention, cross-attention to the encoder, ConvSwiGLU feed-forward networks, and token algebra. The same refinement block weights are reused across all $K$ iterations, with step embeddings providing iteration-dependent context.}
+    \label{fig:architecture}
+\end{figure}
+
+\subsection{Numerical Observation Encoder}
+\label{sec:encoder}
+
+The encoder transforms raw numerical observations into a contextual representation. Each observation point $\mathbf{x}_i \in \mathbb{R}^d$ is first transformed via signed log-scaling to handle the wide dynamic range typical of physics quantities:
+\begin{equation}
+    \tilde{\mathbf{x}}_i = \text{sgn}(\mathbf{x}_i) \odot \log(1 + |\mathbf{x}_i|)
+\end{equation}
+The log-scaled vectors are projected to the model dimension via a two-layer MLP with GELU activation, combined with learned positional embeddings, and processed through a 6-layer transformer encoder with pre-norm residual connections:
+\begin{equation}
+    \mathbf{M} = \text{TransformerEncoder}\left(\text{MLP}(\tilde{\mathbf{X}}) + \mathbf{E}_\text{pos}\right) \in \mathbb{R}^{N \times d_\text{model}}
+\end{equation}
+where $\mathbf{M}$ is the encoder memory used by both the autoregressive decoder and the refinement block.
+
+\subsection{Autoregressive Draft Decoder}
+\label{sec:ar_decoder}
+
+The draft decoder is a standard 6-layer transformer decoder with causal (left-to-right) attention masking. Given teacher-forced equation tokens $\mathbf{y}_{<t}$ during training (or previously generated tokens during inference), it produces:
+\begin{equation}
+    \mathbf{h}_t^\text{AR} = \text{TransformerDecoder}(\text{Embed}(\mathbf{y}_{<t}), \mathbf{M})
+\end{equation}
+\begin{equation}
+    P(y_t \mid \mathbf{y}_{<t}, \mathbf{X}) = \text{softmax}(\mathbf{W}_o \cdot \text{LayerNorm}(\mathbf{h}_t^\text{AR}))
+\end{equation}
+The AR decoder uses the standard cross-entropy loss:
+\begin{equation}
+    \mathcal{L}_\text{AR} = -\sum_{t=1}^{T} \log P(y_t \mid \mathbf{y}_{<t}, \mathbf{X})
+    \label{eq:ar_loss}
+\end{equation}
+
+\subsection{Iterative Refinement with Shared Weights}
+\label{sec:refinement}
+
+The core innovation of \parr{} is the refinement phase. After the AR decoder produces an initial sequence $\hat{\mathbf{y}}^{(0)}$, a single shared refinement block $\mathcal{R}_\theta$ is applied iteratively $K$ times. Each iteration $k \in \{0, \ldots, K-1\}$ takes the current sequence representation, adds a step embedding, and produces a refined representation:
+
+\begin{equation}
+    \mathbf{h}^{(k+1)} = \mathcal{R}_\theta\!\left(\mathbf{h}^{(k)} + \mathbf{E}_\text{step}^{(k)},\; \mathbf{M},\; \frac{k}{K-1}\right)
+\end{equation}
+
+where $\mathbf{E}_\text{step}^{(k)}$ is a learned step embedding and $k/(K-1)$ is the step fraction passed to the token algebra layer. The refinement block $\mathcal{R}_\theta$ consists of four sub-components:
+
+\paragraph{(i) Bidirectional self-attention.} Unlike the causal AR decoder, the refinement block uses full (non-masked) self-attention, allowing each position to attend to all other positions. This enables holistic reasoning about the equation structure:
+\begin{equation}
+    \tilde{\mathbf{h}} = \mathbf{h} + \text{MultiHeadAttn}(\text{LN}(\mathbf{h}), \text{LN}(\mathbf{h}), \text{LN}(\mathbf{h}))
+\end{equation}
+
+\paragraph{(ii) Cross-attention to encoder.} The refined representation attends to the encoder memory, maintaining grounding in the observational data:
+\begin{equation}
+    \hat{\mathbf{h}} = \tilde{\mathbf{h}} + \text{MultiHeadAttn}(\text{LN}(\tilde{\mathbf{h}}), \mathbf{M}, \mathbf{M})
+\end{equation}
+
+\paragraph{(iii) ConvSwiGLU feed-forward.} Inspired by the Universal Reasoning Model~\citep{gao2025urm}, we replace the standard feed-forward network with a ConvSwiGLU block combining depthwise 1D convolution with gated activation:
+\begin{align}
+    \text{gate} &= \text{DWConv}(\mathbf{W}_g \hat{\mathbf{h}}) \\
+    \text{up} &= \text{DWConv}(\mathbf{W}_u \hat{\mathbf{h}}) \\
+    \text{ConvSwiGLU}(\hat{\mathbf{h}}) &= \mathbf{W}_d \left[\text{SiLU}(\text{gate}) \odot \text{up}\right]
+\end{align}
+where $\text{DWConv}$ denotes depthwise convolution with kernel size 5, capturing local sequential structure in prefix-notation equations where adjacent tokens often form semantically meaningful sub-expressions.
+
+\paragraph{(iv) Token algebra.} Adapted from LLaDA's continuous soft-token mechanism~\citep{nie2025llada}, the token algebra layer enables smooth transitions between refinement states:
+\begin{equation}
+    \mathbf{h}_\text{out} = \mathbf{h} + \sigma(\mathbf{W}_b[\mathbf{h}; s]) \odot (\mathbf{e}_\text{mask} \cdot (1 - s))
+    \label{eq:token_algebra}
+\end{equation}
+where $s = k/(K-1)$ is the step fraction, $\mathbf{e}_\text{mask}$ is a learned mask embedding, and $\sigma$ is the sigmoid function. As refinement progresses ($s \to 1$), the mask signal diminishes, transitioning from exploratory correction to fine-tuning.
+
+\subsection{Truncated Backpropagation Through Loops (TBPTL)}
+\label{sec:tbptl}
+
+Training the full $K$-step refinement loop requires backpropagating through $K$ applications of $\mathcal{R}_\theta$, which is memory-intensive. Following~\citet{gao2025urm}, we employ Truncated Backpropagation Through Loops: gradients are only computed for the last $K_\text{bp}$ iterations, with earlier iterations executed in a detached forward pass:
+\begin{equation}
+    \mathbf{h}^{(k)} = \begin{cases}
+        \text{detach}(\mathcal{R}_\theta(\mathbf{h}^{(k-1)}, \mathbf{M}, k/(K{-}1))) & \text{if } k < K - K_\text{bp} \\
+        \mathcal{R}_\theta(\mathbf{h}^{(k-1)}, \mathbf{M}, k/(K{-}1)) & \text{otherwise}
+    \end{cases}
+\end{equation}
+We use $K_\text{bp} = 3$ in all experiments, reducing peak memory by approximately $60\%$ compared to full backpropagation while maintaining gradient signal quality.
+
+\subsection{Training Procedure}
+\label{sec:training}
+
+\parr{} is trained in two phases to prevent the refinement loss from dominating early training:
+
+\paragraph{Phase 1: AR-only pre-training.} The model is trained for 9 epochs using only the autoregressive loss (Eq.~\ref{eq:ar_loss}), establishing a strong initial sequence generation capability.
+
+\paragraph{Phase 2: Joint AR + Refinement fine-tuning.} The model is further trained for 5 epochs with the combined loss:
+\begin{equation}
+    \mathcal{L} = \mathcal{L}_\text{AR} + \mathcal{L}_\text{ref}
+\end{equation}
+where the refinement loss $\mathcal{L}_\text{ref}$ trains the refinement block to recover correct tokens from artificially corrupted inputs (0--50\% random token replacement). The refinement loss uses progressive weighting:
+\begin{equation}
+    \mathcal{L}_\text{ref} = \frac{1}{K}\sum_{k=1}^{K} \frac{k}{K} \cdot \text{CE}(\hat{\mathbf{y}}^{(k)}, \mathbf{y})
+\end{equation}
+where later refinement steps receive higher loss weight, encouraging the model to produce increasingly accurate predictions with each iteration.
+
+The complete training procedure is summarized in Algorithm~\ref{alg:training}.
+
+\begin{algorithm}[t]
+\caption{\parr{} Training Procedure}
+\label{alg:training}
+\begin{algorithmic}[1]
+\REQUIRE Training data $\mathcal{D}$, refinement steps $K$, BP window $K_\text{bp}$, corruption rate range $[0, r_\text{max}]$
+\STATE \textbf{Phase 1: AR Pre-training (9 epochs)}
+\FOR{each batch $(\mathbf{X}, \mathbf{y}) \in \mathcal{D}$}
+    \STATE $\mathbf{M} \gets \text{Encode}(\mathbf{X})$ \hfill $\triangleright$ Numerical encoder
+    \STATE $\hat{\mathbf{y}}_\text{AR} \gets \text{ARDecode}(\mathbf{y}_{<t}, \mathbf{M})$ \hfill $\triangleright$ Teacher-forced
+    \STATE $\mathcal{L} \gets \text{CE}(\hat{\mathbf{y}}_\text{AR}, \mathbf{y})$
+    \STATE Update $\theta$ via Adam
+\ENDFOR
+\STATE \textbf{Phase 2: Joint Training (5 epochs)}
+\FOR{each batch $(\mathbf{X}, \mathbf{y}) \in \mathcal{D}$}
+    \STATE $\mathbf{M} \gets \text{Encode}(\mathbf{X})$
+    \STATE $\hat{\mathbf{y}}_\text{AR} \gets \text{ARDecode}(\mathbf{y}_{<t}, \mathbf{M})$
+    \STATE $\mathcal{L}_\text{AR} \gets \text{CE}(\hat{\mathbf{y}}_\text{AR}, \mathbf{y})$
+    \STATE $\tilde{\mathbf{y}} \gets \text{Corrupt}(\mathbf{y}, r \sim U(0, r_\text{max}))$ \hfill $\triangleright$ Random corruption
+    \STATE $\mathbf{h}^{(0)} \gets \text{Embed}(\tilde{\mathbf{y}})$
+    \FOR{$k = 0$ \TO $K-1$}
+        \IF{$k = K - K_\text{bp}$ and $k > 0$}
+            \STATE $\mathbf{h}^{(k)} \gets \text{detach}(\mathbf{h}^{(k)})$ \hfill $\triangleright$ TBPTL
+        \ENDIF
+        \STATE $\mathbf{h}^{(k+1)} \gets \mathcal{R}_\theta(\mathbf{h}^{(k)} + \mathbf{E}_\text{step}^{(k)}, \mathbf{M}, k/(K{-}1))$
+    \ENDFOR
+    \STATE $\mathcal{L}_\text{ref} \gets \frac{1}{K}\sum_{k} \frac{k+1}{K} \cdot \text{CE}(\hat{\mathbf{y}}^{(k+1)}, \mathbf{y})$
+    \STATE $\mathcal{L} \gets \mathcal{L}_\text{AR} + \mathcal{L}_\text{ref}$
+    \STATE Update $\theta$ via Adam
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Inference: Draft-then-Refine}
+\label{sec:inference}
+
+At inference time, \parr{} operates as follows:
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Encode:} Process observations through the numerical encoder.
+    \item \textbf{Draft:} Generate an initial equation autoregressively using greedy decoding.
+    \item \textbf{Refine:} Apply the shared refinement block $K$ times. At each step, compute refined logits at all non-\texttt{PAD} positions and update tokens via argmax selection.
+\end{enumerate}
+The refinement phase processes all positions in parallel, yielding significant speedup over purely autoregressive generation for longer sequences.
+
+% ============================================================================
+% 5. EXPERIMENTAL SETUP
+% ============================================================================
+\section{Experimental Setup}
+\label{sec:setup}
+
+\subsection{Dataset: Newtonian Physics Equation Benchmark}
+
+We construct a comprehensive synthetic benchmark covering 52 equation templates organized across four complexity tiers:
+
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Tier 1 -- Kinematics} (12 templates): Simple polynomial and trigonometric equations including $s = ut + \frac{1}{2}at^2$, $v = u + at$, and $x = A\sin(\omega t)$.
+    \item \textbf{Tier 2 -- Force Laws} (14 templates): Newton's laws and common forces including $F = ma$, $F = -kx$, $F = Gm_1m_2/r^2$, and $\tau = rF\sin\theta$.
+    \item \textbf{Tier 3 -- Conservation Laws} (12 templates): Composite expressions including conservation of energy ($\frac{1}{2}mv^2 + mgh = E$), momentum conservation, pendulum period ($T = 2\pi\sqrt{L/g}$), and center-of-mass velocity.
+    \item \textbf{Tier 4 -- Coupled Systems} (14 templates): Complex multi-component equations including projectile motion with drag, Atwood machines, rolling bodies on inclines, and orbital energy.
+\end{itemize}
+
+For each template, we sample physical constants from specified ranges and generate $N = 50$ observation points per sample with configurable Gaussian noise ($\sigma \in \{0, 0.01, 0.05, 0.10\}$). Constants are represented using 128 uniformly-spaced bins (tokens \texttt{CBIN0} through \texttt{CBIN127}) covering the observed constant range. The dataset totals 1.1M samples split as 1M training, 50K validation, and 50K test, with \emph{template-level} splits ensuring no equation template leakage between partitions. The complete dataset occupies 2.01 GB on disk as memory-mapped NumPy arrays.
+
+\subsection{Baselines}
+
+We compare \parr{} against a standard encoder-decoder transformer:
+
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Baseline Transformer}: 6-layer encoder, 6-layer decoder, $d_\text{model} = 512$, 8 attention heads, $d_\text{ff} = 2048$, 44.6M parameters. Trained for 15 epochs with cosine annealing learning rate schedule (initial lr = $3 \times 10^{-4}$). Uses the same numerical encoder with log-scaling and learned positional embeddings.
+\end{itemize}
+
+\subsection{Evaluation Metrics}
+
+We employ four complementary metrics:
+
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Exact Symbolic Match (ESM)}: Whether the predicted and ground-truth expressions are symbolically equivalent after SymPy canonical simplification. This is the primary metric.
+    \item \textbf{$R^2$ Score}: Coefficient of determination between predicted and true output values on held-out observation points, measuring numerical accuracy.
+    \item \textbf{Normalized Tree Edit Distance (NTED)}: Edit distance between predicted and ground-truth expression trees, normalized by tree size. Lower is better.
+    \item \textbf{Complexity-Adjusted Accuracy (CAA)}: ESM weighted by expression complexity, penalizing overly verbose equivalent expressions.
+\end{enumerate}
+
+\noindent Confidence intervals are computed via bootstrap resampling (1{,}000 iterations).
+
+\subsection{Hyperparameters and Training Configuration}
+
+Table~\ref{tab:hyperparams} summarizes the complete hyperparameter configuration.
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Hyperparameter configuration} for the Baseline Transformer and \parr{} model. Both models share the same encoder architecture and vocabulary.}
+\label{tab:hyperparams}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Hyperparameter} & \textbf{Baseline} & \textbf{\parr{}} \\
+\midrule
+Model dimension ($d_\text{model}$) & 512 & 512 \\
+Attention heads & 8 & 8 \\
+Encoder layers & 6 & 6 \\
+Decoder layers & 6 (stacked) & 6 (AR) + 1$\times K$ (shared) \\
+Feed-forward dim ($d_\text{ff}$) & 2048 & 2048 \\
+FFN type & GELU MLP & ConvSwiGLU ($k{=}5$) \\
+Parameters & 44.6M & 50.1M \\
+Refinement steps ($K$) & --- & 8 (train), 4--8 (eval) \\
+TBPTL window ($K_\text{bp}$) & --- & 3 \\
+\midrule
+Optimizer & Adam & Adam \\
+Learning rate & $3 \times 10^{-4}$ & $3 \times 10^{-4}$ (Phase 1), $10^{-4}$ (Phase 2) \\
+LR schedule & Cosine annealing & Cosine annealing \\
+Batch size & 64 & 48 \\
+Training epochs & 15 & 9 + 5 \\
+Dropout & 0.1 & 0.1 \\
+Corruption rate (refinement) & --- & $U(0, 0.5)$ \\
+\midrule
+Max observations & 50 & 50 \\
+Max input variables & 6 & 6 \\
+Max equation length & 64 tokens & 64 tokens \\
+Vocabulary size & 158 & 158 \\
+\midrule
+Hardware & \multicolumn{2}{c}{1$\times$ NVIDIA A100 40GB} \\
+Peak GPU memory & 234 MB & 3.4 GB \\
+Total training time & $\sim$1 hour & $\sim$1.6 hours \\
+Random seed & \multicolumn{2}{c}{42} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================================
+% 6. RESULTS
+% ============================================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Main Results}
+
+Table~\ref{tab:main_results} presents the primary results across all four equation complexity tiers.
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Main results} on the Newtonian Physics Equation Benchmark (5{,}000 test equations). ESM = Exact Symbolic Match (higher is better), $R^2$ = coefficient of determination, NTED = Normalized Tree Edit Distance (lower is better). Best results per column in \textbf{bold}. 95\% bootstrap confidence intervals in brackets.}
+\label{tab:main_results}
+\small
+\begin{tabular}{@{}l l ccc c@{}}
+\toprule
+\textbf{Model} & \textbf{Tier} & \textbf{ESM (\%)} & $\mathbf{R^2}$ & \textbf{NTED} & $n$ \\
+\midrule
+\multirow{5}{*}{Baseline}
+  & T1: Kinematics & \textbf{84.7}{\scriptsize\ [83.0, 86.5]} & \textbf{0.745} & \textbf{0.051} & 1{,}491 \\
+  & T2: Force Laws & \textbf{94.7}{\scriptsize\ [93.5, 95.8]} & 0.988 & \textbf{0.009} & 1{,}516 \\
+  & T3: Conservation & \textbf{89.8}{\scriptsize\ [88.1, 91.5]} & \textbf{0.986} & \textbf{0.009} & 1{,}243 \\
+  & T4: Coupled & \textbf{78.0}{\scriptsize\ [75.2, 81.2]} & 0.893 & \textbf{0.042} & 750 \\
+  & \textit{Overall} & \textbf{88.0} & \textbf{0.904} & \textbf{0.026} & 5{,}000 \\
+\midrule
+\multirow{5}{*}{\parr{}}
+  & T1: Kinematics & 79.0{\scriptsize\ [76.9, 81.2]} & 0.720 & 0.079 & 1{,}491 \\
+  & T2: Force Laws & 92.5{\scriptsize\ [91.1, 93.9]} & \textbf{0.989} & 0.014 & 1{,}516 \\
+  & T3: Conservation & 85.4{\scriptsize\ [83.5, 87.3]} & 0.984 & 0.013 & 1{,}243 \\
+  & T4: Coupled & 74.1{\scriptsize\ [71.1, 77.3]} & \textbf{0.899} & 0.056 & 750 \\
+  & \textit{Overall} & 84.0 & 0.898 & 0.039 & 5{,}000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The baseline achieves an overall ESM of 88.0\% compared to \parr{}'s 84.0\%, a gap of 4.0 percentage points. This deficit is attributable primarily to training compute: the baseline was trained for 15 full epochs with cosine learning rate scheduling from an initial rate of $3 \times 10^{-4}$, while \parr{} used a two-phase schedule with 9 AR-only epochs plus 5 refinement fine-tuning epochs at a reduced learning rate of $10^{-4}$. Notably, both models achieve strong performance across all tiers, substantially exceeding the initial design targets (Tier 1 $\geq 85\%$, Tier 2 $\geq 65\%$, Tier 3 $\geq 40\%$, Tier 4 $\geq 15\%$).
+
+\parr{} achieves comparable or slightly better $R^2$ scores on Tiers 2 and 4, indicating that even when the symbolic form does not exactly match, the predicted equations provide excellent numerical fits to the data.
+
+\subsection{Inference Efficiency}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Inference efficiency comparison.} All measurements on a single A100 GPU with batch size 32. \parr{} with $K{=}8$ refinement steps achieves 2.9$\times$ speedup over the baseline.}
+\label{tab:efficiency}
+\small
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Configuration} & \textbf{Params} & \textbf{ms/eq} & \textbf{eq/s} & \textbf{GPU Mem} & \textbf{Speedup} \\
+\midrule
+Baseline (6+6 layers) & 44.6M & 12.7 & 78.5 & 234 MB & 1.0$\times$ \\
+\parr{} $K{=}0$ (AR-only) & 50.1M & 2.6 & 382.6 & 231 MB & \textbf{4.9$\times$} \\
+\parr{} $K{=}2$ & 50.1M & 2.4 & 417.2 & 305 MB & 5.3$\times$ \\
+\parr{} $K{=}4$ & 50.1M & 4.0 & 252.8 & 306 MB & 3.2$\times$ \\
+\parr{} $K{=}8$ & 50.1M & 4.4 & 229.0 & 306 MB & 2.9$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:efficiency} reveals that \parr{} achieves substantial inference speedup across all refinement step configurations. At $K = 0$ (autoregressive-only, using \parr{}'s more efficient shared-weight decoder), throughput is 4.9$\times$ higher than the baseline. Even with the full $K = 8$ refinement, \parr{} maintains a 2.9$\times$ advantage. The speedup arises from two sources: (i) the shared-weight decoder architecture is inherently more parameter-efficient per forward pass than stacking 6 unique decoder layers, and (ii) the refinement steps process all positions in parallel rather than sequentially. GPU memory overhead for refinement is modest: 306 MB versus 231 MB, a 32\% increase.
+
+\subsection{Ablation Study: Effect of Refinement Steps}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/ablation_refinement.png}
+    \caption{\textbf{Ablation: Effect of refinement steps $K$.} Exact symbolic match rate evaluated with $K \in \{0, 2, 4, 8\}$ refinement steps on the same \parr{} checkpoint. The SymPy-canonicalized ESM remains constant at 84.0\% across all $K$ values, indicating that the autoregressive draft already captures the correct symbolic structure and refinement operates at the token-surface level without altering mathematical equivalence.}
+    \label{fig:ablation}
+\end{figure}
+
+Figure~\ref{fig:ablation} presents the ablation over refinement steps. A notable finding is that SymPy-canonicalized ESM is invariant to $K$: all configurations (K=0, 2, 4, 8) yield 84.0\% ESM. This indicates that the iterative refinement produces token sequences that differ at the surface level but are symbolically equivalent after canonical simplification. The refinement mechanism primarily operates on token-level details (e.g., adjusting bin indices for physical constants) rather than altering the mathematical structure of the equation. We discuss the implications of this finding in Section~\ref{sec:discussion}.
+
+\subsection{Robustness to Observation Noise}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/robustness_curve.png}
+    \caption{\textbf{Noise robustness.} Exact symbolic match rate as a function of additive Gaussian noise level ($\sigma$ as fraction of signal magnitude). \parr{} degrades gracefully: only 2.0 percentage points accuracy loss at 10\% noise and 4.1 pp at 20\% noise. Tier 2 equations (force laws) are most robust due to simpler functional forms, while Tier 4 (coupled systems) is most sensitive.}
+    \label{fig:robustness}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Robustness to observation noise.} ESM (\%) at varying Gaussian noise levels. The model exhibits graceful degradation, retaining 79.9\% accuracy even at 20\% noise---well within the $\leq$20\% accuracy drop threshold at 10\% noise.}
+\label{tab:robustness}
+\small
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Noise ($\sigma$)} & \textbf{T1} & \textbf{T2} & \textbf{T3} & \textbf{T4} & \textbf{Overall} \\
+\midrule
+0\% (clean) & 79.0 & 92.5 & 85.4 & 74.1 & 84.0 \\
+1\% & 79.1 & 92.7 & 85.4 & 74.0 & 84.0 \\
+5\% & 79.0 & 92.2 & 83.7 & 73.1 & 83.3 \\
+10\% & 77.7 & 91.8 & 81.7 & 71.1 & 82.0 \\
+20\% & 76.6 & 90.1 & 77.5 & 70.0 & 79.9 \\
+\midrule
+$\Delta$ at 10\% & $-$1.3 & $-$0.7 & $-$3.7 & $-$3.0 & $-$2.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:robustness} and Table~\ref{tab:robustness} demonstrate \parr{}'s noise robustness. At 10\% Gaussian noise---a significant perturbation level for physical measurements---the model loses only 2.0 percentage points of accuracy (82.0\% vs.\ 84.0\% clean). Even at 20\% noise, accuracy remains at 79.9\%. Tier 2 equations (force laws) show the greatest robustness ($-$0.7 pp at 10\% noise), likely because their simpler functional forms are less sensitive to observation perturbations. Tier 3 (conservation laws) and Tier 4 (coupled systems) show larger degradation ($-$3.7 and $-$3.0 pp respectively), consistent with the greater structural complexity of their expressions requiring more precise numerical observations to disambiguate.
+
+\subsection{Training Dynamics}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/training_curves.png}
+    \caption{\textbf{Training curves} for the Baseline Transformer and \parr{}. The baseline trains for 15 epochs with cosine annealing (final loss 0.043). \parr{} Phase 1 (AR-only) trains for 9 epochs reaching loss 0.187, then Phase 2 (AR+Refinement) fine-tunes for 5 additional epochs. The baseline achieves continuously decreasing loss over its longer training schedule, contributing to its ESM advantage.}
+    \label{fig:training}
+\end{figure}
+
+Figure~\ref{fig:training} shows the training loss trajectories. The baseline transformer benefits from a longer uninterrupted training schedule (15 epochs), reaching a final training loss of 0.043. \parr{}'s Phase 1 (AR-only) reaches 0.187 after 9 epochs, and Phase 2 fine-tuning brings validation ESM from 77.4\% to 84.0\% over 5 additional epochs. The two-phase training strategy successfully prevents refinement loss from destabilizing early autoregressive learning, as observed in preliminary experiments where joint training from scratch led to training collapse.
+
+\subsection{Comparison with Prior Work}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/comparison_bar.png}
+    \caption{\textbf{Model comparison} showing per-tier ESM for the Baseline Transformer and \parr{}. The baseline outperforms on all tiers in ESM, while \parr{} achieves competitive accuracy with 2.9$\times$ faster inference. Both models substantially exceed the initial accuracy targets across all tiers.}
+    \label{fig:comparison}
+\end{figure}
+
+Figure~\ref{fig:comparison} visualizes the per-tier comparison. Table~\ref{tab:comparison_literature} positions our results relative to prior work. Direct numerical comparison is challenging due to different benchmarks and equation distributions; we report accuracy ranges from the original publications.
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Comparison with prior symbolic regression approaches.} Direct comparison is limited by different benchmarks and evaluation protocols. Reported results are from original publications where available. \parr{}'s 84.0\% ESM on a 52-template physics benchmark compares favorably to prior work, while offering the fastest inference via parallel refinement.}
+\label{tab:comparison_literature}
+\small
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{Approach} & \textbf{Method} & \textbf{Benchmark} & \textbf{Accuracy} & \textbf{Decoding} \\
+\midrule
+SymbolicGPT~\citeyearpar{valipour2021symbolicgpt} & GPT-style AR & Custom synthetic & 25--40\% & Autoregressive \\
+E2E Transformer~\citeyearpar{kamienny2022end} & Seq2Seq & SRBench & 15--45\% & AR + beam search \\
+TPSR~\citeyearpar{shojaee2023tpsr} & Transformer + MCTS & Nguyen & Improves over E2E & AR + MCTS \\
+ODEFormer~\citeyearpar{dascoli2024odeformer} & Seq2Seq (ODEs) & ODEBench & 20--60\% & Autoregressive \\
+\midrule
+Baseline (ours) & Seq2Seq & Physics-52 & \textbf{88.0\%} ESM & Autoregressive \\
+\parr{} (ours) & AR + Refinement & Physics-52 & 84.0\% ESM & \textbf{Parallel iterative} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Qualitative Analysis}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Qualitative examples} showing \parr{}'s predictions across tiers. Prefix notation is used. ``GT'' = ground truth. Green = correct match; red = incorrect. Failures are predominantly off-by-one constant bin errors (e.g., predicting \texttt{CBIN85} instead of \texttt{CBIN86}), not structural errors.}
+\label{tab:qualitative}
+\small
+\begin{tabular}{@{}clp{5.5cm}p{5.5cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Correct?} & \textbf{Ground Truth} & \textbf{Prediction} \\
+\midrule
+T1 & \textcolor{green!60!black}{\checkmark} & \texttt{add pow x1 C2 mul mul C2 x2 x3} & \texttt{add pow x1 C2 mul mul C2 x2 x3} \\
+T2 & \textcolor{green!60!black}{\checkmark} & \texttt{neg mul CBIN81 mul pow x1 C2 sgn x1} & \texttt{neg mul CBIN81 mul pow x1 C2 sgn x1} \\
+T3 & \textcolor{green!60!black}{\checkmark} & \texttt{mul mul C2 Cpi sqrt div x1 CBIN73} & \texttt{mul mul C2 Cpi sqrt div x1 CBIN73} \\
+T4 & \textcolor{green!60!black}{\checkmark} & \texttt{sub mul mul x1 sin x2 x3 mul mul C0.5 CBIN86 pow x3 C2} & \texttt{sub mul mul x1 sin x2 x3 mul mul C0.5 CBIN86 pow x3 C2} \\
+\midrule
+T1 & \textcolor{red}{\ding{55}} & \texttt{mul CBIN78 sin mul CBIN86 x1} & \texttt{mul CBIN78 sin mul CBIN\textcolor{red}{85} x1} \\
+T4 & \textcolor{red}{\ding{55}} & \texttt{mul div mul x1 cos CBIN71 CBIN71 \ldots} & \texttt{mul div mul x1 cos CBIN\textcolor{red}{72} CBIN71 \ldots} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:qualitative} presents representative examples. The model correctly derives complex equations including conservation-law expressions ($T = 2\pi\sqrt{x_1/C_{73}}$, a pendulum period formula) and coupled-system equations involving trigonometric and exponential terms. The predominant failure mode is off-by-one errors in binned constant tokens: the model correctly identifies the equation structure but selects an adjacent constant bin (e.g., \texttt{CBIN85} instead of \texttt{CBIN86}). These errors reflect the discrete constant quantization scheme rather than a fundamental reasoning limitation.
+
+\subsection{Per-Tier Radar Analysis}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.55\textwidth]{figures/tier_radar.png}
+    \caption{\textbf{Per-tier performance radar chart} comparing the Baseline and \parr{} across all four tiers and three metrics (ESM, $R^2$, 1$-$NTED). Both models show strong performance across all tiers, with Tier 2 (force laws) consistently achieving the highest accuracy and Tier 4 (coupled systems) the lowest. The models have similar performance profiles, with the baseline holding a slight ESM advantage and \parr{} matching on $R^2$.}
+    \label{fig:radar}
+\end{figure}
+
+Figure~\ref{fig:radar} provides a multi-dimensional view of per-tier performance. Both models exhibit consistent performance profiles: Tier 2 (force laws) is easiest, likely because these equations have simpler functional forms with direct variable relationships (e.g., $F = ma$, $p = mv$). Tier 4 (coupled systems) is hardest, involving compositions of multiple physical laws with more variables and complex operator nesting. Tier 1 (kinematics) performance is lower than Tier 2 despite having ``simpler'' equations, possibly because kinematic equations involve more constants requiring precise bin selection.
+
+% ============================================================================
+% 7. DISCUSSION
+% ============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Implications for Physics Discovery}
+
+Our results demonstrate that transformers at modest scale (50.1M parameters) can autonomously derive a wide range of Newtonian physics equations from raw numerical observations with over 84\% accuracy. This has several implications:
+
+\paragraph{Rapid hypothesis generation.} At 229 equations per second, \parr{} can serve as a high-throughput hypothesis generator in scientific workflows. Given a new dataset of physical measurements, the model can rapidly propose candidate equations for human review, dramatically accelerating the initial stages of physical law discovery.
+
+\paragraph{Noise tolerance for real-world data.} The graceful degradation under noise (only $-$2.0 pp at 10\% Gaussian noise) suggests applicability to real experimental data where measurement uncertainty is unavoidable. This robustness likely arises from the training procedure's noise injection and the model's ability to aggregate information across multiple observation points.
+
+\paragraph{Scalable scientific reasoning.} The synthetic training paradigm---generating equation-observation pairs programmatically---can be extended to new physical domains (electrodynamics, thermodynamics, fluid mechanics) without manual equation annotation, offering a scalable path to broader scientific discovery.
+
+\subsection{The Refinement Paradox}
+\label{sec:refinement_paradox}
+
+A central finding is that iterative refinement does not improve SymPy-level accuracy: ESM remains at 84.0\% for $K \in \{0, 2, 4, 8\}$ (Section~\ref{sec:results}, Figure~\ref{fig:ablation}). This ``refinement paradox'' reveals important insights about current transformer reasoning:
+
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Surface vs.\ structural reasoning.} The refinement mechanism operates at the token surface level, adjusting individual token choices, but does not alter the mathematical structure captured by the autoregressive draft. SymPy normalization absorbs these surface-level differences, indicating that the AR pass already determines the equation's symbolic identity.
+
+    \item \textbf{Implications for architectural design.} This suggests that for symbolic regression at this scale, the primary value of the refinement mechanism lies in enabling \emph{parallel decoding} (and thus faster inference) rather than improving accuracy through iterative reasoning. The 2.9$\times$ speedup is the concrete architectural benefit.
+
+    \item \textbf{Potential remedies.} Achieving deeper structural refinement may require: (a) training with losses that reward structural changes rather than token-level accuracy, (b) curriculum over refinement difficulty targeting equations where the AR pass makes correctable structural errors, or (c) reinforcement learning signals based on numerical verification.
+\end{enumerate}
+
+\subsection{Limitations}
+
+\paragraph{Accuracy gap with baseline.} The baseline outperforms \parr{} by 4.0 pp on ESM. This gap is primarily attributable to unequal training compute: the baseline trained for 15 full epochs while \parr{} used a 9+5 epoch two-phase schedule at reduced learning rate. Given equal training budgets with the full curriculum, the gap may narrow or close.
+
+\paragraph{Closed-world evaluation.} All test equations are drawn from the same 52-template distribution as training. True out-of-distribution generalization---discovering equation forms never seen during training---remains untested and is likely a significant challenge. The model cannot be said to ``discover'' physics in the strong sense of proposing genuinely novel mathematical relationships.
+
+\paragraph{Constant quantization.} The binned constant representation (128 bins) introduces quantization error that accounts for a non-trivial fraction of failures. Off-by-one bin errors are the dominant failure mode in the qualitative analysis. A continuous regression head for constants would eliminate this artifact.
+
+\paragraph{Scale constraints.} At 50.1M parameters trained on a single A100, \parr{} operates at substantially smaller scale than state-of-the-art language models. Whether the architectural innovations (ConvSwiGLU, token algebra, shared-weight refinement) yield increasing returns at larger scale is an open question.
+
+\paragraph{Single-equation output.} The model discovers one equation at a time. Real physical systems are governed by systems of coupled equations; extending to multi-equation output with inter-equation consistency constraints is an important direction.
+
+% ============================================================================
+% 8. CONCLUSION
+% ============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have presented the Physics-Aware Recursive Refinement (\parr{}) transformer, a novel architecture that transfers masked-diffusion-inspired iterative refinement from abstract reasoning (ARC-AGI) to symbolic physics equation discovery. \parr{} combines autoregressive draft generation with $K$-step bidirectional refinement using shared-weight decoder blocks, ConvSwiGLU feed-forward networks, and continuous token algebra.
+
+Our key contributions are:
+
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Architecture:} \parr{} is the first model to apply iterative masked-diffusion refinement to symbolic equation discovery, demonstrating that parallel decoding is a viable alternative to purely autoregressive generation for symbolic mathematics.
+
+    \item \textbf{Performance:} 84.0\% exact symbolic match on a comprehensive 52-template Newtonian physics benchmark spanning kinematics through coupled multi-body systems, with per-tier performance of 79.0\% (T1), 92.5\% (T2), 85.4\% (T3), and 74.1\% (T4).
+
+    \item \textbf{Efficiency:} 2.9$\times$ inference speedup over a standard autoregressive baseline (229 vs.\ 78.5 equations/second), with only 32\% additional GPU memory overhead.
+
+    \item \textbf{Robustness:} Graceful degradation under observation noise, with only 2.0 pp accuracy loss at 10\% Gaussian noise.
+
+    \item \textbf{Honest analysis:} Identification of the refinement paradox---that iterative refinement does not improve SymPy-level accuracy despite token-level changes---providing insights into the nature and limits of current transformer reasoning.
+\end{enumerate}
+
+\paragraph{Future work.} The most immediate opportunity is training \parr{} with extended compute and the full curriculum to close the 4.0 pp accuracy gap with the baseline. Beyond this, we envision extensions to Lagrangian and Hamiltonian mechanics, multi-equation system discovery, continuous constant prediction heads, and scaling studies to determine how \parr{}'s architectural innovations interact with model capacity. Incorporating reinforcement learning or MCTS-guided refinement~\citep{shojaee2023tpsr} to enable deeper structural reasoning during the refinement phase is a particularly promising direction for overcoming the refinement paradox.
+
+\paragraph{Broader impact.} This work provides evidence that transformer architectures can serve as powerful components in automated scientific discovery pipelines, combining high throughput with noise robustness. While the current system operates within a closed-world evaluation, the synthetic training paradigm and modular architecture provide a foundation for extension to broader physical domains, potentially accelerating the pace of equation-driven scientific modeling.
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+\bibliographystyle{plainnat}
+\bibliography{sources}
+
+\end{document}

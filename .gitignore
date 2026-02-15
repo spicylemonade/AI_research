@@ -11,3 +11,22 @@
 TASK_*.md
 agent_*.log
 orchestration.log
+
+# Large files (model weights and data)
+checkpoints/
+data/
+*.pt
+*.npy
+*.h5
+*.hdf5
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
