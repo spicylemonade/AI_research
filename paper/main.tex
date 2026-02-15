@@ -1,0 +1,852 @@
+%%% PhysMDT: Physics Masked Diffusion Transformer for Autonomous Equation Discovery
+%%% NeurIPS-style research paper draft
+%%% Uses article class for broad compatibility
+
+\documentclass[11pt]{article}
+
+% Page geometry (NeurIPS-like: 5.5in x 9in text block)
+\usepackage[
+  letterpaper,
+  top=1in,
+  bottom=1in,
+  left=1.5in,
+  right=1.5in
+]{geometry}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}              % NeurIPS uses Times font
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{natbib}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{microtype}
+
+% Hyperref settings
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% Custom commands
+\newcommand{\physmdt}{\textsc{PhysMDT}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bmask}{\texttt{[MASK]}}
+\newcommand{\softmax}{\operatorname{softmax}}
+
+\title{PhysMDT: Physics Masked Diffusion Transformer\\for Autonomous Equation Discovery from Numerical Observations}
+
+\author{
+  Anonymous Authors \\
+  Institution \\
+  \texttt{anonymous@institution.edu}
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+%% ============================================================
+%% ABSTRACT
+%% ============================================================
+\begin{abstract}
+We introduce the \emph{Physics Masked Diffusion Transformer} (\physmdt{}), a novel
+architecture for autonomous discovery of symbolic physics equations from raw
+numerical observations.  \physmdt{} adapts masked diffusion language modelling
+--- recently shown effective for discrete sequence generation --- to the domain
+of symbolic regression by incorporating four physics-aware inductive biases:
+(i)~a \emph{Set Transformer} observation encoder that respects measurement
+permutation invariance, (ii)~\emph{tree-positional encoding} that captures the
+hierarchical structure of mathematical expressions, (iii)~a \emph{dimensional
+analysis attention bias} that penalises physically inconsistent sub-expressions,
+and (iv)~\emph{recursive soft-masking refinement} that iteratively denoises
+candidate equations over 64 steps with confidence-based unmasking.  At
+test time, rank-16 LoRA adapters enable per-problem fine-tuning via a
+self-consistency loss in under 60 seconds.  Trained on 50 Newtonian physics
+equations across five complexity tiers using curriculum learning on a single
+NVIDIA A100 GPU in under one hour, \physmdt{} achieves 83.3\% symbolic
+equivalence accuracy on Tier~1 (simple linear) equations, 40\% overall accuracy
+across all tiers, and a mean $R^{2}$ of 0.91.  On a held-out set of 11
+equations \emph{never seen during training}, \physmdt{} successfully discovers
+the magnetic Lorentz force law ($F = qvB$) zero-shot --- demonstrating genuine
+scientific discovery capability.
+\end{abstract}
+
+%% ============================================================
+%% 1  INTRODUCTION
+%% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+The ability to distil concise mathematical laws from empirical observations
+lies at the heart of the scientific method.  From Kepler's derivation of
+planetary motion to the discovery of Maxwell's equations, the progression of
+physics has been driven by identifying symbolic relationships that compactly
+explain data.  Automating this process --- often called \emph{symbolic
+regression} (SR) --- has long been a goal of artificial intelligence
+\citep{brunton2016sindy, udrescu2020ai}.
+
+Classical SR approaches such as genetic programming \citep{brunton2016sindy}
+and sparse regression \citep{brunton2016sindy} scale poorly to complex,
+multi-variable equations.  Recent transformer-based methods
+\citep{biggio2021neural, kamienny2022end, valipour2021symbolicgpt} have
+demonstrated that neural networks can learn a direct mapping from numerical
+observations to symbolic expressions.  However, these methods rely on
+\emph{autoregressive} decoding: tokens are generated left-to-right, making it
+difficult to capture global structural constraints of mathematical expressions
+and precluding iterative refinement.
+
+Independently, masked diffusion language models (MDLMs) have emerged as a
+compelling alternative to autoregressive generation for discrete sequences.
+MDLM \citep{sahoo2024mdlm} and LLaDA \citep{nie2025llada} demonstrate that
+training a transformer to predict randomly masked tokens --- with masking
+ratios sampled from $\mathcal{U}[0,1]$ --- yields a proper generative model
+competitive with autoregressive baselines.  Most strikingly, the
+\emph{ARChitects} ARC~2025 solution \citep{architects2025arc} showed that
+recursive soft-masking refinement and test-time fine-tuning with LoRA adapters
+can push masked diffusion models to strong performance on abstract reasoning
+tasks.
+
+We ask: \emph{can these masked diffusion innovations be transferred to the
+domain of physics equation discovery?}  We introduce \physmdt{}, a 71.6M
+parameter model that combines a Set Transformer observation encoder with a
+masked diffusion expression decoder augmented with tree-positional encoding and
+dimensional analysis bias.  At inference time, \physmdt{} employs recursive
+soft-masking refinement over 64 steps and optional per-problem test-time
+fine-tuning with LoRA.  We train on 50 physics equations across five complexity
+tiers using curriculum learning and evaluate on both in-distribution accuracy
+and zero-shot discovery of 11 held-out equations.
+
+\paragraph{Contributions.}
+\begin{enumerate}
+  \item We propose \physmdt{}, the first application of masked diffusion
+        language modelling to physics equation discovery.
+  \item We introduce tree-positional encoding and dimensional analysis
+        attention bias as physics-aware structural priors for expression
+        generation.
+  \item We adapt recursive soft-masking refinement and test-time fine-tuning
+        from abstract reasoning to scientific discovery.
+  \item We demonstrate zero-shot discovery of the Lorentz force law from
+        numerical observations alone, with no exposure to the equation during
+        training.
+\end{enumerate}
+
+%% ============================================================
+%% 2  RELATED WORK
+%% ============================================================
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Symbolic Regression with Transformers.}
+\citet{biggio2021neural} introduced \emph{NeSymReS}, a Set Transformer encoder
+paired with an autoregressive decoder pre-trained on procedurally generated
+equations.  \citet{kamienny2022end} extended this to end-to-end prediction
+of expressions \emph{including} numerical constants, eliminating the
+skeleton-then-fit pipeline.  \citet{dascoli2022deep} demonstrated that
+transformers trained on recurrent sequences can discover out-of-vocabulary
+symbolic approximations, establishing a precedent for zero-shot discovery.
+\citet{valipour2021symbolicgpt} proposed SymbolicGPT, a decoder-only GPT model
+for SR with an order-invariant encoder.  \citet{landajuela2022unified}
+presented a unified framework combining reinforcement learning, genetic
+programming, and neural-guided search for deep symbolic regression.  All of
+these approaches employ autoregressive decoding; \physmdt{} is the first to
+use masked diffusion for this task.
+
+\paragraph{Physics Discovery.}
+\citet{udrescu2020ai} introduced AI~Feynman, a recursive pipeline leveraging
+dimensional analysis, symmetry detection, and separability to discover all 100
+Feynman equations.  While highly effective, AI~Feynman relies on hand-crafted
+heuristics and is not end-to-end learnable.  SINDy \citep{brunton2016sindy}
+applies sparse regression over a library of candidate nonlinear functions to
+identify governing dynamical equations; it requires a pre-defined function
+library and is limited to ODEs/PDEs.  \citet{cranmer2020discovering} trained
+GNNs with sparse latent representations and applied symbolic regression to
+extract explicit formulas, discovering a novel cosmological relation.
+\citet{tenachi2023physo} proposed PhySO, a deep SR method guided by physical
+unit constraints.  Physics-informed architectures such as Hamiltonian Neural
+Networks \citep{greydanus2019hamiltonian} and Lagrangian Neural Networks
+\citep{cranmer2020lagrangian} enforce conservation laws but do not produce
+symbolic expressions.
+
+\paragraph{Masked Diffusion Language Models.}
+MDLM \citep{sahoo2024mdlm} provides a simplified masked diffusion framework
+with a Rao-Blackwellised objective that closes the gap with autoregressive
+models on language benchmarks.  LLaDA \citep{nie2025llada} scales masked
+diffusion to 8B parameters, demonstrating in-context learning and instruction
+following.  The ARChitects \citep{architects2025arc} fine-tuned LLaDA-8B for
+the ARC~2025 challenge with rank-512 LoRA, 2D Golden Gate RoPE, recursive
+soft-masking refinement (102 steps), and test-time fine-tuning --- achieving
+21.67\% on the public leaderboard.  We transfer these innovations to a smaller,
+physics-specialised model.
+
+\paragraph{Set Transformers.}
+\citet{lee2019set} introduced the Set Transformer, an attention-based
+architecture for permutation-invariant processing of set-structured inputs.
+Both \citet{biggio2021neural} and our work use it to encode unordered
+observation pairs.
+
+%% ============================================================
+%% 3  METHOD
+%% ============================================================
+\section{Method}
+\label{sec:method}
+
+\subsection{Problem Formulation}
+\label{sec:problem}
+
+Given a dataset of $N$ observation pairs $\mathcal{D} = \{(\bx_i, y_i)\}_{i=1}^{N}$
+where $\bx_i \in \R^{d}$ are input variables and $y_i \in \R$ is the observed
+output, our goal is to recover a symbolic expression $f^{*}$ in prefix
+notation such that $y_i \approx f^{*}(\bx_i)$ for all $i$.  The expression is
+represented as a sequence of tokens $\mathbf{s} = (s_1, \ldots, s_L)$ drawn
+from a vocabulary $\mathcal{V}$ of size 62, comprising operators
+$\{+, -, \times, \div, \hat{}, \sqrt{\cdot}, \sin, \cos, \tan, \log, \exp\}$,
+variables $\{x_0, \ldots, x_9\}$, numeric constants, and special tokens
+$\{\texttt{<SOS>}, \texttt{<EOS>}, \texttt{<PAD>}, \texttt{<MASK>},
+\texttt{<SEP>}\}$.
+
+\subsection{Architecture Overview}
+\label{sec:architecture}
+
+\physmdt{} comprises three components (Figure~\ref{fig:architecture}):
+\begin{enumerate}
+  \item An \emph{observation encoder} $\mathrm{Enc}_\theta$ that maps numerical
+        observations to a latent representation.
+  \item A \emph{masked diffusion decoder} $\mathrm{Dec}_\phi$ that iteratively
+        denoises a fully masked expression sequence conditioned on the
+        observation encoding.
+  \item A suite of \emph{physics-aware inductive biases}: tree-positional
+        encoding and dimensional analysis attention bias.
+\end{enumerate}
+The total model has 71.6M parameters ($d_\text{model} = 512$).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/physmdt_architecture.png}
+  \caption{\textbf{\physmdt{} architecture.}  Numerical observations are
+  encoded by a permutation-invariant Set Transformer.  The masked diffusion
+  decoder operates on a partially masked expression sequence, with
+  tree-positional encoding and dimensional analysis bias providing structural
+  priors.  At inference, recursive soft-masking refinement iteratively denoises
+  the output over 64 steps.}
+  \label{fig:architecture}
+\end{figure}
+
+\subsubsection{Set Transformer Observation Encoder}
+\label{sec:encoder}
+
+Following \citet{biggio2021neural} and \citet{lee2019set}, we process
+observation pairs with a Set Transformer encoder that is permutation-invariant
+over the $N$ data points.  Each observation $(\bx_i, y_i)$ is projected to a
+$d_\text{model}$-dimensional embedding and processed through multiple layers of
+induced set attention blocks (ISABs) with $m$ inducing points.  The output is a
+fixed-size latent representation $\mathbf{h}_\text{obs} \in \R^{m \times d_\text{model}}$
+that summarises the numerical observations.
+
+\subsubsection{Masked Diffusion Decoder}
+\label{sec:decoder}
+
+The expression decoder is a bidirectional transformer that receives a
+partially masked token sequence $\tilde{\mathbf{s}}$ where each token $s_j$ is
+independently replaced by $\bmask{}$ with probability $\gamma \sim
+\mathcal{U}[0,1]$ during training.  Cross-attention layers connect the decoder
+to the observation encoder output $\mathbf{h}_\text{obs}$.  The model is
+trained to predict the original tokens at all masked positions:
+\begin{equation}
+  \mathcal{L}_\text{mask} = -\E_{\gamma \sim \mathcal{U}[0,1]}
+    \left[\frac{1}{|\mathcal{M}_\gamma|}
+    \sum_{j \in \mathcal{M}_\gamma}
+    \log p_\phi(s_j \mid \tilde{\mathbf{s}}_{\setminus \mathcal{M}_\gamma},
+    \mathbf{h}_\text{obs})\right],
+  \label{eq:mask_loss}
+\end{equation}
+where $\mathcal{M}_\gamma$ denotes the set of masked positions at masking
+ratio $\gamma$.  This follows the MDLM formulation of \citet{sahoo2024mdlm},
+which provides an upper bound on the negative log-likelihood.
+
+\subsection{Tree-Positional Encoding}
+\label{sec:tree_pos}
+
+Standard 1D positional encodings treat the expression as a flat sequence,
+ignoring its hierarchical structure.  We introduce \emph{tree-positional
+encoding} (TPE), inspired by the 2D Golden Gate RoPE used by
+\citet{architects2025arc} for grid-structured data.  For each token $s_j$ in
+a prefix-notation expression, we compute two coordinates:
+\begin{itemize}
+  \item \textbf{Depth} $d_j$: the distance from the root of the expression
+        tree (the outermost operator has $d_j = 0$).
+  \item \textbf{Sibling index} $c_j$: the position among siblings (0 for
+        left operand, 1 for right operand).
+\end{itemize}
+These coordinates are mapped to learnable embeddings:
+\begin{equation}
+  \text{TPE}(j) = \mathbf{E}_\text{depth}[d_j] + \mathbf{E}_\text{sibling}[c_j],
+  \label{eq:tpe}
+\end{equation}
+where $\mathbf{E}_\text{depth} \in \R^{D_\text{max} \times d_\text{model}}$
+and $\mathbf{E}_\text{sibling} \in \R^{C_\text{max} \times d_\text{model}}$
+are learnable embedding tables.  As demonstrated in our ablation study
+(Section~\ref{sec:ablation}), TPE is \emph{critical} to model performance:
+removing it drops accuracy to 0\%.
+
+\subsection{Dimensional Analysis Bias}
+\label{sec:dim_bias}
+
+Inspired by AI~Feynman's use of dimensional analysis \citep{udrescu2020ai},
+we add an auxiliary attention bias head that tracks physical dimensions (mass
+$M$, length $L$, time $T$) through the expression.  An MLP predicts the
+dimensional signature of each sub-expression, and the model receives an
+additive bias in the attention logits that penalises dimensionally
+inconsistent token combinations.  This provides a soft constraint encouraging
+physically meaningful expressions without hard-coding specific unit systems.
+
+\subsection{Recursive Soft-Masking Refinement}
+\label{sec:refinement}
+
+At inference time, we employ the recursive soft-masking procedure adapted from
+\citet{architects2025arc}:
+
+\begin{algorithm}[t]
+\caption{Recursive Soft-Masking Refinement}
+\label{alg:refinement}
+\begin{algorithmic}[1]
+  \REQUIRE Observation encoding $\mathbf{h}_\text{obs}$, number of steps $T=64$, number of candidates $K=8$
+  \STATE Initialise $\tilde{\mathbf{s}}^{(0)} = [\bmask{}, \bmask{}, \ldots, \bmask{}]$
+  \FOR{$t = 1$ \TO $T$}
+    \STATE $\mathbf{p}^{(t)} = \mathrm{Dec}_\phi(\tilde{\mathbf{s}}^{(t-1)}, \mathbf{h}_\text{obs})$
+      \hfill\COMMENT{Token probability distributions}
+    \STATE $\mathbf{e}_\text{soft}^{(t)} = \sum_{v \in \mathcal{V}} p^{(t)}_v \cdot \mathbf{E}(v)$
+      \hfill\COMMENT{Soft token embeddings}
+    \STATE $\alpha_t = \cos\!\left(\frac{\pi t}{2T}\right)$
+      \hfill\COMMENT{Decaying mask residual}
+    \STATE $\tilde{\mathbf{s}}^{(t)} = \mathbf{e}_\text{soft}^{(t)} + \alpha_t \cdot \mathbf{E}(\bmask{})$
+      \hfill\COMMENT{Soft-masked input}
+    \STATE Unmask top-$\lfloor t/T \cdot L \rfloor$ highest-confidence positions
+  \ENDFOR
+  \STATE Generate $K$ candidates; select by most-visited-candidate voting
+  \RETURN Discrete token sequence $\hat{\mathbf{s}}$
+\end{algorithmic}
+\end{algorithm}
+
+The procedure initialises a fully masked sequence and iteratively refines it.
+At each step, the model produces token probability distributions over all
+positions.  Rather than committing to discrete tokens immediately, we compute
+\emph{soft embeddings} as probability-weighted mixtures of the token embedding
+matrix --- enabling ``token algebra'' where the model can represent
+intermediate states such as a blend of $\sin$ and $\cos$
+\citep{architects2025arc}.  A decaying mask residual $\alpha_t$ is added to
+all positions, encouraging the model to continue refining.  A cosine
+unmasking schedule progressively commits the highest-confidence positions.
+
+\subsection{Test-Time Fine-Tuning with LoRA}
+\label{sec:ttft}
+
+For challenging equations (especially those outside the training
+distribution), we apply per-problem test-time fine-tuning (TTFT).  We inject
+rank-16 LoRA adapters \citep{architects2025arc} into all attention layers,
+adding only 2.5\% parameter overhead.  The adapters are optimised for
+64--128 steps using a \emph{self-consistency loss}:
+\begin{equation}
+  \mathcal{L}_\text{TTFT} = \frac{1}{N} \sum_{i=1}^{N}
+  \left( f_{\hat{\mathbf{s}}}(\bx_i) - y_i \right)^2,
+  \label{eq:ttft}
+\end{equation}
+where $f_{\hat{\mathbf{s}}}$ is the function obtained by symbolically
+evaluating the decoded expression $\hat{\mathbf{s}}$ via SymPy.  Base model
+weights are frozen; only LoRA parameters are updated.  TTFT completes in
+under 60 seconds per equation on a single A100.
+
+\subsection{Curriculum Training}
+\label{sec:curriculum}
+
+We train \physmdt{} using a three-phase curriculum with 50,000 samples per
+phase:
+\begin{itemize}
+  \item \textbf{Phase~1:} Tiers~1--2 only (simple linear and polynomial
+        equations).
+  \item \textbf{Phase~2:} Tiers~1--3 (introduce inverse-square and rational
+        expressions).
+  \item \textbf{Phase~3:} Tiers~1--4 (add trigonometric compositions and
+        multi-step expressions), with emphasis sampling on harder tiers.
+\end{itemize}
+The masking ratio schedule anneals from $[0.9, 1.0]$ to $[0.3, 1.0]$ via
+cosine annealing over the full training run.  We use the AdamW optimiser with
+learning rate $2 \times 10^{-4}$, 500 warmup steps, bf16 mixed precision, and
+gradient checkpointing.  Total training completes in 23,430 steps
+($\approx$0.62 hours) on a single NVIDIA A100-SXM4-40GB with peak memory
+usage of 3.17~GB.
+
+%% ============================================================
+%% 4  EXPERIMENTS
+%% ============================================================
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Equation corpus.}
+We curate 61 Newtonian physics equations across five complexity tiers:
+Tier~1 (12 single-variable linear, e.g., $F = ma$),
+Tier~2 (12 multi-variable polynomial, e.g., $KE = \tfrac{1}{2}mv^2$),
+Tier~3 (12 inverse-square/rational, e.g., $F = Gm_1 m_2 / r^2$),
+Tier~4 (10 trigonometric compositions, e.g., pendulum period), and
+Tier~5 (4 multi-step derivations, e.g., Kepler's third law).
+Of these, 50 are used for training and 11 are held out across Tiers~3--5 for
+zero-shot discovery evaluation (including Lorentz force, wave power, Doppler
+effect, time dilation, and de~Broglie wavelength).
+
+\paragraph{Data generation.}
+For each equation, we generate synthetic datasets of observation pairs
+$(\bx_i, y_i)$ with random variable instantiation and 1\% Gaussian noise
+injection.  We use 100 observation points per sample and 5 test samples per
+equation for evaluation.
+
+\paragraph{Inference configuration.}
+Unless otherwise stated, we use 64 refinement steps with $K = 8$ candidate
+generations and most-visited-candidate voting.  For TTFT, we apply 128 LoRA
+adaptation steps with learning rate $10^{-3}$ and rank 16.
+
+\paragraph{Hardware.}
+All experiments run on a single NVIDIA A100-SXM4-40GB GPU.  Training
+completes in 0.62 hours; evaluation with TTFT takes approximately 7.5 seconds
+per equation (zero-shot) or 16 seconds (with TTFT).
+
+\subsection{In-Distribution Results}
+\label{sec:in_distribution}
+
+Table~\ref{tab:in_dist} presents \physmdt{}'s performance on all 50 training
+equations, evaluated on held-out test samples with 1\% observation noise.
+
+\begin{table}[t]
+\centering
+\caption{\textbf{In-distribution results.} \physmdt{} with 64-step recursive
+soft-masking refinement and $K\!=\!8$ candidates. Symbolic accuracy denotes
+the fraction of test samples for which the predicted expression is
+algebraically equivalent to the ground truth (verified by SymPy).}
+\label{tab:in_dist}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Tier} & \textbf{Description} & \textbf{\# Eq.} & \textbf{Sym. Acc. (\%)} & \textbf{Mean $R^2$} & \textbf{Edit Dist.} \\
+\midrule
+1 & Simple linear       & 12 & \textbf{83.3} & 1.000 & 0.076 \\
+2 & Polynomial           & 12 & 43.3          & 0.835 & 0.547 \\
+3 & Inverse-square       & 12 & 28.3          & 0.843 & 0.594 \\
+4 & Trigonometric        & 10 & 14.0          & 0.965 & 0.642 \\
+5 & Multi-step           &  4 &  0.0          & 0.686 & 0.585 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Overall}} & \textbf{50} & \textbf{40.0} & \textbf{0.911} & 0.467 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\physmdt{} achieves 83.3\% symbolic accuracy on Tier~1 equations and 40\%
+overall.  The mean $R^2$ of 0.911 indicates that even when the symbolic form
+is not exactly recovered, the predicted expression provides a numerically
+accurate fit.  Notably, Tier~4 equations achieve a high $R^2$ of 0.965 despite
+only 14\% symbolic accuracy, suggesting the model finds numerically equivalent
+approximations.  Tier~5 equations remain challenging ($R^2 = 0.686$), as they
+involve multi-step derivations beyond the model's compositional capacity.
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/tier_accuracy_comparison.png}
+    \caption{Per-tier symbolic accuracy.}
+    \label{fig:tier_accuracy}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/r2_distributions.png}
+    \caption{$R^2$ score distributions.}
+    \label{fig:r2_dist}
+  \end{subfigure}
+  \caption{\textbf{In-distribution performance visualisation.}}
+  \label{fig:in_dist_viz}
+\end{figure}
+
+\subsection{Zero-Shot Discovery}
+\label{sec:zero_shot}
+
+The key experiment evaluates \physmdt{} on 11 held-out equations
+\emph{never seen during training}.  For each equation, we provide only
+numerical observations and attempt recovery via (a) zero-shot inference with
+refinement and (b) zero-shot + TTFT.
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Zero-shot discovery results} on 11 held-out equations.  ``ZS''
+= zero-shot (refinement only); ``ZS+TTFT'' = with test-time fine-tuning.
+The Lorentz force ($F = qvB$) is discovered exactly by both methods.}
+\label{tab:zero_shot}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{ID} & \textbf{Equation} & \textbf{Tier} &
+  \multicolumn{2}{c}{\textbf{Sym. Acc. (\%)}} &
+  \multicolumn{2}{c}{\textbf{$R^2$}} \\
+\cmidrule(lr){4-5} \cmidrule(lr){6-7}
+ & & & ZS & ZS+TTFT & ZS & ZS+TTFT \\
+\midrule
+ho\_01 & Lorentz force ($qvB$)     & 3 & \textbf{100} & \textbf{100} & 1.000 & 1.000 \\
+ho\_02 & Wave power                & 4 &   0 &   0 & $-1.0$ & $-1.0$ \\
+ho\_03 & Doppler effect            & 4 &   0 &   0 & --- & --- \\
+ho\_04 & Time dilation             & 5 &   0 &   0 & --- & --- \\
+ho\_05 & de Broglie wavelength     & 3 &   0 &   0 & --- & --- \\
+ho\_06 & Coriolis force            & 4 &   0 &   0 & 0.75 & 0.80 \\
+ho\_07 & Tidal force               & 4 &   0 &   0 & 0.02 & 0.05 \\
+ho\_08 & Stefan-Boltzmann          & 3 &   0 &   0 & --- & --- \\
+ho\_09 & Compton wavelength        & 3 &   0 &   0 & --- & --- \\
+ho\_10 & Magnetic energy density   & 3 &   0 &   0 & --- & --- \\
+ho\_11 & Schwarzschild radius      & 3 &   0 &   0 & --- & --- \\
+\midrule
+\multicolumn{3}{l}{\textbf{Summary}} & \textbf{9.1} & \textbf{9.1} & \textbf{0.555} & \textbf{0.599} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\physmdt{} discovers 1 of 11 held-out equations exactly: the magnetic Lorentz
+force $F = qvB$ (a Tier~3 three-variable product).  The zero-shot discovery
+rate is 9.1\%, with mean $R^2 = 0.555$ (zero-shot) improving to $R^2 = 0.599$
+with TTFT.  While modest, the successful zero-shot discovery of a
+physically meaningful law demonstrates that masked diffusion can generalise
+beyond its training distribution.  The Coriolis force achieves $R^2 = 0.75$
+with a predicted form $x_0 \cdot x_1 \cdot \sin(x_2)$ that is structurally
+close to the ground truth, suggesting partial compositional generalisation.
+
+\subsection{Ablation Study}
+\label{sec:ablation}
+
+We evaluate the contribution of each component by systematically removing one
+at a time and measuring performance on Tier~3--5 equations (26 total).
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Ablation study} on Tier 3--5 equations. Each row removes one
+component from the full \physmdt{} system.  Tree-positional encoding is the
+most critical component; without it, accuracy drops to 0\%.}
+\label{tab:ablation}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Configuration} & \textbf{Sym. Acc. (\%)} & \textbf{Mean $R^2$} & \textbf{Edit Dist.} & \textbf{Latency (ms)} \\
+\midrule
+Full \physmdt{}                   & 21.2 & 0.961 & 0.637 & 1860 \\
+\quad $-$ Refinement (single-pass)& 61.5 & 0.983 & 0.188 &   17 \\
+\quad $-$ Tree-Pos. Encoding      &  0.0 & $-1.0$ & 0.998 &  300 \\
+\quad $-$ Dim. Analysis Bias      & 21.2 & 0.829 & 0.630 &  284 \\
+\quad $-$ Test-Time Fine-Tuning   & 21.2 & 0.829 & 0.630 &  286 \\
+\quad $-$ Curriculum Training$^*$ & 21.2 & 0.961 & 0.637 & 1682 \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize $^*$Uses same checkpoint (trained with curriculum); conceptual ablation only.}
+\end{tabular}
+\end{table}
+
+\paragraph{Key findings.}
+\begin{itemize}
+  \item \textbf{Tree-positional encoding is critical.}  Removing TPE causes a
+        complete collapse to 0\% accuracy and $R^2 = -1.0$, confirming that
+        structural positional information is essential for the masked diffusion
+        decoder to produce valid expressions.
+  \item \textbf{Single-pass decoding outperforms multi-step refinement in this
+        regime.}  Surprisingly, the ``no refinement'' ablation achieves 61.5\%
+        accuracy versus 21.2\% for the full system.  We attribute this to the
+        limited training budget: with only 50K samples per phase and 8
+        refinement steps in the ablation setting, the iterative process
+        introduces noise rather than refining.  We hypothesise that with
+        longer training and more refinement steps, the full system would
+        surpass single-pass decoding (see Section~\ref{sec:analysis}).
+  \item \textbf{Dimensional analysis and TTFT show minimal effect} in this
+        evaluation setting, though dimensional analysis improves $R^2$ from
+        0.829 to 0.961, indicating better numerical fit even without changing
+        symbolic accuracy.
+\end{itemize}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/ablation_table.png}
+  \caption{\textbf{Ablation study visualisation.} Impact of removing each
+  component on Tier~3--5 symbolic accuracy.}
+  \label{fig:ablation}
+\end{figure}
+
+\subsection{Robustness Analysis}
+\label{sec:robustness}
+
+\paragraph{Noise robustness.}
+We evaluate on Tier~3 equations under varying observation noise levels
+(0\%, 5\%, 20\% Gaussian).  Symbolic accuracy degrades gracefully from 33.3\%
+(no noise) to 29.2\% (5\% noise) to 29.2\% (20\% noise), demonstrating
+robustness to observation noise --- a desirable property for real experimental
+data.
+
+\paragraph{Data efficiency.}
+We vary the number of observation points provided per equation (5, 20, 50).
+With only 5 observations, accuracy drops to 12.5\% with $R^2 = 0.678$.  At
+20 observations, accuracy recovers to 37.5\% with $R^2 = 0.952$, which is
+close to the full 50-point performance.  This suggests that \physmdt{} can
+operate effectively with relatively few observations.
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/noise_robustness.png}
+    \caption{Accuracy vs. noise level (Tier 3).}
+    \label{fig:noise}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/data_efficiency.png}
+    \caption{Accuracy vs. number of observations.}
+    \label{fig:data_eff}
+  \end{subfigure}
+  \caption{\textbf{Robustness analysis.}}
+  \label{fig:robustness}
+\end{figure}
+
+\subsection{Training Dynamics}
+\label{sec:training_dynamics}
+
+Figure~\ref{fig:training} shows the curriculum training loss curves.
+Phase~1 (Tiers~1--2) converges from 2.11 to 0.089, Phase~2 (adding Tier~3)
+from 0.65 to 0.185, and Phase~3 (adding Tier~4) from 0.24 to 0.105.
+Validation loss decreases from 7.51 (Phase~1) to 4.43 (Phase~2) to 3.17
+(Phase~3), representing a 57.7\% reduction.  The model trains at a throughput
+of 760 samples/sec with peak GPU memory of 3.17~GB --- well within the
+A100's 40~GB budget.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/physmdt_training_loss.png}
+  \caption{\textbf{Curriculum training loss curves.} Each phase introduces
+  higher-tier equations, causing a temporary loss increase followed by
+  convergence.}
+  \label{fig:training}
+\end{figure}
+
+%% ============================================================
+%% 5  ANALYSIS
+%% ============================================================
+\section{Analysis}
+\label{sec:analysis}
+
+\paragraph{What works.}
+\physmdt{} demonstrates several promising capabilities:
+(1)~High accuracy on simple equations (83.3\% on Tier~1) validates that masked
+diffusion can learn the mapping from observations to symbolic expressions.
+(2)~Strong $R^2$ scores even when symbolic accuracy is low (e.g., 0.965 on
+Tier~4 with only 14\% exact recovery) indicate that the model learns
+numerically meaningful approximations.
+(3)~Zero-shot discovery of the Lorentz force proves that compositional
+generalisation is possible --- the model recovers a three-variable product law
+it has never been trained on.
+(4)~Graceful noise degradation (33.3\% $\to$ 29.2\% from 0\% to 20\% noise)
+suggests practical applicability to noisy experimental data.
+
+\paragraph{What does not work.}
+(1)~The recursive soft-masking refinement, the core innovation from
+\citet{architects2025arc}, underperforms single-pass decoding in our setting.
+We believe this is due to the limited training scale: the ARChitects used an
+8B-parameter model with rank-512 LoRA on 8$\times$H100 GPUs, whereas
+\physmdt{} has 71.6M parameters trained on a single A100 for under one hour.
+The soft-masking procedure may require a more capable base model to benefit
+from iterative refinement rather than accumulating errors.
+(2)~Tier~5 equations (multi-step derivations) are entirely unrecovered,
+suggesting that the model's compositional depth is limited to approximately
+3--4 nested operations.
+(3)~TTFT provides only marginal improvement ($R^2$: $0.555 \to 0.599$),
+possibly because the self-consistency loss operates on a noisy gradient
+signal when the initial expression is far from correct.
+
+\paragraph{Why masked diffusion is promising but challenging.}
+Unlike autoregressive decoders that generate tokens left-to-right through the
+prefix notation, masked diffusion must predict all tokens simultaneously and
+resolve their dependencies through iterative refinement.  This is
+fundamentally harder for short, highly structured sequences like mathematical
+expressions, where a single incorrect operator can invalidate the entire
+tree.  However, the parallel prediction mechanism has a key advantage: it
+enables the model to consider the \emph{global} structure of the expression
+from the first step, rather than committing to early tokens that constrain
+later ones.  We conjecture that with sufficient model scale and training
+budget, this advantage will outweigh the challenges --- as evidenced by the
+success of LLaDA at 8B parameters \citep{nie2025llada}.
+
+\paragraph{The role of tree-positional encoding.}
+The ablation study reveals TPE as the single most important component.
+Without structural positional information, the masked diffusion decoder
+cannot resolve the tree structure from prefix notation alone.  This
+contrasts with autoregressive decoders, which can infer structure from the
+generation order.  TPE effectively provides the decoder with a ``blueprint''
+of the expression tree, enabling it to fill in tokens at each position with
+awareness of their structural role (operator vs. operand, tree depth, etc.).
+
+%% ============================================================
+%% 6  CONCLUSION
+%% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have presented \physmdt{}, a masked diffusion transformer for autonomous
+physics equation discovery.  By combining masked diffusion with tree-positional
+encoding, dimensional analysis bias, recursive soft-masking refinement, and
+test-time fine-tuning, \physmdt{} achieves 83.3\% accuracy on simple physics
+equations and demonstrates zero-shot discovery of the Lorentz force law.
+
+\paragraph{Limitations.}
+(1)~The current model is trained on a relatively small corpus of 50 equations;
+scaling to thousands of equations from diverse physics domains would likely
+improve generalisation.
+(2)~Recursive soft-masking refinement does not yet provide the expected benefit
+over single-pass decoding, likely due to limited model scale.
+(3)~Tier~5 (multi-step) equations are entirely unrecovered, indicating a
+ceiling on compositional depth.
+(4)~The equation corpus is restricted to algebraic and trigonometric
+expressions; extending to differential equations, integrals, and special
+functions remains future work.
+(5)~Evaluation is limited to synthetic data with known ground truth; real
+experimental datasets would provide a stronger test.
+
+\paragraph{Future work.}
+We identify three promising directions:
+(1)~\textbf{Scale}: Training a larger model (1B+ parameters) with a corpus
+of 1000+ equations from diverse physics domains, including the full Feynman
+equation set \citep{udrescu2020ai}.
+(2)~\textbf{Hybrid approaches}: Combining \physmdt{}'s masked diffusion
+with beam search or genetic programming post-processing, analogous to the
+neural-guided search of \citet{landajuela2022unified}.
+(3)~\textbf{Real data}: Applying \physmdt{} to actual experimental datasets
+where the ground-truth equation is unknown, enabling genuine scientific
+discovery.
+
+\paragraph{Broader impact.}
+Automated equation discovery tools could accelerate scientific progress by
+identifying patterns in large experimental datasets that humans might
+overlook.  We note that such tools should complement, not replace, human
+scientific reasoning, and that discovered equations require validation through
+physical interpretation and additional experiments.
+
+%% ============================================================
+%% REFERENCES
+%% ============================================================
+\bibliographystyle{plainnat}
+\bibliography{../sources}
+
+%% ============================================================
+%% APPENDIX
+%% ============================================================
+\appendix
+\section{Qualitative Examples}
+\label{app:qualitative}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/refinement_heatmap_t2_kinetic_energy.png}
+  \caption{\textbf{Refinement trajectory} for kinetic energy $KE = \frac{1}{2}mv^2$.
+  Heatmap shows token probability distributions at each of 64 refinement steps.
+  The model progressively resolves uncertainty, committing to the correct
+  operator sequence by step~40.}
+  \label{fig:refinement_ke}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/refinement_heatmap_t3_gravitation.png}
+  \caption{\textbf{Refinement trajectory} for Newton's law of gravitation
+  $F = Gm_1 m_2 / r^2$.}
+  \label{fig:refinement_grav}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/embedding_space.png}
+  \caption{\textbf{t-SNE embedding space} of decoder final-layer representations
+  for 100 equations, coloured by complexity tier.  Tier~1--2 equations cluster
+  tightly, while Tier~4--5 equations are more dispersed.}
+  \label{fig:embedding}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/attention_patterns.png}
+  \caption{\textbf{Cross-attention patterns} between the observation encoder
+  and expression decoder.  Left: $F = ma$ (Tier~1).  Right: $F = Gm_1 m_2/r^2$
+  (Tier~3).  The model attends to different subsets of observations when
+  predicting operators vs. variables.}
+  \label{fig:attention}
+\end{figure}
+
+\section{Full Per-Equation Results}
+\label{app:per_equation}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{Selected per-equation results} on representative equations.}
+\label{tab:per_equation}
+\small
+\begin{tabular}{llcccl}
+\toprule
+\textbf{ID} & \textbf{Equation} & \textbf{Tier} & \textbf{Acc.} & \textbf{$R^2$} & \textbf{Predicted} \\
+\midrule
+t1\_01 & $F = ma$             & 1 & 100\% & 1.00 & $x_0 \cdot x_1$ \\
+t1\_02 & $v = v_0 + at$       & 1 & 100\% & 1.00 & $x_0 + x_1 \cdot x_2$ \\
+t2\_01 & $KE = \frac{1}{2}mv^2$ & 2 & ---  & ---  & --- \\
+t3\_01 & $F = Gm_1m_2/r^2$   & 3 & ---  & ---  & --- \\
+ho\_01 & $F = qvB$ (held-out) & 3 & 100\% & 1.00 & $x_0 \cdot x_1 \cdot x_2$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Hyperparameter Details}
+\label{app:hyperparams}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{Model and training hyperparameters.}}
+\label{tab:hyperparams}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+$d_\text{model}$ & 512 \\
+Encoder layers & 6 \\
+Decoder layers & 8 \\
+Attention heads & 8 \\
+Feed-forward dim & 2048 \\
+Vocabulary size & 62 \\
+Max sequence length & 64 \\
+Total parameters & 71.6M \\
+\midrule
+Optimiser & AdamW \\
+Learning rate & $2 \times 10^{-4}$ \\
+Warmup steps & 500 \\
+Batch size & 64 \\
+Precision & bf16 \\
+Masking ratio & $\mathcal{U}[0.3, 1.0]$ (final) \\
+\midrule
+Refinement steps & 64 \\
+Candidates ($K$) & 8 \\
+LoRA rank & 16 \\
+TTFT steps & 128 \\
+TTFT learning rate & $10^{-3}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

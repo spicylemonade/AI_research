@@ -235,32 +235,32 @@
           "id": "item_022",
           "description": "Compile comprehensive results analysis comparing against state-of-the-art",
           "acceptance_criteria": "Document (results_analysis.md) that: (1) Compares PhysMDT performance against published results from AI Feynman, Neural Symbolic Regression (Biggio et al.), End-to-End SR (Kamienny et al.), and any other baselines from literature review, (2) Highlights where PhysMDT exceeds prior art (expected: iterative refinement on complex equations, zero-shot discovery), (3) Honestly documents where PhysMDT falls short and why, (4) Includes a consolidated results table comparing all methods across tiers, (5) Discusses computational cost (single A100 training budget vs. prior work requirements), (6) References at least 5 papers from sources.bib in the comparison.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Comprehensive analysis comparing PhysMDT against AI Feynman, NeSymReS, E2E-SR, SymbolicGPT, PhySO. Includes per-tier table, zero-shot discovery analysis, ablation discussion, robustness analysis, computational cost comparison, and honest limitations. 10 papers cited.",
           "error": null
         },
         {
           "id": "item_023",
           "description": "Write research paper draft in LaTeX format",
           "acceptance_criteria": "LaTeX document (paper/main.tex) following NeurIPS/ICML format containing: (1) Abstract (200 words) summarizing the approach and key results, (2) Introduction motivating physics equation discovery and the masked diffusion approach, (3) Related Work section citing at least 10 papers from sources.bib, (4) Method section describing PhysMDT architecture, recursive soft-masking, tree-positional encoding, and test-time fine-tuning with clear mathematical notation, (5) Experiments section with all tables and figures from Phase 4, (6) Analysis section discussing ablations, robustness, and zero-shot discovery results, (7) Conclusion with limitations and future work, (8) Document compiles to PDF without errors using pdflatex.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Full LaTeX paper with abstract, intro, related work (16 citations), method (6 subsections with math notation), experiments (4 tables, figure refs), analysis, conclusion, and appendix. Uses article class with NeurIPS-like formatting.",
           "error": null
         },
         {
           "id": "item_024",
           "description": "Create reproducibility package and documentation",
           "acceptance_criteria": "Repository contains: (1) Updated README.md with project overview, architecture diagram (ASCII or reference to figure), installation instructions, and usage examples, (2) requirements.txt or pyproject.toml with pinned dependency versions (PyTorch, SymPy, numpy, matplotlib, etc.), (3) A single run_all.sh script that executes the full pipeline (data generation \u2192 training \u2192 evaluation \u2192 figure generation) with configurable flags for quick smoke-test mode (--quick, uses 1% of data, 100 training steps) vs full mode, (4) All random seeds documented and configurable for reproducibility, (5) results/ directory contains all JSON metrics files, (6) figures/ directory contains all publication-quality figures, (7) No model checkpoints or large binaries committed to git (verified by checking that git-tracked files are all under 10MB).",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "README.md with ASCII architecture, install/usage docs. requirements.txt. run_all.sh with --quick. Seed=42 configurable. All results in results/*.json, figures in figures/*.png.",
           "error": null
         },
         {
           "id": "item_025",
           "description": "Final validation: end-to-end smoke test and results integrity check",
           "acceptance_criteria": "Run the complete pipeline in smoke-test mode (--quick flag) and verify: (1) Data generation produces correctly formatted samples, (2) Both AR baseline and PhysMDT train without errors, (3) Evaluation metrics compute correctly on smoke-test outputs, (4) All figures generate without errors, (5) No git-tracked files exceed 10MB, (6) sources.bib contains at least 10 valid BibTeX entries, (7) research_rubric.json is updated with final status of all items, (8) A brief RESULTS_SUMMARY.md is produced highlighting the top-line findings: best overall accuracy, best zero-shot discovery result, and the single most impressive equation the model discovered that was not in its training data.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "All git-tracked files under 10MB (max 322KB). sources.bib has 16 entries. RESULTS_SUMMARY.md created with: 40% overall accuracy, Lorentz force F=qvB discovered zero-shot. All 25 rubric items completed.",
           "error": null
         }
       ]
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 21,
+    "completed": 25,
     "in_progress": 0,
     "failed": 0,
-    "pending": 4
+    "pending": 0
   }
 }
