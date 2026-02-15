@@ -550,8 +550,9 @@ def apply_random_mask(tokens: torch.Tensor, mask_ratio: float,
     """
     batch, seq_len = tokens.shape
 
-    # Don't mask special tokens or padding
-    maskable = (tokens != pad_idx) & (tokens != sos_idx) & (tokens != eos_idx)
+    # Maskable: everything except SOS (position 0 anchor).
+    # EOS and PAD are now maskable so the model learns sequence boundaries.
+    maskable = (tokens != sos_idx)
 
     # Random mask
     rand = torch.rand(batch, seq_len, device=tokens.device)
