@@ -47,16 +47,16 @@
           "id": "item_002",
           "description": "Conduct web-based literature review on symbolic regression and equation discovery with transformers",
           "acceptance_criteria": "Search the web for at least 15 relevant papers/repositories covering: (a) symbolic regression with transformers (e.g., Biggio et al. 2021 'Neural Symbolic Regression that Scales', Kamienny et al. 2022 'End-to-End Symbolic Regression with Transformers', d'Ascoli et al. 2022 'Deep Symbolic Regression for Physics'), (b) physics-informed neural networks and Lagrangian/Hamiltonian neural nets, (c) masked diffusion language models (MDLM, LLaDA), (d) ARC 2025 ARChitects solution techniques (recursive soft-masking, 2D positional encoding, test-time fine-tuning), (e) AI Feynman and SINDy approaches for physics discovery. Compile findings into a structured summary document (literature_review.md) with key insights, strengths, limitations, and relevance to our approach.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Reviewed 15+ papers covering all 5 areas. Created literature_review.md with structured analysis of: Biggio (NeSymReS), Kamienny (E2E-SR), d'Ascoli, AI Feynman, SINDy, Cranmer GNN+SR, HNN, LNN, MDLM, LLaDA, ARChitects ARC2025, SymbolicGPT, Set Transformer, PhySO. Includes comparison table and 7 key design insights.",
           "error": null
         },
         {
           "id": "item_003",
           "description": "Create and maintain sources.bib with BibTeX entries for all consulted references",
           "acceptance_criteria": "sources.bib in repo root contains valid BibTeX entries for at least 10 relevant papers including: Vaswani et al. (Attention Is All You Need), Biggio et al. (Neural Symbolic Regression that Scales), Kamienny et al. (End-to-End Symbolic Regression with Transformers), d'Ascoli et al. (Deep Symbolic Regression for Physics), Udrescu & Tegmark (AI Feynman), Cranmer et al. (Discovering Symbolic Models), Sahoo et al. (MDLM), the ARChitects ARC 2025 solution report, and at least 2 additional papers on physics-informed transformers. Each entry must have author, title, year, and venue/URL fields.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "sources.bib created with 15 BibTeX entries: Vaswani (Transformer), Biggio (NeSymReS), Kamienny (E2E-SR), d'Ascoli (recurrent SR), Udrescu (AI Feynman), Cranmer (symbolic models), Brunton (SINDy), Sahoo (MDLM), Nie (LLaDA), ARChitects (ARC2025), Greydanus (HNN), Cranmer (LNN), Valipour (SymbolicGPT), Lee (Set Transformer), Tenachi (PhySO), Landajuela (unified DSR).",
           "error": null
         },
         {
@@ -71,8 +71,8 @@
           "id": "item_005",
           "description": "Analyze ARChitects ARC 2025 solution and identify transferable architectural innovations",
           "acceptance_criteria": "Produce a technical analysis document (arc_transfer_analysis.md) that maps each ARChitects innovation to the physics equation discovery domain: (1) Masked Diffusion Training \u2192 masked symbolic expression generation, (2) Recursive Soft-Masking Refinement \u2192 iterative equation refinement from noisy numerical data, (3) 2D Golden Gate RoPE \u2192 adapted positional encoding for expression trees and observation grids, (4) Test-Time Fine-Tuning with LoRA \u2192 per-problem adaptation to specific physical systems, (5) Token Algebra in continuous embedding space \u2192 interpolation between candidate symbolic tokens. Document expected benefits and risks for each transfer.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Created arc_transfer_analysis.md with detailed mapping of all 5 innovations: (1) Masked Diffusion→masked expression generation, (2) Recursive Soft-Masking→iterative equation refinement with 64-step procedure, (3) 2D Golden Gate RoPE→Tree-Positional Encoding using (depth, sibling_index), (4) TTFT with LoRA→per-problem self-consistency adaptation, (5) Token Algebra→soft symbolic interpolation. Includes benefits/risks analysis and summary table.",
           "error": null
         }
       ]
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 1,
+    "completed": 4,
     "in_progress": 0,
     "failed": 0,
-    "pending": 24
+    "pending": 21
   }
 }
