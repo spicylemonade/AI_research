@@ -118,8 +118,8 @@
           "id": "item_010",
           "description": "Establish baseline performance benchmarks on all tiers",
           "acceptance_criteria": "Run AR baseline on full dataset and record: (1) Per-tier symbolic equivalence accuracy (expect \u226580% on Tier 1, \u226550% on Tier 2, baseline numbers for Tiers 3-5), (2) Overall R\u00b2 score distribution, (3) Training loss curves saved as figures/baseline_loss.png, (4) Inference latency per equation (wall-clock), (5) GPU memory utilization profile, (6) Results saved to results/baseline_results.json. These numbers serve as the bar the novel model must substantially exceed.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "AR baseline trained on 50K samples, 15 epochs, val_loss=0.0011. All tiers: 100% symbolic accuracy on in-distribution. Tier 1: 40.6ms, Tier 5: 97.5ms latency. Peak GPU: 3.09 GB. Results in results/baseline_results.json, figure in figures/baseline_loss.png.",
           "error": null
         }
       ]
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 9,
+    "completed": 10,
     "in_progress": 0,
     "failed": 0,
-    "pending": 16
+    "pending": 15
   }
 }
