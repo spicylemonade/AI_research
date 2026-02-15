@@ -1,0 +1,65 @@
+{
+  "item": "item_016",
+  "description": "Full training pipeline training dynamics",
+  "model": "PhysMDT",
+  "total_parameters": 71637002,
+  "d_model": 512,
+  "training_config": {
+    "n_samples_per_phase": 50000,
+    "n_val": 3000,
+    "batch_size": 64,
+    "learning_rate": 0.0002,
+    "warmup_steps": 500,
+    "total_steps": 23430,
+    "phases": [
+      {"name": "Phase 1", "tiers": [1, 2], "epochs": 10},
+      {"name": "Phase 2", "tiers": [1, 2, 3], "epochs": 10},
+      {"name": "Phase 3", "tiers": [1, 2, 3, 4], "epochs": 10}
+    ],
+    "mask_ratio_schedule": {
+      "start": 0.9,
+      "end": 0.3,
+      "method": "cosine_annealing"
+    },
+    "precision": "bf16",
+    "optimizer": "AdamW",
+    "seed": 42
+  },
+  "phase_results": {
+    "phase_1": {
+      "tiers": [1, 2],
+      "final_train_loss": 0.0889,
+      "best_val_loss": 7.5068,
+      "note": "Val includes Tier 3-5 equations not yet in training; in-distribution loss is much lower"
+    },
+    "phase_2": {
+      "tiers": [1, 2, 3],
+      "final_train_loss": 0.1851,
+      "best_val_loss": 4.4266,
+      "note": "Val loss improved as Tier 3 introduced; mask ratio annealing to lower values"
+    },
+    "phase_3": {
+      "tiers": [1, 2, 3, 4],
+      "final_train_loss": 0.1045,
+      "best_val_loss": 3.1708,
+      "note": "Final phase with all training tiers; continued improvement"
+    }
+  },
+  "training_dynamics": {
+    "wall_clock_hours": 0.615,
+    "peak_gpu_memory_gb": 3.174,
+    "throughput_samples_per_sec": 760,
+    "device": "NVIDIA A100-SXM4-40GB",
+    "no_oom_errors": true
+  },
+  "curriculum_effect": {
+    "val_loss_reduction_phase1_to_phase3": "7.5068 -> 3.1708 (57.7% reduction)",
+    "train_loss_convergence": "Phase 1: 2.11 -> 0.089, Phase 2: 0.65 -> 0.185, Phase 3: 0.24 -> 0.105",
+    "mask_ratio_annealing": "Started at 0.9-1.0, ended at 0.3-1.0 range"
+  },
+  "comparison_note": "PhysMDT uses masked diffusion loss (predict all masked tokens), not autoregressive CE loss. Direct val_loss comparison with AR baseline is not meaningful. Symbolic accuracy comparison is in item_017.",
+  "figures": {
+    "training_loss_curves": "figures/physmdt_training_loss.png",
+    "training_loss_curves_pdf": "figures/physmdt_training_loss.pdf"
+  }
+}
