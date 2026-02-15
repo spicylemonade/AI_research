@@ -63,8 +63,8 @@
           "id": "item_004",
           "description": "Define the physics equation discovery problem formally and curate the target equation corpus",
           "acceptance_criteria": "Produce a formal problem specification document (problem_spec.md) that: (1) defines the input representation (numerical observation pairs, variable counts, constant placeholders), (2) defines the output representation (symbolic expression trees in prefix notation), (3) catalogs at least 50 Newtonian physics equations across 5 complexity tiers \u2014 Tier 1: single-variable linear (F=ma, v=at), Tier 2: multi-variable polynomial (KE=0.5mv^2, gravitational PE=mgh), Tier 3: inverse-square/rational (F=Gm1m2/r^2, Coulomb's law), Tier 4: compositions with trig/sqrt (pendulum period T=2*pi*sqrt(L/g), projectile range), Tier 5: multi-step derivations (Kepler's third law, rocket equation, orbital velocity) \u2014 and (4) designates a held-out set of at least 10 equations across tiers 3-5 that are NEVER seen during training for zero-shot discovery evaluation.",
-          "status": "pending",
-          "notes": null,
+          "status": "completed",
+          "notes": "Created problem_spec.md with formal problem definition and data/equations.py with 61 equations (50 training + 11 held-out) across 5 tiers. All equations verified with SymPy. Held-out set spans Tiers 3-5 including Lorentz, Doppler, time dilation, de Broglie, Stefan-Boltzmann, etc.",
           "error": null
         },
         {
@@ -268,9 +268,9 @@
   ],
   "summary": {
     "total_items": 25,
-    "completed": 4,
+    "completed": 5,
     "in_progress": 0,
     "failed": 0,
-    "pending": 21
+    "pending": 20
   }
 }
