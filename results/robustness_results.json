@@ -1,0 +1,1214 @@
+{
+  "model": "PhysMDT",
+  "checkpoint": "checkpoints/physmdt_best.pt",
+  "total_params": 71637002,
+  "device": "cuda",
+  "seed": 42,
+  "quick_mode": true,
+  "total_time_seconds": 132.49844098091125,
+  "peak_gpu_memory_gb": 1.156788224,
+  "evaluation_config": {
+    "n_test_samples": 2,
+    "n_candidates": 2,
+    "n_steps": 8,
+    "default_n_points": 30,
+    "default_noise_level": 0.01
+  },
+  "noise_robustness": {
+    "noise_levels": [
+      0.0,
+      0.05,
+      0.2
+    ],
+    "per_level": [
+      {
+        "noise_level": 0.0,
+        "mean_symbolic_accuracy": 0.3333333333333333,
+        "std_symbolic_accuracy": 0.4714045207910317,
+        "mean_r2": 1.0,
+        "std_r2": 0.0,
+        "n_equations": 12,
+        "per_equation": [
+          {
+            "equation_id": "t3_01",
+            "equation_name": "Newton's law of gravitation",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_02",
+            "equation_name": "Coulomb's law",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_03",
+            "equation_name": "Gravitational field strength",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_04",
+            "equation_name": "Escape velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_05",
+            "equation_name": "Gravitational potential energy",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_06",
+            "equation_name": "Centripetal acceleration",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_07",
+            "equation_name": "Centripetal force",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_08",
+            "equation_name": "Orbital velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_09",
+            "equation_name": "Orbital period",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_10",
+            "equation_name": "Moment of inertia (solid sphere)",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_11",
+            "equation_name": "Drag force",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_12",
+            "equation_name": "Terminal velocity",
+            "tier": 3,
+            "n_vars": 5,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          }
+        ]
+      },
+      {
+        "noise_level": 0.05,
+        "mean_symbolic_accuracy": 0.2916666666666667,
+        "std_symbolic_accuracy": 0.4310033513661917,
+        "mean_r2": 1.0,
+        "std_r2": 0.0,
+        "n_equations": 12,
+        "per_equation": [
+          {
+            "equation_id": "t3_01",
+            "equation_name": "Newton's law of gravitation",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_02",
+            "equation_name": "Coulomb's law",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_03",
+            "equation_name": "Gravitational field strength",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_04",
+            "equation_name": "Escape velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_05",
+            "equation_name": "Gravitational potential energy",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_06",
+            "equation_name": "Centripetal acceleration",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_07",
+            "equation_name": "Centripetal force",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_08",
+            "equation_name": "Orbital velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_09",
+            "equation_name": "Orbital period",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_10",
+            "equation_name": "Moment of inertia (solid sphere)",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_11",
+            "equation_name": "Drag force",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_12",
+            "equation_name": "Terminal velocity",
+            "tier": 3,
+            "n_vars": 5,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          }
+        ]
+      },
+      {
+        "noise_level": 0.2,
+        "mean_symbolic_accuracy": 0.2916666666666667,
+        "std_symbolic_accuracy": 0.4310033513661917,
+        "mean_r2": 1.0,
+        "std_r2": 0.0,
+        "n_equations": 12,
+        "per_equation": [
+          {
+            "equation_id": "t3_01",
+            "equation_name": "Newton's law of gravitation",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_02",
+            "equation_name": "Coulomb's law",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_03",
+            "equation_name": "Gravitational field strength",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_04",
+            "equation_name": "Escape velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_05",
+            "equation_name": "Gravitational potential energy",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_06",
+            "equation_name": "Centripetal acceleration",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_07",
+            "equation_name": "Centripetal force",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_08",
+            "equation_name": "Orbital velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_09",
+            "equation_name": "Orbital period",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_10",
+            "equation_name": "Moment of inertia (solid sphere)",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_11",
+            "equation_name": "Drag force",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_12",
+            "equation_name": "Terminal velocity",
+            "tier": 3,
+            "n_vars": 5,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          }
+        ]
+      }
+    ]
+  },
+  "data_efficiency": {
+    "n_points_list": [
+      5,
+      20,
+      50
+    ],
+    "per_n_points": [
+      {
+        "n_points": 5,
+        "mean_symbolic_accuracy": 0.125,
+        "std_symbolic_accuracy": 0.2975595178559521,
+        "mean_r2": 0.6777143885356374,
+        "std_r2": 0.45578068269060734,
+        "n_equations": 12,
+        "per_equation": [
+          {
+            "equation_id": "t3_01",
+            "equation_name": "Newton's law of gravitation",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_02",
+            "equation_name": "Coulomb's law",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_03",
+            "equation_name": "Gravitational field strength",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": 0.03314316560691233
+          },
+          {
+            "equation_id": "t3_04",
+            "equation_name": "Escape velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_05",
+            "equation_name": "Gravitational potential energy",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_06",
+            "equation_name": "Centripetal acceleration",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_07",
+            "equation_name": "Centripetal force",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_08",
+            "equation_name": "Orbital velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_09",
+            "equation_name": "Orbital period",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_10",
+            "equation_name": "Moment of inertia (solid sphere)",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_11",
+            "equation_name": "Drag force",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_12",
+            "equation_name": "Terminal velocity",
+            "tier": 3,
+            "n_vars": 5,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          }
+        ]
+      },
+      {
+        "n_points": 20,
+        "mean_symbolic_accuracy": 0.375,
+        "std_symbolic_accuracy": 0.414578098794425,
+        "mean_r2": 0.9521359402687534,
+        "std_r2": 0.11724252335965003,
+        "n_equations": 12,
+        "per_equation": [
+          {
+            "equation_id": "t3_01",
+            "equation_name": "Newton's law of gravitation",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_02",
+            "equation_name": "Coulomb's law",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_03",
+            "equation_name": "Gravitational field strength",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_04",
+            "equation_name": "Escape velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_05",
+            "equation_name": "Gravitational potential energy",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_06",
+            "equation_name": "Centripetal acceleration",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_07",
+            "equation_name": "Centripetal force",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_08",
+            "equation_name": "Orbital velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_09",
+            "equation_name": "Orbital period",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_10",
+            "equation_name": "Moment of inertia (solid sphere)",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": 0.6649515818812735
+          },
+          {
+            "equation_id": "t3_11",
+            "equation_name": "Drag force",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_12",
+            "equation_name": "Terminal velocity",
+            "tier": 3,
+            "n_vars": 5,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          }
+        ]
+      },
+      {
+        "n_points": 50,
+        "mean_symbolic_accuracy": 0.2916666666666667,
+        "std_symbolic_accuracy": 0.4310033513661917,
+        "mean_r2": 1.0,
+        "std_r2": 0.0,
+        "n_equations": 12,
+        "per_equation": [
+          {
+            "equation_id": "t3_01",
+            "equation_name": "Newton's law of gravitation",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_02",
+            "equation_name": "Coulomb's law",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_03",
+            "equation_name": "Gravitational field strength",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_04",
+            "equation_name": "Escape velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_05",
+            "equation_name": "Gravitational potential energy",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_06",
+            "equation_name": "Centripetal acceleration",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_07",
+            "equation_name": "Centripetal force",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_08",
+            "equation_name": "Orbital velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_09",
+            "equation_name": "Orbital period",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_10",
+            "equation_name": "Moment of inertia (solid sphere)",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_11",
+            "equation_name": "Drag force",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_12",
+            "equation_name": "Terminal velocity",
+            "tier": 3,
+            "n_vars": 5,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          }
+        ]
+      }
+    ]
+  },
+  "variable_count_scaling": {
+    "var_counts": [
+      2,
+      3,
+      4
+    ],
+    "per_var_count": [
+      {
+        "n_vars": 2,
+        "mean_symbolic_accuracy": 0.2727272727272727,
+        "std_symbolic_accuracy": 0.44536177141512334,
+        "mean_r2": 0.8254603523063294,
+        "std_r2": 0.30231153774060954,
+        "n_equations": 22,
+        "per_equation": [
+          {
+            "equation_id": "t1_01",
+            "equation_name": "Newton's second law (F=ma)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t1_03",
+            "equation_name": "Linear momentum",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t1_04",
+            "equation_name": "Work (W=Fd)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t1_05",
+            "equation_name": "Power (P=W/t)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t1_06",
+            "equation_name": "Impulse (I=Ft)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t1_07",
+            "equation_name": "Density (rho=m/V)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t1_08",
+            "equation_name": "Pressure (P=F/A)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t1_09",
+            "equation_name": "Speed (v=d/t)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t1_10",
+            "equation_name": "Acceleration (a=F/m)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t1_11",
+            "equation_name": "Torque (tau=Fr)",
+            "tier": 1,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t2_01",
+            "equation_name": "Kinetic energy",
+            "tier": 2,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t2_06",
+            "equation_name": "Hooke's law (F=kx)",
+            "tier": 2,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t2_07",
+            "equation_name": "Spring potential energy",
+            "tier": 2,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t2_09",
+            "equation_name": "Angular momentum (L=Iw)",
+            "tier": 2,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t2_10",
+            "equation_name": "Rotational kinetic energy",
+            "tier": 2,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t2_11",
+            "equation_name": "Friction force (F=muN)",
+            "tier": 2,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_06",
+            "equation_name": "Centripetal acceleration",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_10",
+            "equation_name": "Moment of inertia (solid sphere)",
+            "tier": 3,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t4_01",
+            "equation_name": "Simple pendulum period",
+            "tier": 4,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t4_07",
+            "equation_name": "Wave speed on string",
+            "tier": 4,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": 0.30184140922531755
+          },
+          {
+            "equation_id": "t4_08",
+            "equation_name": "Angular frequency (SHM)",
+            "tier": 4,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": 0.30184140922531755
+          },
+          {
+            "equation_id": "t4_10",
+            "equation_name": "Total SHM energy",
+            "tier": 4,
+            "n_vars": 2,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          }
+        ]
+      },
+      {
+        "n_vars": 3,
+        "mean_symbolic_accuracy": 0.4411764705882353,
+        "std_symbolic_accuracy": 0.4814913395219088,
+        "mean_r2": 0.9651524817993522,
+        "std_r2": 0.098563665708799,
+        "n_equations": 17,
+        "per_equation": [
+          {
+            "equation_id": "t1_02",
+            "equation_name": "Velocity with constant acceleration",
+            "tier": 1,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t2_02",
+            "equation_name": "Gravitational potential energy (surface)",
+            "tier": 2,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t2_03",
+            "equation_name": "Displacement (constant acceleration)",
+            "tier": 2,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t2_04",
+            "equation_name": "Final velocity squared",
+            "tier": 2,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t2_08",
+            "equation_name": "Heat transfer (Q=mcDT)",
+            "tier": 2,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_03",
+            "equation_name": "Gravitational field strength",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_04",
+            "equation_name": "Escape velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_07",
+            "equation_name": "Centripetal force",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_08",
+            "equation_name": "Orbital velocity",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_09",
+            "equation_name": "Orbital period",
+            "tier": 3,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t4_02",
+            "equation_name": "Projectile range",
+            "tier": 4,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 1.0,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t4_04",
+            "equation_name": "Projectile horizontal position",
+            "tier": 4,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t4_05",
+            "equation_name": "Force along incline",
+            "tier": 4,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t4_06",
+            "equation_name": "Normal force on incline",
+            "tier": 4,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t5_01",
+            "equation_name": "Kepler's third law",
+            "tier": 5,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t5_02",
+            "equation_name": "Tsiolkovsky rocket equation",
+            "tier": 5,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t5_04",
+            "equation_name": "Schwarzschild radius",
+            "tier": 5,
+            "n_vars": 3,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": 0.6863723361941692
+          }
+        ]
+      },
+      {
+        "n_vars": 4,
+        "mean_symbolic_accuracy": 0.1111111111111111,
+        "std_symbolic_accuracy": 0.20786985482077452,
+        "mean_r2": 0.8233370533287072,
+        "std_r2": 0.24983913515133713,
+        "n_equations": 9,
+        "per_equation": [
+          {
+            "equation_id": "t2_05",
+            "equation_name": "Total mechanical energy",
+            "tier": 2,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": 0.47001115998612153
+          },
+          {
+            "equation_id": "t2_12",
+            "equation_name": "Center-of-mass velocity",
+            "tier": 2,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_01",
+            "equation_name": "Newton's law of gravitation",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_02",
+            "equation_name": "Coulomb's law",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.5,
+            "mean_r2": 1.0
+          },
+          {
+            "equation_id": "t3_05",
+            "equation_name": "Gravitational potential energy",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t3_11",
+            "equation_name": "Drag force",
+            "tier": 3,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t4_03",
+            "equation_name": "Projectile vertical position",
+            "tier": 4,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t4_09",
+            "equation_name": "SHM displacement",
+            "tier": 4,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          },
+          {
+            "equation_id": "t5_03",
+            "equation_name": "Orbital energy",
+            "tier": 5,
+            "n_vars": 4,
+            "n_samples": 2,
+            "symbolic_accuracy": 0.0,
+            "mean_r2": -1.0
+          }
+        ]
+      }
+    ]
+  }
+}
