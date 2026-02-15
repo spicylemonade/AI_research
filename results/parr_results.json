@@ -1,0 +1,60 @@
+{
+  "per_tier": {
+    "1": {
+      "exact_match_rate": 0.790073775989269,
+      "exact_match_ci": [
+        0.7692823608316566,
+        0.8115358819584172
+      ],
+      "r2_score": 0.7199453696093283,
+      "tree_edit_distance": 0.07852094573740237,
+      "complexity_adjusted_accuracy": 0.790073775989269,
+      "n_samples": 1491
+    },
+    "2": {
+      "exact_match_rate": 0.9254617414248021,
+      "exact_match_ci": [
+        0.9109498680738787,
+        0.9386543535620053
+      ],
+      "r2_score": 0.9892071360684205,
+      "tree_edit_distance": 0.013727645851656405,
+      "complexity_adjusted_accuracy": 0.9254617414248021,
+      "n_samples": 1516
+    },
+    "3": {
+      "exact_match_rate": 0.8535800482703138,
+      "exact_match_ci": [
+        0.835076427996782,
+        0.8728881737731295
+      ],
+      "r2_score": 0.9836100496033662,
+      "tree_edit_distance": 0.013403544698798118,
+      "complexity_adjusted_accuracy": 0.8535800482703138,
+      "n_samples": 1243
+    },
+    "4": {
+      "exact_match_rate": 0.7413333333333333,
+      "exact_match_ci": [
+        0.7106666666666667,
+        0.7733333333333333
+      ],
+      "r2_score": 0.8990499712583557,
+      "tree_edit_distance": 0.05602963352437036,
+      "complexity_adjusted_accuracy": 0.7413333333333333,
+      "n_samples": 750
+    }
+  },
+  "overall": {
+    "exact_match_rate": 0.8396,
+    "r2_score": 0.8976288623170968,
+    "tree_edit_distance": 0.039313734481892376,
+    "complexity_adjusted_accuracy": 0.8396,
+    "n_samples": 5000
+  },
+  "model": "PARR Transformer",
+  "checkpoint": "checkpoints/parr_best.pt",
+  "n_samples": 5000,
+  "generation_time_s": 22.148625135421753,
+  "throughput_eq_per_s": 225.7476466114198
+}

@@ -28,9 +28,9 @@ class CurriculumScheduler:
     ):
         self.dataset = dataset
         self.phase_thresholds = phase_thresholds or {
-            'A': 0.80,  # Move to B when Tier 1 ESM > 80%
-            'B': 0.65,  # Move to C when Tier 2 ESM > 65%
-            'C': 0.40,  # Move to D when Tier 3 ESM > 40%
+            'A': 0.70,  # Move to B when Tier 1 ESM > 70%
+            'B': 0.50,  # Move to C when Tier 2 ESM > 50%
+            'C': 0.30,  # Move to D when Tier 3 ESM > 30%
         }
         self.hard_mining_weight = hard_mining_weight
 

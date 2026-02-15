@@ -1,0 +1,50 @@
+{
+  "baseline": {
+    "ms_per_equation": 12.731,
+    "equations_per_second": 78.55,
+    "peak_gpu_memory_mb": 233.56,
+    "total_time_s": 40.738,
+    "n_batches": 100,
+    "batch_size": 32,
+    "parameters": 44563072,
+    "parameters_M": 44.6
+  },
+  "parr": {
+    "parameters": 50144384,
+    "parameters_M": 50.1,
+    "by_K": {
+      "0": {
+        "ms_per_equation": 2.614,
+        "equations_per_second": 382.6,
+        "peak_gpu_memory_mb": 231.48,
+        "total_time_s": 8.364,
+        "n_batches": 100,
+        "batch_size": 32
+      },
+      "2": {
+        "ms_per_equation": 2.397,
+        "equations_per_second": 417.17,
+        "peak_gpu_memory_mb": 305.14,
+        "total_time_s": 7.671,
+        "n_batches": 100,
+        "batch_size": 32
+      },
+      "4": {
+        "ms_per_equation": 3.956,
+        "equations_per_second": 252.78,
+        "peak_gpu_memory_mb": 305.64,
+        "total_time_s": 12.659,
+        "n_batches": 100,
+        "batch_size": 32
+      },
+      "8": {
+        "ms_per_equation": 4.367,
+        "equations_per_second": 228.98,
+        "peak_gpu_memory_mb": 305.64,
+        "total_time_s": 13.975,
+        "n_batches": 100,
+        "batch_size": 32
+      }
+    }
+  }
+}

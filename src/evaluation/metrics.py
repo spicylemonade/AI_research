@@ -175,10 +175,11 @@ def exact_symbolic_match(pred_tokens: List[int], gt_tokens: List[int]) -> bool:
                     continue
                 if abs(pred_val - gt_val) > 1e-4 * max(abs(gt_val), 1):
                     return False
-            except (TypeError, ValueError, ZeroDivisionError):
+            except (TypeError, ValueError, ZeroDivisionError, OverflowError):
                 continue
         return True
-    except (sp.SympifyError, TypeError, RecursionError, TimeoutError):
+    except (sp.SympifyError, TypeError, RecursionError, TimeoutError,
+            OverflowError, ValueError):
         return False
 
 

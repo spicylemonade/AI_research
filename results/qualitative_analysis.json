@@ -1,0 +1,212 @@
+{
+  "description": "Qualitative analysis: AR-only (K=0) vs Refined (K=4)",
+  "checkpoint": "checkpoints/parr_best.pt",
+  "n_examples": 20,
+  "summary": {
+    "ar_only_correct": 16,
+    "refined_correct": 16,
+    "refinement_helped": 0
+  },
+  "examples": [
+    {
+      "index": 1318,
+      "tier": 1,
+      "ground_truth": "add pow x1 C2 mul mul C2 x2 x3",
+      "ar_only_K0": "add pow x1 C2 mul mul C2 x2 x3",
+      "refined_K4": "add pow x1 C2 mul mul C2 x2 x3",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 5974,
+      "tier": 1,
+      "ground_truth": "mul mul C0.5 x1 pow x2 C2",
+      "ar_only_K0": "mul mul C0.5 x1 pow x2 C2",
+      "refined_K4": "mul mul C0.5 x1 pow x2 C2",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 14903,
+      "tier": 1,
+      "ground_truth": "add mul x1 x3 mul mul C0.5 x2 pow x3 C2",
+      "ar_only_K0": "add mul x1 x3 mul mul C0.5 x2 pow x3 C2",
+      "refined_K4": "add mul x1 x3 mul mul C0.5 x2 pow x3 C2",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 34801,
+      "tier": 1,
+      "ground_truth": "mul mul C0.5 add x1 x2 x3",
+      "ar_only_K0": "mul mul C0.5 add x1 x2 x3",
+      "refined_K4": "mul mul C0.5 add x1 x2 x3",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 40446,
+      "tier": 1,
+      "ground_truth": "mul CBIN78 sin mul CBIN86 x1",
+      "ar_only_K0": "mul CBIN78 sin mul CBIN85 x1",
+      "refined_K4": "mul CBIN78 sin mul CBIN85 x1",
+      "ar_only_correct": false,
+      "refined_correct": false,
+      "refinement_helped": false
+    },
+    {
+      "index": 5595,
+      "tier": 2,
+      "ground_truth": "neg mul CBIN81 mul pow x1 C2 sgn x1",
+      "ar_only_K0": "neg mul CBIN81 mul pow x1 C2 sgn x1",
+      "refined_K4": "neg mul CBIN81 mul pow x1 C2 sgn x1",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 7630,
+      "tier": 2,
+      "ground_truth": "neg mul CBIN97 x1",
+      "ar_only_K0": "neg mul CBIN98 x1",
+      "refined_K4": "neg mul CBIN98 x1",
+      "ar_only_correct": false,
+      "refined_correct": false,
+      "refinement_helped": false
+    },
+    {
+      "index": 12193,
+      "tier": 2,
+      "ground_truth": "neg mul CBIN80 mul pow x1 C2 sgn x1",
+      "ar_only_K0": "neg mul CBIN80 mul pow x1 C2 sgn x1",
+      "refined_K4": "neg mul CBIN80 mul pow x1 C2 sgn x1",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 13531,
+      "tier": 2,
+      "ground_truth": "mul x1 x2",
+      "ar_only_K0": "mul x1 x2",
+      "refined_K4": "mul x1 x2",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 40231,
+      "tier": 2,
+      "ground_truth": "mul mul CBIN68 x1 x2",
+      "ar_only_K0": "mul mul CBIN68 x1 x2",
+      "refined_K4": "mul mul CBIN68 x1 x2",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 5739,
+      "tier": 3,
+      "ground_truth": "add mul div sub x1 x2 add x1 x2 x3 mul div mul C2 x2 add x1 x2 x4",
+      "ar_only_K0": "add mul div sub x1 x2 add x1 x2 x3 mul div mul C2 x2 add x1 x2 x4",
+      "refined_K4": "add mul div sub x1 x2 add x1 x2 x3 mul div mul C2 x2 add x1 x2 x4",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 35738,
+      "tier": 3,
+      "ground_truth": "div add mul x1 x2 mul x3 x4 add x1 x3",
+      "ar_only_K0": "div add mul x1 x2 mul x3 x4 add x1 x3",
+      "refined_K4": "div add mul x1 x2 mul x3 x4 add x1 x3",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 38651,
+      "tier": 3,
+      "ground_truth": "sqrt div mul CBIN79 pow x1 C2 x2",
+      "ar_only_K0": "sqrt div mul CBIN81 pow x1 C2 x2",
+      "refined_K4": "sqrt div mul CBIN81 pow x1 C2 x2",
+      "ar_only_correct": false,
+      "refined_correct": false,
+      "refinement_helped": false
+    },
+    {
+      "index": 44300,
+      "tier": 3,
+      "ground_truth": "mul mul C2 Cpi sqrt div x1 CBIN73",
+      "ar_only_K0": "mul mul C2 Cpi sqrt div x1 CBIN73",
+      "refined_K4": "mul mul C2 Cpi sqrt div x1 CBIN73",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 48586,
+      "tier": 3,
+      "ground_truth": "mul mul C0.5 x1 pow x2 C2",
+      "ar_only_K0": "mul mul C0.5 x1 pow x2 C2",
+      "refined_K4": "mul mul C0.5 x1 pow x2 C2",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 1566,
+      "tier": 4,
+      "ground_truth": "mul div mul x1 cos CBIN71 CBIN71 sub C1 exp neg mul CBIN71 x2",
+      "ar_only_K0": "mul div mul x1 cos CBIN72 CBIN71 sub C1 exp neg mul CBIN71 x2",
+      "refined_K4": "mul div mul x1 cos CBIN72 CBIN71 sub C1 exp neg mul CBIN71 x2",
+      "ar_only_correct": false,
+      "refined_correct": false,
+      "refinement_helped": false
+    },
+    {
+      "index": 1687,
+      "tier": 4,
+      "ground_truth": "sub mul mul x1 sin x2 x3 mul mul C0.5 CBIN86 pow x3 C2",
+      "ar_only_K0": "sub mul mul x1 sin x2 x3 mul mul C0.5 CBIN86 pow x3 C2",
+      "refined_K4": "sub mul mul x1 sin x2 x3 mul mul C0.5 CBIN86 pow x3 C2",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 5128,
+      "tier": 4,
+      "ground_truth": "sqrt div mul mul C2 CBIN86 x1 add C1 div x2 mul x3 pow x4 C2",
+      "ar_only_K0": "sqrt div mul mul C2 CBIN86 x1 add C1 div x2 mul x3 pow x4 C2",
+      "refined_K4": "sqrt div mul mul C2 CBIN86 x1 add C1 div x2 mul x3 pow x4 C2",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 12000,
+      "tier": 4,
+      "ground_truth": "sub mul x1 CBIN86 mul x2 x3",
+      "ar_only_K0": "sub mul x1 CBIN86 mul x2 x3",
+      "refined_K4": "sub mul x1 CBIN86 mul x2 x3",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    },
+    {
+      "index": 23393,
+      "tier": 4,
+      "ground_truth": "mul mul x1 cos x2 x3",
+      "ar_only_K0": "mul mul x1 cos x2 x3",
+      "refined_K4": "mul mul x1 cos x2 x3",
+      "ar_only_correct": true,
+      "refined_correct": true,
+      "refinement_helped": false
+    }
+  ]
+}

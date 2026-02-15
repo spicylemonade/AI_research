@@ -1,0 +1,170 @@
+{
+  "model": "PARR Transformer",
+  "checkpoint": "checkpoints/parr_best.pt",
+  "n_samples": 5000,
+  "noise_levels": [
+    0.0,
+    0.01,
+    0.05,
+    0.1,
+    0.2
+  ],
+  "seed": 42,
+  "results": {
+    "0.0": {
+      "per_tier": {
+        "1": {
+          "token_match_accuracy": 0.790073775989269,
+          "n_correct": 1178,
+          "n_total": 1491
+        },
+        "2": {
+          "token_match_accuracy": 0.9254617414248021,
+          "n_correct": 1403,
+          "n_total": 1516
+        },
+        "3": {
+          "token_match_accuracy": 0.8535800482703138,
+          "n_correct": 1061,
+          "n_total": 1243
+        },
+        "4": {
+          "token_match_accuracy": 0.7413333333333333,
+          "n_correct": 556,
+          "n_total": 750
+        }
+      },
+      "overall": {
+        "token_match_accuracy": 0.8396,
+        "n_correct": 4198,
+        "n_total": 5000
+      },
+      "noise_level": 0.0,
+      "eval_time_s": 21.229557037353516
+    },
+    "0.01": {
+      "per_tier": {
+        "1": {
+          "token_match_accuracy": 0.7914151576123407,
+          "n_correct": 1180,
+          "n_total": 1491
+        },
+        "2": {
+          "token_match_accuracy": 0.9267810026385225,
+          "n_correct": 1405,
+          "n_total": 1516
+        },
+        "3": {
+          "token_match_accuracy": 0.8535800482703138,
+          "n_correct": 1061,
+          "n_total": 1243
+        },
+        "4": {
+          "token_match_accuracy": 0.74,
+          "n_correct": 555,
+          "n_total": 750
+        }
+      },
+      "overall": {
+        "token_match_accuracy": 0.8402,
+        "n_correct": 4201,
+        "n_total": 5000
+      },
+      "noise_level": 0.01,
+      "eval_time_s": 20.250248670578003
+    },
+    "0.05": {
+      "per_tier": {
+        "1": {
+          "token_match_accuracy": 0.790073775989269,
+          "n_correct": 1178,
+          "n_total": 1491
+        },
+        "2": {
+          "token_match_accuracy": 0.9221635883905013,
+          "n_correct": 1398,
+          "n_total": 1516
+        },
+        "3": {
+          "token_match_accuracy": 0.8374899436846339,
+          "n_correct": 1041,
+          "n_total": 1243
+        },
+        "4": {
+          "token_match_accuracy": 0.7306666666666667,
+          "n_correct": 548,
+          "n_total": 750
+        }
+      },
+      "overall": {
+        "token_match_accuracy": 0.833,
+        "n_correct": 4165,
+        "n_total": 5000
+      },
+      "noise_level": 0.05,
+      "eval_time_s": 20.41083073616028
+    },
+    "0.1": {
+      "per_tier": {
+        "1": {
+          "token_match_accuracy": 0.7773306505700872,
+          "n_correct": 1159,
+          "n_total": 1491
+        },
+        "2": {
+          "token_match_accuracy": 0.9182058047493403,
+          "n_correct": 1392,
+          "n_total": 1516
+        },
+        "3": {
+          "token_match_accuracy": 0.8173773129525342,
+          "n_correct": 1016,
+          "n_total": 1243
+        },
+        "4": {
+          "token_match_accuracy": 0.7106666666666667,
+          "n_correct": 533,
+          "n_total": 750
+        }
+      },
+      "overall": {
+        "token_match_accuracy": 0.82,
+        "n_correct": 4100,
+        "n_total": 5000
+      },
+      "noise_level": 0.1,
+      "eval_time_s": 20.46054244041443
+    },
+    "0.2": {
+      "per_tier": {
+        "1": {
+          "token_match_accuracy": 0.7659289067739772,
+          "n_correct": 1142,
+          "n_total": 1491
+        },
+        "2": {
+          "token_match_accuracy": 0.9010554089709762,
+          "n_correct": 1366,
+          "n_total": 1516
+        },
+        "3": {
+          "token_match_accuracy": 0.7747385358004827,
+          "n_correct": 963,
+          "n_total": 1243
+        },
+        "4": {
+          "token_match_accuracy": 0.7,
+          "n_correct": 525,
+          "n_total": 750
+        }
+      },
+      "overall": {
+        "token_match_accuracy": 0.7992,
+        "n_correct": 3996,
+        "n_total": 5000
+      },
+      "noise_level": 0.2,
+      "eval_time_s": 20.309049606323242
+    }
+  }
+}
