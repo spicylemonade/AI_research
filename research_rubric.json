@@ -1,0 +1,284 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-15T00:00:00Z",
+  "updated_at": "2026-02-15T01:59:00.431363+00:00",
+  "current_agent": "orchestrator",
+  "agent_status": {
+    "orchestrator": {
+      "status": "completed",
+      "started_at": "2026-02-15T00:00:00Z",
+      "completed_at": "2026-02-15T01:59:00.431341+00:00",
+      "error": null
+    },
+    "researcher": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "writer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    },
+    "reviewer": {
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Problem Analysis & Literature Review",
+      "order": 1,
+      "items": [
+        {
+          "id": "item_001",
+          "description": "Analyze repository structure and establish project scaffold",
+          "acceptance_criteria": "Create a ARCHITECTURE.md file documenting the planned project layout with directories: src/ (model code), data/ (data generation & loading), experiments/ (training scripts & configs), eval/ (evaluation & metrics), notebooks/ (analysis). Confirm .gitignore excludes *.pt, *.ckpt, *.bin, wandb/, __pycache__/, and checkpoint directories. Confirm .gitattributes handles large binary formats via LFS.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_002",
+          "description": "Conduct comprehensive literature review on transformer-based symbolic regression and physics equation discovery",
+          "acceptance_criteria": "Search the web for and read at least 15 papers spanning: (a) transformer symbolic regression (E2E-SR, TPSR, SymbolicGPT, NeSymReS), (b) physics-informed symbolic discovery (AI Feynman, AI Feynman 2.0, Phi-SO, PhyE2E), (c) masked diffusion language models (LLaDA, MDLM, DDSR), (d) ARC-AGI architectures (ARChitects 2025 solution), (e) test-time training and iterative refinement. Produce a literature_review.md summarizing key findings, techniques, and gaps. At least 15 relevant papers must be cited in sources.bib with complete BibTeX entries.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_003",
+          "description": "Create and maintain sources.bib bibliography file",
+          "acceptance_criteria": "sources.bib exists in repo root with valid BibTeX entries for at least 15 papers including: Udrescu & Tegmark 2020 (AI Feynman), Kamienny et al. 2022 (E2E), Sahoo et al. 2024 (MDLM), Nie et al. 2025 (LLaDA), Valipour et al. 2021 (SymbolicGPT), Biggio et al. 2021 (NeSymReS), Cranmer 2023 (PySR), Tenachi et al. 2023 (Phi-SO), Sun et al. 2023 (PhyE2E), Shojaee et al. 2024 (TPSR), the ARChitects ARC2025 solution, Lample & Charton 2020 (Deep Learning for Symbolic Mathematics), and at least 3 additional relevant references. Each entry must have author, title, year, and venue fields.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_004",
+          "description": "Define the Newtonian physics equation corpus covering simple-to-complex derivations",
+          "acceptance_criteria": "Create data/equation_corpus.json containing at least 50 Newtonian physics equations organized into 4 complexity tiers: Tier 1 (basic: F=ma, KE=0.5mv^2, p=mv, 10+ equations), Tier 2 (intermediate: projectile motion, circular motion, gravitational potential, work-energy theorem, 15+ equations), Tier 3 (advanced: coupled oscillators, rigid body dynamics, Lagrangian formulations, central force orbits, 15+ equations), Tier 4 (complex/held-out: Kepler's laws from gravitational derivation, precession of perihelion approximation, three-body restricted problem linearizations, tidal force derivations, 10+ equations reserved exclusively for testing generalization to never-seen equations). Each equation must include: symbolic form (SymPy-compatible string), variable descriptions, dimensional analysis metadata, physical domain tag, and derivation dependency chain (which simpler equations it derives from).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_005",
+          "description": "Formalize the research hypothesis and evaluation framework",
+          "acceptance_criteria": "Create HYPOTHESIS.md stating: (H1) A masked-diffusion transformer with physics-aware tokenization and iterative refinement can recover known Newtonian equations from numerical data with >85% symbolic accuracy on Tier 1-2 and >60% on Tier 3; (H2) The same model can derive equations it has never seen during training (Tier 4 held-out) with >30% symbolic accuracy, demonstrating genuine equation discovery; (H3) Test-time iterative refinement (inspired by ARChitects' recursive soft-masking) improves accuracy by at least 15 percentage points over single-pass inference. Define metrics: symbolic accuracy (exact match after simplification), R^2 fit score, normalized tree-edit distance, and a novel 'derivation depth' metric measuring how many reasoning steps the model chains.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_006",
+          "description": "Design the synthetic data generation pipeline specification",
+          "acceptance_criteria": "Create data/generation_spec.md documenting: (1) how numerical datasets are generated per equation (uniformly sampling variable ranges with physics-plausible bounds, adding configurable Gaussian noise at SNR levels 100, 50, 20), (2) data augmentation strategies (variable permutation, unit scaling, coordinate transformations), (3) tokenization scheme for both numerical inputs (scientific notation tokens) and symbolic outputs (prefix-notation expression trees with operator/variable/constant tokens), (4) dataset splits: 70% training, 10% validation, 20% test with Tier 4 equations appearing ONLY in test, (5) target dataset size of 500K-1M equation-data pairs generatable on a single A100 within 2 hours. Reference relevant approaches from AI Feynman and E2E-SR literature (cited in sources.bib).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Baseline Implementation & Metrics",
+      "order": 2,
+      "items": [
+        {
+          "id": "item_007",
+          "description": "Implement the synthetic data generation pipeline",
+          "acceptance_criteria": "Runnable script data/generate.py that: (1) generates numerical input-output datasets for all equations in equation_corpus.json, (2) produces tokenized sequences in the specified prefix-notation format, (3) applies all augmentation strategies from generation_spec.md, (4) outputs train/val/test splits as memory-mapped .npy files (or HuggingFace Dataset format) with total size manageable for single A100 (80GB VRAM), (5) completes generation of 500K samples in under 2 hours on available hardware, (6) includes unit tests verifying at least 10 equations round-trip correctly through tokenize-detokenize. Model checkpoints and generated data files must be git-ignored.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_008",
+          "description": "Implement baseline autoregressive transformer for symbolic regression",
+          "acceptance_criteria": "Implement src/models/baseline_ar.py: a standard encoder-decoder transformer (4-8 layers, 256-512 hidden dim, 4-8 heads) that takes numerical data tokens as input and autoregressively generates symbolic equation tokens. Use PyTorch with standard positional encoding. Include a training script experiments/train_baseline.py with configurable hyperparameters via YAML config. Model must fit in A100 80GB memory with batch size >= 32. Reference E2E-SR and NeSymReS architectures from sources.bib.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_009",
+          "description": "Implement evaluation harness with all defined metrics",
+          "acceptance_criteria": "Implement eval/metrics.py with functions: (1) symbolic_accuracy(pred, target) using SymPy simplify + equality check, (2) r2_fit_score(pred_eq, data_points) evaluating predicted equation on held-out numerical data, (3) normalized_tree_edit_distance(pred_tree, target_tree) on expression trees, (4) derivation_depth_score(pred_eq, dependency_chain) measuring whether intermediate physical relationships are implicitly captured. Implement eval/evaluate.py that runs a trained model on test split and produces a JSON report with all metrics broken down by complexity tier. Include at least 20 unit tests for the metric functions covering edge cases (equivalent but differently-written equations, off-by-constant errors, partial matches).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_010",
+          "description": "Train and evaluate baseline autoregressive model",
+          "acceptance_criteria": "Train baseline_ar model for at least 50 epochs (or until validation loss plateaus for 10 epochs with early stopping). Record: (1) training loss curve, (2) validation symbolic accuracy per tier at checkpoints every 5 epochs, (3) final test-set metrics across all 4 tiers. Baseline must achieve at minimum >50% symbolic accuracy on Tier 1 (basic equations) to confirm the pipeline is functional. Save results to experiments/results/baseline_ar_results.json. Training must complete within 8 hours on a single A100. Do NOT commit model checkpoint files to git.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_011",
+          "description": "Implement PySR/genetic programming baseline for comparison",
+          "acceptance_criteria": "Implement eval/pysr_baseline.py that runs PySR (Cranmer 2023, cited in sources.bib) on the same test equations' numerical data to establish a non-neural baseline. Record symbolic accuracy, R^2 fit, and wall-clock time per equation. Store results in experiments/results/pysr_baseline_results.json. This provides a critical comparison point referenced in later analysis.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Core Research & Novel Approaches",
+      "order": 3,
+      "items": [
+        {
+          "id": "item_012",
+          "description": "Implement PhysFormer: masked-diffusion transformer with physics-aware architecture",
+          "acceptance_criteria": "Implement src/models/physformer.py: a bidirectional transformer (LLaDA-style masked diffusion) with the following novel components: (1) Physics-Aware Tokenization: separate embedding spaces for physical quantities, operators, and constants, with dimensional-analysis consistency embeddings that encode SI unit signatures as auxiliary input features, (2) 2D-Inspired Positional Encoding adapted from ARChitects' Golden-Gate-RoPE \u2014 use multi-axis rotary embeddings where one axis encodes position in the data sequence and another encodes position in the equation tree depth, (3) Masked diffusion training objective: random masking of equation tokens at rate t~U[0,1] with cross-entropy loss on masked positions only (following LLaDA protocol), (4) Dimensional Consistency Head: auxiliary classification head predicting the SI unit signature of each sub-expression, providing a physics-grounded training signal. Model size must fit single A100 with batch size >= 16 (target: 50-150M parameters). Include architecture diagram in comments or docstring.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_013",
+          "description": "Implement recursive soft-masking iterative refinement at inference time",
+          "acceptance_criteria": "Implement src/inference/iterative_refine.py: the recursive soft-masking strategy inspired by ARChitects' breakthrough technique. (1) Rather than discretely sampling tokens at each denoising step, blend predicted token embeddings with mask embeddings in continuous space, (2) Implement configurable refinement rounds (default: 2 rounds of 51 steps each, matching ARChitects' protocol, adapted for equation-length sequences), (3) Implement 'most-visited-candidate' selection: track candidate equations across refinement iterations, rank by frequency, and select top-K (default K=3), (4) Add optional cold-restart between rounds (re-mask all tokens and restart denoising from refined embedding state). Demonstrate via unit test that iterative refinement produces different (ideally better) outputs than single-pass greedy decoding on at least 5 example equations.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_014",
+          "description": "Implement test-time training (TTT) adaptation for unseen equations",
+          "acceptance_criteria": "Implement src/inference/test_time_train.py: per-instance fine-tuning at test time using the numerical data of the target equation. (1) Use low-rank adaptation (LoRA, rank 16-32) to avoid catastrophic forgetting, applied to attention projection matrices, (2) TTT objective: masked-diffusion loss on the numerical data tokens (self-supervised) plus an R^2 consistency loss that evaluates candidate equations against the input data, (3) Run 32-128 TTT steps per test instance with learning rate warmup and cosine decay, (4) Apply random data augmentations (noise injection, variable rescaling) at each TTT step following ARChitects' strategy. Must run within 60 seconds per test instance on A100. Include ablation hooks to disable individual TTT components.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_015",
+          "description": "Implement equation-space token algebra for compositional reasoning",
+          "acceptance_criteria": "Implement src/models/token_algebra.py: leverage continuous embedding space for compositional equation building, inspired by ARChitects' token algebra. (1) Define algebraic operations in embedding space: addition of equation embeddings to compose additive terms, scaling for coefficient adjustment, (2) Implement 'equation decomposition' module that uses learned projections to factor complex equations into sub-expressions (e.g., detecting that F_total = F_gravity + F_friction), (3) Implement 'equation composition' that combines sub-expression embeddings into full equations, (4) Integration point: can be used as a post-processing step on PhysFormer outputs or as an intermediate representation layer. Verify with test: compose embeddings of 'F=ma' and 'a=v^2/r' should produce embedding close to 'F=mv^2/r'.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_016",
+          "description": "Implement physics-constrained beam search with dimensional analysis pruning",
+          "acceptance_criteria": "Implement src/inference/constrained_search.py: a modified beam search (width 8-16) that prunes candidate tokens violating dimensional consistency. (1) At each decoding step, use the dimensional consistency head from PhysFormer to score candidate continuations, (2) Prune branches where predicted SI units are inconsistent with physical constraints (e.g., cannot add meters to seconds), (3) Apply Pareto-optimal selection balancing equation complexity (tree size) vs. data fit (R^2), following Phi-SO's approach (cited in sources.bib), (4) Benchmark: constrained search should reduce average candidate pool by >50% compared to unconstrained beam search while maintaining or improving symbolic accuracy.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Experiments & Evaluation",
+      "order": 4,
+      "items": [
+        {
+          "id": "item_017",
+          "description": "Train PhysFormer on full dataset and run comprehensive evaluation",
+          "acceptance_criteria": "Train PhysFormer (masked-diffusion) for at least 100 epochs with early stopping (patience 15 epochs on validation symbolic accuracy). Use AdamW optimizer with cosine learning rate schedule, peak LR swept over {1e-4, 3e-4, 5e-4}. Training must complete within 24 hours on single A100. Record and store: (1) training/validation loss curves, (2) per-tier symbolic accuracy at every 10 epochs, (3) final test metrics with all 4 metrics (symbolic accuracy, R^2, tree-edit distance, derivation depth). Results saved to experiments/results/physformer_results.json. Do NOT commit checkpoints to git.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_018",
+          "description": "Ablation study: measure impact of each novel component",
+          "acceptance_criteria": "Run 5 ablation variants: (A) PhysFormer without dimensional consistency head, (B) PhysFormer without physics-aware tokenization (standard token embeddings), (C) PhysFormer without 2D positional encoding (standard 1D sinusoidal), (D) PhysFormer with autoregressive decoding instead of masked diffusion, (E) PhysFormer without test-time training. Each ablation trained for at least 50 epochs. Record per-tier symbolic accuracy for each. Store results in experiments/results/ablation_results.json. At least 3 of the 5 novel components must show statistically significant improvement (p<0.05 via paired t-test across equations) over their ablated variant.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_019",
+          "description": "Evaluate iterative refinement vs. single-pass inference",
+          "acceptance_criteria": "Compare PhysFormer with: (1) single-pass greedy decoding, (2) standard beam search (width 8), (3) constrained beam search with dimensional pruning, (4) iterative soft-mask refinement (2 rounds x 51 steps), (5) iterative refinement + test-time training. Record symbolic accuracy per tier for each. Iterative refinement must improve over single-pass by >= 10 percentage points on Tier 3 equations. Combined iterative + TTT must show >= 15 point improvement on Tier 3. Store results in experiments/results/inference_strategy_results.json.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_020",
+          "description": "Generalization experiment: discover never-seen Tier 4 equations",
+          "acceptance_criteria": "Evaluate PhysFormer (with best inference strategy from item_019) on all Tier 4 held-out equations that were NEVER in training data. For each Tier 4 equation: (1) provide only numerical data (no symbolic hint), (2) record top-3 predicted equations, (3) evaluate symbolic accuracy, R^2 fit, and whether predicted equation is physically meaningful (dimensionally consistent). PhysFormer must achieve >30% symbolic accuracy OR >0.95 R^2 fit on at least 40% of Tier 4 equations. Provide qualitative analysis of 5 best and 5 worst predictions. This is the critical experiment proving genuine equation discovery capability. Store in experiments/results/generalization_results.json.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_021",
+          "description": "Head-to-head comparison against all baselines and prior work",
+          "acceptance_criteria": "Create experiments/results/comparison_table.json consolidating: (1) PhysFormer (full system) vs. baseline AR transformer vs. PySR vs. published results from E2E-SR, NeSymReS, and AI Feynman (from sources.bib literature). Compare across all 4 tiers and all 4 metrics. PhysFormer must outperform the baseline AR transformer on every tier. PhysFormer must match or exceed PySR on Tier 1-2 and outperform it on Tier 3-4 (where PySR's search space becomes intractable). Include wall-clock time comparisons. Generate a LaTeX-formatted comparison table.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_022",
+          "description": "Noise robustness experiment",
+          "acceptance_criteria": "Evaluate PhysFormer and baseline AR on test equations with noise levels SNR = {100, 50, 20, 10, 5}. Record symbolic accuracy and R^2 per noise level per tier. PhysFormer must degrade gracefully: less than 20 percentage points accuracy drop from SNR=100 to SNR=20 on Tier 1-2. Store results in experiments/results/noise_robustness_results.json. Compare against PySR's noise robustness (from item_011).",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Analysis & Documentation",
+      "order": 5,
+      "items": [
+        {
+          "id": "item_023",
+          "description": "Produce publication-quality visualizations and figures",
+          "acceptance_criteria": "Create notebooks/figures.ipynb (or scripts in eval/plot.py) generating at minimum: (1) Training curves comparing PhysFormer vs. baseline AR, (2) Bar chart of per-tier symbolic accuracy across all methods, (3) Scatter plot of equation complexity vs. prediction accuracy, (4) Heatmap of ablation results (component x tier), (5) Qualitative visualization showing iterative refinement progression on 3 example equations (how the predicted equation evolves across denoising steps), (6) Noise robustness degradation curves. All figures saved as PDF/SVG in figures/ directory. Figures must use consistent styling and be publication-ready.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_024",
+          "description": "Write comprehensive technical report",
+          "acceptance_criteria": "Create REPORT.md (or report/report.tex) containing: (1) Abstract summarizing the key contribution and headline result, (2) Introduction motivating the problem with citations from sources.bib, (3) Related Work section discussing at least 10 papers from literature review, (4) Method section describing PhysFormer architecture, training, and inference with architecture diagrams, (5) Experiments section presenting all results from Phase 4 with tables and figures, (6) Analysis section discussing: why masked diffusion outperforms autoregressive for this task, what the model learns about physics (embedding space analysis), failure modes and limitations, (7) Conclusion with concrete claims supported by experimental evidence. Report must be at least 3000 words.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_025",
+          "description": "Analyze learned representations and physical understanding",
+          "acceptance_criteria": "Create notebooks/embedding_analysis.ipynb analyzing: (1) t-SNE/UMAP visualization of equation embeddings colored by physical domain (mechanics, gravitation, oscillations), (2) Probe whether the model's internal representations encode dimensional information by training a linear probe on hidden states to predict SI units (probe accuracy > 80%), (3) Attention pattern analysis on 5 representative equations showing which input data points the model attends to when generating each equation token, (4) Analysis of the compositional structure: do sub-expression embeddings compose linearly? Measure cosine similarity between composed and directly-encoded equation embeddings. Document findings in the technical report.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        },
+        {
+          "id": "item_026",
+          "description": "Reproducibility package and final documentation",
+          "acceptance_criteria": "Create: (1) requirements.txt or pyproject.toml with all dependencies pinned to exact versions, (2) README.md updated with: project overview, installation instructions, commands to reproduce all experiments, expected results summary, hardware requirements (single A100 80GB), (3) Makefile or scripts/run_all.sh that reproduces the full pipeline (data generation -> training -> evaluation -> figures) with a single command, (4) Verify that git repo contains NO model checkpoints, NO generated data files >10MB, NO wandb artifacts \u2014 only code, configs, result JSONs, figures, and documentation. Run git status to confirm clean state.",
+          "status": "pending",
+          "notes": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_items": 26,
+    "completed": 0,
+    "in_progress": 0,
+    "failed": 0,
+    "pending": 26
+  }
+}
